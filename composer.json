@@ -1,0 +1,45 @@
+{
+  "name": "bhry98/bhry-laravel-core",
+  "license": "MIT",
+  "description": "Laravel Starter to manage [identity, users, RBAC,dynamic enums, and more ] for fresh laravel applications only",
+  "keywords": [
+    "users management",
+    "auth",
+    "jwt",
+    "bhry98",
+    "user types",
+    "RBAC",
+    "laravel",
+    "php",
+    "dynamic enums"
+  ],
+  "autoload": {
+    "files": [
+      "src/Helpers/responses.php",
+      "src/Helpers/assets.php"
+    ],
+    "psr-4": {
+      "Bhry98\\BhryLaravelCore\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=8.2",
+    "laravel/framework": ">=11.0",
+    "laravel/sanctum": "^4.0",
+    "illuminate/console": "*"
+  },
+  "authors": [
+    {
+      "name": "bhry98",
+      "email": "bhrabdelrahman8@gmail.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Bhry98\\BhryLaravelCore\\BhryLaravelCoreServiceProvider"
+      ]
+    },
+    "minimum-stability": "stable"
+  }
+}
