@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\LaravelUsersCore\Commands;
+namespace Bhry98\Bhry98LaravelReady\Commands;
 
 use Bhry98\LaravelUsersCore\Database\Seeders\UsersCoreCountriesSeeder;
 use Bhry98\LaravelUsersCore\Database\Seeders\UsersCoreTypesSeeder;
@@ -14,7 +14,7 @@ class CountriesRunSeedCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'bhry98-users-core:seed-default-countries';
+    protected $signature = 'bhry98-laravel-ready:seed-default-countries';
 
     /**
      * The console command description.

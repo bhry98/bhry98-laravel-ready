@@ -1,5 +1,5 @@
 {
-  "name": "bhry98/bhry-laravel-core",
+  "name": "bhry98/bhry98-laravel-ready",
   "license": "MIT",
   "description": "Laravel Starter to manage [identity, users, RBAC,dynamic enums, and more ] for fresh laravel applications only",
   "keywords": [
@@ -19,7 +19,7 @@
       "src/Helpers/assets.php"
     ],
     "psr-4": {
-      "Bhry98\\BhryLaravelCore\\": "src/"
+      "Bhry98\\Bhry98LaravelReady\\": "src/"
     }
   },
   "require": {
@@ -37,7 +37,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Bhry98\\BhryLaravelCore\\BhryLaravelCoreServiceProvider"
+        "Bhry98\\Bhry98LaravelReady\\Bhry98LaravelReadyServiceProvider"
       ]
     },
     "minimum-stability": "stable"

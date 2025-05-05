@@ -1,12 +1,12 @@
 <?php
 
-namespace Bhry98\LaravelUsersCore\Commands;
+namespace Bhry98\Bhry98LaravelReady\Commands;
 
 use Bhry98\LaravelUsersCore\Database\Seeders\UsersCoreCountriesSeeder;
 use Bhry98\LaravelUsersCore\Database\Seeders\UsersCoreTypesSeeder;
 use Illuminate\Console\Command;
 
-class Bhry98LaravelUsersCoreRunSeedCommand extends Command
+class Bhry98LaravelReadySeedDefaultCommand extends Command
 {
 
     /**
@@ -14,7 +14,7 @@ class Bhry98LaravelUsersCoreRunSeedCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'bhry98-users-core:seed-all-defaults';
+    protected $signature = 'bhry98-laravel-ready:seed-all-defaults';
 
     /**
      * The console command description.
@@ -28,7 +28,7 @@ class Bhry98LaravelUsersCoreRunSeedCommand extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $this->line("starting seeding");
         $this->call('db:seed', ['--class' => UsersCoreTypesSeeder::class]);

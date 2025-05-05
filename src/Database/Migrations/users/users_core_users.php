@@ -1,6 +1,6 @@
 <?php
 
-use Bhry98\LaravelUsersCore\Models\{
+use Bhry98\Bhry98LaravelReady\Models\users\{
     UsersCoreUsersModel,
     UsersCoreTypesModel,
     UsersCoreGovernoratesModel,
@@ -20,8 +20,7 @@ return new class extends Migration {
             table: UsersCoreUsersModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->uuid(column: 'code')
-                    ->unique();
+                $table->uuid(column: 'identity_code')->unique();
                 $table->foreignId(column: 'type_id')
                     ->references(column: 'id')
                     ->on(table: UsersCoreTypesModel::TABLE_NAME)

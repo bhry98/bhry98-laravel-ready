@@ -1,9 +1,7 @@
 <?php
 return [
-
-
     "auth_guard" => env(key: 'BHRY98_AUTH_GUARD', default: "bhry98"),
-    "user_model" => \Bhry98\LaravelUsersCore\Models\UsersCoreUsersModel::class,
+    "user_model" => \Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel::class,
     "date" => [
         'format' => 'd-m-Y  h:i A',
         'format_time' => 'H:i A',

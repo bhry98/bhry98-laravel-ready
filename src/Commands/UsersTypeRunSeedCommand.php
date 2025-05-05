@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\LaravelUsersCore\Commands;
+namespace Bhry98\Bhry98LaravelReady\Commands;
 
 use Bhry98\LaravelUsersCore\Database\Seeders\UsersCoreTypesSeeder;
 use Illuminate\Console\Command;
@@ -13,7 +13,7 @@ class UsersTypeRunSeedCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'bhry98-users-core:seed-default-types';
+    protected $signature = 'bhry98-laravel-ready:seed-default-types';
 
     /**
      * The console command description.

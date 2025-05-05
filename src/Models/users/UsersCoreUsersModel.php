@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\LaravelUsersCore\Models;
+namespace Bhry98\Bhry98LaravelReady\Models\users;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,11 +14,12 @@ class UsersCoreUsersModel extends Authenticatable
 
     // start env
     const TABLE_NAME = "bhry98_users_core_users";
-    const RELATIONS = ["country","governorate","city"];
+    const RELATIONS = ["country", "governorate", "city"];
+    const FILTERS = ["display_name", "first_name", "last_name", "phone_number", "national_id", "username", "email"];
     // start table
     protected $table = self::TABLE_NAME;
     protected $fillable = [
-        "code",
+        "identity_code",
         "type_id",
         "country_id",
         "governorate_id",
@@ -68,6 +69,7 @@ class UsersCoreUsersModel extends Authenticatable
             foreignKey: "id",
             localKey: "country_id");
     }
+
     public function governorate(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(
@@ -75,6 +77,7 @@ class UsersCoreUsersModel extends Authenticatable
             foreignKey: "id",
             localKey: "governorate_id");
     }
+
     public function city(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(
@@ -91,14 +94,7 @@ class UsersCoreUsersModel extends Authenticatable
         });
     }
 
-    static function generateNewCode(): string
-    {
-        $code = Str::uuid();
-        if (static::where('code', $code)->exists()) {
-            return self::generateNewCode();
-        }
-        return $code;
-    }
+
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
