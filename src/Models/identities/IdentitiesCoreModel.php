@@ -2,93 +2,37 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\identities;
 
-use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreCountriesModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreExtraValuesModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreGovernoratesModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreTypesModel;
-use Illuminate\Database\Eloquent\Model;
+use Bhry98\Bhry98LaravelReady\Enums\identities\IdentitiesCoreTypes;
+use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
 
-class IdentitiesCoreModel extends Authenticatable
+class IdentitiesCoreModel extends BaseModel
 {
-    use HasApiTokens, SoftDeletes;
-
-    // start env
-    const TABLE_NAME = "bhry98_identities_core";
-    const RELATIONS = ["country", "governorate", "city"];
-    const FILTERS = ["display_name", "first_name", "last_name", "phone_number", "national_id", "username", "email"];
-    // start table
+    const TABLE_NAME = 'identities_core';
+    use SoftDeletes;
     protected $table = self::TABLE_NAME;
     protected $fillable = [
-        "identity_code",
-        "type_id",
-        "country_id",
-        "governorate_id",
-        "city_id",
-        "display_name",
-        "first_name",
-        "last_name",
-        "phone_number",
-        "national_id",
-        "birthdate",
-        "username",
-        "email",
-        "email_verified_at",
-        "password",
+        "code",
+        "type",
+        "name",
+        "module",
+        "relation",
+        "relation_id",
+        "parent_id",
+        "metadata",
+        "is_active",
+        "created_at",
+        "updated_at",
     ];
+
     protected $casts = [
-        "email_verified_at" => "datetime",
-        "password" => "hashed",
-        "remember_token" => "string",
-        "birthdate" => "date:Y-m-d",
-        "national_id" => "integer",
-        "created_at" => "datetime",
+        'type' => IdentitiesCoreTypes::class,
+        'metadata' => 'array',
+        'is_active' => 'boolean',
         "updated_at" => "datetime",
-        "deleted_at" => "datetime",
+        "created_at" => "datetime",
     ];
-
-    public function extraColumns(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(
-            related: UsersCoreExtraValuesModel::class,
-            foreignKey: "core_user_id",
-            localKey: "id");
-    }
-
-    public function Type(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(
-            related: UsersCoreTypesModel::class,
-            foreignKey: "id",
-            localKey: "type_id");
-    }
-
-    public function country(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(
-            related: UsersCoreCountriesModel::class,
-            foreignKey: "id",
-            localKey: "country_id");
-    }
-
-    public function governorate(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(
-            related: UsersCoreGovernoratesModel::class,
-            foreignKey: "id",
-            localKey: "governorate_id");
-    }
-
-    public function city(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(
-            related: UsersCoreGovernoratesModel::class,
-            foreignKey: "id",
-            localKey: "city_id");
-    }
 
     protected static function booted(): void
     {
@@ -98,26 +42,12 @@ class IdentitiesCoreModel extends Authenticatable
         });
     }
 
-
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier(): mixed
+    static function generateNewCode(): string
     {
-        return $this->getKey();
+        $code = Str::uuid();
+        if (static::query()->where('code', $code)->exists()) {
+            return self::generateNewCode();
+        }
+        return $code;
     }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims(): array
-    {
-        return [];
-    }
-
 }

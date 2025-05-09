@@ -1,0 +1,53 @@
+<?php
+
+namespace Bhry98\Bhry98LaravelReady\Http\Controllers\users;
+
+use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthLoginRequest;
+use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
+use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+
+class UsersAuthenticationController extends \App\Http\Controllers\Controller
+{
+    function login(UsersAuthLoginRequest $request, UsersAuthenticationService $authenticationService): JsonResponse
+    {
+        try {
+            $token = $authenticationService->login(
+                samAccountName: $request->get(key: "username"),
+                password: $request->get(key: "password"));
+            if (!$token) return bhry98_response_validation_error(
+                [
+                    'username' => __(key: 'Bhry98::responses.login-failed'),
+                    'password' => __(key: 'Bhry98::responses.login-failed'),
+                ],
+                __(key: "Bhry98::responses.login-failed"));
+            return bhry98_response_success_with_data([
+                'access_type' => 'Bearer',
+                'access_token' => $token,
+                "user" => UserResource::make($authenticationService->getAuthUser()),
+            ]);
+        } catch (Exception $e) {
+            return bhry98_response_internal_error([
+                'error' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+            ]);
+        }
+    }
+
+    function logout(UsersAuthenticationService $authenticationService): JsonResponse
+    {
+        try {
+            if (!$authenticationService->logout()) return bhry98_response_validation_error(message: __(key: "Bhry98::responses.logout-failed"));
+            return bhry98_response_success_with_data(message: __(key: "Bhry98::responses.logout-success"));
+        } catch (Exception $e) {
+            return bhry98_response_internal_error(data: [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+            ]);
+        }
+    }
+
+}
