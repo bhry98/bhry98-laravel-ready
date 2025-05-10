@@ -18,7 +18,7 @@ class CoreEnumsSeeder extends Seeder
     function seedByFileName($fileName): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $enums = include __DIR__ . "$ds..$ds..{$ds}data{$ds}enums{$ds}$fileName.php";;
+        $enums = include __DIR__ . "$ds..$ds..{$ds}data{$ds}enums$ds$fileName.php";
         foreach ($enums ?? [] as $key => $enum) {
             foreach ($enum ?? [] as $enumValue) {
                 $enumRecord = EnumsCoreModel::query()->updateOrCreate(

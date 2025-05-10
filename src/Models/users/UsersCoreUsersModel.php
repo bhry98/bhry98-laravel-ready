@@ -24,7 +24,6 @@ class UsersCoreUsersModel extends Authentication
 {
     use HasApiTokens, SoftDeletes;
 
-    protected $connection = "core";
     const TABLE_NAME = "users_core";
     const RELATIONS = ["country", "governorate", "city", "type", "gender", "azure", "adManager"];
     const FILTER_COLUMNS = ["display_name", "phone_number", "national_id", "username", "email"];

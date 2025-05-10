@@ -39,12 +39,12 @@ class CoreLocationsSeeder extends Seeder
     /**
      * @param $egypt_id
      * @return void
-     * to add all Egypt governorates and call add cities method for each governorate
+     * to add all Egypt governorates and call the add cities method for each governorate
      */
     static function addEgyptGovernorates($egypt_id): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $egyptGovernoratesArray = include __DIR__ . "{$ds}..{$ds}..{$ds}data{$ds}locations{$ds}governorates{$ds}egypt.php";
+        $egyptGovernoratesArray = include __DIR__ . "$ds..$ds..{$ds}data{$ds}locations{$ds}governorates{$ds}egypt.php";
         foreach ($egyptGovernoratesArray ?? [] as $governorate) {
             $fixData = [
                 "default_name" => $governorate["name"],

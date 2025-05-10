@@ -100,16 +100,4 @@ class RBACLocalManagementService extends BaseService
         return false;
     }
 
-
-    public function addNewGroup(array $data)
-    {
-        $record = CoreRBACGroupsModel::query()->create($data);
-        if ($record) {
-            // add log
-            Log::info(message: "add new rbac group", context: ['group' => $record, "user" => Auth::user()]);
-        };
-        return $record;
-    }
-
-
 }

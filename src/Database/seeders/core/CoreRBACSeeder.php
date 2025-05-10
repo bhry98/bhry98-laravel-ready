@@ -22,6 +22,9 @@ class CoreRBACSeeder extends Seeder
     {
         $ds = DIRECTORY_SEPARATOR;
         $groups = include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}groups.php";
+        if (array_key_exists(key: "addon_permission", array: config('bhry98.rbac.groups', []))) {
+            $groups = array_merge($groups, config('bhry98.rbac.groups', []));
+        }
         foreach ($groups ?? [] as $key => $group) {
             $groupRecord = RBACGroupsModel::query()->updateOrCreate(
                 [
@@ -61,6 +64,9 @@ class CoreRBACSeeder extends Seeder
     {
         $ds = DIRECTORY_SEPARATOR;
         $permissions = include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions.php";
+        if (array_key_exists(key: "addon_permission", array: config('bhry98.rbac.permissions', []))) {
+            $permissions = array_merge($permissions, config('bhry98.rbac.permissions', []));
+        }
         foreach ($permissions ?? [] as $key => $permission) {
             $permissionRecord = RBACPermissionsModel::query()->updateOrCreate(
                 [

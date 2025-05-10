@@ -7,38 +7,14 @@ use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
-use LdapRecord\Auth\PasswordRequiredException;
-use LdapRecord\Auth\UsernameRequiredException;
-use LdapRecord\Container;
-use LdapRecord\ContainerException;
-use LdapRecord\Models\ActiveDirectory\User;
 
 class UsersAuthenticationService extends BaseService
 {
-    /**
-     * @throws ContainerException
-     * @throws UsernameRequiredException
-     * @throws PasswordRequiredException
-     */
-    public function login(string $samAccountName, string $password): ?string
+    public function login(string $username, string $password): ?string
     {
-        // check if password correct from ldap
-        # set connection to ldap
-        $connection = Container::getConnection('prod');
-        # get a user object from ldap by samAccountName (to get user base dn)
-        $user = User::query()->findBy('samaccountname', $samAccountName);
-        if (!$user) return false;
-        # verify password with ldap
-        if ($connection->auth()->attempt($user->getDn(), $password)) {
-            // check if a user exists in the local database users table
-            $userExists = UsersADManagerUsersModel::query()
-                ->where('sam_account_name', $samAccountName)
-                ->whereHas('user')
-                ->first();
-            if (!$userExists) return false;
-            $userExists->user->password = $password;
-            $userExists->user->save();
-            return self::loginViaUser($userExists->user);
+        if (auth()->attempt(["username" => $username, "password" => $password])) {
+            $userExists = UsersCoreUsersModel::query()->where('username', $username)->first();
+            return self::loginViaUser($userExists);
         }
         return false;
     }
