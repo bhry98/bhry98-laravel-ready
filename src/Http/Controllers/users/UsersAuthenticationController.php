@@ -7,15 +7,18 @@ use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use \App\Http\Controllers\Controller;
 
-class UsersAuthenticationController extends \App\Http\Controllers\Controller
+class UsersAuthenticationController extends Controller
 {
     function login(UsersAuthLoginRequest $request, UsersAuthenticationService $authenticationService): JsonResponse
     {
         try {
-            $token = $authenticationService->login(
-                samAccountName: $request->get(key: "username"),
-                password: $request->get(key: "password"));
+            $token = match (bhry98_app_settings(key: "login_via", default: "username")) {
+                "email" => $authenticationService->loginByEmail(email: $request->get(key: "email"), password: $request->get(key: "password")),
+                "phone_number" => $authenticationService->loginByPhoneNumber(phoneNumber: $request->get(key: "phone_number"), password: $request->get(key: "password")),
+                default => $authenticationService->loginByUsername(username: $request->get(key: "username"), password: $request->get(key: "password")),
+            };
             if (!$token) return bhry98_response_validation_error(
                 [
                     'username' => __(key: 'Bhry98::responses.login-failed'),

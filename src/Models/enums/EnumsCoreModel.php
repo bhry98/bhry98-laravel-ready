@@ -2,7 +2,9 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\enums;
 
+use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Traits\HasLocalization;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -13,7 +15,7 @@ class EnumsCoreModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
 
-    protected array $localizable= ['name'];
+    protected array $localizable = ['name'];
     const TABLE_NAME = 'enums_core';
     const RELATIONS = [];
     const FILTER_COLUMNS = ['code', 'name', 'default_name'];
@@ -54,6 +56,15 @@ class EnumsCoreModel extends BaseModel
             localKey: "id"
         );
     }
+
+//    public function records(): HasMany
+//    {
+//        return match ($this->type) {
+//            EnumsCoreTypes::UsersType => $this->hasMany(related: UsersCoreUsersModel::class, foreignKey: "type_id", localKey: "id"),
+//            EnumsCoreTypes::Timezone => $this->hasMany(related: UsersCoreUsersModel::class, foreignKey: "type_id", localKey: "id"),
+//            default => $this->hasMany(related: EnumsCoreModel::class, foreignKey: "parent_id", localKey: "id"),
+//        };
+//    }
 
     protected static function booted(): void
     {

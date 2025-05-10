@@ -10,10 +10,26 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersAuthenticationService extends BaseService
 {
-    public function login(string $username, string $password): ?string
+    public function loginByUsername(string $username, string $password): ?string
     {
         if (auth()->attempt(["username" => $username, "password" => $password])) {
             $userExists = UsersCoreUsersModel::query()->where('username', $username)->first();
+            return self::loginViaUser($userExists);
+        }
+        return false;
+    }
+    public function loginByEmail(string $email, string $password): ?string
+    {
+        if (auth()->attempt(["email" => $email, "password" => $password])) {
+            $userExists = UsersCoreUsersModel::query()->where('email', $email)->first();
+            return self::loginViaUser($userExists);
+        }
+        return false;
+    }
+    public function loginByPhoneNumber(string $phoneNumber, string $password): ?string
+    {
+        if (auth()->attempt(["phone_number" => $phoneNumber, "password" => $password])) {
+            $userExists = UsersCoreUsersModel::query()->where('phone_number', $phoneNumber)->first();
             return self::loginViaUser($userExists);
         }
         return false;
@@ -25,6 +41,7 @@ class UsersAuthenticationService extends BaseService
         $tokenResult = $user->createToken($user->identity_code);
         return $tokenResult->plainTextToken;
     }
+
 
     public function getAuthUser(array|null $relations = null): ?Authenticatable
     {

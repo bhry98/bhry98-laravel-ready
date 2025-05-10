@@ -8,6 +8,7 @@ use Bhry98\Bhry98LaravelReady\Console\Commands\seeds\UpdateRBACData;
 use Bhry98\Bhry98LaravelReady\Exceptions\HandlerUnAuthenticatedException;
 use Bhry98\Bhry98LaravelReady\Helpers\CreateCustomLogger;
 use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
+use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
 use Bhry98\Bhry98LaravelReady\Models\cache\CacheCoreModel;
@@ -45,9 +46,16 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
             DB::connection()->getPdo();
             self::setDefaultConfiguration();
             self::overridingDefaultPersonalAccessTokenModels();
-            $this->app->register(LaravelCoreAuthServiceProvider::class);
+            if (Schema::hasTable(RBACPermissionsModel::TABLE_NAME)) {
+                $this->app->register(LaravelCoreAuthServiceProvider::class);
+            }
         } catch (\Throwable $e) {
         }
+
+
+        $this->publishes([
+            __DIR__ . '/Config/bhry98.php' => config_path('bhry98.php'),
+        ]);
     }
 
     function overridingDefaultPersonalAccessTokenModels(): void
@@ -105,7 +113,6 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
     function setDefaultConfiguration(): void
     {
         //sessions.php config file
-        config()->set(key: 'session.connection', value: bhry98_app_settings('session_connection'));
         config()->set('session.driver', Schema::hasTable(SessionsCoreModel::TABLE_NAME) ? 'database' : 'file');
         config()->set(key: 'session.table', value: SessionsCoreModel::TABLE_NAME);
         config()->set(key: 'session.lifetime', value: 120);
@@ -133,7 +140,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         config()->set(key: "auth.providers", value: [
             'users' => [
                 'driver' => 'eloquent',
-                'model' => UsersCoreUsersModel::class,
+                'model' => bhry98_app_settings('users_model'),
             ],
         ]);
     }

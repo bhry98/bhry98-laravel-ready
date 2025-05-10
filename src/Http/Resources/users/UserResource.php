@@ -29,12 +29,10 @@ class UserResource extends JsonResource
             "email" => $this->email,
             "must_change_password" => $this->must_change_password,
             "is_active" => $this->is_active,
-            "azure" => AzureUserResource::make($this->whenLoaded(relationship: 'azure')),
-            "ad_manager" => ADManagerUserResource::make($this->whenLoaded(relationship: 'adManager')),
             "country" => CountryResource::make($this->whenLoaded(relationship: 'country')),
             "governorate" => GovernorateResource::make($this->whenLoaded(relationship: 'governorate')),
             "city" => CityResource::make($this->whenLoaded(relationship: 'city')),
-            "avatar_base64" => $this->avatar_base64,
+            "avatar" =>  $this->avatar_url,
         ];
     }
 }

@@ -27,7 +27,7 @@ class RBACGetGroupDetailsRequest extends FormRequest
 
         $rules['groupCode'] = [
             "required",
-            "exists:core." . RBACGroupsModel::TABLE_NAME . ",code"
+            "exists:" . RBACGroupsModel::TABLE_NAME . ",code"
         ];
         $rules['with'] = [
             "sometimes",

@@ -14,7 +14,7 @@ class LocationsCitiesModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
 
-    protected array $localizable== ['name'];
+    protected array $localizable= ['name'];
 
     const TABLE_NAME = "locations_cities";
     const RELATIONS = ["country", "governorate"];

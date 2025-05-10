@@ -27,6 +27,7 @@
     "laravel/framework": ">=11.0",
     "laravel/sanctum": "^4.0",
     "illuminate/console": "*",
+    "laravolt/avatar": "6.2.0",
     "ext-pdo": "*"
   },
   "authors": [

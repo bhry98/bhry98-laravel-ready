@@ -142,6 +142,13 @@ class UsersCoreUsersModel extends Authentication
         );
     }
 
+    public function avatarUrl(): Attribute
+    {
+        return new Attribute(
+            get: fn() => (new Avatar())->create($this->email ?? env(key: "APP_NAME"))->toGravatar(['d' => 'identicon', 'r' => 'pg', 's' => 300])
+        );
+    }
+
     protected static function booted(): void
     {
         static::creating(function ($model) {
@@ -151,10 +158,11 @@ class UsersCoreUsersModel extends Authentication
                 "name" => !is_null($model->display_name) ? $model->display_name : $model->first_name . " " . $model->last_name,
                 "module" => Modules::Core,
                 "metadata" => $model->toArray(),
-                "is_active" => $model->is_active,
+                "is_active" => $model->is_active ?? true,
             ]);
             // create new unique code
             $model->identity_code = $identityRecord->code;
+            $model->is_active = $identityRecord->is_active;
         });
     }
 

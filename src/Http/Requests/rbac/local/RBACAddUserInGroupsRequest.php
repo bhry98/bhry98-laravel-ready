@@ -28,11 +28,11 @@ class RBACAddUserInGroupsRequest extends FormRequest
         $rules = [];
         $rules['groupCode'] = [
             "required",
-            "exists:core." . RBACGroupsModel::TABLE_NAME . ",code"
+            "exists:" . RBACGroupsModel::TABLE_NAME . ",code"
         ];
         $rules['userCode'] = [
             "required",
-            "exists:core." . UsersCoreUsersModel::TABLE_NAME . ",identity_code"
+            "exists:" . UsersCoreUsersModel::TABLE_NAME . ",identity_code"
         ];
         return $rules;
     }

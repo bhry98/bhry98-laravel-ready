@@ -1,4 +1,7 @@
 <?php
+
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+
 return [
     "app_settings" => [
         // database settings
@@ -7,8 +10,9 @@ return [
         "db_name" => env(key: "DB_DATABASE"),
         "db_username" => env(key: "DB_USERNAME"),
         "db_password" => env(key: "DB_PASSWORD"),
-        // session settings
-        "session_connection" => env(key: "DB_CONNECTION"),
+        // auth settings
+        "login_via" => "phone_number",// username, email, phone_number by default username
+        "users_model" => UsersCoreUsersModel::class,
     ],
     "rbac" => [
         "default_groups" => ["Users"],

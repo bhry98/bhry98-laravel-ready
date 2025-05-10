@@ -3,6 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication;
 
 use Bhry98\Bhry98LaravelReady\Models\users\UsersADManagerUsersModel;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -16,19 +17,22 @@ class UsersAuthLoginRequest extends FormRequest
     public function rules(): array
     {
         $rules = [];
-        $rules['username'] = [
-            "required",
-            "string",
-//            "exists:core." . UsersADManagerUsersModel::TABLE_NAME . ",sam_account_name",
-            Rule::exists(UsersADManagerUsersModel::class, 'sam_account_name')->whereNotNull('user_id')
-        ];
+        switch (bhry98_app_settings(key: "login_via", default: "username")) {
+            case 'email':
+                $rules['email'] = ["required", "email", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",email"];
+                break;
+            case 'phone_number':
+                $rules['phone_number'] = ["required", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",phone_number"];
+                break;
+            default:
+                $rules['username'] = ["required", "string", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",username"];
+        }
         $rules['password'] = [
             "required",
             "string"
         ];
         return $rules;
     }
-
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): void
     {
         if ($this->expectsJson()) {
