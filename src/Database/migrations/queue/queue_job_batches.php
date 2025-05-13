@@ -8,30 +8,26 @@ use Bhry98\Bhry98LaravelReady\Models\queue\{
     QueueJobModel,
     QueueJobFailedModel,
 };
+
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create(table: QueueJobBatchesModel::TABLE_NAME,
             callback: function (Blueprint $table) {
-                $table->string('id')->primary();
-                $table->string('name');
-                $table->integer('total_jobs');
-                $table->integer('pending_jobs');
-                $table->integer('failed_jobs');
-                $table->longText('failed_job_ids');
-                $table->mediumText('options')->nullable();
-                $table->integer('cancelled_at')->nullable();
-                $table->integer('created_at');
-                $table->integer('finished_at')->nullable();
+                $table->string(column: 'id')->primary();
+                $table->string(column: 'name');
+                $table->integer(column: 'total_jobs');
+                $table->integer(column: 'pending_jobs');
+                $table->integer(column: 'failed_jobs');
+                $table->longText(column: 'failed_job_ids');
+                $table->mediumText(column: 'options')->nullable();
+                $table->integer(column: 'cancelled_at')->nullable();
+                $table->integer(column: 'created_at');
+                $table->integer(column: 'finished_at')->nullable();
             });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists(table: QueueJobBatchesModel::TABLE_NAME);

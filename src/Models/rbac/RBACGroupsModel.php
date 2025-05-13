@@ -23,7 +23,7 @@ class RBACGroupsModel extends BaseModel
         "description",
         "can_delete",
         "is_default",
-        "is_active"
+        "active"
     ];
     protected $hidden = [];
 
@@ -32,7 +32,7 @@ class RBACGroupsModel extends BaseModel
         return [
             "can_delete" => "boolean",
             "is_default" => "boolean",
-            "is_active" => "boolean",
+            "active" => "boolean",
         ];
     }
 

@@ -26,7 +26,7 @@ return [
             // "default_permission" => "*" or ["permission_code_1", "permission_code_2"],
             // "can_delete" => false,
             // "is_default" => false,
-            // "is_active" => true
+            // "active" => true
             //],
         ],
         "permissions" => [

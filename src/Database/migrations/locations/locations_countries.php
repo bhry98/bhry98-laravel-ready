@@ -25,8 +25,7 @@ return new class extends Migration {
                 $table->string(column: 'flag', length: 10);
                 $table->string(column: 'lang_key', length: 10);
                 $table->boolean(column: 'system_lang')->default(value: false);
-                $table->softDeletes();
-                $table->timestamps();
+                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();
     }

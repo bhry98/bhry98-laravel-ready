@@ -35,7 +35,7 @@ class CoreRBACSeeder extends Seeder
                     "default_name" => $group['locales_name']['en'],
                     "can_delete" => $group['can_delete'] ?? false,
                     "is_default" => $group['is_default'] ?? false,
-                    "is_active" => $group['is_active'] ?? true,
+                    "active" => $group['active'] ?? true,
                 ]);
             if (array_key_exists(key: "default_permission", array: $group)) {
                 if ($group["default_permission"] == "*") {

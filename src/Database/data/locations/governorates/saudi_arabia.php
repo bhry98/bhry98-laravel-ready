@@ -1,16 +1,16 @@
 <?php
 return [
-    ["name" => "Riyadh", "local_name" => "الرياض"],
-    ["name" => "Makkah", "local_name" => "مكة المكرمة"],
-    ["name" => "Madinah", "local_name" => "المدينة المنورة"],
-    ["name" => "Eastern Province", "local_name" => "المنطقة الشرقية"],
-    ["name" => "Asir", "local_name" => "عسير"],
-    ["name" => "Jazan", "local_name" => "جازان"],
-    ["name" => "Al-Qassim", "local_name" => "القصيم"],
-    ["name" => "Hail", "local_name" => "حائل"],
-    ["name" => "Tabuk", "local_name" => "تبوك"],
-    ["name" => "Najran", "local_name" => "نجران"],
-    ["name" => "Al-Jawf", "local_name" => "الجوف"],
-    ["name" => "Al-Baha", "local_name" => "الباحة"],
-    ["name" => "Northern Borders", "local_name" => "الحدود الشمالية"]
+    ["name_en" => "Riyadh", "name_ar" => "الرياض"],
+    ["name_en" => "Makkah", "name_ar" => "مكة المكرمة"],
+    ["name_en" => "Madinah", "name_ar" => "المدينة المنورة"],
+    ["name_en" => "Eastern Province", "name_ar" => "المنطقة الشرقية"],
+    ["name_en" => "Asir", "name_ar" => "عسير"],
+    ["name_en" => "Jazan", "name_ar" => "جازان"],
+    ["name_en" => "Al-Qassim", "name_ar" => "القصيم"],
+    ["name_en" => "Hail", "name_ar" => "حائل"],
+    ["name_en" => "Tabuk", "name_ar" => "تبوك"],
+    ["name_en" => "Najran", "name_ar" => "نجران"],
+    ["name_en" => "Al-Jawf", "name_ar" => "الجوف"],
+    ["name_en" => "Al-Baha", "name_ar" => "الباحة"],
+    ["name_en" => "Northern Borders", "name_ar" => "الحدود الشمالية"]
 ];

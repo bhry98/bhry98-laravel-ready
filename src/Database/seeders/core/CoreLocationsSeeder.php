@@ -6,6 +6,7 @@ use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
 use Illuminate\Database\Seeder;
+use function Laravel\Prompts\select;
 
 class CoreLocationsSeeder extends Seeder
 {
@@ -19,14 +20,14 @@ class CoreLocationsSeeder extends Seeder
         foreach ($countriesArray ?? [] as $country) {
             $fixData = [
                 "country_code" => $country["code"],
-                "default_name" => $country["name"],
+                "default_name" => $country["name_en"],
                 "flag" => $country["flag"],
                 "lang_key" => $country["lang_key"],
                 "system_lang" => false,
             ];
             $countryAfterAdd = LocationsCountriesModel::query()->updateOrCreate(["country_code" => $country["code"]], $fixData);
             if ($countryAfterAdd) {
-                $countryAfterAdd->setLocalized(column: "name", value: $country["name"], locale: "en");
+                self::addLocalizations($countryAfterAdd, $country);
                 match ($country["code"]) {
                     "EG" => self::addEgyptGovernorates($countryAfterAdd->id),
                     "SA" => self::addSaudiArabiaGovernorates($countryAfterAdd->id),
@@ -47,13 +48,13 @@ class CoreLocationsSeeder extends Seeder
         $egyptGovernoratesArray = include __DIR__ . "$ds..$ds..{$ds}data{$ds}locations{$ds}governorates{$ds}egypt.php";
         foreach ($egyptGovernoratesArray ?? [] as $governorate) {
             $fixData = [
-                "default_name" => $governorate["name"],
+                "default_name" => $governorate["name_en"],
                 "country_id" => $egypt_id
             ];
-            $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate(['country_id' => $egypt_id, 'default_name' => $governorate["name"]], $fixData);
+            $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate(['country_id' => $egypt_id, 'default_name' => $governorate["name_en"]], $fixData);
             if ($governorateAfterAdd) {
-                $governorateAfterAdd->setLocalized(column: "name", value: $governorate["name"], locale: "en");
-                match ($governorate["name"]) {
+                self::addLocalizations($governorateAfterAdd, $governorate);
+                match ($governorate["name_en"]) {
                     "Cairo" => self::addEgyptCairoCities($egypt_id, $governorateAfterAdd->id),
                     "Giza" => self::addEgyptGizaCities($egypt_id, $governorateAfterAdd->id),
                     "Alexandria" => self::addEgyptAlexandriaCities($egypt_id, $governorateAfterAdd->id),
@@ -75,16 +76,16 @@ class CoreLocationsSeeder extends Seeder
         $citiesArray = include __DIR__ . "/..$ds..{$ds}data{$ds}locations{$ds}cities{$ds}egypt_cairo.php";
         foreach ($citiesArray ?? [] as $city) {
             $fixData = [
-                "default_name" => $city["name"],
+                "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
                 "governorate_id" => $cairo_id
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
                 "governorate_id" => $cairo_id,
-                "default_name" => $city["name"],
+                "default_name" => $city["name_en"],
             ], $fixData);
-            $cityRecord->setLocalized(column: "name", value: $city["name"], locale: "en");
+            self::addLocalizations($cityRecord, $city);
         }
     }
 
@@ -100,16 +101,17 @@ class CoreLocationsSeeder extends Seeder
         $citiesArray = include __DIR__ . "/..$ds..{$ds}data{$ds}locations{$ds}cities{$ds}egypt_giza.php";
         foreach ($citiesArray ?? [] as $city) {
             $fixData = [
-                "default_name" => $city["name"],
+                "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
                 "governorate_id" => $giza_id
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
                 "governorate_id" => $giza_id,
-                "default_name" => $city["name"],
+                "default_name" => $city["name_en"],
             ], $fixData);
-            $cityRecord->setLocalized(column: "name", value: $city["name"], locale: "en");
+            self::addLocalizations($cityRecord, $city);
+
         }
     }
 
@@ -125,16 +127,17 @@ class CoreLocationsSeeder extends Seeder
         $citiesArray = include __DIR__ . "/..$ds..{$ds}data{$ds}locations{$ds}cities{$ds}egypt_alexandria.php";
         foreach ($citiesArray ?? [] as $city) {
             $fixData = [
-                "default_name" => $city["name"],
+                "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
                 "governorate_id" => $alexandria_id
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
                 "governorate_id" => $alexandria_id,
-                "default_name" => $city["name"],
+                "default_name" => $city["name_en"],
             ], $fixData);
-            $cityRecord->setLocalized(column: "name", value: $city["name"], locale: "en");
+            self::addLocalizations($cityRecord, $city);
+
         }
     }
 
@@ -144,11 +147,17 @@ class CoreLocationsSeeder extends Seeder
         $governoratesArray = include __DIR__ . "/..$ds..{$ds}data{$ds}locations{$ds}governorates{$ds}saudi_arabia.php";
         foreach ($governoratesArray ?? [] as $governorate) {
             $fixData = [
-                "default_name" => $governorate["name"],
+                "default_name" => $governorate["name_en"],
                 "country_id" => $saudi_arabia_id
             ];
-            $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate(['country_id' => $saudi_arabia_id, 'default_name' => $governorate["name"]], $fixData);
-            $governorateAfterAdd->setLocalized(column: "name", value: $governorate["name"], locale: "en");
+            $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate(['country_id' => $saudi_arabia_id, 'default_name' => $governorate["name_en"]], $fixData);
+            self::addLocalizations($governorateAfterAdd, $governorate);
         }
+    }
+
+    static function addLocalizations(LocationsCitiesModel|LocationsCountriesModel|LocationsGovernoratesModel $record, array $data): void
+    {
+        $record->setLocalized(column: "name", value: $data["name_ar"], locale: "en");
+        $record->setLocalized(column: "name", value: $data["name_ar"], locale: "ar");
     }
 }

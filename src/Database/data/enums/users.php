@@ -29,18 +29,6 @@ return [
                 "en" => "Normal User",
             ]
         ],
-        [
-            'module' => Modules::Core,
-            'type' => EnumsCoreTypes::UsersType,
-            'api_access' => true,
-            'can_delete' => true,
-            "default_color" => "blue",
-            'parent_id' => null,
-            'locales' => [
-                'ar' => "عميل",
-                "en" => "Customer",
-            ]
-        ],
     ],
     "genders" => [
         [

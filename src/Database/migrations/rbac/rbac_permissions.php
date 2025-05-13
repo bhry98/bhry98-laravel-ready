@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->id();
                 $table->string(column: 'code')->index()->unique()->comment(comment: "example => [ModuleName].[OperationName].[ActionName] => Core.CoreUsers.Create || Core.AzureUsers.Update");
                 $table->string(column: 'default_name')->nullable();
-                $table->timestamps();
+                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();
     }

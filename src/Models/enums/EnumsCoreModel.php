@@ -29,6 +29,7 @@ class EnumsCoreModel extends BaseModel
         "api_access",
         "can_delete",
         "parent_id",
+        "active"
     ];
     protected $hidden = [];
 

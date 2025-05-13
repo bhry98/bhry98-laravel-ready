@@ -8,7 +8,7 @@ return [
         "default_permission" => "*",
         "can_delete" => false,
         "is_default" => false,
-        "is_active" => true
+        "active" => true
     ],
     "Users" => [
         "locales_name" => [
@@ -22,6 +22,6 @@ return [
         ],
         "can_delete" => false,
         "is_default" => true,
-        "is_active" => true
+        "active" => true
     ],
 ];

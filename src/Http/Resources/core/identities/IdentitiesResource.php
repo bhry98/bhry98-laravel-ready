@@ -15,7 +15,7 @@ class IdentitiesResource extends JsonResource
             "name" => $this->name,
             "module" => $this->module,
             "metadata" => $this->metadata,
-            "is_active" => $this->is_active,
+            "active" => $this->active,
             "parent" => IdentitiesResource::make($this->whenLoaded(relationship: 'parent')),
         ];
     }

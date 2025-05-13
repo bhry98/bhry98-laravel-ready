@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Bhry98\Bhry98LaravelReady\Models\localizations\LocalizationsModel;
+
 return new class extends Migration {
 
     public function up(): void
@@ -18,8 +19,7 @@ return new class extends Migration {
                 $table->string(column: 'locale');
                 $table->string(column: 'value');
                 $table->string(column: 'reference_id');
-                $table->softDeletes();
-                $table->timestamps();
+                bhry98_common_database_columns(table: $table, softDeletes: true);
             });
         Schema::enableForeignKeyConstraints();
     }

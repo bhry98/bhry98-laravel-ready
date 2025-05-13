@@ -1,5 +1,6 @@
 <?php
 
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,21 +12,15 @@ return new class extends Migration {
     {
         Schema::disableForeignKeyConstraints();
         Schema::create(
-            table:LogsSystemModel::TABLE_NAME,
+            table: LogsSystemModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->foreignId(column: 'user_id')
-                    ->nullable()
-                    ->references(column: 'id')
-                    ->on(table: \Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel::TABLE_NAME)
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
-                $table->string('log_level');
-                $table->string('app_profile');
-                $table->longText('message');
-                $table->json('context')->nullable();
-                $table->timestamps();
-
+                $table->foreignId(column: 'user_id')->nullable()->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->string(column: 'log_level');
+                $table->string(column: 'app_profile');
+                $table->longText(column: 'message');
+                $table->json(column: 'context')->nullable();
+                bhry98_common_database_columns(table: $table);
             });
         Schema::enableForeignKeyConstraints();
     }

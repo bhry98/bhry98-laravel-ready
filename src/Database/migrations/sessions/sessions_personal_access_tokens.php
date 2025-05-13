@@ -15,12 +15,12 @@ return new class extends Migration {
             table: SessionsPersonalAccessTokenModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->morphs('tokenable',indexName: "core_sessions_personal_access_tokenable");
-                $table->string('name');
-                $table->string('token', 64)->unique(indexName: "core_sessions_access_token");
-                $table->text('abilities')->nullable();
-                $table->timestamp('last_used_at')->nullable();
-                $table->timestamp('expires_at')->nullable();
+                $table->morphs(name: 'tokenable', indexName: "core_sessions_personal_access_tokenable");
+                $table->string(column: 'name');
+                $table->string(column: 'token', length: 64)->unique(indexName: "core_sessions_access_token");
+                $table->text(column: 'abilities')->nullable();
+                $table->timestamp(column: 'last_used_at')->nullable();
+                $table->timestamp(column: 'expires_at')->nullable();
                 $table->timestamps();
             });
     }

@@ -16,28 +16,18 @@ return new class extends Migration {
             table: UsersNotificationsModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->foreignId(column: 'to_user_id')
-                    ->references(column: 'id')
-                    ->on(table: UsersCoreUsersModel::TABLE_NAME)
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
-                $table->foreignId(column: 'from_user_id')
-                    ->nullable()
-                    ->references(column: 'id')
-                    ->on(table: UsersCoreUsersModel::TABLE_NAME)
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
-                $table->string(column: 'module');
-                $table->string(column: 'type');
+                $table->foreignId(column: 'to_user_id')->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId(column: 'from_user_id')->nullable()->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->string(column: 'title');
                 $table->string(column: 'message');
-                $table->string(column: 'url');
+                $table->string(column: 'relation')->nullable();
+                $table->string(column: 'reference_id')->nullable();
+                $table->string(column: 'url')->nullable();
                 $table->string(column: 'icon')->nullable();
                 $table->string(column: 'color')->nullable();
                 $table->string(column: 'is_read')->default(value: false);
                 $table->timestamp(column: 'read_at')->nullable();
-                $table->timestamp(column: 'created_at')->useCurrent();
-                $table->timestamp(column: 'updated_at')->useCurrentOnUpdate();
+                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true);
             });
         Schema::enableForeignKeyConstraints();
     }

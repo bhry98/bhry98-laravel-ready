@@ -9,7 +9,6 @@ use Bhry98\Bhry98LaravelReady\Models\cache\{
 
 return new class extends Migration {
 
-//    protected $connection = 'core';
 
     public function up(): void
     {
@@ -17,9 +16,9 @@ return new class extends Migration {
         Schema::create(
             table: CacheCoreModel::TABLE_NAME,
             callback: function (Blueprint $table) {
-                $table->string('key')->primary();
-                $table->mediumText('value');
-                $table->integer('expiration');
+                $table->string(column: 'key')->primary();
+                $table->mediumText(column: 'value');
+                $table->integer(column: 'expiration');
             });
         Schema::enableForeignKeyConstraints();
     }

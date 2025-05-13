@@ -8,23 +8,18 @@ use Bhry98\Bhry98LaravelReady\Models\cache\{
 };
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create(
             table: CacheLocksModel::TABLE_NAME,
             callback: function (Blueprint $table) {
-                $table->string('key')->primary();
-                $table->string('owner');
-                $table->integer('expiration');
+                $table->string(column: 'key')->primary();
+                $table->string(column: 'owner');
+                $table->integer(column: 'expiration');
             });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists(table: CacheLocksModel::TABLE_NAME);

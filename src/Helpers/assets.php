@@ -1,5 +1,6 @@
 <?php
 
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Log;
 
@@ -153,13 +154,13 @@ if (!function_exists(function: 'bhry98_force_delete_log')) {
     }
 }
 if (!function_exists(function: 'bhry98_common_database_columns')) {
-    function bhry98_common_database_columns(Blueprint $table, bool $softDeletes = false,bool $active = false): void
+    function bhry98_common_database_columns(Blueprint $table, bool $softDeletes = false, bool $userLog = false, bool $active = false): void
     {
         if ($active) $table->boolean(column: 'active')->default(value: true);
+        if ($userLog) $table->foreignId(column: 'created_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+        if ($userLog) $table->foreignId(column: 'updated_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
         $table->timestamp(column: 'created_at')->useCurrent();
-        $table->string(column: 'created_by')->comment('user identity code');
         $table->timestamp(column: 'updated_at')->useCurrentOnUpdate();
-        $table->string(column: 'updated_by')->nullable();
         if ($softDeletes) $table->softDeletes();
     }
 }

@@ -15,20 +15,12 @@ return new class extends Migration {
             callback: function (Blueprint $table) {
                 $table->id();
                 $table->uuid(column: 'code')->unique();
-                $table->foreignId(column: 'parent_id')
-                    ->nullable()
-                    ->references(column: 'id')
-                    ->on(table: IdentitiesCoreModel::TABLE_NAME)
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
+                $table->foreignId(column: 'parent_id')->nullable()->references(column: 'id')->on(table: IdentitiesCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->string(column: 'type');
                 $table->string(column: 'module');
                 $table->string(column: 'name')->nullable();
                 $table->json(column: 'metadata')->nullable();
-                $table->boolean(column: 'is_active')->default(value: true);
-                $table->timestamp(column: 'created_at')->useCurrent();
-                $table->timestamp(column: 'updated_at')->useCurrentOnUpdate();
-                $table->softDeletes();
+                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();
     }

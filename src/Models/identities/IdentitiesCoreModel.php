@@ -21,7 +21,7 @@ class IdentitiesCoreModel extends BaseModel
         "relation_id",
         "parent_id",
         "metadata",
-        "is_active",
+        "active",
         "created_at",
         "updated_at",
     ];
@@ -29,7 +29,7 @@ class IdentitiesCoreModel extends BaseModel
     protected $casts = [
         'type' => IdentitiesCoreTypes::class,
         'metadata' => 'array',
-        'is_active' => 'boolean',
+        'active' => 'boolean',
         "updated_at" => "datetime",
         "created_at" => "datetime",
     ];

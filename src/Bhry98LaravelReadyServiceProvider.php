@@ -8,6 +8,7 @@ use Bhry98\Bhry98LaravelReady\Console\Commands\seeds\UpdateRBACData;
 use Bhry98\Bhry98LaravelReady\Exceptions\HandlerUnAuthenticatedException;
 use Bhry98\Bhry98LaravelReady\Helpers\CreateCustomLogger;
 use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
+use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
@@ -143,5 +144,10 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
                 'model' => bhry98_app_settings('users_model'),
             ],
         ]);
+        // media_library.php
+        config()->set(key: 'media-library.disk_name', value: 'public');
+        config()->set(key: 'media-library.media_model', value: MediaLibraryModel::class);
+        config()->set(key: 'media-library.queue_connection_name', value: "database");
+
     }
 }

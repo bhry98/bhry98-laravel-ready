@@ -15,7 +15,7 @@ class RBACGroupResource extends JsonResource
             "total_permissions" => $this->permissions_count,
             "total_users" => $this->users_count,
             "is_default" => $this->is_default,
-            "is_active" => $this->is_active
+            "active" => $this->active
         ];
     }
 }

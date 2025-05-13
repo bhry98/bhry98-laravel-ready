@@ -8,31 +8,35 @@ use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 use Bhry98\Bhry98LaravelReady\Models\identities\IdentitiesCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Traits\HasLocalization;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LocationsGovernoratesModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
 
-    protected array $localizable= ['name'];
+    protected array $localizable = ['name'];
 
     const TABLE_NAME = "locations_governorates";
+    const FILTER_COLUMNS = ["name"];
     const RELATIONS = [
         "country",
     ];
-    // start table
     protected $table = self::TABLE_NAME;
     public $timestamps = true;
     protected $fillable = [
         "identity_code",
         "default_name",
         "country_id",
+        "active",
     ];
     protected $casts = [
         "name" => "string",
+        "active" => "boolean"
     ];
 
-    public function country(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function country(): HasOne
     {
         return $this->hasOne(
             related: LocationsCountriesModel::class,
@@ -40,7 +44,7 @@ class LocationsGovernoratesModel extends BaseModel
             localKey: "country_id");
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function users(): HasMany
     {
         return $this->hasMany(
             related: UsersCoreUsersModel::class,
@@ -48,7 +52,7 @@ class LocationsGovernoratesModel extends BaseModel
             localKey: "id");
     }
 
-    public function cities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function cities(): HasMany
     {
         return $this->hasMany(
             related: LocationsCitiesModel::class,
@@ -72,7 +76,7 @@ class LocationsGovernoratesModel extends BaseModel
                 "module" => Modules::Core,
                 "metadata" => $model->toArray(),
                 "parent_id" => $parent_id,
-                "is_active" => $model->is_active ?? true,
+                "active" => $model->active ?? true,
             ]);
             $model->identity_code = $identityRecord->code;
         });

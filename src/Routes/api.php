@@ -1,6 +1,7 @@
 <?php
 
 use Bhry98\Bhry98LaravelReady\Http\Controllers\enums\EnumsManagementController;
+use Bhry98\Bhry98LaravelReady\Http\Controllers\locations\CountriesManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\rbac\RBACLocalManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersAuthenticationController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersProfileController;
@@ -44,6 +45,15 @@ Route::name("api.")
             ->prefix("enums")
             ->group(function () {
                 Route::get("/{enumType}", [EnumsManagementController::class, "allByType"])->name("allByType");
+            });
+        // locations routes
+        Route::name("locations.")
+//            ->middleware(["auth:sanctum"])
+            ->prefix("locations")
+            ->group(function () {
+                Route::get("countries", [CountriesManagementController::class, "all"])->name("countries.all");
+                Route::get("countries/{countryCode}/governorates", [CountriesManagementController::class, "allGovernorate"])->name("countries.allGovernorate");
+                Route::get("countries/{countryCode}/governorates", [CountriesManagementController::class, "allGovernorate"])->name("countries.allGovernorate");
             });
 
     });

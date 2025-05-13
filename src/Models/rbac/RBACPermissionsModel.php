@@ -19,11 +19,13 @@ class RBACPermissionsModel extends BaseModel
     protected $fillable = [
         "code",
         "default_name",
+        "active",
     ];
     protected $hidden = [];
     protected function casts(): array
     {
         return [
+            "active"=>"boolean"
         ];
     }
     function groups(): HasMany

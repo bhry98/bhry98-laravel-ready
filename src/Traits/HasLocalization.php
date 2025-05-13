@@ -12,15 +12,14 @@ trait HasLocalization
 
     public function scopeWhereTranslationLike(Builder $query, string $column, ?string $value, ?string $locale = null): Builder
     {
-        $locale = $locale ?? app()->getLocale();
-//        dd($locale);
+        //$locale = $locale ?? app()->getLocale();
+        //dd($locale);
         if (is_null($value)) {
             return $query; // Skip filter if value is null
         }
         return $query->whereHas('localizations', function ($q) use ($column, $value, $locale) {
             $q->where('value', "like", "%$value%")
-                ->where('column_name', $column)
-                ->where('locale', $locale);
+                ->where('column_name', $column);
         });
     }
 

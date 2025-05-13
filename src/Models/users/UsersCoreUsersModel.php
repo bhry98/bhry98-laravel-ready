@@ -6,12 +6,13 @@ use Bhry98\Bhry98LaravelReady\Enums\identities\IdentitiesCoreTypes;
 use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\identities\IdentitiesCoreModel;
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
+use Illuminate\Support\Str;
+use Bhry98\Bhry98LaravelReady\Models\locations\{
+    LocationsCitiesModel,
+    LocationsCountriesModel,
+    LocationsGovernoratesModel
+};
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsUsersModel;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -42,7 +43,7 @@ class UsersCoreUsersModel extends Authentication
         "last_name",
         "phone_number",
         "national_id",
-        "is_active",
+        "active",
         "birthdate",
         "username",
         "email",
@@ -55,7 +56,7 @@ class UsersCoreUsersModel extends Authentication
         "password" => "hashed",
         "remember_token" => "string",
         "must_change_password" => "boolean",
-        "is_active" => "boolean",
+        "active" => "boolean",
         "birthdate" => "date:Y-m-d",
         "national_id" => "integer",
         "created_at" => "datetime",
@@ -111,22 +112,6 @@ class UsersCoreUsersModel extends Authentication
             localKey: "city_id");
     }
 
-    public function azure(): HasOne
-    {
-        return $this->hasOne(
-            related: UsersAzureUsersModel::class,
-            foreignKey: "user_id",
-            localKey: "id");
-    }
-
-    public function adManager(): HasOne
-    {
-        return $this->hasOne(
-            related: UsersADManagerUsersModel::class,
-            foreignKey: "user_id",
-            localKey: "id");
-    }
-
     public function groups(): HasMany
     {
         return $this->hasMany(
@@ -154,16 +139,26 @@ class UsersCoreUsersModel extends Authentication
         static::creating(function ($model) {
             // create record in identity table
             $identityRecord = IdentitiesCoreModel::query()->create([
-                "type" => IdentitiesCoreTypes::CoreUsers,
+                "type" => IdentitiesCoreTypes::User,
                 "name" => !is_null($model->display_name) ? $model->display_name : $model->first_name . " " . $model->last_name,
                 "module" => Modules::Core,
                 "metadata" => $model->toArray(),
-                "is_active" => $model->is_active ?? true,
+                "active" => $model->active ?? true,
             ]);
             // create new unique code
             $model->identity_code = $identityRecord->code;
-            $model->is_active = $identityRecord->is_active;
+            $model->active = $identityRecord->active;
+            $model->username = $model->username ?? $this->generateUsername();
         });
+    }
+
+    function generateUsername(): string
+    {
+        $username = Str::random(length: 10);
+        if (static::query()->where(column: 'username', value: $username)->exists()) {
+            static::generateUsername();
+        }
+        return $username;
     }
 
     public function hasPermission($permissionCode): bool

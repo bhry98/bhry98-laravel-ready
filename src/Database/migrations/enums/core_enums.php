@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Bhry98\Bhry98LaravelReady\Models\enums\{
     EnumsCoreModel,
 };
+
 return new class extends Migration {
 
     public function up(): void
@@ -22,14 +23,8 @@ return new class extends Migration {
                 $table->string(column: 'default_color')->default('gray');
                 $table->boolean(column: 'api_access')->default(value: false);
                 $table->boolean(column: 'can_delete')->default(value: true);
-                $table->foreignId(column: 'parent_id')
-                    ->nullable()
-                    ->references(column: 'id')
-                    ->on(table:  EnumsCoreModel::TABLE_NAME)
-                    ->cascadeOnDelete()
-                    ->cascadeOnUpdate();
-                $table->softDeletes();
-                $table->timestamps();
+                $table->foreignId(column: 'parent_id')->nullable()->references(column: 'id')->on(table: EnumsCoreModel::TABLE_NAME)->cascadeOnDelete()->cascadeOnUpdate();
+                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();
     }
@@ -37,7 +32,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists(table:  EnumsCoreModel::TABLE_NAME);
+        Schema::dropIfExists(table: EnumsCoreModel::TABLE_NAME);
         Schema::enableForeignKeyConstraints();
     }
 };
