@@ -157,7 +157,7 @@ class CoreLocationsSeeder extends Seeder
 
     static function addLocalizations(LocationsCitiesModel|LocationsCountriesModel|LocationsGovernoratesModel $record, array $data): void
     {
-        $record->setLocalized(column: "name", value: $data["name_ar"], locale: "en");
+        $record->setLocalized(column: "name", value: $data["name_en"], locale: "en");
         $record->setLocalized(column: "name", value: $data["name_ar"], locale: "ar");
     }
 }

@@ -84,7 +84,7 @@ if (!function_exists(function: 'bhry98_response_unauthenticated')) {
             data: [
                 'success' => false,
                 'code' => 401,
-                'message' => app()->getLocale(), //$message,
+                'message' =>$message,
                 'note' => __(key: "Bhry98::responses.unauthenticated"),
             ],
             status: 401

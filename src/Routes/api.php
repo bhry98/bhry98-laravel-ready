@@ -6,6 +6,7 @@ use Bhry98\Bhry98LaravelReady\Http\Controllers\rbac\RBACLocalManagementControlle
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersAuthenticationController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersProfileController;
 use Bhry98\Bhry98LaravelReady\Http\Middleware\GlobalResponseLocale;
+use Bhry98\Bhry98LaravelReady\Http\Middleware\users\UserAccountEnable;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,14 +23,15 @@ Route::name("api.")
             });
         // account routes
         Route::name("me.")
-            ->middleware(["auth:sanctum"])
+            ->middleware(["auth:sanctum", UserAccountEnable::class])
             ->prefix("me")
             ->group(function () {
                 Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile");
+                    Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword");
             });
         // rbac routes
         Route::name("rbac.")
-            ->middleware(["auth:sanctum"])
+            ->middleware(["auth:sanctum", UserAccountEnable::class])
             ->prefix("rbac")
             ->group(function () {
                 Route::get("/permissions", [RBACLocalManagementController::class, "allPermissions"])->name("allPermissions");
@@ -41,7 +43,7 @@ Route::name("api.")
             });
         // enums routes
         Route::name("enums.")
-            ->middleware(["auth:sanctum"])
+            ->middleware(["auth:sanctum", UserAccountEnable::class])
             ->prefix("enums")
             ->group(function () {
                 Route::get("/{enumType}", [EnumsManagementController::class, "allByType"])->name("allByType");

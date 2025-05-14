@@ -3,9 +3,11 @@
 namespace Bhry98\Bhry98LaravelReady\Http\Resources\users;
 
 use Bhry98\Bhry98LaravelReady\Http\Resources\core\enums\EnumsResource;
-use Bhry98\Bhry98LaravelReady\Http\Resources\core\locations\CountryResource;
-use Bhry98\Bhry98LaravelReady\Http\Resources\locations\CityResource;
-use Bhry98\Bhry98LaravelReady\Http\Resources\locations\GovernorateResource;
+use Bhry98\Bhry98LaravelReady\Http\Resources\locations\{
+    CityResource,
+    CountryResource,
+    GovernorateResource,
+};
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -32,7 +34,7 @@ class UserResource extends JsonResource
             "country" => CountryResource::make($this->whenLoaded(relationship: 'country')),
             "governorate" => GovernorateResource::make($this->whenLoaded(relationship: 'governorate')),
             "city" => CityResource::make($this->whenLoaded(relationship: 'city')),
-            "avatar" =>  $this->avatar_url,
+            "avatar" => $this->avatar_url,
         ];
     }
 }

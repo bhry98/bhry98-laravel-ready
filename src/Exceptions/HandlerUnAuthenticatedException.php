@@ -17,44 +17,39 @@ class HandlerUnAuthenticatedException extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception): JsonResponse
     {
-        $locale = $request->header(key: 'Accept-Language', default: 'en');
-        if (in_array($locale, ['ar', 'en'])) {
-            app()->setLocale($locale);
-            config(['app.locale' => $locale]);
+        if ($request->is('api/*')) {
+            $locale = $request->header(key: 'Accept-Language', default: 'en');
+            if (in_array($locale, ['ar', 'en'])) {
+                app()->setLocale($locale);
+                config(['app.locale' => $locale]);
+            }
+            return bhry98_response_unauthenticated();
         }
-        return bhry98_response_unauthenticated();
+        return parent::unauthenticated($request, $exception);
     }
 
     public function render($request, Throwable $e): \Symfony\Component\HttpFoundation\Response
     {
-        $locale = $request->header(key: 'Accept-Language', default: 'en');
-        if (in_array($locale, ['ar', 'en'])) {
-            app()->setLocale($locale);
-            config(['app.locale' => $locale]);
-        }
-        if ($e instanceof AuthorizationException) {
-            return bhry98_response_authorization_error();
-        }
-        if ($e instanceof ErrorException) {
-            return bhry98_response_internal_error([
-                'message' => $e->getMessage(),
-                'code' => $e->getCode(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine()
+        if ($request->is('api/*')) {
+            $locale = $request->header(key: 'Accept-Language', default: 'en');
+            if (in_array($locale, ['ar', 'en'])) {
+                app()->setLocale($locale);
+                config(['app.locale' => $locale]);
+            }
+            if ($e instanceof AuthorizationException) {
+                return bhry98_response_authorization_error();
+            }
+            if ($e instanceof ErrorException) {
+                return bhry98_response_internal_error([
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine()
 
-            ]);
+                ]);
+            }
+            return parent::render($request, $e);
         }
-
-//        if (!app()->isProduction()) {
-//            return bhry98_response_internal_error([
-//                'message' => $e->getMessage(),
-//                'code' => $e->getCode(),
-//                'file' => $e->getFile(),
-//                'line' => $e->getLine()
-//            ]);
-//
-//        }
         return parent::render($request, $e);
-
     }
 }

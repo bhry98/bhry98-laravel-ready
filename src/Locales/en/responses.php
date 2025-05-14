@@ -23,4 +23,7 @@ return [
     "user-deleted-from-group-successfully" => "User deleted from group successfully",
     "create-user-successfully" => "User created successfully",
     "create-user-failed" => "User creation failed",
+    "your-account-disabled" => "Your account is disabled",
+    "your-account-archived" => "Your account is archived",
+    "password-changed-successfully"=>"Password changed successfully",
 ];
