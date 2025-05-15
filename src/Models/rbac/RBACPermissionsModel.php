@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class RBACPermissionsModel extends BaseModel
 {
     use HasLocalization;
-
     protected array $localizable= ['name']; // Columns that should be localized
     const TABLE_NAME = 'rbac_permissions';
     const RELATIONS = [];

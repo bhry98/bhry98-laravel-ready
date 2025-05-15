@@ -1,37 +1,43 @@
 <?php
 return [
     ### Local RBAC
-    "LocalRBAC.CreateGroup" => [
+    "Rules.CreateGroup" => [
         "locales" => [
             "ar" => "إضافة مجموعة صلاحيات جديدة بالنظام",
             "en" => "Create new local group policy",
         ],
     ],
-    "LocalRBAC.UpdateGroup" => [
+    "Rules.UpdateGroup" => [
         "locales" => [
             "ar" => "تعديل مجموعة الصلاحيات بالنظام",
             "en" => "Update local group policy",
         ],
     ],
-    "LocalRBAC.RetrieveGroup" => [
+    "Rules.RetrieveGroup" => [
         "locales" => [
             "ar" => "عرض تفاصيل مجموعة الصلاحيات بالنظام",
             "en" => "Retrieve local group policy details",
         ],
     ],
-    "LocalRBAC.DeleteGroup" => [
+    "Rules.All" => [
+        "locales" => [
+            "ar" => "عرض كل مجموعات الصلاحيات بالنظام",
+            "en" => "View all system rule groups",
+        ],
+    ],
+    "Rules.DeleteGroup" => [
         "locales" => [
             "ar" => "حذف مجموعة الصلاحيات بالنظام",
             "en" => "Delete local group policy",
         ],
     ],
-    "LocalRBAC.ForceDeleteGroup" => [
+    "Rules.ForceDeleteGroup" => [
         "locales" => [
             "ar" => "حذف مجموعة الصلاحيات من النظام نهائياً",
             "en" => "Force delete local group policy",
         ],
     ],
-    "LocalRBAC.UpdateUsersGroup" => [
+    "Rules.UpdateUsersGroup" => [
         "locales" => [
             "ar" => "تعديل المستفيدين من مجموعة الصلاحيات بالنظام",
             "en" => "Update users in local group policy",
@@ -99,4 +105,4 @@ return [
             "en" => "Change my timezone",
         ],
     ],
-  ];
+];

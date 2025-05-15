@@ -160,7 +160,6 @@ class UsersCoreUsersModel extends Authentication
         }
         return $username;
     }
-
     public function hasPermission($permissionCode): bool
     {
         $userGroups = $this->groups;
@@ -169,7 +168,7 @@ class UsersCoreUsersModel extends Authentication
         // get all permissions from the groups
         $allPermissions = collect();
         $userGroups->each(function ($userGroup) use ($allPermissions) {
-            $permissionsFromGroup = $userGroup->group->permissions;
+            $permissionsFromGroup = $userGroup->group?->permissions;
             if ($permissionsFromGroup && count($permissionsFromGroup) > 0) {
                 $permissionsFromGroup->each(function ($permission) use ($userGroup, $allPermissions) {
                     $allPermissions->push($permission->permission?->code ?? '');

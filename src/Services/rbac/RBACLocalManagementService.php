@@ -3,6 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady\Services\rbac;
 
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
+use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsPermissionsModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsUsersModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
@@ -94,6 +95,27 @@ class RBACLocalManagementService extends BaseService
                 success: (bool)$update,
                 message: "CORE => RBACLocalManagementService@manageUserInGroup",
                 context: ['group' => $groupRecord, "user" => $user, 'add' => $add]
+            );
+            return (bool)$update;
+        }
+        return false;
+    }
+    public function managePermissionInGroup(string $groupCode, string $permissionCode, bool $add = true): bool
+    {
+        $groupRecord = self::groupDetails($groupCode);
+        $permission = RBACPermissionsModel::query()->where('code', $permissionCode)->first();
+        if ($groupRecord && $permission) {
+            $record = RBACGroupsPermissionsModel::query();
+            if ($add) {
+                $update = $record->updateOrCreate(["group_id" => $groupRecord->id, "permission_id" => $permission->id]);
+            } else {
+                $record->where(["group_id" => $groupRecord->id, "permission_id" => $permission->id])->forceDelete();
+                $update = !RBACGroupsUsersModel::query()->where(["group_id" => $groupRecord->id, "permission_id" => $permission->id])->exists();
+            };
+            bhry98_updated_log(
+                success: (bool)$update,
+                message: "CORE => RBACLocalManagementService@managePermissionInGroup",
+                context: ['group' => $groupRecord, "permission" => $permission, 'add' => $add]
             );
             return (bool)$update;
         }

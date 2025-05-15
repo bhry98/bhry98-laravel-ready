@@ -10,16 +10,18 @@ trait HasLocalization
 {
 
 
+
     public function scopeWhereTranslationLike(Builder $query, string $column, ?string $value, ?string $locale = null): Builder
     {
-        //$locale = $locale ?? app()->getLocale();
-        //dd($locale);
+        $locale = $locale ?? app()->getLocale();
+//        dd($locale);
         if (is_null($value)) {
             return $query; // Skip filter if value is null
         }
         return $query->whereHas('localizations', function ($q) use ($column, $value, $locale) {
             $q->where('value', "like", "%$value%")
-                ->where('column_name', $column);
+                ->where('column_name', $column)
+                ->where('locale', $locale);
         });
     }
 
@@ -27,6 +29,15 @@ trait HasLocalization
     {
         return $this->hasMany(LocalizationsModel::class, 'reference_id')
             ->where('relation', static::class);
+    }
+
+    public function localization(): HasOne
+    {
+        return $this->hasOne(LocalizationsModel::class, 'reference_id')
+            ->where([
+                'relation' => static::class,
+                "locale" => App::getLocale()
+            ]);
     }
 
     public static function getLocalizable(): array
@@ -94,6 +105,35 @@ trait HasLocalization
         }
     }
 
+    /**
+     * Update localized values for a column for multiple locales at once.
+     *
+     * @param string $column
+     * @param array $values ['en' => 'Value in English', 'ar' => 'Arabic Name', ...]
+     */
+    public function updateLocalized(string $column, string $value, string $locale): void
+    {
+        $record = LocalizationsModel::query()->where([
+            'relation' => static::class,
+            'column_name' => $column,
+            'reference_id' => $this->id,
+            'locale' => $locale,
+        ])->first();
+        if ($record) {
+            $record->update([
+                'value' => $value,
+            ]);
+        } else {
+            LocalizationsModel::query()->create([
+                'value' => $value,
+                'relation' => static::class,
+                'column_name' => $column,
+                'reference_id' => $this->id,
+                'locale' => $locale,
+            ]);
+        }
+    }
+
     public function deleteLocalized($column, $locale = null): void
     {
         $locale = $locale ?? App::getLocale();
@@ -116,4 +156,5 @@ trait HasLocalization
             ->where('locale', $locale)
             ->forceDelete();
     }
+
 }

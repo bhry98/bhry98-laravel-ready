@@ -13,6 +13,7 @@ return [
         // auth settings
         "login_via" => "phone_number",// username, email, phone_number by default username
         "users_model" => UsersCoreUsersModel::class,
+        "locales" => ["ar", "en"],
     ],
     "rbac" => [
         "default_groups" => ["Users"],
