@@ -23,12 +23,12 @@ class CoreEnumsSeeder extends Seeder
             foreach ($enum ?? [] as $enumValue) {
                 $enumRecord = EnumsCoreModel::query()->updateOrCreate(
                     [
-                        'default_name' => $enumValue['locales']['en'],
+                        'default_name' => array_key_exists('default_name', $enumValue) ? $enumValue['default_name'] : $enumValue['locales']['en'],
                         'type' => $enumValue['type'],
                         'module' => $enumValue['module'],
                     ],
                     [
-                        'default_name' => $enumValue['locales']['en'],
+                        'default_name' => array_key_exists('default_name', $enumValue) ? $enumValue['default_name'] : $enumValue['locales']['en'],
                         'type' => $enumValue['type'],
                         'module' => $enumValue['module'],
                         'default_color' => array_key_exists('default_color', $enumValue) ? $enumValue['default_color'] : "gray",

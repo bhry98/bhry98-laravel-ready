@@ -86,6 +86,37 @@ return [
             "en" => "Change account status of user",
         ],
     ],
+    ###
+    "CoreUsers.Types.All" => [
+        "locales" => [
+            "ar" => "عرض كل انواع المستخدمين",
+            "en" => "All user types",
+        ],
+    ],
+    "CoreUsers.Types.Create" => [
+        "locales" => [
+            "ar" => "إضافة نوع مستخدم جديد",
+            "en" => "Create new user types",
+        ],
+    ],
+    "CoreUsers.Types.Update" => [
+        "locales" => [
+            "ar" => "تعديل نوع مستخدم",
+            "en" => "Update user types",
+        ],
+    ],
+    "CoreUsers.Types.Delete" => [
+        "locales" => [
+            "ar" => "حذف نوع مستخدم",
+            "en" => "Delete user types",
+        ],
+    ],
+    "CoreUsers.Types.ForceDelete" => [
+        "locales" => [
+            "ar" => "حذف نوع مستخدم نهائياً",
+            "en" => "Force delete user types",
+        ],
+    ],
     ### My Account
     "MyAccount.ChangePassword" => [
         "locales" => [

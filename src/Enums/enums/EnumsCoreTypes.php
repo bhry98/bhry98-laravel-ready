@@ -7,5 +7,4 @@ enum EnumsCoreTypes: string
     case UsersType = 'usersType';
     case Timezone = 'timezone';
     case UsersGender = 'usersGender';
-    case ItAssetsCategoryStatus = 'ItAssetsCategoryStatus';
 }

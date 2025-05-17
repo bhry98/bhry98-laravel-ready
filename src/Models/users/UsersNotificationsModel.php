@@ -3,8 +3,9 @@
 namespace Bhry98\Bhry98LaravelReady\Models\users;
 
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
+use Illuminate\Notifications\DatabaseNotification;
 
-class UsersNotificationsModel extends BaseModel
+class UsersNotificationsModel extends DatabaseNotification
 {
 
     // start env
@@ -13,20 +14,17 @@ class UsersNotificationsModel extends BaseModel
     // start table
     protected $table = self::TABLE_NAME;
     protected $fillable = [
-        "verify_code",
-        "user_id",
-        "valid",
-        "expired_at",
-        "created_at",
-        "updated_at",
+        "id",
+        "id",
+        "type",
+        "notifiable",
+        "data",
+        "read_at",
     ];
     protected $casts = [
-        "valid" => "boolean",
-        "verify_code" => "integer",
-        "expired_at" => "datetime",
-        "created_at" => "datetime",
-        "updated_at" => "datetime",
+        "data" => "array",
     ];
+
     public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(
@@ -38,9 +36,7 @@ class UsersNotificationsModel extends BaseModel
     protected static function booted(): void
     {
         static::creating(function ($model) {
-            $model->verify_code = rand(123451, 987968);
-            $model->valid = true;
-            $model->expired_at = now(config('app.timezone'))->addMinutes(10);
+//            dd($model->attributes['data']);
         });
     }
 

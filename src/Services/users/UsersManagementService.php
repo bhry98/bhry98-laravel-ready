@@ -3,9 +3,11 @@
 namespace Bhry98\Bhry98LaravelReady\Services\users;
 
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Bhry98\Bhry98LaravelReady\Notifications\users\UserUpdatedSuccessfully;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class UsersManagementService extends BaseService
 {
@@ -45,7 +47,10 @@ class UsersManagementService extends BaseService
             $last_name = array_key_exists("last_name", $data) ? $data["last_name"] : $user->last_name;
             $data["display_name"] = "$first_name $last_name";
             $data["username"] = array_key_exists("email", $data) ? $data["email"] : $user->email;
-            return $user->update($data);
+            $update = $user->update($data);
+//            if ($update) Notification::sendNow(auth()->user(), new UserUpdatedSuccessfully(auth()->id()), ['database']);
+            if ($update) auth()->user()->notifyNow(new UserUpdatedSuccessfully(),["database"]);
+            return $update;
         }
         return (bool)$user;
     }

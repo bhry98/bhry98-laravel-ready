@@ -15,6 +15,7 @@ use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
 use Bhry98\Bhry98LaravelReady\Models\cache\CacheCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\cache\CacheLocksModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreAuthServiceProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +46,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         self::loadTranslations();
         try {
             DB::connection()->getPdo();
+//            \Illuminate\Notifications\Notification::useDatabaseNotificationModel(UsersNotificationsModel::class);
             self::setDefaultConfiguration();
             self::overridingDefaultPersonalAccessTokenModels();
             if (Schema::hasTable(RBACPermissionsModel::TABLE_NAME)) {

@@ -15,19 +15,22 @@ return new class extends Migration {
         Schema::create(
             table: UsersNotificationsModel::TABLE_NAME,
             callback: function (Blueprint $table) {
-                $table->id();
-                $table->foreignId(column: 'to_user_id')->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId(column: 'from_user_id')->nullable()->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->string(column: 'title');
-                $table->string(column: 'message');
-                $table->string(column: 'relation')->nullable();
-                $table->string(column: 'reference_id')->nullable();
-                $table->string(column: 'url')->nullable();
-                $table->string(column: 'icon')->nullable();
-                $table->string(column: 'color')->nullable();
-                $table->string(column: 'is_read')->default(value: false);
-                $table->timestamp(column: 'read_at')->nullable();
-                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true);
+                // laravel default notification table
+                $table->uuid('id')->primary();
+                $table->string('type');
+                $table->morphs('notifiable');
+                $table->text('data');
+                $table->timestamp('read_at')->nullable();
+                $table->timestamps();
+                // packages notification table
+//                $table->foreignId(column: 'to_user_id')->nullable()->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+//                $table->foreignId(column: 'from_user_id')->nullable()->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+//                $table->string(column: 'relation')->nullable();
+//                $table->string(column: 'reference_id')->nullable();
+//                $table->string(column: 'url')->nullable();
+//                $table->string(column: 'icon')->nullable();
+//                $table->string(column: 'color')->nullable();
+//                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true);
             });
         Schema::enableForeignKeyConstraints();
     }

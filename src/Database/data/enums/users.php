@@ -2,12 +2,15 @@
 
 use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersDefaultType;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersGendersType;
 
 return [
     "types" => [
         [
             'module' => Modules::Core,
             'type' => EnumsCoreTypes::UsersType,
+            'default_name' => UsersDefaultType::Administrator,
             'api_access' => false,
             'can_delete' => false,
             'parent_id' => null,
@@ -20,9 +23,10 @@ return [
         [
             'module' => Modules::Core,
             'type' => EnumsCoreTypes::UsersType,
+            'default_name' => UsersDefaultType::User,
             'api_access' => true,
             'can_delete' => true,
-            "default_color" => "azure",
+            "default_color" => "blue",
             'parent_id' => null,
             'locales' => [
                 'ar' => "مستخدم عادي",
@@ -34,6 +38,7 @@ return [
         [
             'module' => Modules::Core,
             'type' => EnumsCoreTypes::UsersGender,
+            'default_name' => UsersGendersType::Male,
             'api_access' => true,
             'can_delete' => false,
             'parent_id' => null,
@@ -46,6 +51,7 @@ return [
         [
             'module' => Modules::Core,
             'type' => EnumsCoreTypes::UsersGender,
+            'default_name' => UsersGendersType::Female,
             'api_access' => true,
             'can_delete' => false,
             'parent_id' => null,

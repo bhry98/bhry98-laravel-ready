@@ -6,6 +6,8 @@ use Bhry98\Bhry98LaravelReady\Enums\identities\IdentitiesCoreTypes;
 use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\identities\IdentitiesCoreModel;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Bhry98\Bhry98LaravelReady\Models\locations\{
     LocationsCitiesModel,
@@ -23,7 +25,7 @@ use Laravolt\Avatar\Avatar;
 
 class UsersCoreUsersModel extends Authentication
 {
-    use HasApiTokens, SoftDeletes;
+    use HasApiTokens, SoftDeletes, Notifiable;
 
     const TABLE_NAME = "users_core";
     const RELATIONS = ["country", "governorate", "city", "type", "gender", "azure", "adManager"];
@@ -160,6 +162,7 @@ class UsersCoreUsersModel extends Authentication
         }
         return $username;
     }
+
     public function hasPermission($permissionCode): bool
     {
         $userGroups = $this->groups;
@@ -177,4 +180,29 @@ class UsersCoreUsersModel extends Authentication
         });
         return $allPermissions->contains($permissionCode);
     }
+
+    public function notifications(): MorphMany
+    {
+        return $this->morphMany(UsersNotificationsModel::class, 'notifiable')
+            ->orderBy('created_at', 'desc');
+    }
+//    public function notifications(): HasMany
+//    {
+//        return $this->hasMany(
+//            related: UsersNotificationsModel::class,
+//            foreignKey: 'notifiable_id',
+//            localKey: 'id')
+//            ->orderBy('id', 'desc');
+//    }
+
+    public function unreadNotifications(): MorphMany
+    {
+        return $this->morphMany(UsersNotificationsModel::class, 'notifiable')
+            ->whereNull('read_at')
+            ->orderBy('created_at', 'desc');
+    }
+//    public function routeNotificationForDatabase(): UsersNotificationsModel
+//    {
+//        return new UsersNotificationsModel;
+//    }
 }
