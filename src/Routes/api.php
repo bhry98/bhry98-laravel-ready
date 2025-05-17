@@ -43,14 +43,13 @@ Route::name("api.")
             });
         // enums routes
         Route::name("enums.")
-            ->middleware(["auth:sanctum", UserAccountEnable::class])
+//            ->middleware(["auth:sanctum", UserAccountEnable::class])
             ->prefix("enums")
             ->group(function () {
                 Route::get("/{enumType}", [EnumsManagementController::class, "allByType"])->name("allByType");
             });
         // locations routes
         Route::name("locations.")
-//            ->middleware(["auth:sanctum"])
             ->prefix("locations")
             ->group(function () {
                 Route::get("countries", [CountriesManagementController::class, "all"])->name("countries.all");
