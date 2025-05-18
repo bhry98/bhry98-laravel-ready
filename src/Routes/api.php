@@ -19,6 +19,7 @@ Route::name("api.")
             ->prefix("auth")
             ->group(function () {
                 Route::post("/login", [UsersAuthenticationController::class, "login"])->name("login");
+                Route::post("/registration", [UsersAuthenticationController::class, "registration"])->name("registration");
                 Route::get("/logout", [UsersAuthenticationController::class, "logout"])->name("logout")->middleware("auth:sanctum");
             });
         // account routes
@@ -27,7 +28,7 @@ Route::name("api.")
             ->prefix("me")
             ->group(function () {
                 Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile");
-                    Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword");
+                Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword");
             });
         // rbac routes
         Route::name("rbac.")

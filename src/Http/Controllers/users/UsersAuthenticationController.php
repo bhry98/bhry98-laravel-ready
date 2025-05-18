@@ -2,12 +2,14 @@
 
 namespace Bhry98\Bhry98LaravelReady\Http\Controllers\users;
 
+use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\RegistrationUserByTypeRequest;
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthLoginRequest;
 use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use \App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class UsersAuthenticationController extends Controller
 {
@@ -46,6 +48,33 @@ class UsersAuthenticationController extends Controller
             return bhry98_response_success_with_data(message: __(key: "Bhry98::responses.logout-success"));
         } catch (Exception $e) {
             return bhry98_response_internal_error(data: [
+                'error' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+            ]);
+        }
+    }
+
+    function registration(RegistrationUserByTypeRequest $request, UsersAuthenticationService $usersCoreServices): JsonResponse
+    {
+        return bhry98_response_success_with_data(data: $request->validated());
+        try {
+            DB::beginTransaction();
+            $user = $usersCoreServices->registerByType($request->validated());
+            if ($user) {
+                $token = $usersCoreServices->loginViaUser($user);
+                DB::commit();
+                return bhry98_response_success_with_data([
+                    'access_type' => 'Bearer',
+                    'access_token' => $token,
+                    "user" => UserResource::make($user),
+                ]);
+            } else {
+                DB::rollBack();
+                return bhry98_response_success_without_data();
+            }
+        } catch (\Exception $e) {
+            return bhry98_response_internal_error([
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),
                 'line' => $e->getLine(),

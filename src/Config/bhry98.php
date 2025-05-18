@@ -14,6 +14,13 @@ return [
         "login_via" => "phone_number",// username, email, phone_number by default username
         "users_model" => UsersCoreUsersModel::class,
         "locales" => ["ar", "en"],
+        // validation settings
+        "validations" => [
+            "users_require_username" => "required",
+            "users_require_phone_number" => "sometimes",
+            "users_require_email" => "sometimes",
+            "users_require_national_id" => "sometimes",
+        ]
     ],
     "rbac" => [
         "default_groups" => ["Users"],

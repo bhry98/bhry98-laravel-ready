@@ -54,6 +54,28 @@ class UsersAuthenticationService extends BaseService
         return $user->first();
     }
 
+    public function registerByType(array $data)
+    {
+        // check if a normal user exists
+        $userType = UsersCoreTypesService::getByCode(code: $data['type_code']);
+        // if normal user type not found return null
+        throw_if(!$userType, "No user type found");
+        // add normal user in database
+        $data['type_id'] = $userType->id;
+        $data['country_id'] = UsersCoreLocationsService::getCountryDetails($data['country_id'])?->id;
+        $data['governorate_id'] = UsersCoreLocationsService::getGovernorateDetails($data['governorate_id'])?->id;
+        $data['city_id'] = UsersCoreLocationsService::getCityDetails($data['city_id'])?->id;
+        $user = UsersCoreUsersModel::create($data);
+        if ($user) {
+            // if added successfully add log [info] and return user
+            Log::info("User registered successfully with id {$user->id}", ['user' => $user]);
+            return $user;
+        } else {
+            // if added successfully add log [error] and return user
+            Log::error("User registered field");
+            return null;
+        }
+    }
     public function logout(): bool
     {
         bhry98_add_log(level: 'info', message: 'User logout', context: ['user' => Auth::user()?->identity_code ?? '']);
