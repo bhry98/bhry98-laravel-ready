@@ -14,6 +14,7 @@ use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
 use Bhry98\Bhry98LaravelReady\Models\cache\CacheCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\cache\CacheLocksModel;
+use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreAuthServiceProvider;
@@ -89,6 +90,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
             __DIR__ . "{$ds}Database{$ds}migrations{$ds}rbac",
             __DIR__ . "{$ds}Database{$ds}migrations{$ds}sessions",
             __DIR__ . "{$ds}Database{$ds}migrations{$ds}users",
+            __DIR__ . "{$ds}Database{$ds}migrations{$ds}settings",
         ]);
     }
 
@@ -150,6 +152,9 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         config()->set(key: 'media-library.disk_name', value: 'public');
         config()->set(key: 'media-library.media_model', value: MediaLibraryModel::class);
         config()->set(key: 'media-library.queue_connection_name', value: "database");
-
+        // settings
+        config()->set(key: 'settings.table', value: SettingsCoreModel::TABLE_NAME);
+        config()->set(key: 'settings.driver', value: "eloquent");
+        config()->set(key: 'settings.teams', value: false);
     }
 }

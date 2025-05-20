@@ -29,6 +29,7 @@ Route::name("api.")
             ->group(function () {
                 Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile");
                 Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword");
+                Route::put("/", [UsersProfileController::class, "updateProfile"])->name("updateProfile");
             });
         // rbac routes
         Route::name("rbac.")
@@ -54,8 +55,9 @@ Route::name("api.")
             ->prefix("locations")
             ->group(function () {
                 Route::get("countries", [CountriesManagementController::class, "all"])->name("countries.all");
+                Route::get("countries/{countryCode}", [CountriesManagementController::class, "details"])->name("countries.details");
                 Route::get("countries/{countryCode}/governorates", [CountriesManagementController::class, "allGovernorate"])->name("countries.allGovernorate");
-                Route::get("countries/{countryCode}/governorates", [CountriesManagementController::class, "allGovernorate"])->name("countries.allGovernorate");
+                Route::get("countries/{countryCode}/cities", [CountriesManagementController::class, "allCities"])->name("countries.allCities");
             });
 
     });

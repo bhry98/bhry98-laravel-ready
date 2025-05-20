@@ -29,7 +29,8 @@
     "illuminate/console": "*",
     "laravolt/avatar": "6.2.0",
     "ext-pdo": "*",
-    "spatie/laravel-medialibrary": "^11.12"
+    "spatie/laravel-medialibrary": "^11.12",
+    "rawilk/laravel-settings": "^3.4"
   },
   "authors": [
     {

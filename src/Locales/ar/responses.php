@@ -23,5 +23,9 @@ return [
     "user-deleted-from-group-successfully" => "تم حذف المستخدم من المجموعة بنجاح",
     "create-user-successfully" => "تم إنشاء المستخدم بنجاح",
     "create-user-failed" => "فشل في إنشاء المستخدم",
+    "your-account-disabled" => "حسابك موقوف",
+    "your-account-archived" => "حسابك مؤرشف/محذوف",
+    "password-changed-successfully" => "تم تغيير كلمه المرور بنجاح",
+    "no-data-in-validation-failed" => "خطأ في البيانات (لا يوجد بيانات مرسلة)"
 
 ];

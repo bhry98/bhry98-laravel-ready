@@ -17,10 +17,16 @@ return [
         // validation settings
         "validations" => [
             "users_require_username" => "required",
-            "users_require_phone_number" => "sometimes",
-            "users_require_email" => "sometimes",
-            "users_require_national_id" => "sometimes",
-        ]
+            "users_require_phone_number" => "nullable",
+            "users_require_email" => "nullable",
+            "users_require_national_id" => "nullable",
+        ],
+        "date" => [
+            "format" => "Y-m-d | h:i A",
+            "format_time" => "h:i A",
+            "format_notification" => "Y M d",
+            "format_without_time" => "Y-m-d",
+        ],
     ],
     "rbac" => [
         "default_groups" => ["Users"],

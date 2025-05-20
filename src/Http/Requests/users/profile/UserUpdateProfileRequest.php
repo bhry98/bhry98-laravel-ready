@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication;
+namespace Bhry98\Bhry98LaravelReady\Http\Requests\users\profile;
 
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
@@ -13,34 +13,29 @@ use Illuminate\Validation\Rule;
 //use\HttpResponseException;
 
 
-class RegistrationUserByTypeRequest extends FormRequest
+class UserUpdateProfileRequest extends FormRequest
 {
     public function prepareForValidation()
     {
-//        $fixedData["country_id"] = $this->country;
-//        $fixedData["type_code"] = $this->type;
-//        $fixedData["governorate_id"] = $this->governorate;
-//        $fixedData["city_id"] = $this->city;
-        $fixedData["redirect_link"] = is_null($this->redirect_link) ? session("redirect_link") : $this->redirect_link;
-//        $fixedData["display_name"] = is_null($this->display_name) ? $this->first_name . " " . $this->last_name : $this->display_name;
-//        $fixedData["username"] = is_null($this->username) ? $this->email : $this->username;
+        $fixedData = [];
         return $this->merge($fixedData);
     }
 
     public function rules(): array
     {
+        $authId = auth()->id();
         $roles["username"] = [
-            bhry98_app_settings(key: "validations.users_require_username", default: "required"),
+            "sometimes",
             "string",
-            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",username",
+            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",username," . $authId,
         ];
         $roles["first_name"] = [
-            "required",
+            "sometimes",
             "string",
             "max:50",
         ];
         $roles["last_name"] = [
-            "required",
+            "sometimes",
             "string",
             "max:50",
         ];
@@ -51,28 +46,16 @@ class RegistrationUserByTypeRequest extends FormRequest
             "max:50",
         ];
         $roles["email"] = [
-            bhry98_app_settings(key: "validations.users_require_email", default: "required"),
+            "sometimes",
             "email",
-            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",email",
+            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",email," . $authId,
         ];
         $roles["phone_number"] = [
-            bhry98_app_settings(key: "validations.users_require_phone_number", default: "required"),
+            "sometimes",
             "numeric",
             "digits:11",
             "starts_with:010,011,012,015",
-            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",phone_number",
-        ];
-        $roles["password"] = [
-            "required",
-            "string",
-            "between:8,50",
-            "confirmed",
-        ];
-        $roles["type"] = [
-            "sometimes",
-            "nullable",
-            "string",
-            "exists:" . EnumsCoreModel::TABLE_NAME . ",code",
+            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",phone_number,".$authId,
         ];
         $roles["birthdate"] = [
             "sometimes",
@@ -81,10 +64,10 @@ class RegistrationUserByTypeRequest extends FormRequest
             "before:" . date('Y') - 10,
         ];
         $roles["national_id"] = [
-            bhry98_app_settings(key: "validations.users_require_national_id", default: "required"),
+            "sometimes",
             "numeric",
             "digits:14",
-            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",national_id",
+            "unique:" . UsersCoreUsersModel::TABLE_NAME . ",national_id," . $authId,
         ];
         $roles["country"] = [
             "sometimes",
@@ -103,10 +86,6 @@ class RegistrationUserByTypeRequest extends FormRequest
             "nullable",
             "string",
             "exists:" . LocationsCitiesModel::TABLE_NAME . ",identity_code",
-        ];
-        $roles["redirect_link"] = [
-            "nullable",
-            "string"
         ];
         return $roles;
     }

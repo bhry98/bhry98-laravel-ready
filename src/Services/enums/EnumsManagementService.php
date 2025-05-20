@@ -1,4 +1,5 @@
 <?php
+
 namespace Bhry98\Bhry98LaravelReady\Services\enums;
 
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -9,9 +10,19 @@ use Bhry98\Bhry98LaravelReady\Enums\Modules;
 
 class EnumsManagementService extends BaseService
 {
-    public function getByCode(string $enumCode, array|null $relations = null): EnumsCoreModel
+    public function getByCode(string $enumCode, array|null $relations = null): ?EnumsCoreModel
     {
         $record = EnumsCoreModel::query()->where('code', $enumCode)->first();
+        if ($relations) {
+            $record->with($relations);
+        }
+        return $record;
+    }
+
+    public function getDefault(string $enumTypeCode, string $enumDefaultName, ?string $enumModule = null, array|null $relations = null): ?EnumsCoreModel
+    {
+        $record = EnumsCoreModel::query()->where(["type" => $enumTypeCode, "default_name" => $enumDefaultName,])->first();
+        if ($enumModule)
         if ($relations) {
             $record->with($relations);
         }
@@ -50,6 +61,7 @@ class EnumsManagementService extends BaseService
         $enumType = EnumsCoreTypes::from($type);
         $data = EnumsCoreModel::query()
             ->where('type', $enumType)
+            ->where('api_access',true)
             ->orderBy('id', 'desc');
         if ($module) {
             $data->where('module', Modules::from($module));

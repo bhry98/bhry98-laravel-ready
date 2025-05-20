@@ -150,11 +150,14 @@ class UsersCoreUsersModel extends Authentication
             // create new unique code
             $model->identity_code = $identityRecord->code;
             $model->active = $identityRecord->active;
-            $model->username = $model->username ?? $this->generateUsername();
+            $model->username = $model->username ?? self::generateUsername();
+            $model->display_name = $model->display_name ?: "{$model->first_name} {$model->last_name}";
+        });
+        static::updating(function ($model) {
+            $model->display_name = $model->display_name ?: "{$model->first_name} {$model->last_name}";
         });
     }
-
-    function generateUsername(): string
+    static function generateUsername(): string
     {
         $username = Str::random(length: 10);
         if (static::query()->where(column: 'username', value: $username)->exists()) {

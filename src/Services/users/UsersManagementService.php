@@ -43,10 +43,6 @@ class UsersManagementService extends BaseService
     {
         $user = self::getByIdentityCode($identityCode);
         if ($user) {
-            $first_name = array_key_exists("first_name", $data) ? $data["first_name"] : $user->first_name;
-            $last_name = array_key_exists("last_name", $data) ? $data["last_name"] : $user->last_name;
-            $data["display_name"] = "$first_name $last_name";
-            $data["username"] = array_key_exists("email", $data) ? $data["email"] : $user->email;
             $update = $user->update($data);
 //            if ($update) Notification::sendNow(auth()->user(), new UserUpdatedSuccessfully(auth()->id()), ['database']);
             if ($update) auth()->user()->notifyNow(new UserUpdatedSuccessfully(),["database"]);

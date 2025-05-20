@@ -9,10 +9,10 @@ if (!function_exists(function: 'bhry98_date_formatted')) {
     {
         return [
             "iso" => $date,
-            'format' => $date?->format(config(key: "bhry98.date.format")) ?? null,
-            'format_time' => $date?->format(config(key: "bhry98.date.format_time")) ?? null,
-            'format_notification' => $date?->format(config(key: "bhry98.date.format_notification")) ?? null,
-            'format_without_time' => $date?->format(config(key: "bhry98.date.format_without_time")) ?? null,
+            'format' => $date?->format(config(key: "bhry98.app_settings.date.format", default: "Y-m-d | H:i A")) ?? null,
+            'format_time' => $date?->format(config(key: "bhry98.app_settings.date.format_time", default: "H:i A")) ?? null,
+            'format_notification' => $date?->format(config(key: "bhry98.app_settings.date.format_notification", default: "Y M d")) ?? null,
+            'format_without_time' => $date?->format(config(key: "bhry98.app_settings.date.format_without_time", default: "Y-m-d")) ?? null,
         ];
     }
 }
@@ -21,12 +21,6 @@ if (!function_exists(function: 'bhry98_app_settings')) {
     function bhry98_app_settings($key, $default = null)
     {
         return config(key: "bhry98.app_settings.$key", default: $default);
-    }
-}
-if (!function_exists(function: 'bhry98_core_settings')) {
-    function bhry98_core_settings($key, $default = null)
-    {
-        return config(key: "bhry98.core_settings.$key", default: $default);
     }
 }
 if (!function_exists(function: 'bhry98_add_log')) {
@@ -162,5 +156,17 @@ if (!function_exists(function: 'bhry98_common_database_columns')) {
         $table->timestamp(column: 'created_at')->useCurrent();
         $table->timestamp(column: 'updated_at')->useCurrentOnUpdate();
         if ($softDeletes) $table->softDeletes();
+    }
+}
+if (!function_exists(function: 'bhry98_get_setting')) {
+    function bhry98_get_setting(string $key, ?string $default = null)
+    {
+        return \Rawilk\Settings\Facades\Settings::get(key: $key, default: $default);
+    }
+}
+if (!function_exists(function: 'bhry98_set_setting')) {
+    function bhry98_set_setting(string $key, string $value)
+    {
+        return \Rawilk\Settings\Facades\Settings::set(key: $key, value: $value);
     }
 }

@@ -25,5 +25,8 @@ return [
     "create-user-failed" => "User creation failed",
     "your-account-disabled" => "Your account is disabled",
     "your-account-archived" => "Your account is archived",
-    "password-changed-successfully"=>"Password changed successfully",
+    "your-profile-updated-successfully" => "Your profile updated successfully",
+    "your-profile-updated-failed" => "Your profile updated failed",
+    "password-changed-successfully" => "Password changed successfully",
+    "no-data-in-validation-failed" => "No data validation failed"
 ];

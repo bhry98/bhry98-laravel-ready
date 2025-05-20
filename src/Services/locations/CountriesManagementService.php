@@ -12,11 +12,11 @@ class CountriesManagementService extends BaseService
 {
     public function getByCode(string $identityCode, array|null $relations = null): ?LocationsCountriesModel
     {
-        $record = LocationsCountriesModel::query()->where('identity_code', $identityCode)->first();
+        $record = LocationsCountriesModel::query()->where('identity_code', $identityCode)->withCount(['governorates', 'cities','users']);
         if ($relations) {
             $record->with($relations);
         }
-        return $record;
+        return $record->first();
     }
 
     public function createNewCountry(array $data): LocationsCountriesModel

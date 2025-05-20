@@ -2,7 +2,7 @@
 
 namespace Bhry98\Bhry98LaravelReady\Http\Controllers\users;
 
-use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\RegistrationUserByTypeRequest;
+use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UserAuthRegistrationRequest;
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthLoginRequest;
 use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
@@ -55,12 +55,12 @@ class UsersAuthenticationController extends Controller
         }
     }
 
-    function registration(RegistrationUserByTypeRequest $request, UsersAuthenticationService $usersCoreServices): JsonResponse
+    function registration(UserAuthRegistrationRequest $request, UsersAuthenticationService $usersCoreServices): JsonResponse
     {
-        return bhry98_response_success_with_data(data: $request->validated());
+//        return bhry98_response_success_with_data(data: $request->validated());
         try {
             DB::beginTransaction();
-            $user = $usersCoreServices->registerByType($request->validated());
+            $user = $usersCoreServices->registration($request->validated());
             if ($user) {
                 $token = $usersCoreServices->loginViaUser($user);
                 DB::commit();
