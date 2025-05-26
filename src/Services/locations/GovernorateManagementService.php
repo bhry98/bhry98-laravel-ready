@@ -3,6 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady\Services\locations;
 
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
+use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -59,10 +60,14 @@ class GovernorateManagementService extends BaseService
         })->toArray();
     }
 
-    public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+    public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null, string|null $countryGlobalCode = null): LengthAwarePaginator
     {
         $data = LocationsGovernoratesModel::query()
             ->orderBy('id', 'desc');
+        if ($countryGlobalCode) {
+            $country = LocationsCountriesModel::query()->where('country_code', $countryGlobalCode)->first();
+            $data->where("country_id", $country?->id ?? "");
+        }
         if (!empty($filters)) {
             self::applyFilters($data, $filters, LocationsGovernoratesModel::class);
             $pageNumber = 0;
@@ -96,5 +101,24 @@ class GovernorateManagementService extends BaseService
                 page: $pageNumber,
             );
     }
+//    public function getAllGovernoratesByGlobalCountryCode(string $countryGlobalCode, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+//    {
+//        $country = LocationsCountriesModel::query()->where('country_code', $countryGlobalCode)->first();
+//        $data = LocationsGovernoratesModel::query()
+//            ->where("country_id", $country?->id ?? "")
+//            ->orderBy('id', 'desc');
+//        if (!empty($filters)) {
+//            self::applyFilters($data, $filters, LocationsGovernoratesModel::class);
+//            $pageNumber = 0;
+//        }
+//        if ($relations) {
+//            $data->with($relations);
+//        }
+//        return $data->withCount(['users', 'cities'])
+//            ->paginate(
+//                perPage: $perPage,
+//                page: $pageNumber,
+//            );
+//    }
 
 }
