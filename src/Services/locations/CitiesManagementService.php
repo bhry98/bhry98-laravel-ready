@@ -10,7 +10,7 @@ class CitiesManagementService extends BaseService
 {
     public function getByCode(string $identityCode, array|null $relations = null): ?LocationsCitiesModel
     {
-        $record = LocationsCitiesModel::query()->where(column: 'identity_code', value: $identityCode)->first();
+        $record = LocationsCitiesModel::query()->where('identity_code',  $identityCode)->first();
         if ($relations) {
             $record->with($relations);
         }

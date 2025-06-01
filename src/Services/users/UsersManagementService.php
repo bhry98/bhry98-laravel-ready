@@ -2,9 +2,15 @@
 
 namespace Bhry98\Bhry98LaravelReady\Services\users;
 
+use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersDefaultType;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Notifications\users\UserUpdatedSuccessfully;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
+use Bhry98\Bhry98LaravelReady\Services\enums\EnumsManagementService;
+use Bhry98\Bhry98LaravelReady\Services\locations\CitiesManagementService;
+use Bhry98\Bhry98LaravelReady\Services\locations\CountriesManagementService;
+use Bhry98\Bhry98LaravelReady\Services\locations\GovernorateManagementService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -43,9 +49,13 @@ class UsersManagementService extends BaseService
     {
         $user = self::getByIdentityCode($identityCode);
         if ($user) {
+            if (array_key_exists('country', $data)) $data['country_id'] = (new CountriesManagementService)->getByCode(identityCode: $data['country'])?->id;
+            if (array_key_exists('governorate', $data)) $data['governorate_id'] = (new GovernorateManagementService())->getByCode(identityCode: $data['governorate'])?->id;
+            if (array_key_exists('city', $data)) $data['city_id'] = (new CitiesManagementService())->getByCode(identityCode: $data['city'])?->id;
+            if (array_key_exists('type', $data)) $data['type_id'] = (new EnumsManagementService())->getByCode( $data['type'])?->id;
             $update = $user->update($data);
 //            if ($update) Notification::sendNow(auth()->user(), new UserUpdatedSuccessfully(auth()->id()), ['database']);
-            if ($update) auth()->user()->notifyNow(new UserUpdatedSuccessfully(),["database"]);
+            if ($update) auth()->user()->notifyNow(new UserUpdatedSuccessfully(), ["database"]);
             return $update;
         }
         return (bool)$user;

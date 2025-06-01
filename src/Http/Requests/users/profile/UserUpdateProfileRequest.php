@@ -87,6 +87,12 @@ class UserUpdateProfileRequest extends FormRequest
             "string",
             "exists:" . LocationsCitiesModel::TABLE_NAME . ",identity_code",
         ];
+        $roles["type"] = [
+            "sometimes",
+            "nullable",
+            "string",
+            "exists:" . EnumsCoreModel::TABLE_NAME . ",code",
+        ];
         return $roles;
     }
 

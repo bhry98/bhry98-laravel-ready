@@ -12,7 +12,7 @@ class GovernorateManagementService extends BaseService
 {
     public function getByCode(string $identityCode, array|null $relations = null): ?LocationsGovernoratesModel
     {
-        $record = LocationsGovernoratesModel::query()->where(column: 'identity_code', value: $identityCode)->first();
+        $record = LocationsGovernoratesModel::query()->where('identity_code', $identityCode)->first();
         if ($relations) {
             $record->with($relations);
         }
