@@ -10,9 +10,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GovernorateManagementService extends BaseService
 {
-    public function getByCode(string $identityCode, array|null $relations = null): ?LocationsGovernoratesModel
+    public function getByCode(string $code, array|null $relations = null): ?LocationsGovernoratesModel
     {
-        $record = LocationsGovernoratesModel::query()->where('identity_code', $identityCode)->first();
+        $record = LocationsGovernoratesModel::query()->where('code', $code)->first();
         if ($relations) {
             $record->with($relations);
         }

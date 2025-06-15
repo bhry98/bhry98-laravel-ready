@@ -19,7 +19,7 @@ return new class extends Migration {
             table: LocationsGovernoratesModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->uuid(column: 'identity_code')->unique();
+                $table->string(column: 'code',length: 50)->unique()->index();
                 $table->string(column: 'default_name')->nullable();
                 $table->foreignId(column: 'country_id')->references(column: 'id')->on(table: LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);

@@ -30,7 +30,7 @@ class LocationsGetAllCountryCitiesRequest extends FormRequest
     {
         $rules["countryCode"] = [
             "required",
-            "exists:" . LocationsCountriesModel::TABLE_NAME . ",identity_code"
+            "exists:" . LocationsCountriesModel::TABLE_NAME . ",code"
         ];
         $rules["pageNumber"] = [
             "nullable",

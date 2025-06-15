@@ -23,7 +23,6 @@ class EnumsCoreModel extends BaseModel
     protected $fillable = [
         "code",
         "type",
-        "module",
         "default_name",
         "default_color",
         "api_access",
@@ -57,29 +56,16 @@ class EnumsCoreModel extends BaseModel
             localKey: "id"
         );
     }
-
-//    public function records(): HasMany
-//    {
-//        return match ($this->type) {
-//            EnumsCoreTypes::UsersType => $this->hasMany(related: UsersCoreUsersModel::class, foreignKey: "type_id", localKey: "id"),
-//            EnumsCoreTypes::Timezone => $this->hasMany(related: UsersCoreUsersModel::class, foreignKey: "type_id", localKey: "id"),
-//            default => $this->hasMany(related: EnumsCoreModel::class, foreignKey: "parent_id", localKey: "id"),
-//        };
-//    }
-
     protected static function booted(): void
     {
         static::creating(function ($model) {
-            $model->code = self::generateNewCode();
+            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->created_by = auth()->id();
+        });
+        static::updating(function ($model) {
+            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->updated_by = auth()->id();
         });
     }
 
-    static function generateNewCode(): string
-    {
-        $code = Str::random(length: 10);
-        if (static::query()->where('code', $code)->exists()) {
-            return self::generateNewCode();
-        }
-        return $code;
-    }
 }

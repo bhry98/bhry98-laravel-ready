@@ -23,7 +23,7 @@ A Laravel starter package designed to help developers kickstart new Laravel proj
 - Custom helper functions
 
 ## 📂 Folder Structure Overview
-
+## reset_password_attempt_limit
 app/
 ├── Actions/
 ├── Http/

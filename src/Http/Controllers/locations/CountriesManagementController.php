@@ -42,7 +42,7 @@ class CountriesManagementController extends Controller
     {
         try {
             $permissions = $countryService->getByCode(
-                identityCode: $request->get(key: 'countryCode'),
+                code: $request->get(key: 'countryCode'),
                 relations: $request->get(key: 'with')
             );
             if (!$permissions) {

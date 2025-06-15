@@ -49,7 +49,7 @@ class UsersProfileController extends \App\Http\Controllers\Controller
         try {
             if (!$request->validated()) return bhry98_response_validation_error(message: __(key: "Bhry98::responses.no-data-in-validation-failed"));
 
-            if (!$userService->updateProfile(identityCode: auth()->user()?->identity_code, data: $request->validated())) return bhry98_response_not_found(message: __(key: "Bhry98::responses.your-profile-updated-field"));
+            if (!$userService->updateProfile(code: auth()->user()?->code, data: $request->validated())) return bhry98_response_not_found(message: __(key: "Bhry98::responses.your-profile-updated-field"));
             return bhry98_response_success_with_data(message: __(key: "Bhry98::responses.your-profile-updated-successfully"));
         } catch (Exception $e) {
             return bhry98_response_internal_error([

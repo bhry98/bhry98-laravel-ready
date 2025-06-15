@@ -19,7 +19,7 @@ return new class extends Migration {
             table: LocationsCountriesModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->uuid(column: 'identity_code')->unique();
+                $table->string(column: 'code',length: 50)->unique()->index();
                 $table->string(column: 'default_name')->nullable();
                 $table->string(column: 'country_code', length: 20)->index()->unique();
                 $table->string(column: 'flag', length: 10);

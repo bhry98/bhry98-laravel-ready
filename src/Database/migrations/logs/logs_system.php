@@ -1,5 +1,6 @@
 <?php
 
+use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +16,13 @@ return new class extends Migration {
             table: LogsSystemModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->foreignId(column: 'user_id')->nullable()->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId(column: 'user_id')
+                    ->nullable()
+                    ->references(column: 'id')
+                    ->on(table: UsersCoreUsersModel::TABLE_NAME)
+                    ->cascadeOnUpdate()
+                    ->cascadeOnDelete();
+                $table->string(column: 'action')->default(SystemActionEnums::Other->name);
                 $table->string(column: 'log_level');
                 $table->string(column: 'app_profile');
                 $table->longText(column: 'message');

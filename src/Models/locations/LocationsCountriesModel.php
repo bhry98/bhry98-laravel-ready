@@ -2,13 +2,9 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\locations;
 
-use Bhry98\Bhry98LaravelReady\Enums\identities\IdentitiesCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
-use Bhry98\Bhry98LaravelReady\Models\identities\IdentitiesCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Traits\HasLocalization;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,7 +20,7 @@ class LocationsCountriesModel extends BaseModel
     public $timestamps = true;
     protected $fillable = [
         "id",
-        "identity_code",
+        "code",
         "country_code",
         "default_name",
         "flag",
@@ -65,15 +61,12 @@ class LocationsCountriesModel extends BaseModel
     protected static function booted(): void
     {
         static::creating(function ($model) {
-            // create record in identity table
-            $identityRecord = IdentitiesCoreModel::query()->create([
-                "type" => IdentitiesCoreTypes::Country,
-                "name" => $model->default_name,
-                "module" => Modules::Core,
-                "metadata" => $model->toArray(),
-                "active" => $model->active ?? true,
-            ]);
-            $model->identity_code = $identityRecord->code;
+            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->created_by = auth()->id();
+        });
+        static::updating(function ($model) {
+            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->updated_by = auth()->id();
         });
     }
 }

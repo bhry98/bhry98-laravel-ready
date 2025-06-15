@@ -16,7 +16,6 @@ class EnumsManagementController extends Controller
             // get all enums by type
             $permissions = $enumService->getAllByType(
                 type: $request->get(key: 'type'),
-                module: $request->get(key: 'module'),
                 pageNumber: $request->get(key: 'pageNumber'),
                 perPage: $request->get(key: 'perPage'),
                 filters: $request->get(key: 'filters')

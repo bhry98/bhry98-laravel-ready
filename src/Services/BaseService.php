@@ -6,12 +6,12 @@ class BaseService
 {
     function applyFilters($data, array $filters, $class): void
     {
-        foreach ($filters as $filterKEY => $filterValue) {
-            if (in_array($filterKEY, $class::FILTER_COLUMNS ?? [])) {
-                if (method_exists($class, 'getLocalizable') && in_array($filterKEY, $class::getLocalizable() ?? [])) {
-                    $data->whereTranslationLike($filterKEY, $filterValue);
+        foreach ($filters as $filterColumn => $filterValue) {
+            if (in_array($filterColumn, $class::FILTER_COLUMNS ?? [])) {
+                if (method_exists($class, 'getLocalizable') && in_array($filterColumn, (new $class)->getLocalizable() ?? [])) {
+                    $data->filterLocalized(column: $filterColumn, value: $filterValue);
                 } else {
-                    $data->where($filterKEY, "like", "%$filterValue%");
+                    $data->where($filterColumn, "like", "%$filterValue%");
                 }
             }
         }

@@ -5,6 +5,7 @@ namespace Bhry98\Bhry98LaravelReady\Models\rbac;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 use Bhry98\Bhry98LaravelReady\Traits\HasLocalization;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,7 @@ class RBACGroupsModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
 
-    protected array $localizable= ['name']; // Columns that should be localized
+    protected array $localizable = ['name'];
     const TABLE_NAME = 'rbac_groups';
     const FILTER_COLUMNS = ['code', 'default_name', 'name'];
     const RELATIONS = [];
@@ -36,7 +37,7 @@ class RBACGroupsModel extends BaseModel
         ];
     }
 
-    function permissions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    function permissions(): HasMany
     {
         return $this->hasMany(
             related: RBACGroupsPermissionsModel::class,
@@ -44,7 +45,7 @@ class RBACGroupsModel extends BaseModel
             localKey: "id");
     }
 
-    function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    function users(): HasMany
     {
         return $this->hasMany(
             related: RBACGroupsUsersModel::class,
@@ -55,18 +56,12 @@ class RBACGroupsModel extends BaseModel
     protected static function booted(): void
     {
         static::creating(function ($model) {
-            if (empty($model->code)) {
-                $model->code = self::generateNewCode();
-            }
+            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->created_by = auth()->id();
         });
-    }
-
-    static function generateNewCode(): string
-    {
-        $code = Str::random(length: 10);
-        if (static::query()->where('code', $code)->exists()) {
-            return self::generateNewCode();
-        }
-        return $code;
+        static::updating(function ($model) {
+            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->updated_by = auth()->id();
+        });
     }
 }

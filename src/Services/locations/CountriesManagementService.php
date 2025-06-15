@@ -10,9 +10,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CountriesManagementService extends BaseService
 {
-    public function getByCode(string $identityCode, array|null $relations = null): ?LocationsCountriesModel
+    public function getByCode(string $code, array|null $relations = null): ?LocationsCountriesModel
     {
-        $record = LocationsCountriesModel::query()->where('identity_code', $identityCode)->withCount(['governorates', 'cities','users']);
+        $record = LocationsCountriesModel::query()->where('code', $code)->withCount(['governorates', 'cities','users']);
         if ($relations) {
             $record->with($relations);
         }

@@ -17,6 +17,7 @@ return new class extends Migration {
             callback: function (Blueprint $table) {
                 $table->id();
                 $table->integer(column: 'verify_code');
+                $table->string(column: 'type');
                 $table->foreignId(column: 'user_id')->references(column: 'id')->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->timestamp(column: 'expired_at')->nullable();
                 $table->boolean(column: 'valid')->default(value: true);

@@ -21,6 +21,7 @@ Route::name("api.")
             ->group(function () {
                 Route::post("/login", [UsersAuthenticationController::class, "login"])->name("login");
                 Route::post("/registration", [UsersAuthenticationController::class, "registration"])->name("registration");
+                Route::post("/resetPassword", [UsersAuthenticationController::class, "resetPassword"])->name("resetPassword");
                 Route::get("/logout", [UsersAuthenticationController::class, "logout"])->name("logout")->middleware("auth:sanctum");
             });
         // account routes

@@ -8,9 +8,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CitiesManagementService extends BaseService
 {
-    public function getByCode(string $identityCode, array|null $relations = null): ?LocationsCitiesModel
+    public function getByCode(string $code, array|null $relations = null): ?LocationsCitiesModel
     {
-        $record = LocationsCitiesModel::query()->where('identity_code',  $identityCode)->first();
+        $record = LocationsCitiesModel::query()->where('code',  $code)->first();
         if ($relations) {
             $record->with($relations);
         }

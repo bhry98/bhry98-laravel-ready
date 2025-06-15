@@ -3,11 +3,10 @@
 namespace Bhry98\Bhry98LaravelReady\Models\rbac;
 
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RBACGroupsPermissionsModel extends BaseModel
 {
-
     const TABLE_NAME = 'rbac_groups_permissions';
     const RELATIONS = [];
     protected $table = self::TABLE_NAME;
@@ -22,7 +21,7 @@ class RBACGroupsPermissionsModel extends BaseModel
         return [];
     }
 
-    function permission(): \Illuminate\Database\Eloquent\Relations\HasOne
+    function permission(): HasOne
     {
         return $this->hasOne(
             related: RBACPermissionsModel::class,
@@ -30,7 +29,7 @@ class RBACGroupsPermissionsModel extends BaseModel
             localKey: "permission_id");
     }
 
-    function group(): \Illuminate\Database\Eloquent\Relations\HasOne
+    function group(): HasOne
     {
         return $this->hasOne(
             related: RBACGroupsModel::class,

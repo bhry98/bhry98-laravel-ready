@@ -31,7 +31,7 @@ class LocationsGetAllGovernoratesRequest extends FormRequest
     {
         $rules["country"] = [
             "nullable",
-            "exists:" . LocationsCountriesModel::TABLE_NAME . ",country_code"
+            "exists:" . LocationsCountriesModel::TABLE_NAME . ",code"
         ];
         $rules["pageNumber"] = [
             "nullable",

@@ -32,7 +32,7 @@ class RBACAddUserInGroupsRequest extends FormRequest
         ];
         $rules['userCode'] = [
             "required",
-            "exists:" . UsersCoreUsersModel::TABLE_NAME . ",identity_code"
+            "exists:" . UsersCoreUsersModel::TABLE_NAME . ",code"
         ];
         return $rules;
     }

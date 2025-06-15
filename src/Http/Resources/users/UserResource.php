@@ -17,7 +17,7 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "code" => $this->identity_code,
+            "code" => $this->code,
             "type" => $this->type ? EnumsResource::make($this->type) : null,
             "gender" => $this->gender ? EnumsResource::make($this->gender) : null,
             "timezone" => $this->timezone ? EnumsResource::make($this->timezone) : null,

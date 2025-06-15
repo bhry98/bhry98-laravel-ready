@@ -2,19 +2,19 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\users;
 
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersVerifyCodeTypes;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UsersVerifyCodesModel extends BaseModel
 {
-
-    // start env
     const TABLE_NAME = "users_verify_codes";
     const RELATIONS = ["user"];
-    // start table
     protected $table = self::TABLE_NAME;
     protected $fillable = [
         "verify_code",
         "user_id",
+        "type",
         "valid",
         "expired_at",
         "created_at",
@@ -22,13 +22,14 @@ class UsersVerifyCodesModel extends BaseModel
     ];
     protected $casts = [
         "valid" => "boolean",
+        "type" => UsersVerifyCodeTypes::class,
         "verify_code" => "integer",
         "expired_at" => "datetime",
         "created_at" => "datetime",
         "updated_at" => "datetime",
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function user(): HasOne
     {
         return $this->hasOne(
             related: UsersCoreUsersModel::class,

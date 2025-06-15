@@ -73,19 +73,19 @@ class UserUpdateProfileRequest extends FormRequest
             "sometimes",
             "nullable",
             "string",
-            "exists:" . LocationsCountriesModel::TABLE_NAME . ",identity_code",
+            "exists:" . LocationsCountriesModel::TABLE_NAME . ",code",
         ];
         $roles["governorate"] = [
             "sometimes",
             "nullable",
             "string",
-            "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",identity_code",
+            "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",code",
         ];
         $roles["city"] = [
             "sometimes",
             "nullable",
             "string",
-            "exists:" . LocationsCitiesModel::TABLE_NAME . ",identity_code",
+            "exists:" . LocationsCitiesModel::TABLE_NAME . ",code",
         ];
         $roles["type"] = [
             "sometimes",

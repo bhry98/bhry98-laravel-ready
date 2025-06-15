@@ -12,9 +12,7 @@ class LocalizationsModel extends BaseModel
     use SoftDeletes;
     const TABLE_NAME = 'localizations';
     const RELATIONS = [];
-    const TRANSLATION_MODELS = [
-        'core_enums' => EnumsCoreModel::class,
-    ];
+
     protected $table = self::TABLE_NAME;
     protected $fillable = [
         'id',

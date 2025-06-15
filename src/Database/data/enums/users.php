@@ -1,16 +1,15 @@
 <?php
 
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\users\UsersDefaultType;
-use Bhry98\Bhry98LaravelReady\Enums\users\UsersGendersType;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersAccountTypes;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersGenderTypes;
 
 return [
     "types" => [
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::UsersType,
-            'default_name' => UsersDefaultType::Administrator,
+            'default_name' => UsersAccountTypes::Administrator,
             'api_access' => false,
             'can_delete' => false,
             'parent_id' => null,
@@ -21,9 +20,9 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::UsersType,
-            'default_name' => UsersDefaultType::User,
+            'default_name' => UsersAccountTypes::User,
             'api_access' => true,
             'can_delete' => true,
             "default_color" => "blue",
@@ -36,9 +35,9 @@ return [
     ],
     "genders" => [
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::UsersGender,
-            'default_name' => UsersGendersType::Male,
+            'default_name' => UsersGenderTypes::Male,
             'api_access' => true,
             'can_delete' => false,
             'parent_id' => null,
@@ -49,9 +48,9 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::UsersGender,
-            'default_name' => UsersGendersType::Female,
+            'default_name' => UsersGenderTypes::Female,
             'api_access' => true,
             'can_delete' => false,
             'parent_id' => null,
@@ -64,7 +63,7 @@ return [
     ],
     "timezones" => [
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -74,7 +73,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -84,7 +83,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -94,7 +93,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -104,7 +103,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -114,7 +113,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -124,7 +123,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -134,7 +133,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -144,7 +143,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -154,7 +153,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -164,7 +163,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -174,7 +173,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -184,7 +183,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -194,7 +193,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -204,7 +203,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -214,7 +213,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -224,7 +223,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -234,7 +233,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -244,7 +243,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -254,7 +253,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -264,7 +263,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -274,7 +273,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -284,7 +283,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -294,7 +293,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -304,7 +303,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -314,7 +313,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -324,7 +323,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -334,7 +333,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -344,7 +343,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -354,7 +353,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -364,7 +363,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -374,7 +373,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -384,7 +383,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -394,7 +393,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -404,7 +403,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -414,7 +413,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -424,7 +423,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -434,7 +433,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -444,7 +443,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -454,7 +453,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -464,7 +463,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -474,7 +473,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -484,7 +483,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -494,7 +493,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -504,7 +503,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -514,7 +513,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -524,7 +523,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -534,7 +533,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -544,7 +543,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -554,7 +553,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -564,7 +563,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -574,7 +573,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -584,7 +583,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -594,7 +593,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -604,7 +603,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -614,7 +613,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -624,7 +623,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -634,7 +633,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -644,7 +643,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -654,7 +653,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -664,7 +663,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -674,7 +673,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -684,7 +683,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -694,7 +693,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -704,7 +703,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -714,7 +713,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -724,7 +723,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -734,7 +733,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -744,7 +743,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -754,7 +753,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -764,7 +763,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -774,7 +773,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -784,7 +783,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -794,7 +793,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -804,7 +803,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -814,7 +813,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -824,7 +823,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -834,7 +833,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -844,7 +843,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -854,7 +853,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -864,7 +863,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -874,7 +873,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -884,7 +883,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -894,7 +893,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -904,7 +903,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -914,7 +913,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -924,7 +923,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -934,7 +933,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -944,7 +943,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -954,7 +953,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -964,7 +963,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -974,7 +973,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -984,7 +983,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -994,7 +993,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1004,7 +1003,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1014,7 +1013,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1024,7 +1023,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1034,7 +1033,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1044,7 +1043,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1054,7 +1053,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1064,7 +1063,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1074,7 +1073,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1084,7 +1083,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1094,7 +1093,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1104,7 +1103,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1114,7 +1113,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1124,7 +1123,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1134,7 +1133,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1144,7 +1143,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1154,7 +1153,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1164,7 +1163,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1174,7 +1173,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1184,7 +1183,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1194,7 +1193,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1204,7 +1203,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1214,7 +1213,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1224,7 +1223,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1234,7 +1233,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1244,7 +1243,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1254,7 +1253,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1264,7 +1263,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1274,7 +1273,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1284,7 +1283,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1294,7 +1293,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1304,7 +1303,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1314,7 +1313,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1324,7 +1323,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1334,7 +1333,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1344,7 +1343,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1354,7 +1353,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1364,7 +1363,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1374,7 +1373,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1384,7 +1383,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1394,7 +1393,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1404,7 +1403,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1414,7 +1413,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1424,7 +1423,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1434,7 +1433,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1444,7 +1443,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1454,7 +1453,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1464,7 +1463,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1474,7 +1473,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1484,7 +1483,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1494,7 +1493,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1504,7 +1503,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1514,7 +1513,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1524,7 +1523,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1534,7 +1533,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1544,7 +1543,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1554,7 +1553,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1564,7 +1563,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1574,7 +1573,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1584,7 +1583,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1594,7 +1593,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1604,7 +1603,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1614,7 +1613,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1624,7 +1623,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1634,7 +1633,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1644,7 +1643,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1654,7 +1653,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1664,7 +1663,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1674,7 +1673,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1684,7 +1683,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1694,7 +1693,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1704,7 +1703,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1714,7 +1713,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1724,7 +1723,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1734,7 +1733,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1744,7 +1743,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1754,7 +1753,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1764,7 +1763,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1774,7 +1773,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1784,7 +1783,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1794,7 +1793,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1804,7 +1803,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1814,7 +1813,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1824,7 +1823,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1834,7 +1833,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1844,7 +1843,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1854,7 +1853,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1864,7 +1863,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1874,7 +1873,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1884,7 +1883,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1894,7 +1893,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1904,7 +1903,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1914,7 +1913,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1924,7 +1923,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1934,7 +1933,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1944,7 +1943,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1954,7 +1953,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1964,7 +1963,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1974,7 +1973,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1984,7 +1983,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -1994,7 +1993,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2004,7 +2003,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2014,7 +2013,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2024,7 +2023,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2034,7 +2033,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2044,7 +2043,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2054,7 +2053,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2064,7 +2063,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2074,7 +2073,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2084,7 +2083,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2094,7 +2093,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2104,7 +2103,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2114,7 +2113,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2124,7 +2123,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2134,7 +2133,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2144,7 +2143,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2154,7 +2153,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2164,7 +2163,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2174,7 +2173,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2184,7 +2183,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2194,7 +2193,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2204,7 +2203,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2214,7 +2213,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2224,7 +2223,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2234,7 +2233,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2244,7 +2243,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2254,7 +2253,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2264,7 +2263,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2274,7 +2273,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2284,7 +2283,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2294,7 +2293,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2304,7 +2303,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2314,7 +2313,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2324,7 +2323,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2334,7 +2333,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2344,7 +2343,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2354,7 +2353,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2364,7 +2363,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2374,7 +2373,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2384,7 +2383,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2394,7 +2393,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2404,7 +2403,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2414,7 +2413,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2424,7 +2423,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2434,7 +2433,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2444,7 +2443,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2454,7 +2453,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2464,7 +2463,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2474,7 +2473,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2484,7 +2483,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2494,7 +2493,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2504,7 +2503,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2514,7 +2513,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2524,7 +2523,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2534,7 +2533,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2544,7 +2543,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2554,7 +2553,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2564,7 +2563,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2574,7 +2573,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2584,7 +2583,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2594,7 +2593,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2604,7 +2603,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2614,7 +2613,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2624,7 +2623,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2634,7 +2633,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2644,7 +2643,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2654,7 +2653,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2664,7 +2663,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2674,7 +2673,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2684,7 +2683,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2694,7 +2693,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2704,7 +2703,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2714,7 +2713,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2724,7 +2723,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2734,7 +2733,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2744,7 +2743,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2754,7 +2753,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2764,7 +2763,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2774,7 +2773,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2784,7 +2783,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2794,7 +2793,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2804,7 +2803,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2814,7 +2813,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2824,7 +2823,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2834,7 +2833,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2844,7 +2843,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2854,7 +2853,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2864,7 +2863,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2874,7 +2873,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2884,7 +2883,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2894,7 +2893,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2904,7 +2903,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2914,7 +2913,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2924,7 +2923,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2934,7 +2933,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2944,7 +2943,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2954,7 +2953,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2964,7 +2963,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2974,7 +2973,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2984,7 +2983,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -2994,7 +2993,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3004,7 +3003,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3014,7 +3013,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3024,7 +3023,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3034,7 +3033,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3044,7 +3043,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3054,7 +3053,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3064,7 +3063,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3074,7 +3073,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3084,7 +3083,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3094,7 +3093,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3104,7 +3103,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3114,7 +3113,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3124,7 +3123,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3134,7 +3133,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3144,7 +3143,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3154,7 +3153,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3164,7 +3163,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3174,7 +3173,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3184,7 +3183,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3194,7 +3193,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3204,7 +3203,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3214,7 +3213,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3224,7 +3223,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3234,7 +3233,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3244,7 +3243,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3254,7 +3253,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3264,7 +3263,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3274,7 +3273,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3284,7 +3283,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3294,7 +3293,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3304,7 +3303,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3314,7 +3313,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3324,7 +3323,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3334,7 +3333,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3344,7 +3343,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3354,7 +3353,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3364,7 +3363,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3374,7 +3373,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3384,7 +3383,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3394,7 +3393,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3404,7 +3403,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3414,7 +3413,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3424,7 +3423,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3434,7 +3433,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3444,7 +3443,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3454,7 +3453,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3464,7 +3463,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3474,7 +3473,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3484,7 +3483,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3494,7 +3493,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3504,7 +3503,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3514,7 +3513,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3524,7 +3523,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3534,7 +3533,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3544,7 +3543,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3554,7 +3553,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3564,7 +3563,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3574,7 +3573,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3584,7 +3583,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3594,7 +3593,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3604,7 +3603,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3614,7 +3613,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3624,7 +3623,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3634,7 +3633,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3644,7 +3643,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3654,7 +3653,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3664,7 +3663,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3674,7 +3673,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3684,7 +3683,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3694,7 +3693,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3704,7 +3703,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3714,7 +3713,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3724,7 +3723,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3734,7 +3733,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3744,7 +3743,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3754,7 +3753,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3764,7 +3763,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3774,7 +3773,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3784,7 +3783,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3794,7 +3793,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3804,7 +3803,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3814,7 +3813,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3824,7 +3823,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3834,7 +3833,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3844,7 +3843,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3854,7 +3853,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3864,7 +3863,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3874,7 +3873,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3884,7 +3883,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3894,7 +3893,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3904,7 +3903,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3914,7 +3913,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3924,7 +3923,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3934,7 +3933,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3944,7 +3943,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3954,7 +3953,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3964,7 +3963,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3974,7 +3973,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3984,7 +3983,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -3994,7 +3993,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4004,7 +4003,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4014,7 +4013,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4024,7 +4023,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4034,7 +4033,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4044,7 +4043,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4054,7 +4053,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4064,7 +4063,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4074,7 +4073,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4084,7 +4083,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4094,7 +4093,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4104,7 +4103,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4114,7 +4113,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4124,7 +4123,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4134,7 +4133,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4144,7 +4143,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4154,7 +4153,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4164,7 +4163,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4174,7 +4173,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4184,7 +4183,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4194,7 +4193,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4204,7 +4203,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4214,7 +4213,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4224,7 +4223,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4234,7 +4233,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4244,7 +4243,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4254,7 +4253,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4264,7 +4263,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4274,7 +4273,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4284,7 +4283,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4294,7 +4293,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4304,7 +4303,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4314,7 +4313,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4324,7 +4323,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4334,7 +4333,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4344,7 +4343,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4354,7 +4353,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4364,7 +4363,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4374,7 +4373,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4384,7 +4383,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4394,7 +4393,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4404,7 +4403,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4414,7 +4413,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4424,7 +4423,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4434,7 +4433,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4444,7 +4443,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4454,7 +4453,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4464,7 +4463,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4474,7 +4473,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4484,7 +4483,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4494,7 +4493,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4504,7 +4503,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4514,7 +4513,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4524,7 +4523,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4534,7 +4533,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4544,7 +4543,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4554,7 +4553,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4564,7 +4563,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4574,7 +4573,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4584,7 +4583,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4594,7 +4593,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4604,7 +4603,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4614,7 +4613,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4624,7 +4623,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4634,7 +4633,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4644,7 +4643,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4654,7 +4653,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4664,7 +4663,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4674,7 +4673,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4684,7 +4683,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4694,7 +4693,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4704,7 +4703,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4714,7 +4713,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4724,7 +4723,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4734,7 +4733,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4744,7 +4743,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4754,7 +4753,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4764,7 +4763,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4774,7 +4773,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4784,7 +4783,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4794,7 +4793,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4804,7 +4803,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4814,7 +4813,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4824,7 +4823,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4834,7 +4833,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4844,7 +4843,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4854,7 +4853,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4864,7 +4863,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4874,7 +4873,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4884,7 +4883,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4894,7 +4893,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4904,7 +4903,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4914,7 +4913,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4924,7 +4923,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4934,7 +4933,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4944,7 +4943,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4954,7 +4953,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4964,7 +4963,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4974,7 +4973,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4984,7 +4983,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -4994,7 +4993,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5004,7 +5003,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5014,7 +5013,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5024,7 +5023,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5034,7 +5033,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5044,7 +5043,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5054,7 +5053,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5064,7 +5063,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5074,7 +5073,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5084,7 +5083,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5094,7 +5093,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5104,7 +5103,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5114,7 +5113,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5124,7 +5123,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5134,7 +5133,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5144,7 +5143,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5154,7 +5153,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5164,7 +5163,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5174,7 +5173,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5184,7 +5183,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5194,7 +5193,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5204,7 +5203,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5214,7 +5213,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5224,7 +5223,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5234,7 +5233,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5244,7 +5243,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5254,7 +5253,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5264,7 +5263,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5274,7 +5273,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5284,7 +5283,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5294,7 +5293,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5304,7 +5303,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5314,7 +5313,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5324,7 +5323,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5334,7 +5333,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5344,7 +5343,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5354,7 +5353,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5364,7 +5363,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5374,7 +5373,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5384,7 +5383,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5394,7 +5393,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5404,7 +5403,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5414,7 +5413,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5424,7 +5423,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5434,7 +5433,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5444,7 +5443,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5454,7 +5453,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5464,7 +5463,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5474,7 +5473,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5484,7 +5483,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5494,7 +5493,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5504,7 +5503,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5514,7 +5513,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5524,7 +5523,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5534,7 +5533,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5544,7 +5543,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5554,7 +5553,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5564,7 +5563,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5574,7 +5573,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5584,7 +5583,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5594,7 +5593,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5604,7 +5603,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5614,7 +5613,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5624,7 +5623,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5634,7 +5633,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5644,7 +5643,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5654,7 +5653,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5664,7 +5663,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5674,7 +5673,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5684,7 +5683,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5694,7 +5693,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5704,7 +5703,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5714,7 +5713,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5724,7 +5723,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5734,7 +5733,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5744,7 +5743,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5754,7 +5753,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5764,7 +5763,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5774,7 +5773,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5784,7 +5783,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5794,7 +5793,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5804,7 +5803,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5814,7 +5813,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5824,7 +5823,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5834,7 +5833,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5844,7 +5843,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5854,7 +5853,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5864,7 +5863,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5874,7 +5873,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5884,7 +5883,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5894,7 +5893,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5904,7 +5903,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5914,7 +5913,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5924,7 +5923,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5934,7 +5933,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5944,7 +5943,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5954,7 +5953,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5964,7 +5963,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5974,7 +5973,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5984,7 +5983,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -5994,7 +5993,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -6004,7 +6003,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,
@@ -6014,7 +6013,7 @@ return [
             ]
         ],
         [
-            'module' => Modules::Core,
+            
             'type' => EnumsCoreTypes::Timezone,
             'api_access' => true,
             'can_delete' => true,

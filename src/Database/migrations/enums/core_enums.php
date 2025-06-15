@@ -18,7 +18,6 @@ return new class extends Migration {
                 $table->id();
                 $table->string(column: 'code')->index()->unique();
                 $table->string(column: 'type');
-                $table->string(column: 'module');
                 $table->string(column: 'default_name')->nullable();
                 $table->string(column: 'default_color')->default('gray');
                 $table->boolean(column: 'api_access')->default(value: false);

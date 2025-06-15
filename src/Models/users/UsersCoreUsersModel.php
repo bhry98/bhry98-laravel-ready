@@ -2,12 +2,10 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\users;
 
-use Bhry98\Bhry98LaravelReady\Enums\identities\IdentitiesCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
-use Bhry98\Bhry98LaravelReady\Models\identities\IdentitiesCoreModel;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Bhry98\Bhry98LaravelReady\Models\locations\{
     LocationsCitiesModel,
@@ -33,7 +31,6 @@ class UsersCoreUsersModel extends Authentication
     protected $table = self::TABLE_NAME;
     protected $fillable = [
         "id",
-        "identity_code",
         "type_id",
         "country_id",
         "governorate_id",
@@ -139,39 +136,38 @@ class UsersCoreUsersModel extends Authentication
     protected static function booted(): void
     {
         static::creating(function ($model) {
-            // create record in identity table
-            $identityRecord = IdentitiesCoreModel::query()->create([
-                "type" => IdentitiesCoreTypes::User,
-                "name" => !is_null($model->display_name) ? $model->display_name : $model->first_name . " " . $model->last_name,
-                "module" => Modules::Core,
-                "metadata" => $model->toArray(),
-                "active" => $model->active ?? true,
-            ]);
-            // create new unique code
-            $model->identity_code = $identityRecord->code;
-            $model->active = $identityRecord->active;
-            $model->username = $model->username ?? self::generateUsername();
-            $model->display_name = $model->display_name ?: "{$model->first_name} {$model->last_name}";
+            $model->username = self::createUniqueTextForColumn("username", $model->username);
+            $model->code = self::createUniqueTextForColumn("code", $model->code);
+            $model->display_name = $model->display_name ?: "$model->first_name $model->last_name";
         });
         static::updating(function ($model) {
-            $model->display_name = $model->display_name ?: "{$model->first_name} {$model->last_name}";
+            $model->display_name = $model->display_name ?: "$model->first_name $model->last_name";
         });
     }
-    static function generateUsername(): string
+    private static function createUniqueTextForColumn(string $column, ?string $str = null, int $length = 10): string
     {
-        $username = Str::random(length: 10);
-        if (static::query()->where(column: 'username', value: $username)->exists()) {
-            static::generateUsername();
+        if ($str) return Str::upper(Str::slug($str));
+        $code = Str::upper(Str::random($length));
+        if (static::query()->where($column, $code)->exists()) {
+            return self::createUniqueTextForColumn($column, null, $length);
         }
-        return $username;
+        return $code;
     }
+
 
     public function hasPermission($permissionCode): bool
     {
-        $userGroups = $this->groups;
-        // check if the user doesn't have any group return false
-        if (!$userGroups || count($userGroups) <= 0) return false;
-        // get all permissions from the groups
+        if (!Cache::has("user_permissions_" . auth()->id())) {
+            $userGroups = $this->groups;
+            if (!$userGroups || count($userGroups) <= 0) return false;
+            $this->cachePermissions($userGroups);
+        }
+        $permissions = Cache::get("user_permissions_" . auth()->id());
+        return in_array($permissionCode, $permissions ?? []);
+    }
+
+    function cachePermissions($userGroups): void
+    {
         $allPermissions = collect();
         $userGroups->each(function ($userGroup) use ($allPermissions) {
             $permissionsFromGroup = $userGroup->group?->permissions;
@@ -181,7 +177,9 @@ class UsersCoreUsersModel extends Authentication
                 });
             }
         });
-        return $allPermissions->contains($permissionCode);
+        Cache::remember("user_permissions_" . auth()->id(), now()->addDay(), function () use ($allPermissions) {
+            return $allPermissions->toArray();
+        });
     }
 
     public function notifications(): MorphMany
@@ -189,14 +187,6 @@ class UsersCoreUsersModel extends Authentication
         return $this->morphMany(UsersNotificationsModel::class, 'notifiable')
             ->orderBy('created_at', 'desc');
     }
-//    public function notifications(): HasMany
-//    {
-//        return $this->hasMany(
-//            related: UsersNotificationsModel::class,
-//            foreignKey: 'notifiable_id',
-//            localKey: 'id')
-//            ->orderBy('id', 'desc');
-//    }
 
     public function unreadNotifications(): MorphMany
     {
@@ -204,8 +194,4 @@ class UsersCoreUsersModel extends Authentication
             ->whereNull('read_at')
             ->orderBy('created_at', 'desc');
     }
-//    public function routeNotificationForDatabase(): UsersNotificationsModel
-//    {
-//        return new UsersNotificationsModel;
-//    }
 }

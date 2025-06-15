@@ -4,7 +4,7 @@ namespace Bhry98\Bhry98LaravelReady\Models\rbac;
 
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RBACGroupsUsersModel extends BaseModel
 {
@@ -23,7 +23,7 @@ class RBACGroupsUsersModel extends BaseModel
         return [];
     }
 
-    function group(): \Illuminate\Database\Eloquent\Relations\HasOne
+    function group(): HasOne
     {
         return $this->hasOne(
             related: RBACGroupsModel::class,
@@ -31,7 +31,7 @@ class RBACGroupsUsersModel extends BaseModel
             localKey: "group_id");
     }
 
-    function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    function user(): HasOne
     {
         return $this->hasOne(
             related: UsersCoreUsersModel::class,

@@ -4,6 +4,7 @@ namespace Bhry98\Bhry98LaravelReady\Http\Controllers\users;
 
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UserAuthRegistrationRequest;
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthLoginRequest;
+use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthResetPasswordRequest;
 use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
 use Exception;
@@ -82,4 +83,24 @@ class UsersAuthenticationController extends Controller
         }
     }
 
+    function resetPassword(UsersAuthResetPasswordRequest $request, UsersAuthenticationService $authenticationService): JsonResponse
+    {
+        try {
+            $codeSend = $authenticationService->sendResetPasswordCodeViaEmail($request->get("email"));
+            if (!$codeSend) return bhry98_response_validation_error(
+                [
+                    'username' => __(key: 'Bhry98::responses.reset-password-failed'),
+                    'password' => __(key: 'Bhry98::responses.reset-password-failed'),
+                ],
+                __(key: "Bhry98::responses.reset-password-failed"));
+            return bhry98_response_success_with_data(message: __(key: "Bhry98::responses.reset-password-send"));
+        } catch (Exception $e) {
+            return bhry98_response_internal_error([
+                'error' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+            ]);
+        }
+
+    }
 }

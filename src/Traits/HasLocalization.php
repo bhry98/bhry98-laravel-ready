@@ -3,69 +3,57 @@
 namespace Bhry98\Bhry98LaravelReady\Traits;
 
 use Bhry98\Bhry98LaravelReady\Models\localizations\LocalizationsModel;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\App;
 
 trait HasLocalization
 {
 
-
-
-    public function scopeWhereTranslationLike(Builder $query, string $column, ?string $value, ?string $locale = null): Builder
-    {
-        $locale = $locale ?? app()->getLocale();
-//        dd($locale);
-        if (is_null($value)) {
-            return $query; // Skip filter if value is null
-        }
-        return $query->whereHas('localizations', function ($q) use ($column, $value, $locale) {
-            $q->where('value', "like", "%$value%")
-                ->where('column_name', $column)
-                ->where('locale', $locale);
-        });
-    }
-
-    public function localizations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    /**
+     * @return HasMany
+     */
+    public function localizations(): HasMany
     {
         return $this->hasMany(LocalizationsModel::class, 'reference_id')
             ->where('relation', static::class);
     }
 
-    public function localization(): HasOne
+    /**
+     * Scope a query to only include popular users.
+     * @param Builder $query
+     * @return void
+     */
+    #[Scope]
+    protected function locales(Builder $query): void
     {
-        return $this->hasOne(LocalizationsModel::class, 'reference_id')
-            ->where([
-                'relation' => static::class,
-                "locale" => App::getLocale()
-            ]);
+        $query->with('localizations');
     }
-
-    public static function getLocalizable(): array
-    {
-        // Use ReflectionClass to access protected property
-        $reflection = new \ReflectionClass(static::class);
-        $property = $reflection->getProperty('localizable');
-        return $property->getValue(new static()) ?? [];
-    }
-
 
     /**
-     * Get a localized value for a given column.
+     * Get a localized value for a given column without a database query.
+     * @param $column
+     * @param null $locale
+     * @return string|null
      */
-    public function getLocalized($column, $locale = null)
+    public function getLocalized($column, $locale = null): ?string
     {
         $locale = $locale ?? App::getLocale();
-
-        return LocalizationsModel::query()
-            ->where('relation', static::class)
+        return collect($this->localizations ?? [])
             ->where('column_name', $column)
-            ->where('reference_id', $this->id)
             ->where('locale', $locale)
-            ->value('value') ?? $this->attributes[$column] ?? null;
+            ->first()?->value
+            ?? $this->attributes[$column]
+            ?? null;
     }
 
     /**
      * Set a localized value for a given column.
+     * @param $column
+     * @param $value
+     * @param null $locale
+     * @return void
      */
     public function setLocalized($column, $value, $locale = null): void
     {
@@ -82,9 +70,44 @@ trait HasLocalization
     }
 
     /**
-     * Override getAttribute to return localized values automatically.
+     * @param $column
+     * @param $locale
+     * @return void
      */
-    public function getAttribute($key)
+    public function deleteLocalized($column, $locale = null): void
+    {
+        $locale = $locale ?? App::getLocale();
+        LocalizationsModel::query()
+            ->where('relation', static::class)
+            ->where('column_name', $column)
+            ->where('reference_id', $this->id)
+            ->where('locale', $locale)
+            ->first()
+            ?->delete();
+    }
+
+    /**
+     * @param $column
+     * @param $locale
+     * @return void
+     */
+    public function forceDeleteLocalized($column, $locale = null): void
+    {
+        $locale = $locale ?? App::getLocale();
+        LocalizationsModel::query()
+            ->where('relation', static::class)
+            ->where('column_name', $column)
+            ->where('reference_id', $this->id)
+            ->where('locale', $locale)
+            ->first()
+            ?->forceDelete();
+    }
+
+    /**
+     * @param $key
+     * @return mixed|string|null
+     */
+    public function getAttribute($key): mixed
     {
         if (in_array($key, $this->localizable ?? [])) {
             return $this->getLocalized($key);
@@ -94,67 +117,36 @@ trait HasLocalization
     }
 
     /**
-     * Override setAttribute to save localized values automatically.
+     * @return array
      */
-    public function setAttribute($key, $value): void
+    public function getLocalizable(): array
     {
-        if (in_array($key, $this->localizable ?? [])) {
-            $this->setLocalized($key, $value);
-        } else {
-            parent::setAttribute($key, $value);
+        return $this->localizable ?? [];
+    }
+
+    protected function scopeFilterLocalized(Builder $query, string $column, ?string $value, $locale = null): Builder
+    {
+
+        $locale = $locale ?? app()->getLocale();
+//        dd($locale);
+        if (is_null($value)) {
+            return $query; // Skip filter if value is null
         }
+        return $query->whereHas('localizations', function ($q) use ($column, $value, $locale) {
+            $q->where('value', "like", "%$value%")
+                ->where('column_name', $column)
+                ->where('locale', $locale);
+        });
+//        $query->withWhereRelation('localizations', $column, "like", "%$value%");
+//        $locale = $locale ?? App::getLocale();
+//        return collect($this->localizations ?? [])
+//            ->where('column_name', $column)
+//            ->where('locale', $locale)
+//            ->where('value', $value)
+//            ->first()?->value
+//            ?? $this->attributes[$column]
+//            ?? null;
     }
 
-    /**
-     * Update localized values for a column for multiple locales at once.
-     *
-     * @param string $column
-     * @param array $values ['en' => 'Value in English', 'ar' => 'Arabic Name', ...]
-     */
-    public function updateLocalized(string $column, string $value, string $locale): void
-    {
-        $record = LocalizationsModel::query()->where([
-            'relation' => static::class,
-            'column_name' => $column,
-            'reference_id' => $this->id,
-            'locale' => $locale,
-        ])->first();
-        if ($record) {
-            $record->update([
-                'value' => $value,
-            ]);
-        } else {
-            LocalizationsModel::query()->create([
-                'value' => $value,
-                'relation' => static::class,
-                'column_name' => $column,
-                'reference_id' => $this->id,
-                'locale' => $locale,
-            ]);
-        }
-    }
-
-    public function deleteLocalized($column, $locale = null): void
-    {
-        $locale = $locale ?? App::getLocale();
-
-        LocalizationsModel::query()
-            ->where('relation', static::class)
-            ->where('column_name', $column)
-            ->where('reference_id', $this->id)
-            ->where('locale', $locale)
-            ->delete();
-    }
-
-    public function forceDeleteLocalized($column, $locale = null): void
-    {
-        $locale = $locale ?? App::getLocale();
-        LocalizationsModel::query()
-            ->where('relation', static::class)
-            ->where('column_name', $column)
-            ->where('reference_id', $this->id)
-            ->where('locale', $locale)
-            ->forceDelete();
-    }
 
 }

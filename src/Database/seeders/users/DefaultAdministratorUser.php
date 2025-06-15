@@ -3,7 +3,6 @@
 namespace Bhry98\Bhry98LaravelReady\Database\seeders\users;
 
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsUsersModel;
@@ -24,7 +23,6 @@ class DefaultAdministratorUser extends Seeder
     {
         $type = EnumsCoreModel::query()
             ->where("type", "=", EnumsCoreTypes::UsersType)
-            ->where("module", "=", Modules::Core)
             ->where("default_name", "=", "Administrator")
             ->first();
         $user = UsersCoreUsersModel::query()->updateOrCreate(
@@ -37,9 +35,10 @@ class DefaultAdministratorUser extends Seeder
                 "first_name" => "Super",
                 "last_name" => "admin",
                 "username" => "administrator",
+                "phone_number" => "01097033958",
                 "email" => "administrator@bhry98.local",
                 "must_change_password" => false,
-                "password" => "123456",
+                "password" => "12345678",
             ]
         );
         if ($user) {

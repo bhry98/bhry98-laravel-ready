@@ -2,24 +2,24 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\logs;
 
+use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 
 class LogsSystemModel extends BaseModel
 {
-    // start env
     const TABLE_NAME = "logs_system";
-    // start table
     protected $table = self::TABLE_NAME;
     protected $fillable = [
         'user_id',
         'log_level',
+        'action',
         'message',
         'app_profile',
         'context',
     ];
     protected $casts = [
         'context' => 'array',
+        "action" => SystemActionEnums::class
     ];
 
     protected static function booted(): void
@@ -27,6 +27,7 @@ class LogsSystemModel extends BaseModel
         static::creating(function ($model) {
             $model->user_id = auth()->id();
             $model->app_profile = app()->isProduction() ? 'production' : 'development';
+            $model->action = $model->context['action'] ?? SystemActionEnums::Other->name;
         });
     }
 }

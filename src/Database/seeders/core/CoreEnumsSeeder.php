@@ -25,12 +25,10 @@ class CoreEnumsSeeder extends Seeder
                     [
                         'default_name' => array_key_exists('default_name', $enumValue) ? $enumValue['default_name'] : $enumValue['locales']['en'],
                         'type' => $enumValue['type'],
-                        'module' => $enumValue['module'],
                     ],
                     [
                         'default_name' => array_key_exists('default_name', $enumValue) ? $enumValue['default_name'] : $enumValue['locales']['en'],
                         'type' => $enumValue['type'],
-                        'module' => $enumValue['module'],
                         'default_color' => array_key_exists('default_color', $enumValue) ? $enumValue['default_color'] : "gray",
                         'api_access' => $enumValue['api_access'],
                         'can_delete' => $enumValue['can_delete'],

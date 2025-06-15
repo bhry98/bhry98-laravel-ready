@@ -6,7 +6,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
 
 class EnumsManagementService extends BaseService
 {
@@ -22,7 +21,6 @@ class EnumsManagementService extends BaseService
     public function getDefault(string $enumTypeCode, string $enumDefaultName, ?string $enumModule = null, array|null $relations = null): ?EnumsCoreModel
     {
         $record = EnumsCoreModel::query()->where(["type" => $enumTypeCode, "default_name" => $enumDefaultName,])->first();
-        if ($enumModule)
         if ($relations) {
             $record->with($relations);
         }
@@ -56,16 +54,13 @@ class EnumsManagementService extends BaseService
         return $update;
     }
 
-    public function getAllByType(string $type, ?string $module, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+    public function getAllByType(string $type, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
     {
         $enumType = EnumsCoreTypes::from($type);
         $data = EnumsCoreModel::query()
             ->where('type', $enumType)
             ->where('api_access',true)
             ->orderBy('id', 'desc');
-        if ($module) {
-            $data->where('module', Modules::from($module));
-        }
         if (!empty($filters)) {
             self::applyFilters($data, $filters, EnumsCoreModel::class);
             $pageNumber = 0;

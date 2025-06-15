@@ -2,7 +2,6 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\sessions;
 
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class SessionsPersonalAccessTokenModel extends PersonalAccessToken

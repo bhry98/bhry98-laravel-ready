@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 
-class UsersAuthLoginRequest extends FormRequest
+class UsersAuthResetPasswordRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,20 +18,7 @@ class UsersAuthLoginRequest extends FormRequest
     public function rules(): array
     {
         $rules = [];
-        switch (bhry98_app_settings(key: "login_via", default: "username")) {
-            case 'email':
-                $rules['email'] = ["required", "email", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",email"];
-                break;
-            case 'phone_number':
-                $rules['phone_number'] = ["required", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",phone_number"];
-                break;
-            default:
-                $rules['username'] = ["required", "string", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",username"];
-        }
-        $rules['password'] = [
-            "required",
-            "string"
-        ];
+        $rules['email'] = ["required", "email", "exists:" . UsersCoreUsersModel::TABLE_NAME . ",email"];
         return $rules;
     }
     protected function failedValidation(Validator $validator): void

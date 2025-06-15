@@ -3,9 +3,6 @@
 namespace Bhry98\Bhry98LaravelReady\Http\Requests\enums\management;
 
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -41,10 +38,6 @@ class EnumsGetAllByTypeRequest extends FormRequest
         $rules['type'] = [
             "required",
             Rule::enum(EnumsCoreTypes::class),
-        ];
-        $rules['module'] = [
-            "sometimes",
-            Rule::enum(Modules::class),
         ];
         $rules["filters"] = [
             "sometimes",

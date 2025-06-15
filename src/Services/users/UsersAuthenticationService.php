@@ -3,9 +3,11 @@
 namespace Bhry98\Bhry98LaravelReady\Services\users;
 
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\users\UsersDefaultType;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersADManagerUsersModel;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersAccountTypes;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersVerifyCodeTypes;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersVerifyCodesModel;
+use Bhry98\Bhry98LaravelReady\Notifications\auth\ResetPasswordCode;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Bhry98\Bhry98LaravelReady\Services\enums\EnumsManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\CitiesManagementService;
@@ -14,7 +16,6 @@ use Bhry98\Bhry98LaravelReady\Services\locations\GovernorateManagementService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use function Laravel\Prompts\select;
 
 class UsersAuthenticationService extends BaseService
 {
@@ -48,7 +49,7 @@ class UsersAuthenticationService extends BaseService
     public function loginViaUser(UsersCoreUsersModel|Authenticatable $user): string
     {
         Auth::loginUsingId($user->id);
-        $tokenResult = $user->createToken($user->identity_code);
+        $tokenResult = $user->createToken($user->code);
         return $tokenResult->plainTextToken;
     }
 
@@ -69,15 +70,15 @@ class UsersAuthenticationService extends BaseService
             $userType = $enumsService->getByCode(enumCode: $data['type']);
         } else {
             // get a default user type
-            $userType = $enumsService->getDefault(enumTypeCode: EnumsCoreTypes::UsersType->value, enumDefaultName: UsersDefaultType::User->value);
+            $userType = $enumsService->getDefault(enumTypeCode: EnumsCoreTypes::UsersType->name, enumDefaultName: UsersAccountTypes::User->name);
         }
         // if a normal user type didn't find abort, 400
         abort_if(!$userType, 400, __("validation.required", ["attribute" => "type"]), ['type' => __("validation.required", ["attribute" => "type"])]);
         // add normal user in database
         $data['type_id'] = $userType->id;
-        if (array_key_exists('country', $data)) $data['country_id'] = (new CountriesManagementService)->getByCode(identityCode: $data['country'])?->id;
-        if (array_key_exists('governorate', $data)) $data['governorate_id'] = (new GovernorateManagementService())->getByCode(identityCode: $data['governorate'])?->id;
-        if (array_key_exists('city', $data)) $data['city_id'] = (new CitiesManagementService())->getByCode(identityCode: $data['city'])?->id;
+        if (array_key_exists('country', $data)) $data['country_id'] = (new CountriesManagementService)->getByCode($data['country'])?->id;
+        if (array_key_exists('governorate', $data)) $data['governorate_id'] = (new GovernorateManagementService())->getByCode($data['governorate'])?->id;
+        if (array_key_exists('city', $data)) $data['city_id'] = (new CitiesManagementService())->getByCode($data['city'])?->id;
         $user = UsersCoreUsersModel::query()->create($data);
         if ($user) {
             // if added successfully, add log [info] and return the user
@@ -90,9 +91,35 @@ class UsersAuthenticationService extends BaseService
         }
     }
 
+    public function sendResetPasswordCodeViaEmail($email): bool
+    {
+        $user = UsersCoreUsersModel::query()->where('email', $email)->first();
+        if (!$user) return false;
+//        if ($this->userHasManyResetPasswordAttempt($user)) return false;
+//        dd();
+        $code = UsersVerifyCodesModel::query()->create([
+            "user_id" => $user->id,
+            "type" => UsersVerifyCodeTypes::ResetPassword->name,
+        ]);
+        $user->notifyNow(new ResetPasswordCode());
+        return (bool)$code;
+    }
+
+    public function userHasManyResetPasswordAttempt(UsersCoreUsersModel $user): bool
+    {
+        $attempt = UsersVerifyCodesModel::query()
+            ->where([
+                'user_id' => $user->id,
+                "type" => UsersVerifyCodeTypes::ResetPassword->name,
+            ])
+            ->whereDate('created_at', '>=', now()->subHour())
+            ->count();
+        return $attempt >= bhry98_get_setting('reset_password_attempt_limit', 5);
+    }
+
     public function logout(): bool
     {
-        bhry98_add_log(level: 'info', message: 'User logout', context: ['user' => Auth::user()?->identity_code ?? '']);
+        bhry98_add_log(level: 'info', message: 'User logout', context: ['user' => Auth::user()?->code ?? '']);
         Auth::user()?->currentAccessToken()->delete();
         Auth::forgetUser();
         return !auth()->check();

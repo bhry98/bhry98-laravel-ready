@@ -2,41 +2,58 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\users;
 
-use Bhry98\Bhry98LaravelReady\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\DatabaseNotification;
 
 class UsersNotificationsModel extends DatabaseNotification
 {
 
-    // start env
     const TABLE_NAME = "users_notifications";
-    const RELATIONS = ["user"];
-    // start table
+    const RELATIONS = ["fromUser", "toUser"];
     protected $table = self::TABLE_NAME;
     protected $fillable = [
         "id",
-        "id",
+        "to_user_id",
+        "from_user_id",
+        "relation",
+        "relation_id",
         "type",
-        "notifiable",
-        "data",
+        "title_key",
+        "message_key",
+        "note_key",
+        "icon",
+        "color",
+        "is_read",
+        "url",
         "read_at",
     ];
-    protected $casts = [
-        "data" => "array",
-    ];
+    protected $casts = [];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function fromUser(): HasOne
     {
         return $this->hasOne(
             related: UsersCoreUsersModel::class,
             foreignKey: "id",
-            localKey: "user_id");
+            localKey: "from_user_id");
+    }
+
+    public function toUser(): HasOne
+    {
+        return $this->hasOne(
+            related: UsersCoreUsersModel::class,
+            foreignKey: "id",
+            localKey: "to_user_id");
     }
 
     protected static function booted(): void
     {
         static::creating(function ($model) {
-//            dd($model->attributes['data']);
+//            $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->from_user_id = auth()->id();
+        });
+        static::updating(function ($model) {
+//            $model->code = self::createUniqueTextForColumn('code', $model->code);
+//            $model->updated_by = auth()->id();
         });
     }
 

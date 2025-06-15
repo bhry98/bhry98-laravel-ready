@@ -4,13 +4,12 @@ namespace Bhry98\Bhry98LaravelReady\Models\rbac;
 
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 use Bhry98\Bhry98LaravelReady\Traits\HasLocalization;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RBACPermissionsModel extends BaseModel
 {
     use HasLocalization;
-    protected array $localizable= ['name']; // Columns that should be localized
+    protected array $localizable= ['name'];
     const TABLE_NAME = 'rbac_permissions';
     const RELATIONS = [];
     const FILTER_COLUMNS = ["code", "name", "default_name"];

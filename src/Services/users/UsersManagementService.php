@@ -3,7 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady\Services\users;
 
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\users\UsersDefaultType;
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersAccountTypes;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Notifications\users\UserUpdatedSuccessfully;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Notification;
 
 class UsersManagementService extends BaseService
 {
-    public function getByIdentityCode(string $identityCode, array|null $relations = null): ?UsersCoreUsersModel
+    public function getByCode(string $code, array|null $relations = null): ?UsersCoreUsersModel
     {
-        $data = UsersCoreUsersModel::query()->where('identity_code', $identityCode);
+        $data = UsersCoreUsersModel::query()->where('code', $code);
         if ($relations) {
             $data->with($relations);
         }
@@ -35,9 +35,9 @@ class UsersManagementService extends BaseService
         return $data->first();
     }
 
-    public function changeAccountStatus(string $identityCode, bool|null $status = null): bool
+    public function changeAccountStatus(string $code, bool|null $status = null): bool
     {
-        $user = self::getByIdentityCode($identityCode);
+        $user = self::getByCode($code);
         if ($user) {
             $user->active = $status ?? !$user->active;
             return $user->save();
@@ -45,17 +45,17 @@ class UsersManagementService extends BaseService
         return (bool)$user;
     }
 
-    public function updateProfile(string $identityCode, array $data): bool
+    public function updateProfile(string $code, array $data): bool
     {
-        $user = self::getByIdentityCode($identityCode);
+        $user = self::getByCode($code);
         if ($user) {
-            if (array_key_exists('country', $data)) $data['country_id'] = (new CountriesManagementService)->getByCode(identityCode: $data['country'])?->id;
-            if (array_key_exists('governorate', $data)) $data['governorate_id'] = (new GovernorateManagementService())->getByCode(identityCode: $data['governorate'])?->id;
-            if (array_key_exists('city', $data)) $data['city_id'] = (new CitiesManagementService())->getByCode(identityCode: $data['city'])?->id;
-            if (array_key_exists('type', $data)) $data['type_id'] = (new EnumsManagementService())->getByCode( $data['type'])?->id;
+            if (array_key_exists('country', $data)) $data['country_id'] = (new CountriesManagementService)->getByCode($data['country'])?->id;
+            if (array_key_exists('governorate', $data)) $data['governorate_id'] = (new GovernorateManagementService())->getByCode($data['governorate'])?->id;
+            if (array_key_exists('city', $data)) $data['city_id'] = (new CitiesManagementService())->getByCode($data['city'])?->id;
+            if (array_key_exists('type', $data)) $data['type_id'] = (new EnumsManagementService())->getByCode($data['type'])?->id;
             $update = $user->update($data);
 //            if ($update) Notification::sendNow(auth()->user(), new UserUpdatedSuccessfully(auth()->id()), ['database']);
-            if ($update) auth()->user()->notifyNow(new UserUpdatedSuccessfully(), ["database"]);
+//            if ($update) auth()->user()->notifyNow(new UserUpdatedSuccessfully(), ["database"]);
             return $update;
         }
         return (bool)$user;
@@ -63,7 +63,7 @@ class UsersManagementService extends BaseService
 
     public function changePassword(string $identityCode, string $password): bool
     {
-        $user = self::getByIdentityCode($identityCode);
+        $user = self::getByCode($identityCode);
         if ($user) {
             $user->password = $password;
             $update = $user->save();
@@ -94,7 +94,7 @@ class UsersManagementService extends BaseService
 
     public function delete(string $identityCode): bool
     {
-        $user = self::getByIdentityCode($identityCode);
+        $user = self::getByCode($identityCode);
         if ($user) {
             return (bool)$user->delete();
         }
@@ -103,7 +103,7 @@ class UsersManagementService extends BaseService
 
     public function forceDelete(string $identityCode): bool
     {
-        $user = self::getByIdentityCode($identityCode);
+        $user = self::getByCode($identityCode);
         if ($user) {
             return (bool)$user->forceDelete();
         }

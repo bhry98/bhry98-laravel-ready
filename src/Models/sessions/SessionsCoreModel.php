@@ -3,13 +3,12 @@
 namespace Bhry98\Bhry98LaravelReady\Models\sessions;
 
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class SessionsCoreModel extends BaseModel
 {
     const TABLE_NAME = "sessions_core";
-    // start table
     protected $table = self::TABLE_NAME;
     protected $fillable = [
         "user_id",
