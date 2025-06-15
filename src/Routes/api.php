@@ -8,6 +8,7 @@ use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersAuthenticationControll
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersProfileController;
 use Bhry98\Bhry98LaravelReady\Http\Middleware\GlobalResponseLocale;
 use Bhry98\Bhry98LaravelReady\Http\Middleware\users\UserAccountEnable;
+use Bhry98\Bhry98LaravelReady\Http\Middleware\users\UserMustChangePassword;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,15 +23,16 @@ Route::name("api.")
                 Route::post("/login", [UsersAuthenticationController::class, "login"])->name("login");
                 Route::post("/registration", [UsersAuthenticationController::class, "registration"])->name("registration");
                 Route::post("/resetPassword", [UsersAuthenticationController::class, "resetPassword"])->name("resetPassword");
+                Route::post("/verifyOtp", [UsersAuthenticationController::class, "verifyOtp"])->name("verifyOtp");
                 Route::get("/logout", [UsersAuthenticationController::class, "logout"])->name("logout")->middleware("auth:sanctum");
             });
         // account routes
         Route::name("me.")
-            ->middleware(["auth:sanctum", UserAccountEnable::class])
+            ->middleware(["auth:sanctum", UserAccountEnable::class,UserMustChangePassword::class])
             ->prefix("me")
             ->group(function () {
                 Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile");
-                Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword");
+                Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword")->withoutMiddleware(UserMustChangePassword::class);
                 Route::put("/", [UsersProfileController::class, "updateProfile"])->name("updateProfile");
             });
         // rbac routes

@@ -76,7 +76,7 @@ class UsersManagementService extends BaseService
     {
         $user = auth()->user();
         if (!$user) return false;
-        $user->update(["password" => $newPassword]);
+        $user->update(["password" => $newPassword, "must_change_password" => false]);
         $update = $user->save();
         bhry98_updated_log(success: $update, message: "CORE => UsersManagementService@changeMyPassword");
         return $update ?? false;

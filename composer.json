@@ -43,7 +43,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Bhry98\\Bhry98LaravelReady\\Bhry98LaravelReadyServiceProvider"
+        "Bhry98\\Bhry98LaravelReady\\Bhry98LaravelReadyServiceProvider",
+        "Bhry98\\Bhry98LaravelReady\\Providers\\LaravelCoreConfigServiceProvider"
       ]
     },
     "minimum-stability": "stable"

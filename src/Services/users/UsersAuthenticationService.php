@@ -13,9 +13,11 @@ use Bhry98\Bhry98LaravelReady\Services\enums\EnumsManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\CitiesManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\CountriesManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\GovernorateManagementService;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 
 class UsersAuthenticationService extends BaseService
 {
@@ -95,14 +97,42 @@ class UsersAuthenticationService extends BaseService
     {
         $user = UsersCoreUsersModel::query()->where('email', $email)->first();
         if (!$user) return false;
-//        if ($this->userHasManyResetPasswordAttempt($user)) return false;
-//        dd();
+        if ($this->userHasManyResetPasswordAttempt($user)) return false;
+        UsersVerifyCodesModel::query()->where('user_id', $user->id)->update(['valid' => false]);
         $code = UsersVerifyCodesModel::query()->create([
             "user_id" => $user->id,
             "type" => UsersVerifyCodeTypes::ResetPassword->name,
         ]);
-        $user->notifyNow(new ResetPasswordCode());
+        $user->notifyNow(new ResetPasswordCode($code));
         return (bool)$code;
+    }
+
+    public function getTokenForResetPasswordViaEmail($email): ?string
+    {
+        $user = UsersCoreUsersModel::query()->where('email', $email)->first();
+        if (!$user) return false;
+        $login = self::loginViaUser($user);
+        if ($login) {
+            $user->must_change_password = true;
+            $user->save();
+            return $login;
+        }
+        return null;
+    }
+
+    public function verifyCode(UsersVerifyCodeTypes $codeType, int $code, string $email, bool $setAsNotValid = true): bool
+    {
+        $user = UsersCoreUsersModel::query()->where('email', $email)->first();
+        if (!$user) return false;
+        $code = UsersVerifyCodesModel::query()->where([
+            "user_id" => $user->id,
+            "type" => $codeType,
+            "valid" => true,
+            "verify_code" => $code
+        ])->first();
+        $bool = $code && Carbon::parse($code->expired_at ?? now()->subMinute())?->isFuture();
+        if ($setAsNotValid) $code?->update(['valid' => false]);
+        return $bool;
     }
 
     public function userHasManyResetPasswordAttempt(UsersCoreUsersModel $user): bool
@@ -110,7 +140,7 @@ class UsersAuthenticationService extends BaseService
         $attempt = UsersVerifyCodesModel::query()
             ->where([
                 'user_id' => $user->id,
-                "type" => UsersVerifyCodeTypes::ResetPassword->name,
+                "type" => UsersVerifyCodeTypes::ResetPassword,
             ])
             ->whereDate('created_at', '>=', now()->subHour())
             ->count();

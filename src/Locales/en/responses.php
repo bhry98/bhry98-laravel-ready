@@ -28,5 +28,10 @@ return [
     "your-profile-updated-successfully" => "Your profile updated successfully",
     "your-profile-updated-failed" => "Your profile updated failed",
     "password-changed-successfully" => "Password changed successfully",
-    "no-data-in-validation-failed" => "No data validation failed"
+    "no-data-in-validation-failed" => "No data validation failed",
+    "reset-password-send" => "Reset password send successfully",
+    "reset-password-failed" => "Reset password failed",
+    "otp-not-valid" => "OTP not valid or expired",
+    "you-must-change-password" => "You must change password first"
+
 ];

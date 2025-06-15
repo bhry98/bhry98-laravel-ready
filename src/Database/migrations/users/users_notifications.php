@@ -16,12 +16,14 @@ return new class extends Migration {
             table: UsersNotificationsModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->foreignId(column: 'to_user_id')
+                $table->foreignId(column: 'notifiable_id')
                     ->nullable()
                     ->references(column: 'id')
                     ->on(table: UsersCoreUsersModel::TABLE_NAME)
                     ->cascadeOnUpdate()
                     ->cascadeOnDelete();
+                $table->foreignId(column: 'notifiable_type')
+                    ->nullable();
                 $table->foreignId(column: 'from_user_id')
                     ->nullable()
                     ->references(column: 'id')

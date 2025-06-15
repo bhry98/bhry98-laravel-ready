@@ -2,6 +2,7 @@
 
 namespace Bhry98\Bhry98LaravelReady\Notifications\auth;
 
+use Bhry98\Bhry98LaravelReady\Models\users\UsersVerifyCodesModel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +15,9 @@ class ResetPasswordCode extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(
+        public UsersVerifyCodesModel $codesRecord
+    )
     {
         //
     }
@@ -26,7 +29,7 @@ class ResetPasswordCode extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail','database'];
+        return ['mail'];
     }
 
     /**
@@ -35,9 +38,13 @@ class ResetPasswordCode extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting(__("Bhry98::notifications.greeting.hello",[
+                "user"=>$this->codesRecord->user?->display_name
+            ]))
+            ->subject(__("Bhry98::notifications.auth.reset-password-code.title"))
+            ->line(__("Bhry98::notifications.auth.reset-password-code.message", [
+                "code" => $this->codesRecord->verify_code
+            ]));
     }
 
     /**

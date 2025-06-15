@@ -42,7 +42,7 @@ class UsersVerifyCodesModel extends BaseModel
         static::creating(function ($model) {
             $model->verify_code = rand(123451, 987968);
             $model->valid = true;
-            $model->expired_at = now(config('app.timezone'))->addMinutes(10);
+            $model->expired_at = now(config('app.timezone'))->addHour();
         });
     }
 

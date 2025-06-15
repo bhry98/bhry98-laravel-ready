@@ -3,6 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady;
 
 use Bhry98\Bhry98LaravelReady\Exceptions\HandlerUnAuthenticatedException;
+use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreConfigLoad;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreAuthServiceProvider;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreCommandsServiceProvider;
@@ -37,9 +38,10 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         $this->app->register(LaravelCoreCommandsServiceProvider::class);
         self::loadRoutes();
         self::loadTranslations();
+//        $this->app->register(LaravelCoreConfigServiceProvider::class);
+        LaravelCoreConfigLoad::load();
         try {
             DB::connection()->getPdo();
-            $this->app->register(LaravelCoreConfigServiceProvider::class);
             Sanctum::usePersonalAccessTokenModel(model: SessionsPersonalAccessTokenModel::class);
             $this->app->register(LaravelCoreAuthServiceProvider::class);
 
@@ -48,6 +50,8 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Config/bhry98.php' => config_path('bhry98.php'),
         ]);
+//        dd(config('mail.mailers.smtp'));
+
     }
 
     function loadRoutes(): void

@@ -2,9 +2,11 @@
 
 namespace Bhry98\Bhry98LaravelReady\Http\Controllers\users;
 
+use Bhry98\Bhry98LaravelReady\Enums\users\UsersVerifyCodeTypes;
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UserAuthRegistrationRequest;
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthLoginRequest;
 use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthResetPasswordRequest;
+use Bhry98\Bhry98LaravelReady\Http\Requests\users\authentication\UsersAuthVerifyOtpRequest;
 use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
 use Exception;
@@ -94,6 +96,27 @@ class UsersAuthenticationController extends Controller
                 ],
                 __(key: "Bhry98::responses.reset-password-failed"));
             return bhry98_response_success_with_data(message: __(key: "Bhry98::responses.reset-password-send"));
+        } catch (Exception $e) {
+            return bhry98_response_internal_error([
+                'error' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
+            ]);
+        }
+
+    }
+
+    function verifyOtp(UsersAuthVerifyOtpRequest $request, UsersAuthenticationService $authenticationService): JsonResponse
+    {
+        try {
+            $codeValid = $authenticationService->verifyCode(UsersVerifyCodeTypes::ResetPassword, $request->get("otp"), $request->get("email"));
+            if (!$codeValid) return bhry98_response_validation_error(message: __(key: "Bhry98::responses.otp-not-valid"));
+            $token = $authenticationService->getTokenForResetPasswordViaEmail($request->get("email"));
+            return bhry98_response_success_with_data(data: [
+                'access_type' => 'Bearer',
+                'access_token' => $token,
+                "user" => UserResource::make($authenticationService->getAuthUser()),
+            ]);
         } catch (Exception $e) {
             return bhry98_response_internal_error([
                 'error' => $e->getMessage(),
