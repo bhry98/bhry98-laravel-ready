@@ -4,6 +4,7 @@ namespace Bhry98\Bhry98LaravelReady;
 
 use Bhry98\Bhry98LaravelReady\Exceptions\HandlerUnAuthenticatedException;
 use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreConfigLoad;
+use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreMigrationsLoad;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreAuthServiceProvider;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreCommandsServiceProvider;

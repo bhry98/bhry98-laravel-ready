@@ -1,10 +1,10 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Providers;
+namespace Bhry98\Bhry98LaravelReady\Helpers\loads;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelCoreMigrationsServiceProvider extends ServiceProvider
+class LaravelCoreMigrationsLoad extends ServiceProvider
 {
     public function boot(): void
     {
@@ -21,7 +21,6 @@ class LaravelCoreMigrationsServiceProvider extends ServiceProvider
             __DIR__ . "$ds..{$ds}Database{$ds}migrations{$ds}sessions",
             __DIR__ . "$ds..{$ds}Database{$ds}migrations{$ds}users",
             __DIR__ . "$ds..{$ds}Database{$ds}migrations{$ds}settings",
-            __DIR__ . "$ds..{$ds}Database{$ds}migrations{$ds}media",
         ]);
     }
 }

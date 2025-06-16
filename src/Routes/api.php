@@ -4,6 +4,7 @@ use Bhry98\Bhry98LaravelReady\Http\Controllers\enums\EnumsManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\locations\CountriesManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\locations\GovernorateManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\rbac\RBACLocalManagementController;
+use Bhry98\Bhry98LaravelReady\Http\Controllers\system\SystemSettingsController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersAuthenticationController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\users\UsersProfileController;
 use Bhry98\Bhry98LaravelReady\Http\Middleware\GlobalResponseLocale;
@@ -53,6 +54,12 @@ Route::name("api.")
             ->prefix("enums")
             ->group(function () {
                 Route::get("/{enumType}", [EnumsManagementController::class, "allByType"])->name("allByType");
+            });
+        Route::name("system.")
+//            ->middleware(["auth:sanctum", UserAccountEnable::class])
+            ->prefix("system")
+            ->group(function () {
+                Route::get("settings/{settingKey}", [SystemSettingsController::class, "getByKey"])->name("getSettingByKey");
             });
         // locations routes
         Route::name("locations.")

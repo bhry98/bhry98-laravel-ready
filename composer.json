@@ -44,7 +44,7 @@
     "laravel": {
       "providers": [
         "Bhry98\\Bhry98LaravelReady\\Bhry98LaravelReadyServiceProvider",
-        "Bhry98\\Bhry98LaravelReady\\Providers\\LaravelCoreConfigServiceProvider"
+        "Bhry98\\Bhry98LaravelReady\\Providers\\LaravelCoreMigrationsServiceProvider"
       ]
     },
     "minimum-stability": "stable"

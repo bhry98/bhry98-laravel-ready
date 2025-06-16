@@ -124,6 +124,29 @@ if (!function_exists(function: 'bhry98_deleted_log')) {
         }
     }
 }
+if (!function_exists(function: 'bhry98_restored_log')) {
+    function bhry98_restored_log(bool $success, string $message = "", array $context = []): void
+    {
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
+        $class = $trace['class'] ?? 'N/A';
+        $method = $trace['function'] ?? 'N/A';
+        if ($success) {
+            Log::info(message: "Restored Successfully", context: [
+                "class" => $class,
+                "method" => $method,
+                "message" => $message,
+                "context" => $context
+            ]);
+        } else {
+            Log::error(message: "Restored Field", context: [
+                "class" => $class,
+                "method" => $method,
+                "message" => $message,
+                "context" => $context
+            ]);
+        }
+    }
+}
 if (!function_exists(function: 'bhry98_force_delete_log')) {
     function bhry98_force_delete_log(bool $success, string $message = "", array $context = []): void
     {
@@ -153,9 +176,10 @@ if (!function_exists(function: 'bhry98_common_database_columns')) {
         if ($active) $table->boolean(column: 'active')->default(value: true);
         if ($userLog) $table->foreignId(column: 'created_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
         if ($userLog) $table->foreignId(column: 'updated_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+        if ($userLog && $softDeletes) $table->foreignId(column: 'deleted_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
         $table->timestamp(column: 'created_at')->useCurrent();
         $table->timestamp(column: 'updated_at')->useCurrentOnUpdate();
-        if ($softDeletes) $table->softDeletes();
+        if ($softDeletes) $table->timestamp(column: 'deleted_at')->nullable();
     }
 }
 if (!function_exists(function: 'bhry98_get_setting')) {
