@@ -4,6 +4,7 @@ namespace Bhry98\Bhry98LaravelReady\Helpers\loads;
 
 use Bhry98\Bhry98LaravelReady\Helpers\CreateCustomLogger;
 use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
+use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
 
@@ -18,6 +19,7 @@ class LaravelCoreConfigLoad
         (new LaravelCoreConfigLoad)->mediaLibraryConfig();
         (new LaravelCoreConfigLoad)->settingsConfig();
         (new LaravelCoreConfigLoad)->mailConfig();
+        (new LaravelCoreConfigLoad)->queueConfig();
     }
 
     private function sessionsConfig(): void
@@ -29,6 +31,20 @@ class LaravelCoreConfigLoad
         config()->set(key: 'session.encrypt', value: false);
         config()->set(key: 'session.files', value: storage_path(path: 'framework/sessions'));
         config()->set(key: 'session.lottery', value: [2, 100]);
+    }
+
+    private function queueConfig(): void
+    {
+        config()->set('session.driver', 'database');
+        config()->set(key: 'session.connections.database', value: [
+            'driver' => '',
+            'connection' => "mysql",
+            'table' => QueueJobModel::TABLE_NAME,
+            'queue' => "database",
+            'retry_after' => (int)env('DB_QUEUE_RETRY_AFTER', 90),
+            'after_commit' => false,
+
+        ]);;
     }
 
     private function loggingConfig(): void
