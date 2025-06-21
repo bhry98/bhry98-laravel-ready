@@ -7,6 +7,8 @@ use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class LaravelCoreConfigLoad
 {
@@ -54,12 +56,12 @@ class LaravelCoreConfigLoad
             'via' => CreateCustomLogger::class,
             'ignore_exceptions' => false,
         ]);
-        config()->set('logging.default', 'database');
+        config()->set('logging.default', env("B_LOGS", 'file'));
     }
 
     private function cacheConfig(): void
     {
-        config()->set('cache.driver', 'file');
+        config()->set('cache.default', env("B_CACHE", 'file'));
     }
 
     private function authConfig(): void

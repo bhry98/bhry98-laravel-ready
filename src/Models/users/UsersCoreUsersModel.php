@@ -144,13 +144,18 @@ class UsersCoreUsersModel extends Authentication
             $model->display_name = $model->display_name ?: "$model->first_name $model->last_name";
         });
     }
+
     private static function createUniqueTextForColumn(string $column, ?string $str = null, int $length = 10): string
     {
-        if ($str) return Str::upper(Str::slug($str));
-        $code = Str::upper(Str::random($length));
-        if (static::query()->where($column, $code)->exists()) {
-            return self::createUniqueTextForColumn($column, null, $length);
+        if ($str) {
+            $baseCode = Str::upper(Str::slug($str));
+            if (!static::query()->where($column, $baseCode)->exists()) {
+                return $baseCode;
+            }
         }
+        do {
+            $code = Str::upper(Str::random($length));
+        } while (static::query()->where($column, $code)->exists());
         return $code;
     }
 
