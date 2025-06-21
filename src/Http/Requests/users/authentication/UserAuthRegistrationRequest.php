@@ -81,19 +81,16 @@ class UserAuthRegistrationRequest extends FormRequest
             "unique:" . UsersCoreUsersModel::TABLE_NAME . ",national_id",
         ];
         $roles["country"] = [
-            "sometimes",
             "nullable",
             "string",
             "exists:" . LocationsCountriesModel::TABLE_NAME . ",identity_code",
         ];
         $roles["governorate"] = [
-            "sometimes",
             "nullable",
             "string",
             "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",identity_code",
         ];
         $roles["city"] = [
-            "sometimes",
             "nullable",
             "string",
             "exists:" . LocationsCitiesModel::TABLE_NAME . ",identity_code",
