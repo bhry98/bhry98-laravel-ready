@@ -83,17 +83,17 @@ class UserAuthRegistrationRequest extends FormRequest
         $roles["country"] = [
             "nullable",
             "string",
-            "exists:" . LocationsCountriesModel::TABLE_NAME . ",identity_code",
+            "exists:" . LocationsCountriesModel::TABLE_NAME . ",code",
         ];
         $roles["governorate"] = [
             "nullable",
             "string",
-            "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",identity_code",
+            "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",code",
         ];
         $roles["city"] = [
             "nullable",
             "string",
-            "exists:" . LocationsCitiesModel::TABLE_NAME . ",identity_code",
+            "exists:" . LocationsCitiesModel::TABLE_NAME . ",code",
         ];
         $roles["redirect_link"] = [
             "nullable",
