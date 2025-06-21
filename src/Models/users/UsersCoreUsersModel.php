@@ -139,6 +139,7 @@ class UsersCoreUsersModel extends Authentication
             $model->username = self::createUniqueTextForColumn("username", $model->username);
             $model->code = self::createUniqueTextForColumn("code", $model->code);
             $model->display_name = $model->display_name ?: "$model->first_name $model->last_name";
+            $model->must_change_password = $model->must_change_password ?? false;
         });
         static::updating(function ($model) {
             $model->display_name = $model->display_name ?: "$model->first_name $model->last_name";

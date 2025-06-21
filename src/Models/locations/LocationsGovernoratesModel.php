@@ -23,6 +23,7 @@ class LocationsGovernoratesModel extends BaseModel
     protected $table = self::TABLE_NAME;
     public $timestamps = true;
     protected $fillable = [
+        "id",
         "code",
         "default_name",
         "country_id",

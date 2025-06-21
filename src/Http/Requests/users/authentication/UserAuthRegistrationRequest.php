@@ -18,6 +18,7 @@ class UserAuthRegistrationRequest extends FormRequest
     public function prepareForValidation()
     {
         $fixedData["redirect_link"] = is_null($this->redirect_link) ? session("redirect_link") : $this->redirect_link;
+        $fixedData["must_change_password"] = $this->must_change_password ?? false;
         return $this->merge($fixedData);
     }
 
@@ -98,6 +99,10 @@ class UserAuthRegistrationRequest extends FormRequest
         $roles["redirect_link"] = [
             "nullable",
             "string"
+        ];
+        $roles["must_change_password"] = [
+            "required",
+            "boolean"
         ];
         return $roles;
     }

@@ -32,7 +32,7 @@ Route::name("api.")
             ->middleware(["auth:sanctum", UserAccountEnable::class,UserMustChangePassword::class])
             ->prefix("me")
             ->group(function () {
-                Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile");
+                Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile")->withoutMiddleware(UserMustChangePassword::class);
                 Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword")->withoutMiddleware(UserMustChangePassword::class);
                 Route::put("/", [UsersProfileController::class, "updateProfile"])->name("updateProfile");
             });
