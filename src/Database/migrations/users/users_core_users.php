@@ -35,7 +35,7 @@ return new class extends Migration {
                 $table->string(column: 'username', length: 50)->unique();
                 $table->string(column: 'email', length: 100)->nullable()->unique();
                 $table->timestamp(column: 'email_verified_at')->nullable();
-                $table->boolean(column: 'must_change_password')->default(value: true);
+                $table->boolean(column: 'must_change_password')->default(value: false);
                 $table->string(column: 'password')->nullable();
                 $table->foreignId(column: 'type_id')->references(column: 'id')->on(table: EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId(column: 'gender_id')->nullable()->references(column: 'id')->on(table: EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
