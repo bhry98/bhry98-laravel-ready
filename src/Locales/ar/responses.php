@@ -26,6 +26,10 @@ return [
     "your-account-disabled" => "حسابك موقوف",
     "your-account-archived" => "حسابك مؤرشف/محذوف",
     "password-changed-successfully" => "تم تغيير كلمه المرور بنجاح",
-    "no-data-in-validation-failed" => "خطأ في البيانات (لا يوجد بيانات مرسلة)"
+    "no-data-in-validation-failed" => "خطأ في البيانات (لا يوجد بيانات مرسلة)",
+    "reset-password-send" => "تم إرسال إعادة تعيين كلمة المرور بنجاح",
+    "reset-password-failed" => "فشل في إعادة تعيين كلمة المرور",
+    "otp-not-valid" => "رمز التحقق غير صالح أو منتهي الصلاحية",
+    "you-must-change-password" => "يجب عليك تغيير كلمة المرور أولاً",
 
 ];
