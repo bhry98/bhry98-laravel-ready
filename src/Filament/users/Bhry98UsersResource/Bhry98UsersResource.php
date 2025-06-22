@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Users;
+namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource;
 
 use App\Filament\Resources\Users;
-use App\Models\users\User;
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Enums\Modules;
+use Bhry98\Bhry98LaravelReady\Filament\Bhry98UsersResource\Modules;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ListUsers;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Services\locations\CitiesManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\CountriesManagementService;
@@ -15,13 +14,10 @@ use Bhry98\Bhry98LaravelReady\Services\locations\GovernorateManagementService;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersManagementService;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
-use Filament\Infolists\Components\Fieldset as InfoFieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
@@ -33,24 +29,20 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
 //use Filament\;
-class UsersResource extends Resource
+class Bhry98UsersResource extends Resource
 {
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $model = User::class;
+    protected static ?string $model = UsersCoreUsersModel::class;
 
     public static function canAccess(): bool
     {
         return auth()->user()->can(abilities: 'CoreUsers.All');
     }
 
-//    public function getRouteKeyName(): string
-//    {
-//        return 'identity_code';
-//    }
-//    public static function getRoutePrefix(): string
-//    {
-//        return '/users';
-//    }
+    public static function getRoutePrefix(): string
+    {
+        return '/users';
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -99,10 +91,6 @@ class UsersResource extends Resource
                 Tables\Columns\IconColumn::make(name: 'active')
                     ->boolean()
                     ->label(__(key: 'center.active')),
-                Tables\Columns\TextColumn::make(name: 'points_sum_total_points')
-                    ->sum(relationship: 'points', column: 'total_points')
-                    ->default(state: 0)
-                    ->label(__(key: 'center.users.total-points')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make()
@@ -112,10 +100,10 @@ class UsersResource extends Resource
             ->actions([
 
                 ActionGroup::make([
-                    Tables\Actions\ViewAction::make()
-                        ->label(__(key: "center.view"))
-                        ->visible(fn(Model $record) => is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Retrieve'))
-                        ->url(fn($record) => Users\UsersResource\Pages\ViewUsers::getUrl([$record])),
+//                    Tables\Actions\ViewAction::make()
+//                        ->label(__(key: "center.view"))
+//                        ->visible(fn(Model $record) => is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Retrieve'))
+//                        ->url(fn($record) => Users\UsersResource\Pages\ViewUsers::getUrl([$record])),
                     Tables\Actions\EditAction::make()
                         ->label(__(key: "center.modify"))
                         ->visible(fn(Model $record) => is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Update'))
@@ -172,8 +160,8 @@ class UsersResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Users\UsersResource\Pages\ListUsers::route(path: '/'),
-            'view' => Users\UsersResource\Pages\ViewUsers::route(path: '/{record}'),
+            'index' => ListUsers::route(path: '/'),
+//            'view' => Users\UsersResource\Pages\ViewUsers::route(path: '/{record}'),
         ];
     }
 
