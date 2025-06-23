@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class RBACPermissionsModel extends BaseModel
 {
     use HasLocalization;
-    protected array $localizable= ['name'];
+
+    protected array $localizable = ['name', 'discretion'];
     const TABLE_NAME = 'rbac_permissions';
     const RELATIONS = [];
     const FILTER_COLUMNS = ["code", "name", "default_name"];
@@ -17,15 +18,18 @@ class RBACPermissionsModel extends BaseModel
     protected $fillable = [
         "code",
         "default_name",
-        "active",
+        "default_discretion",
+        "is_default",
     ];
     protected $hidden = [];
+
     protected function casts(): array
     {
         return [
-            "active"=>"boolean"
+            "is_default" => "boolean"
         ];
     }
+
     function groups(): HasMany
     {
         return $this->hasMany(

@@ -63,10 +63,10 @@ class CoreRBACSeeder extends Seeder
     function permissionsSeeder(): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $permissions = include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions.php";
-        if (config('bhry98.rbac.permissions') && count(config('bhry98.rbac.permissions')) > 0) {
-            $permissions = array_merge($permissions, config('bhry98.rbac.permissions', []));
-        }
+        $permissions = include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}locations.php";
+//        if (config('bhry98.rbac.permissions') && count(config('bhry98.rbac.permissions')) > 0) {
+//            $permissions = array_merge($permissions, config('bhry98.rbac.permissions', []));
+//        }
         foreach ($permissions ?? [] as $key => $permission) {
             $permissionRecord = RBACPermissionsModel::query()->updateOrCreate(
                 [
@@ -74,10 +74,14 @@ class CoreRBACSeeder extends Seeder
                 ],
                 [
                     "code" => (string)$key,
-                    "default_name" => $permission['locales']['en'],
+                    "default_name" => $permission['names']['en'],
+                    "default_discretion" => $permission['discretion']['en'],
                 ]);
-            foreach ($permission['locales'] ?? [] as $local => $value) {
+            foreach ($permission['names'] ?? [] as $local => $value) {
                 $permissionRecord->setLocalized(column: 'name', value: $value, locale: $local);
+            }
+            foreach ($permission['discretion'] ?? [] as $local => $value) {
+                $permissionRecord->setLocalized(column: 'discretion', value: $value, locale: $local);
             }
         }
     }

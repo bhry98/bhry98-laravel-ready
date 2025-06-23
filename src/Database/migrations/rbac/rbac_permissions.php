@@ -19,9 +19,11 @@ return new class extends Migration {
             table: RBACPermissionsModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->string(column: 'code')->index()->unique()->comment(comment: "example => [ModuleName].[OperationName].[ActionName] => Core.CoreUsers.Create || Core.AzureUsers.Update");
-                $table->string(column: 'default_name')->nullable();
-                bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
+                $table->string('code')->index()->unique()->comment(comment: "example => [ModuleName].[OperationName].[ActionName] => Core.CoreUsers.Create || Core.AzureUsers.Update");
+                $table->string('default_name')->nullable();
+                $table->string('default_discretion')->nullable();
+                $table->boolean('is_default')->default(false);
+                bhry98_common_database_columns(table: $table);
             });
         Schema::enableForeignKeyConstraints();
     }

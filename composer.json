@@ -22,9 +22,6 @@
       "Bhry98\\Bhry98LaravelReady\\": "src/"
     }
   },
-  "require-dev": {
-    "filament/filament": "^3.3"
-  },
   "require": {
     "php": ">=8.2",
     "laravel/framework": ">=11.0",
@@ -35,7 +32,10 @@
     "spatie/laravel-medialibrary": "^11.12",
     "rawilk/laravel-settings": "^3.4",
     "barryvdh/laravel-debugbar": "^3.15",
-    "filament/support": "^3.3"
+    "filament/support": "^3.3",
+    "filament/filament": "^3.3",
+    "tomatophp/filament-language-switcher": "^1.0",
+    "ysfkaya/filament-phone-input": "^3.1"
   },
   "authors": [
     {

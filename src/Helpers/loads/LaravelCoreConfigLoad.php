@@ -22,6 +22,7 @@ class LaravelCoreConfigLoad
         (new LaravelCoreConfigLoad)->settingsConfig();
         (new LaravelCoreConfigLoad)->mailConfig();
         (new LaravelCoreConfigLoad)->queueConfig();
+        (new LaravelCoreConfigLoad)->filamentLanguageSwitcherConfig();
     }
 
     private function sessionsConfig(): void
@@ -105,6 +106,20 @@ class LaravelCoreConfigLoad
         config()->set('mail.from', [
             'address' => env(key: 'B_MAIL_FROM_ADDRESS', default: 'code.faster@bhry98.serv00.net'),
             'name' => env(key: 'B_MAIL_FROM_NAME', default: 'Code Faster'),
+        ]);
+    }
+
+    private function filamentLanguageSwitcherConfig(): void
+    {
+        config()->set('filament-language-switcher.locals', [
+            'en' => [
+                'label' => 'English',
+                'flag' => 'us',
+            ],
+            'ar' => [
+                'label' => 'Arabic',
+                'flag' => 'sa',
+            ],
         ]);
     }
 }

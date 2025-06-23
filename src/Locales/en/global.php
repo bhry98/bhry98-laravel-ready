@@ -6,4 +6,11 @@ return [
     "delete" => "Delete",
     "force-delete" => "Force delete",
     "restore" => "Restore",
+    "active" => "Active",
+    "code" => "Code",
+    "default-name" => "Default name",
+    "created-at" => "Created at",
+    "created-by" => "Created by",
+    "updated-at" => "Updated at",
+    "updated-by" => "Updated by",
 ];
