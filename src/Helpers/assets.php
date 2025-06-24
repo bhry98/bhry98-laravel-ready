@@ -1,6 +1,10 @@
 <?php
 
+use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Carbon\Carbon;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Log;
 
@@ -194,3 +198,40 @@ if (!function_exists(function: 'bhry98_set_setting')) {
         return \Rawilk\Settings\Facades\Settings::set(key: $key, value: $value);
     }
 }
+if (!function_exists(function: 'bhry98_figma_columns')) {
+    function bhry98_figma_columns(bool $active = false, bool $by = false): array
+    {
+        if ($active) {
+            $columns[] = IconColumn::make('active')
+                ->label(__('Bhry98::global.active'))
+                ->boolean()
+                ->toggleable();
+        }
+        $columns[] = TextColumn::make('created_at')
+            ->label(__('Bhry98::global.created-at'))
+            ->getStateUsing(fn(LocationsCountriesModel $record) => $record->created_at ? Carbon::parse($record->created_at)->format(config("bhry98.app_settings.date.format")) : "---")
+            ->toggleable()
+            ->toggledHiddenByDefault();
+        $columns[] = TextColumn::make('updated_at')
+            ->label(__('Bhry98::global.updated-at'))
+            ->getStateUsing(fn(LocationsCountriesModel $record) => $record->updated_at ? Carbon::parse($record->updated_at)->format(config("bhry98.app_settings.date.format")) : "---")
+            ->toggleable()
+            ->toggledHiddenByDefault();
+        if ($by) {
+            $columns[] = TextColumn::make('createdBy.email')
+                ->label(__('Bhry98::global.created-by'))
+                ->copyable()
+                ->toggleable()
+                ->default("---")
+                ->toggledHiddenByDefault();
+            $columns[] = TextColumn::make('updatedBy.email')
+                ->label(__('Bhry98::global.updated-by'))
+                ->copyable()
+                ->toggleable()
+                ->default("---")
+                ->toggledHiddenByDefault();
+        }
+        return $columns;
+    }
+}
+

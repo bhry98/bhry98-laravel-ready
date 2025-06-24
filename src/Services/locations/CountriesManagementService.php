@@ -6,6 +6,7 @@ use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
+use Filament\Notifications\Notification;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class CountriesManagementService extends BaseService
@@ -46,8 +47,21 @@ class CountriesManagementService extends BaseService
     public function updateCountry(int $id, array $data): bool
     {
         $record = self::getById($id);
-        $updated = $record?->update($data);
-        bhry98_updated_log(success: (bool)$updated, message: "update country", context: ['record' => $record->toArray(), 'data' => $data]);
+        dd($id, $record);
+        if (!$record) {
+            Notification::make()
+                ->title(__("Bhry98::notifications.filament.updated-field"))
+                ->danger()
+                ->send();
+            return false;
+        }
+        $updated = $record?->update(collect($data)->except(['names'])?->toArray() ?? []);
+        if (array_key_exists('names', $data)) {
+            foreach ($data['names'] as $locale => $value) {
+                $record?->setLocalized('name', $value, $locale);
+            }
+        }
+        bhry98_updated_log(success: (bool)$updated, message: "update country", context: ['record' => $record?->toArray(), 'data' => $data]);
         return (bool)$updated;
     }
 

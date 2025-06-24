@@ -18,13 +18,13 @@ class ListCountries extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label(__("Bhry98::global.create"))
-//                ->visible(fn() => auth()->user()->can())
-                ->action(fn(array $data) => (new CountriesManagementService())->createCountry($data))
-                ->slideOver()
-                ->closeModalByClickingAway(false)
-                ->createAnother(false)
+//            Actions\CreateAction::make()
+//                ->label(__("Bhry98::global.create"))
+////                ->visible(fn() => auth()->user()->can())
+//                ->action(fn(array $data) => (new CountriesManagementService())->createCountry($data))
+//                ->slideOver()
+//                ->closeModalByClickingAway(false)
+//                ->createAnother(false)
         ];
     }
 }

@@ -121,5 +121,15 @@ class LaravelCoreConfigLoad
                 'flag' => 'sa',
             ],
         ]);
+        config()->set('filament-translation-component.languages', [
+            "en" => [
+                "label" => "English",
+                "flag" => "us"
+            ],
+            "ar" => [
+                "label" => "Arabic",
+                "flag" => "eg"
+            ],
+        ]);
     }
 }

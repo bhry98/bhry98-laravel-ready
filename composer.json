@@ -35,7 +35,8 @@
     "filament/support": "^3.3",
     "filament/filament": "^3.3",
     "tomatophp/filament-language-switcher": "^1.0",
-    "ysfkaya/filament-phone-input": "^3.1"
+    "ysfkaya/filament-phone-input": "^3.1",
+    "tomatophp/filament-translation-component": "^1.0"
   },
   "authors": [
     {
