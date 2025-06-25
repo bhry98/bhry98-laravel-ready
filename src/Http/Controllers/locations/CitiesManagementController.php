@@ -6,6 +6,7 @@ use Bhry98\Bhry98LaravelReady\Http\Requests\locations\cities\LocationsGetAllCiti
 use Bhry98\Bhry98LaravelReady\Http\Requests\locations\cities\LocationsGetCityDetailsRequest;
 use Bhry98\Bhry98LaravelReady\Http\Resources\locations\CityResource;
 use Bhry98\Bhry98LaravelReady\Services\locations\CitiesManagementService;
+
 use Exception;
 use Illuminate\Http\JsonResponse;
 use \App\Http\Controllers\Controller;
@@ -13,6 +14,8 @@ use \App\Http\Controllers\Controller;
 class CitiesManagementController extends Controller
 {
     /**
+     *  Get All Locations Cities
+     *
      * @param LocationsGetAllCitiesRequest $request
      * @param CitiesManagementService $cityService
      * @return JsonResponse
@@ -33,8 +36,9 @@ class CitiesManagementController extends Controller
             ]);
         }
     }
-
     /**
+     * Get City Details By Code
+     *
      * @param LocationsGetCityDetailsRequest $request
      * @param CitiesManagementService $cityService
      * @return JsonResponse

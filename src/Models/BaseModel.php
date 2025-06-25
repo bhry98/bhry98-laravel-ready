@@ -3,6 +3,8 @@
 namespace Bhry98\Bhry98LaravelReady\Models;
 
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
@@ -33,5 +35,17 @@ abstract class BaseModel extends Model
     public function deletedBy(): HasOne
     {
         return $this->hasOne(UsersCoreUsersModel::class, 'id', 'deleted_by');
+    }
+
+    /**
+     * Scope a query to only include active users.
+     */
+
+    #[Scope]
+    protected function active(Builder $query): void
+    {
+
+        $query->where('active', true);
+
     }
 }

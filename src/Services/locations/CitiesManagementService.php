@@ -147,9 +147,10 @@ class CitiesManagementService extends BaseService
      * @param array|null $filters
      * @return LengthAwarePaginator
      */
-    public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+    public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null, bool $getActiveOnly = true): LengthAwarePaginator
     {
         $data = LocationsCitiesModel::query()->latest('id');
+        if ($getActiveOnly) $data->active();
         if (!empty($filters)) {
             self::applyFilters($data, $filters, LocationsCitiesModel::class);
             $pageNumber = 0;

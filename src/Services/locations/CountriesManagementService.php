@@ -118,7 +118,7 @@ class CountriesManagementService extends BaseService
             }
 
         }
-         return (bool)$deleted;
+        return (bool)$deleted;
     }
 
     /**
@@ -149,9 +149,10 @@ class CountriesManagementService extends BaseService
      * @param array|null $filters
      * @return LengthAwarePaginator
      */
-    public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+    public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null, bool $getActiveOnly = true): LengthAwarePaginator
     {
         $data = LocationsCountriesModel::query()->latest('id');
+        if ($getActiveOnly) $data->active();
         if (!empty($filters)) {
             self::applyFilters($data, $filters, LocationsCountriesModel::class);
             $pageNumber = 0;
@@ -169,10 +170,11 @@ class CountriesManagementService extends BaseService
      * @param array|null $filters
      * @return LengthAwarePaginator
      */
-    public function getAllGovernorates(string $countryCode, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+    public function getAllGovernorates(string $countryCode, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null, bool $getActiveOnly = true): LengthAwarePaginator
     {
         $country = self::getByCode($countryCode);
         $data = LocationsGovernoratesModel::query()->where(["country_id" => $country?->id ?? ""])->latest('id');
+        if ($getActiveOnly) $data->active();
         if (!empty($filters)) {
             self::applyFilters($data, $filters, LocationsGovernoratesModel::class);
             $pageNumber = 0;
@@ -190,10 +192,11 @@ class CountriesManagementService extends BaseService
      * @param array|null $filters
      * @return LengthAwarePaginator
      */
-    public function getAllCities(string $countryCode, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
+    public function getAllCities(string $countryCode, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null, bool $getActiveOnly = true): LengthAwarePaginator
     {
         $country = self::getByCode($countryCode);
         $data = LocationsCitiesModel::query()->where(["country_id" => $country?->id ?? ""])->latest('id');
+        if ($getActiveOnly) $data->active();
         if (!empty($filters)) {
             self::applyFilters($data, $filters, LocationsCitiesModel::class);
             $pageNumber = 0;
