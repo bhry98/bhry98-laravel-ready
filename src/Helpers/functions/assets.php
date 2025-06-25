@@ -20,7 +20,6 @@ if (!function_exists(function: 'bhry98_date_formatted')) {
         ];
     }
 }
-
 if (!function_exists(function: 'bhry98_app_settings')) {
     function bhry98_app_settings($key, $default = null)
     {

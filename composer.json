@@ -15,8 +15,9 @@
   ],
   "autoload": {
     "files": [
-      "src/Helpers/responses.php",
-      "src/Helpers/assets.php"
+      "src/Helpers/functions/notifications.php",
+      "src/Helpers/functions/responses.php",
+      "src/Helpers/functions/assets.php"
     ],
     "psr-4": {
       "Bhry98\\Bhry98LaravelReady\\": "src/"

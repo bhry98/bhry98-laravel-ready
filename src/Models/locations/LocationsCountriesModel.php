@@ -12,7 +12,7 @@ class LocationsCountriesModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
 
-    protected array $localizable= ['name'];
+    protected array $localizable = ['name'];
     const TABLE_NAME = "locations_countries";
     const RELATIONS = [];
     const FILTER_COLUMNS = ["name"];
@@ -42,7 +42,7 @@ class LocationsCountriesModel extends BaseModel
             localKey: "id");
     }
 
-    public function cities():HasMany
+    public function cities(): HasMany
     {
         return $this->hasMany(
             related: LocationsCitiesModel::class,
@@ -68,5 +68,33 @@ class LocationsCountriesModel extends BaseModel
             $model->code = self::createUniqueTextForColumn('code', $model->code);
             $model->updated_by = auth()->id();
         });
+    }
+
+    public function canEdit(): bool
+    {
+        $notDeleted = is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Countries.Update');
+        return $notDeleted && $abilities;
+    }
+
+    public function canDelete($relationsCount): bool
+    {
+        $notDeleted = is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Countries.Delete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canForceDelete($relationsCount): bool
+    {
+        $notDeleted = !is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Countries.ForceDelete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canRestore(): bool
+    {
+        $notDeleted = !is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Countries.Restore');
+        return $notDeleted && $abilities;
     }
 }

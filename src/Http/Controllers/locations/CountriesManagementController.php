@@ -16,19 +16,17 @@ use \App\Http\Controllers\Controller;
 
 class CountriesManagementController extends Controller
 {
-    function all(LocationsGetAllCountriesRequest $request, CountriesManagementService $countryService): JsonResponse
+    /**
+     * @param LocationsGetAllCountriesRequest $request
+     * @param CountriesManagementService $countryService
+     * @return JsonResponse
+     */
+    public function all(LocationsGetAllCountriesRequest $request, CountriesManagementService $countryService): JsonResponse
     {
         try {
-            // get all countries by type
-            $permissions = $countryService->getAll(
-                pageNumber: $request->get(key: 'pageNumber'),
-                perPage: $request->get(key: 'perPage'),
-                filters: $request->get(key: 'filters')
-            );
-            if ($permissions->isEmpty()) {
-                return bhry98_response_success_without_data(data: CountryResource::collection($permissions)->response()->getData(true));
-            }
-            return bhry98_response_success_with_data(data: CountryResource::collection($permissions)->response()->getData(true));
+            $data = $countryService->getAll($request->get('pageNumber'), $request->get('perPage'), $request->get('with'), $request->get('filters'));
+            if ($data->isEmpty()) return bhry98_response_success_without_data(CountryResource::collection($data)->response()->getData(true));
+            return bhry98_response_success_with_data(CountryResource::collection($data)->response()->getData(true));
         } catch (Exception $e) {
             return bhry98_response_internal_error([
                 'error' => $e->getMessage(),
@@ -38,17 +36,17 @@ class CountriesManagementController extends Controller
         }
     }
 
-    function details(LocationsGetCountryDetailsRequest $request, CountriesManagementService $countryService): JsonResponse
+    /**
+     * @param LocationsGetCountryDetailsRequest $request
+     * @param CountriesManagementService $countryService
+     * @return JsonResponse
+     */
+    public function details(LocationsGetCountryDetailsRequest $request, CountriesManagementService $countryService): JsonResponse
     {
         try {
-            $permissions = $countryService->getByCode(
-                code: $request->get(key: 'countryCode'),
-                relations: $request->get(key: 'with')
-            );
-            if (!$permissions) {
-                return bhry98_response_success_without_data();
-            }
-            return bhry98_response_success_with_data(data: CountryResource::make($permissions));
+            $data = $countryService->getByCode($request->get('countryCode'), $request->get('with'),true);
+            if (!$data) return bhry98_response_success_without_data();
+            return bhry98_response_success_with_data(CountryResource::make($data));
         } catch (Exception $e) {
             return bhry98_response_internal_error([
                 'error' => $e->getMessage(),
@@ -58,21 +56,17 @@ class CountriesManagementController extends Controller
         }
     }
 
-    function allGovernorate(LocationsGetAllCountryGovernoratesRequest $request, CountriesManagementService $countryService): JsonResponse
+    /**
+     * @param LocationsGetAllCountryGovernoratesRequest $request
+     * @param CountriesManagementService $countryService
+     * @return JsonResponse
+     */
+    public function allGovernorate(LocationsGetAllCountryGovernoratesRequest $request, CountriesManagementService $countryService): JsonResponse
     {
         try {
-            // get all countries by type
-            $permissions = $countryService->getAllGovernorates(
-                countryCode: $request->get(key: 'countryCode'),
-                pageNumber: $request->get(key: 'pageNumber'),
-                perPage: $request->get(key: 'perPage'),
-                relations: $request->get(key: 'with'),
-                filters: $request->get(key: 'filters')
-            );
-            if ($permissions->isEmpty()) {
-                return bhry98_response_success_without_data(data: GovernorateResource::collection($permissions)->response()->getData(true));
-            }
-            return bhry98_response_success_with_data(data: GovernorateResource::collection($permissions)->response()->getData(true));
+            $data = $countryService->getAllGovernorates($request->get('countryCode'), $request->get('pageNumber'), $request->get('perPage'), $request->get('with'), $request->get('filters'));
+            if ($data->isEmpty()) return bhry98_response_success_without_data(GovernorateResource::collection($data)->response()->getData(true));
+            return bhry98_response_success_with_data(GovernorateResource::collection($data)->response()->getData(true));
         } catch (Exception $e) {
             return bhry98_response_internal_error([
                 'error' => $e->getMessage(),
@@ -82,21 +76,17 @@ class CountriesManagementController extends Controller
         }
     }
 
-    function allCities(LocationsGetAllCountryCitiesRequest $request, CountriesManagementService $countryService): JsonResponse
+    /**
+     * @param LocationsGetAllCountryCitiesRequest $request
+     * @param CountriesManagementService $countryService
+     * @return JsonResponse
+     */
+    public function allCities(LocationsGetAllCountryCitiesRequest $request, CountriesManagementService $countryService): JsonResponse
     {
         try {
-            // get all countries by type
-            $permissions = $countryService->getAllCities(
-                countryCode: $request->get(key: 'countryCode'),
-                pageNumber: $request->get(key: 'pageNumber'),
-                perPage: $request->get(key: 'perPage'),
-                relations: $request->get(key: 'with'),
-                filters: $request->get(key: 'filters')
-            );
-            if ($permissions->isEmpty()) {
-                return bhry98_response_success_without_data(data: CityResource::collection($permissions)->response()->getData(true));
-            }
-            return bhry98_response_success_with_data(data: CityResource::collection($permissions)->response()->getData(true));
+            $data = $countryService->getAllCities($request->get('countryCode'), $request->get('pageNumber'), $request->get('perPage'), $request->get('with'), $request->get('filters'));
+            if ($data->isEmpty()) return bhry98_response_success_without_data(CityResource::collection($data)->response()->getData(true));
+            return bhry98_response_success_with_data(CityResource::collection($data)->response()->getData(true));
         } catch (Exception $e) {
             return bhry98_response_internal_error([
                 'error' => $e->getMessage(),

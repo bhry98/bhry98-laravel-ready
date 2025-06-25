@@ -1,6 +1,7 @@
 <?php
 
 use Bhry98\Bhry98LaravelReady\Http\Controllers\enums\EnumsManagementController;
+use Bhry98\Bhry98LaravelReady\Http\Controllers\locations\CitiesManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\locations\CountriesManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\locations\GovernorateManagementController;
 use Bhry98\Bhry98LaravelReady\Http\Controllers\rbac\RBACLocalManagementController;
@@ -70,6 +71,10 @@ Route::name("api.")
                 Route::get("countries/{countryCode}/governorates", [CountriesManagementController::class, "allGovernorate"])->name("countries.allGovernorate");
                 Route::get("countries/{countryCode}/cities", [CountriesManagementController::class, "allCities"])->name("countries.allCities");
                 Route::get("governorates", [GovernorateManagementController::class, "all"])->name("governorates.all");
+                Route::get("governorates/{governorateCode}", [GovernorateManagementController::class, "details"])->name("governorates.details");
+                Route::get("governorates/{governorateCode}/cities", [GovernorateManagementController::class, "allCities"])->name("governorates.allCities");
+                Route::get("cities", [CitiesManagementController::class, "all"])->name("cities.all");
+                Route::get("cities/{cityCode}", [CitiesManagementController::class, "details"])->name("cities.details");
             });
 
     });

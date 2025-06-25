@@ -2,9 +2,7 @@
 
 namespace Bhry98\Bhry98LaravelReady\Http\Requests\locations\countries;
 
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class LocationsGetAllCountriesRequest extends FormRequest
 {
@@ -35,7 +33,7 @@ class LocationsGetAllCountriesRequest extends FormRequest
             "between:5,50",
         ];
         $rules["filters"] = [
-            "sometimes",
+            "nullable",
             "array",
         ];
         return $rules;

@@ -1,12 +1,13 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Http\Requests\locations\countries;
+namespace Bhry98\Bhry98LaravelReady\Http\Requests\locations\governorates;
 
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
+use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
+use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class LocationsGetCountryDetailsRequest extends FormRequest
+class LocationsGetAllGovernorateCitiesRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -18,24 +19,38 @@ class LocationsGetCountryDetailsRequest extends FormRequest
     public function prepareForValidation()
     {
         $fixData = [];
-        $fixData["countryCode"] = $this->route('countryCode');
-
+        $fixData["governorateCode"] = $this->route('governorateCode');
+        $fixData["pageNumber"] = $this->pageNumber ?? 1;
+        $fixData["perPage"] = $this->perPage ?? 10;
         $fixData["with"] = $this->with ? explode(",", $this->with) : null;
         return $this->merge($fixData);
     }
 
     public function rules(): array
     {
-        $rules["countryCode"] = [
+        $rules["governorateCode"] = [
             "required",
-            "exists:" . LocationsCountriesModel::TABLE_NAME . ",code"
+            "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",code"
+        ];
+        $rules["pageNumber"] = [
+            "nullable",
+            "numeric",
+        ];
+        $rules["perPage"] = [
+            "nullable",
+            "numeric",
+            "between:5,50",
+        ];
+        $rules["filters"] = [
+            "sometimes",
+            "array",
         ];
         $rules["with"] = [
             "sometimes"
         ];
         $rules["with.*"] = [
             "sometimes",
-            Rule::in(LocationsCountriesModel::RELATIONS),
+            Rule::in(LocationsCitiesModel::RELATIONS),
         ];
         return $rules;
     }

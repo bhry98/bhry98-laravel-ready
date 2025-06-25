@@ -16,7 +16,7 @@ class LocationsCitiesModel extends BaseModel
     protected array $localizable = ['name'];
     const TABLE_NAME = "locations_cities";
     const RELATIONS = ["country", "governorate"];
-    const FILTERS_COLUMNS = ["name"];
+    const FILTER_COLUMNS = ["name"];
     protected $table = self::TABLE_NAME;
     public $timestamps = true;
     protected $fillable = [
@@ -66,5 +66,33 @@ class LocationsCitiesModel extends BaseModel
             $model->code = self::createUniqueTextForColumn('code', $model->code);
             $model->updated_by = auth()->id();
         });
+    }
+
+    public function canEdit(): bool
+    {
+        $notDeleted = is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Cities.Update');
+        return $notDeleted && $abilities;
+    }
+
+    public function canDelete($relationsCount): bool
+    {
+        $notDeleted = is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Cities.Delete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canForceDelete($relationsCount): bool
+    {
+        $notDeleted = !is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Cities.ForceDelete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canRestore(): bool
+    {
+        $notDeleted = !is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Locations.Cities.Restore');
+        return $notDeleted && $abilities;
     }
 }

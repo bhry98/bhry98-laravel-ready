@@ -8,72 +8,170 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CitiesManagementService extends BaseService
 {
-    public function getByCode(string $code, array|null $relations = null): ?LocationsCitiesModel
+    /**
+     * @param string $code
+     * @param array|null $relations
+     * @param bool $withRelationsCount
+     * @param bool $withTrash
+     * @return LocationsCitiesModel|null
+     */
+    public function getByCode(string $code, array|null $relations = null, bool $withRelationsCount = false, bool $withTrash = false): ?LocationsCitiesModel
     {
-        $record = LocationsCitiesModel::query()->where('code',  $code)->first();
-        if ($relations) {
-            $record->with($relations);
-        }
-        return $record;
+        $record = LocationsCitiesModel::query()->where(['code' => $code]);
+        if ($withTrash) $record->withTrashed();
+        if ($relations) $record->with($relations);
+        if ($withRelationsCount) $record->withCount(['governorates', 'cities', 'users']);
+        return $record->first();
     }
 
-    public function createNewCity(array $data): LocationsCitiesModel
+    /**
+     * @param int $id
+     * @param array|null $relations
+     * @param bool $withRelationsCount
+     * @param bool $withTrash
+     * @return LocationsCitiesModel|null
+     */
+    public function getById(int $id, array|null $relations = null, bool $withRelationsCount = false, bool $withTrash = false): ?LocationsCitiesModel
+    {
+        $record = LocationsCitiesModel::query()->where(['id' => $id]);
+        if ($withTrash) $record->withTrashed();
+        if ($relations) $record->with($relations);
+        if ($withRelationsCount) $record->withCount(['governorates', 'cities', 'users']);
+        return $record->first();
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function createCity(array $data): bool
     {
         $record = LocationsCitiesModel::query()->create($data);
-        bhry98_created_log(success: (bool)$record, message: "CORE => CitiesManagementService@createNewCity", context: $record->toArray());
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.created-field"));
+            return false;
+        } else {
+            bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.created-success"));
+        }
+        bhry98_created_log((bool)$record, "create new locations city", context: ['record' => $record->toArray()]);
         return $record;
     }
 
-    public function updateCity(string $identityCode, array $data): bool
+    /**
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public function updateCity(int $id, array $data): bool
     {
-        $record = self::getByCode($identityCode);
-        $update = $record->update($data);
-        bhry98_updated_log(success: $update, message: "CORE => CitiesManagementService@updateCity", context: ['old' => $record, 'new' => $data]);
-        return $update;
-    }
-
-    public function deleteCity(string $identityCode, bool $force = false): ?bool
-    {
-        $record = self::getByCode($identityCode);
-        if ($force) {
-            $update = $record->forceDelete();
-        } else {
-            $update = $record->delete();
+        $record = self::getById($id);
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-field"));
+            return false;
         }
-        bhry98_force_delete_log(success: (bool)$update, message: "CORE => CitiesManagementService@deleteCity", context: ['old' => $record, 'force' => $force]);
+        $update = $record->update($data);
+        if (array_key_exists('names', $data)) {
+            foreach ($data['names'] as $locale => $value) {
+                $record->setLocalized('name', $value, $locale);
+            }
+        }
+        if (!$update) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-field"));
+            return false;
+        } else {
+            bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));
+        }
+        bhry98_updated_log((bool)$update, "update locations city", context: ['record' => $record, 'data' => $data]);
         return $update;
     }
 
-    public function searchByName(string $cityName, int $limit = 20): array
+    /**
+     * @param int $id
+     * @param bool $force
+     * @return bool|null
+     */
+    public function deleteCity(int $id, bool $force = false): ?bool
     {
-        $data = LocationsCitiesModel::query();
-        $data->orderBy(column: 'id', direction: 'desc');
-        $data->whereHas(relation: 'localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$cityName}%"));
-        $data->orWhereLike(column: 'default_name', value: "%{$cityName}%");
-        $data->limit(value: $limit);
-        $result = $data->get();
-        return $result->mapWithKeys(function ($model) {
-            $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name . 33;
-            return [$model->id => $label];
-        })->toArray();
+        $record = self::getById($id, withTrash: true);
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.deleted-field"));
+            return false;
+        }
+        $recordClone = self::getById($id, withTrash: true);
+        if ($force) {
+            $delete = $record->forceDelete();
+            bhry98_force_delete_log((bool)$delete, "force delete locations city", ['record' => $recordClone]);
+            if (!$delete) {
+                bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.force-deleted-field"));
+            } else {
+                bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.force-deleted-success"));
+            }
+        } else {
+            $delete = $record->delete();
+            bhry98_deleted_log((bool)$delete, "delete locations city", ['record' => $recordClone]);
+            if (!$delete) {
+                bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.deleted-field"));
+            } else {
+                bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.deleted-success"));
+            }
+        }
+        return $delete;
     }
 
+    /**
+     * @param int $id
+     * @return bool|null
+     */
+    public function restoreCity(int $id): ?bool
+    {
+        $record = self::getById($id, withTrash: true);
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restores-field"));
+            return false;
+        }
+        $restore = $record->restore();
+        bhry98_deleted_log((bool)$restore, "restore locations city", ['record' => $record]);
+        if (!$restore) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restored-field"));
+            return false;
+        } else {
+            bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.restored-success"));
+        }
+        return $restore;
+    }
+
+    /**
+     * @param int $pageNumber
+     * @param int $perPage
+     * @param array|null $relations
+     * @param array|null $filters
+     * @return LengthAwarePaginator
+     */
     public function getAll(int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
     {
-        $data = LocationsCitiesModel::query()
-            ->orderBy('id', 'desc');
+        $data = LocationsCitiesModel::query()->latest('id');
         if (!empty($filters)) {
             self::applyFilters($data, $filters, LocationsCitiesModel::class);
             $pageNumber = 0;
         }
-        if ($relations) {
-            $data->with($relations);
-        }
-        return $data->withCount(['users', 'cities'])
-            ->paginate(
-                perPage: $perPage,
-                page: $pageNumber,
-            );
+        if ($relations) $data->with($relations);
+        $data->withCount(['users']);
+        return $data->paginate($perPage, page: $pageNumber);
     }
+
+
+//    public function searchByName(string $cityName, int $limit = 20): array
+//    {
+//        $data = LocationsCitiesModel::query();
+//        $data->orderBy('id', 'desc');
+//        $data->whereHas('localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$cityName}%"));
+////        $data->orWhereLike(column: 'default_name', value: "%{$cityName}%");
+//        $data->limit($limit);
+//        $result = $data->get();
+//        return $result->mapWithKeys(function ($model) {
+//            $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name;
+//            return [$model->id => $label];
+//        })->toArray();
+//    }
 
 }

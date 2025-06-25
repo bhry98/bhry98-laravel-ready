@@ -24,6 +24,7 @@ class CoreLocationsSeeder extends Seeder
                 "flag" => $country["flag"],
                 "lang_key" => $country["lang_key"],
                 "system_lang" => false,
+                "active" => in_array($country["code"], ['EG', "SA"]),
             ];
             $countryAfterAdd = LocationsCountriesModel::query()->updateOrCreate(["country_code" => $country["code"]], $fixData);
             if ($countryAfterAdd) {

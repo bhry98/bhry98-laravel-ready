@@ -67,6 +67,7 @@ trait HasLocalization
             ],
             ['value' => $value]
         );
+        if ($locale == "en") $this->update(["default_name" => $value]);
     }
 
     /**
@@ -122,6 +123,11 @@ trait HasLocalization
     public function getLocalizable(): array
     {
         return $this->localizable ?? [];
+    }
+
+    public function getLocalizedArray(): array
+    {
+        return $this->localizations()?->pluck('value', 'locale')?->toArray() ?? [];
     }
 
     protected function scopeFilterLocalized(Builder $query, string $column, ?string $value, $locale = null): Builder

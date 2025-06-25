@@ -20,7 +20,7 @@ class ListCountries extends ListRecords
         return [
 //            Actions\CreateAction::make()
 //                ->label(__("Bhry98::global.create"))
-////                ->visible(fn() => auth()->user()->can())
+//                ->visible(fn() => auth()->user()?->can("Locations.Countries.Create"))
 //                ->action(fn(array $data) => (new CountriesManagementService())->createCountry($data))
 //                ->slideOver()
 //                ->closeModalByClickingAway(false)

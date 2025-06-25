@@ -11,4 +11,8 @@ return [
     "total-governorates" => "Total governorates",
     "total-cities" => "Total cities",
     "total-users" => "Total users",
+    "country" => "Country",
+    "governorates" => "governorates",
+    "governate-code" => "Governate code",
+    "governorate-name" => "Governate name",
 ];

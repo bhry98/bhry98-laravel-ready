@@ -1,12 +1,12 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Http\Requests\locations\countries;
+namespace Bhry98\Bhry98LaravelReady\Http\Requests\locations\governorates;
 
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
+use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class LocationsGetCountryDetailsRequest extends FormRequest
+class LocationsGetGovernorateDetailsRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -18,7 +18,7 @@ class LocationsGetCountryDetailsRequest extends FormRequest
     public function prepareForValidation()
     {
         $fixData = [];
-        $fixData["countryCode"] = $this->route('countryCode');
+        $fixData["governorateCode"] = $this->route('governorateCode');
 
         $fixData["with"] = $this->with ? explode(",", $this->with) : null;
         return $this->merge($fixData);
@@ -26,16 +26,16 @@ class LocationsGetCountryDetailsRequest extends FormRequest
 
     public function rules(): array
     {
-        $rules["countryCode"] = [
+        $rules["governorateCode"] = [
             "required",
-            "exists:" . LocationsCountriesModel::TABLE_NAME . ",code"
+            "exists:" . LocationsGovernoratesModel::TABLE_NAME . ",code"
         ];
         $rules["with"] = [
             "sometimes"
         ];
         $rules["with.*"] = [
             "sometimes",
-            Rule::in(LocationsCountriesModel::RELATIONS),
+            Rule::in(LocationsGovernoratesModel::RELATIONS),
         ];
         return $rules;
     }

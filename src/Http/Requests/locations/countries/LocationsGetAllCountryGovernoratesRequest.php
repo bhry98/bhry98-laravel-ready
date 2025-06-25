@@ -4,7 +4,6 @@ namespace Bhry98\Bhry98LaravelReady\Http\Requests\locations\countries;
 
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsGovernoratesModel;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
