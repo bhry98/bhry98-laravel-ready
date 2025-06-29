@@ -5,7 +5,7 @@ return [
             "ar" => "إضافة مستخدم جديد للنظام",
             "en" => "Create new core user",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "ينشئ مستخدم جديد ويضيفه إلى النظام.",
             "en" => "Creates a new user and adds them to the system.",
         ],
@@ -15,7 +15,7 @@ return [
             "ar" => "تعديل مستخدم للنظام",
             "en" => "Update core user",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يعدل معلومات المستخدم الموجود في النظام.",
             "en" => "Updates the existing user's information in the system.",
         ],
@@ -25,7 +25,7 @@ return [
             "ar" => "عرض تفاصيل مستخدم للنظام",
             "en" => "Retrieve core user details",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يعرض معلومات وتفاصيل مستخدم معين في النظام.",
             "en" => "Displays details of a specific user in the system.",
         ],
@@ -35,9 +35,19 @@ return [
             "ar" => "حذف مستخدم للنظام",
             "en" => "Delete core user",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يحذف المستخدم من النظام مع إمكانية الاسترجاع لاحقاً.",
             "en" => "Deletes the user from the system with possible recovery.",
+        ],
+    ],
+    "Users.Restore" => [
+        "names" => [
+            "ar" => "استرجاع مستخدم للنظام",
+            "en" => "Restore core user",
+        ],
+        "descriptions" => [
+            "ar" => "استرجاع مستخدم تم حذفه مسبقاً إلى النظام.",
+            "en" => "Restores a previously deleted user to the system.",
         ],
     ],
     "Users.ForceDelete" => [
@@ -45,7 +55,7 @@ return [
             "ar" => "حذف مستخدم للنظام نهائياً",
             "en" => "Force delete core user",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يحذف المستخدم بشكل دائم من النظام بدون إمكانية استرجاع.",
             "en" => "Permanently deletes the user from the system with no restore option.",
         ],
@@ -55,7 +65,7 @@ return [
             "ar" => "عرض كل المستخدمين بالنظام",
             "en" => "View all core users",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يعرض قائمة بجميع المستخدمين المسجلين في النظام.",
             "en" => "Displays a list of all users registered in the system.",
         ],
@@ -65,7 +75,7 @@ return [
             "ar" => "تغيير حالة الحساب للمستخدم",
             "en" => "Change account status of user",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يقوم بتفعيل أو تعطيل حساب المستخدم.",
             "en" => "Activates or deactivates the user’s account.",
         ],
@@ -75,7 +85,7 @@ return [
             "ar" => "تغيير كلمة مرور الحساب للمستخدم",
             "en" => "Change account password of user",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يتيح تغيير كلمة مرور حساب المستخدم.",
             "en" => "Allows changing the user’s account password.",
         ],

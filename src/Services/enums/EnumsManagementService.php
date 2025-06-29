@@ -221,7 +221,7 @@ class EnumsManagementService extends BaseService
      */
     public function searchByName($type, ?string $searchStr, int $limit = 20): array
     {
-        $data = EnumsCoreModel::query()->locales();
+        $data = EnumsCoreModel::query();
         $data->where(['type' => $type]);
         $data->whereHas('localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$searchStr}%"));
         $data->whereLike('default_name', value: "%{$searchStr}%");

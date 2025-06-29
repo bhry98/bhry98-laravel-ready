@@ -1,7 +1,7 @@
 <?php
 return [
     "Administrators" => [
-        "locales_name" => [
+        "names" => [
             "ar" => "مجموعة المسؤوليين",
             "en" => "Administrators group",
         ],
@@ -11,7 +11,7 @@ return [
         "active" => true
     ],
     "Users" => [
-        "locales_name" => [
+        "names" => [
             "ar" => "مجموعة المستخدمين العاديين",
             "en" => "Normal Users group",
         ],

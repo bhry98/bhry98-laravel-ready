@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Services\rbac;
+namespace Bhry98\Bhry98LaravelReady\Services\system\rbac;
 
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsPermissionsModel;
@@ -9,8 +9,6 @@ use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class RBACLocalManagementService extends BaseService
 {

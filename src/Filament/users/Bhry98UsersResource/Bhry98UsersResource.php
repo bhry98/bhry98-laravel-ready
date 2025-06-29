@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 //use Filament\;
 class Bhry98UsersResource extends Resource
@@ -48,6 +49,11 @@ class Bhry98UsersResource extends Resource
     public static function canAccess(): bool
     {
         return auth()->user()->can('Users.All');
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return UsersCoreUsersModel::query()->with(['country', 'nationality', 'timezone', 'type']);
     }
 
     public static function getRoutePrefix(): string
@@ -90,100 +96,27 @@ class Bhry98UsersResource extends Resource
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
             ->columns([
-                TextColumn::make('code')
-                    ->label(__('Bhry98::users.code'))
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->searchable(),
-                TextColumn::make('first_name')
-                    ->label(__('Bhry98::users.first-name'))
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                TextColumn::make('last_name')
-                    ->label(__('Bhry98::users.last-name'))
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                TextColumn::make('display_name')
-                    ->label(__('Bhry98::users.display-name'))
-                    ->toggleable(),
-                TextColumn::make('phone_number')
-                    ->label(__('Bhry98::users.phone-number'))
-                    ->toggleable(),
-                TextColumn::make('phone_number_verified_at')
-                    ->label(__('Bhry98::users.phone-number-verified-at'))
-                    ->getStateUsing(fn($record) => $record->phone_number_verified_at ? Carbon::parse($record->phone_number_verified_at)->format(config("bhry98.date.format")) : "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                TextColumn::make('email')
-                    ->label(__('Bhry98::users.email'))
-                    ->toggleable(),
-                TextColumn::make('email_verified_at')
-                    ->label(__('Bhry98::users.email-verified-at'))
-                    ->getStateUsing(fn($record) => $record->email_verified_at ? Carbon::parse($record->email_verified_at)->format(config("bhry98.date.format")) : "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                TextColumn::make('birthdate')
-                    ->label(__('Bhry98::users.birthdate'))
-                    ->getStateUsing(fn($record) => $record->birthdate ? Carbon::parse($record->birthdate)->format(config("bhry98.date.format")) : "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                TextColumn::make('username')
-                    ->label(__('Bhry98::users.username'))
-                    ->searchable()
-                    ->toggleable(),
-                TextColumn::make('national_id')
-                    ->label(__('Bhry98::users.national-id'))
-                    ->default("--")
-                    ->searchable()
-                    ->toggleable()
-                    ->toggledHiddenByDefault(),
-                TextColumn::make('gender.default_name')
-                    ->getStateUsing(fn($record) => $record->gender?->name ?? $record->gender?->default_name ?? "---")
-                    ->toggleable()
-                    ->label(__('Bhry98::users.gender')),
-                TextColumn::make('nationality.default_name')
-                    ->getStateUsing(fn($record) => $record->nationality ? "({$record->nationality->flag}) {$record->nationality->name}" : "---")
-                    ->toggleable()
-                    ->label(__('Bhry98::users.nationality')),
-                TextColumn::make('country.default_name')
-                    ->getStateUsing(fn($record) => $record->country ? "({$record->country->flag}) {$record->country->name}" : "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.country')),
-                TextColumn::make('governorate.default_name')
-                    ->getStateUsing(fn($record) => $record->governorate?->name ?? $record->governorate?->default_name ?? "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.governorate')),
-                TextColumn::make('city.default_name')
-                    ->getStateUsing(fn($record) => $record->city?->name ?? $record->city?->default_name ?? "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.city')),
-                TextColumn::make('timezone.default_name')
-                    ->getStateUsing(fn($record) => $record->timezone?->name ?? $record->timezone?->default_name ?? "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.timezone')),
-                TextColumn::make('type.default_name')
-                    ->getStateUsing(fn($record) => $record->type?->name ?? $record->type?->default_name ?? "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.type')),
-                TextColumn::make('lang')
-                    ->getStateUsing(fn($record) => $record->lang ?? "---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.lang')),
-                IconColumn::make('active')
-                    ->boolean()
-                    ->toggleable()
-                    ->label(__('Bhry98::global.active')),
-                IconColumn::make('must_change_password')
-                    ->boolean()
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__('Bhry98::users.must-change-password')),
+                TextColumn::make('code')->label(__('Bhry98::users.code'))->toggleable()->toggledHiddenByDefault()->searchable(),
+                TextColumn::make('first_name')->label(__('Bhry98::users.first-name'))->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('last_name')->label(__('Bhry98::users.last-name'))->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('display_name')->label(__('Bhry98::users.display-name'))->toggleable(),
+                PhoneColumn::make('phone_number')->label(__('Bhry98::users.phone-number'))->toggleable(),
+                TextColumn::make('phone_number_verified_at')->label(__('Bhry98::users.phone-number-verified-at'))->getStateUsing(fn($record) => $record->phone_number_verified_at ? Carbon::parse($record->phone_number_verified_at)->format(config("bhry98.date.format")) : "---")->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('email')->label(__('Bhry98::users.email'))->toggleable(),
+                TextColumn::make('email_verified_at')->label(__('Bhry98::users.email-verified-at'))->getStateUsing(fn($record) => $record->email_verified_at ? Carbon::parse($record->email_verified_at)->format(config("bhry98.date.format")) : "---")->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('birthdate')->label(__('Bhry98::users.birthdate'))->getStateUsing(fn($record) => $record->birthdate ? Carbon::parse($record->birthdate)->format(config("bhry98.date.format")) : "---")->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('username')->label(__('Bhry98::users.username'))->searchable()->toggleable(),
+                TextColumn::make('national_id')->label(__('Bhry98::users.national-id'))->default("--")->searchable()->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('gender.default_name')->getStateUsing(fn($record) => $record->gender?->name ?? "---")->toggleable()->label(__('Bhry98::users.gender')),
+                TextColumn::make('nationality.default_name')->getStateUsing(fn($record) => $record->nationality?->name_label ?? "---")->toggleable()->label(__('Bhry98::users.nationality')),
+                TextColumn::make('country.default_name')->getStateUsing(fn($record) => $record->country?->name_label ?? "---")->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.country')),
+                TextColumn::make('governorate.default_name')->getStateUsing(fn($record) => $record->governorate?->name ?? "---")->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.governorate')),
+                TextColumn::make('city.default_name')->getStateUsing(fn($record) => $record->city?->name ?? "---")->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.city')),
+                TextColumn::make('timezone.default_name')->getStateUsing(fn($record) => $record->timezone?->name ?? "---")->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.timezone')),
+                TextColumn::make('type.default_name')->getStateUsing(fn($record) => $record->type?->name ?? "---")->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.type')),
+                TextColumn::make('lang')->getStateUsing(fn($record) => $record->lang ?? "---")->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.lang')),
+                IconColumn::make('active')->boolean()->toggleable()->label(__('Bhry98::global.active')),
+                IconColumn::make('must_change_password')->boolean()->toggleable()->toggledHiddenByDefault()->label(__('Bhry98::users.must-change-password')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make()->visible(auth()->user()->can('Users.ForceDelete') || auth()->user()->can('Users.Delete')),
@@ -191,7 +124,34 @@ class Bhry98UsersResource extends Resource
                 Tables\Filters\TernaryFilter::make('must_change_password')->label(__("Bhry98::users.must-change-password")),
             ])
             ->actions([
-
+                ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                        ->label(__("Bhry98::global.modify"))
+                        ->visible(fn(UsersCoreUsersModel $record) => $record->canEdit())
+                        ->action(fn(UsersCoreUsersModel $record, array $data) => (new UsersManagementService())->updateUser($record->id, $data))
+                        ->slideOver()
+                        ->closeModalByClickingAway(false),
+                    Tables\Actions\DeleteAction::make()
+                        ->label(__("Bhry98::global.delete"))
+                        ->visible(fn(UsersCoreUsersModel $record) => $record->canDelete(self::geRelationsCount()))
+                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->deleteUser($record->id))
+                        ->closeModalByClickingAway(false),
+                    Tables\Actions\ForceDeleteAction::make()
+                        ->label(__("Bhry98::global.force-delete"))
+                        ->visible(fn(UsersCoreUsersModel $record) => $record->canForceDelete(self::geRelationsCount()))
+                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->deleteUser($record->id, true))
+                        ->closeModalByClickingAway(false),
+                    Tables\Actions\RestoreAction::make()
+                        ->label(__("Bhry98::global.restore"))
+                        ->visible(fn(UsersCoreUsersModel $record) => $record->canRestore())
+                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->restoreUser($record->id))
+                        ->closeModalByClickingAway(false),
+//                    Tables\Actions\Action::make()
+//                        ->label(__("Bhry98::auth.change-password"))
+//                        ->visible(fn(UsersCoreUsersModel $record) => $record->canChangePassword())
+//                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->restoreUser($record->id))
+//                        ->closeModalByClickingAway(false),
+                ])
             ])
             ->bulkActions([
             ]);
@@ -206,14 +166,14 @@ class Bhry98UsersResource extends Resource
         $personalInputs[] = Select::make('gender_id')->relationship('gender', 'default_name')->options((new EnumsManagementService())->selectOptions(EnumsCoreTypes::UsersGender->name))->getSearchResultsUsing(fn($search) => (new EnumsManagementService())->searchByName(EnumsCoreTypes::UsersGender->name, $search))->searchable()->preload()->label(__("Bhry98::users.gender"))->required();
         $personalInputs[] = Select::make('nationality_id')->relationship('nationality', 'default_name')->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->searchable()->preload()->label(__("Bhry98::users.nationality"))->required();
         $personalInputs[] = DatePicker::make('birthdate')->native(false)->label(__("Bhry98::users.birthdate"))->nullable();
-        $personalInputs[] = Select::make('lang')->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->options(fn() => (new CountriesManagementService())->getOptions())->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->searchable()->preload()->label(__("Bhry98::users.lang"))->required();
+        $personalInputs[] = Select::make('language_id')->relationship('language', "default_name")->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->options(fn() => (new CountriesManagementService())->getOptions())->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->searchable()->preload()->label(__("Bhry98::users.lang"))->required();
         $personalInputs[] = TextInput::make('national_id')->numeric()->label(__("Bhry98::users.national-id"))->nullable();
         $accountInputs[] = TextInput::make('email')->label(__("Bhry98::users.email"))->email()->unique(UsersCoreUsersModel::TABLE_NAME, "email", ignoreRecord: true)->required();
-        $accountInputs[] = PhoneInput::make('phone_number')->label(__("Bhry98::users.phone-number"))->defaultCountry(bhry98_get_setting("default_input_phone_country", "EG"))->required();
+        $accountInputs[] = PhoneInput::make('phone_number')->label(__("Bhry98::users.phone-number"))->defaultCountry(bhry98_get_setting("default_input_phone_country", "EG"))->unique(UsersCoreUsersModel::TABLE_NAME, "phone_number", ignoreRecord: true)->required();
         $accountInputs[] = TextInput::make('username')->label(__("Bhry98::users.username"))->maxLength(100)->unique(UsersCoreUsersModel::TABLE_NAME, "username", ignoreRecord: true)->nullable();
         $accountInputs[] = Select::make('type_id')->relationship('type', 'default_name')->options((new EnumsManagementService())->selectOptions(EnumsCoreTypes::UsersType->name))->getSearchResultsUsing(fn($search) => (new EnumsManagementService())->searchByName(EnumsCoreTypes::UsersType->name, $search))->searchable()->preload()->label(__("Bhry98::users.type"))->required();
         $accountInputs[] = Select::make('timezone_id')->relationship('timezone', 'default_name')->options((new EnumsManagementService())->selectOptions(EnumsCoreTypes::Timezone->name))->getSearchResultsUsing(fn($search) => (new EnumsManagementService())->searchByName(EnumsCoreTypes::Timezone->name, $search))->searchable()->preload()->label(__("Bhry98::users.timezone"))->required();
-        $accountInputs[] = TextInput::make('password')->label(__("Bhry98::users.password"))->maxLength(100)->password()->minLength(8)->maxLength(20)->revealable();
+        $accountInputs[] = TextInput::make('password')->label(__("Bhry98::users.password"))->visible(fn($record) => !$record)->maxLength(100)->password()->minLength(8)->maxLength(20)->revealable();
         $accountInputs[] = Select::make('country_id')->relationship('country', 'default_name')->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->reactive()->afterStateUpdated(function (Set $set) {
             $set('governorate_id', null);
             $set('city_id', null);
@@ -289,5 +249,10 @@ class Bhry98UsersResource extends Resource
             report($e);
             return [];
         }
+    }
+
+    protected static function geRelationsCount(): int
+    {
+        return 0;
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->id();
                 $table->string('code')->index()->unique()->comment(comment: "example => [ModuleName].[OperationName].[ActionName] => Core.CoreUsers.Create || Core.AzureUsers.Update");
                 $table->string('default_name')->nullable();
-                $table->string('default_discretion')->nullable();
+                $table->string('default_description')->nullable();
                 $table->boolean('is_default')->default(false);
                 bhry98_common_database_columns(table: $table);
             });

@@ -213,7 +213,7 @@ class CountriesManagementService extends BaseService
      */
     public function getOptions(int $limit = 20): array
     {
-        $data = LocationsCountriesModel::query()->locales();
+        $data = LocationsCountriesModel::query()->with('localizations');
         $data->orderBy('id', 'desc');
         $data->limit($limit);
         $result = $data->get();
@@ -229,7 +229,7 @@ class CountriesManagementService extends BaseService
      */
     public function searchByName(string $countryName, int $limit = 20): array
     {
-        $data = LocationsCountriesModel::query()->locales();
+        $data = LocationsCountriesModel::query()->with('localizations');
         $data->orderBy(column: 'id', direction: 'desc');
         $data->whereHas(relation: 'localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$countryName}%"));
         $data->orWhereLike(column: 'default_name', value: "%{$countryName}%");

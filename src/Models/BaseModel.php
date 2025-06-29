@@ -44,8 +44,6 @@ abstract class BaseModel extends Model
     #[Scope]
     protected function active(Builder $query): void
     {
-
         $query->where('active', true);
-
     }
 }

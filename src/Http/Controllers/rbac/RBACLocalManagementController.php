@@ -12,7 +12,7 @@ use Bhry98\Bhry98LaravelReady\Http\Requests\rbac\local\RBACRemoveUserFromGroupsR
 use Bhry98\Bhry98LaravelReady\Http\Resources\core\rbac\RBACGroupResource;
 use Bhry98\Bhry98LaravelReady\Http\Resources\core\rbac\RBACPermissionResource;
 use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
-use Bhry98\Bhry98LaravelReady\Services\rbac\RBACLocalManagementService;
+use Bhry98\Bhry98LaravelReady\Services\system\rbac\RBACLocalManagementService;
 use Exception;
 
 class RBACLocalManagementController extends \App\Http\Controllers\Controller

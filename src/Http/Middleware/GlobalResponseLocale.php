@@ -12,8 +12,8 @@ class GlobalResponseLocale
     {
         $locale = $request->header(key: 'Accept-Language', default: 'en');
         if (in_array($locale, ['ar', 'en'])) {
-            app()->setLocale($locale);
-            config(['app.locale' => $locale]);
+//            app()->setLocale($locale);
+//            config(['app.locale' => $locale]);
         }
         return $next($request);
     }

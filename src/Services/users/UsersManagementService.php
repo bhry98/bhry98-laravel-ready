@@ -4,6 +4,7 @@ namespace Bhry98\Bhry98LaravelReady\Services\users;
 
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
 use Bhry98\Bhry98LaravelReady\Enums\users\UsersAccountTypes;
+use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Notifications\users\UserUpdatedSuccessfully;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
@@ -17,23 +18,124 @@ use Illuminate\Support\Facades\Notification;
 
 class UsersManagementService extends BaseService
 {
-    public function getByCode(string $code, array|null $relations = null): ?UsersCoreUsersModel
+    /**
+     * @param string $code
+     * @param array|null $relations
+     * @param bool $withRelationsCount
+     * @param bool $withTrash
+     * @return UsersCoreUsersModel|null
+     */
+    public function getByCode(string $code, array|null $relations = null, bool $withRelationsCount = false, bool $withTrash = false): ?UsersCoreUsersModel
     {
-        $data = UsersCoreUsersModel::query()->where('code', $code);
-        if ($relations) {
-            $data->with($relations);
-        }
-        return $data->first();
+        $record = UsersCoreUsersModel::query()->where(['code' => $code]);
+        if ($withTrash) $record->withTrashed();
+        if ($relations) $record->with($relations);
+//        if ($withRelationsCount) $record->withCount(['governorates', 'cities', 'users']);
+        return $record->first();
     }
 
-    public function getById(int $id, array|null $relations = null): ?UsersCoreUsersModel
+    /**
+     * @param int $id
+     * @param array|null $relations
+     * @param bool $withRelationsCount
+     * @param bool $withTrash
+     * @return UsersCoreUsersModel|null
+     */
+    public function getById(int $id, array|null $relations = null, bool $withRelationsCount = false, bool $withTrash = false): ?UsersCoreUsersModel
     {
-        $data = UsersCoreUsersModel::query()->where('id', $id);
-        if ($relations) {
-            $data->with($relations);
-        }
-        return $data->first();
+        $record = UsersCoreUsersModel::query()->where(['id' => $id]);
+        if ($withTrash) $record->withTrashed();
+        if ($relations) $record->with($relations);
+//        if ($withRelationsCount) $record->withCount(['governorates', 'cities', 'users']);
+        return $record->first();
     }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function createNewUser(array $data): bool
+    {
+        $record = UsersCoreUsersModel::query()->create($data);
+        !$record ? bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.created-field")) : bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.created-success"));
+        bhry98_created_log(success: (bool)$record, message: "create new user", context: ['record' => $record->toArray()]);
+        return (bool)$record;
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public function updateUser(int $id, array $data): bool
+    {
+        $record = self::getById($id);
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-field"));
+            return false;
+        }
+        $update = $record->update($data);
+        !$update ? bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-field")) : bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));
+        bhry98_updated_log((bool)$update, "update user", context: ['record' => $record, 'data' => $data]);
+        return $update;
+    }
+
+    /**
+     * @param int $id
+     * @param bool $force
+     * @return bool|null
+     */
+    public function deleteUser(int $id, bool $force = false): ?bool
+    {
+        $record = self::getById($id, withTrash: true);
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.deleted-field"));
+            return false;
+        }
+        $recordClone = self::getById($id, withTrash: true);
+        if ($force) {
+            $delete = $record->forceDelete();
+            bhry98_force_delete_log((bool)$delete, "force delete user", ['record' => $recordClone]);
+            if (!$delete) {
+                bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.force-deleted-field"));
+            } else {
+                bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.force-deleted-success"));
+            }
+        } else {
+            $delete = $record->delete();
+            bhry98_deleted_log((bool)$delete, "delete user", ['record' => $recordClone]);
+            if (!$delete) {
+                bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.deleted-field"));
+            } else {
+                bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.deleted-success"));
+            }
+        }
+        return $delete;
+    }
+
+    /**
+     * @param int $id
+     * @return bool|null
+     */
+    public function restoreUser(int $id): ?bool
+    {
+        $record = self::getById($id, withTrash: true);
+        if (!$record) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restores-field"));
+            return false;
+        }
+        $restore = $record->restore();
+        bhry98_restored_log((bool)$restore, "restore user", ['record' => $record]);
+        if (!$restore) {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restored-field"));
+            return false;
+        } else {
+            bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.restored-success"));
+        }
+        return $restore;
+    }
+
+    ///////////////////////////////////////////
 
     public function changeAccountStatus(string $code, bool|null $status = null): bool
     {
@@ -82,16 +184,6 @@ class UsersManagementService extends BaseService
         return $update ?? false;
     }
 
-    public function createNewUser(array $data): ?UsersCoreUsersModel
-    {
-        dd($data);
-        $first_name = $data["first_name"];
-        $last_name = $data["last_name"];
-        $data["display_name"] = "$first_name $last_name";
-        $record = UsersCoreUsersModel::query()->create($data);
-        bhry98_created_log(success: (bool)$record, message: "CORE => UsersManagementService@createNewUser", context: $record->toArray());
-        return $record;
-    }
 
     public function delete(string $identityCode): bool
     {

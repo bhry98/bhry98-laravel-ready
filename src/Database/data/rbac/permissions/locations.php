@@ -6,7 +6,7 @@ return [
             "ar" => "عرض كل البلدان في النظام",
             "en" => "View all countries in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يتيح لك هذا الدور استعراض جميع البلدان المسجلة في النظام.",
             "en" => "Allows you to view all countries registered in the system.",
         ],
@@ -16,7 +16,7 @@ return [
             "ar" => "إنشاء بلد جديد في النظام",
             "en" => "Create new country in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "هذا الإجراء يتيح لك إنشاء سجل جديد لبلد داخل النظام.",
             "en" => "This action allows you to create a new country record in the system.",
         ],
@@ -26,7 +26,7 @@ return [
             "ar" => "عرض كل البلدان في النظام",
             "en" => "All countries in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يمكنك من تعديل معلومات بلد موجود في النظام.",
             "en" => "Allows updating the information of an existing country in the system.",
         ],
@@ -36,7 +36,7 @@ return [
             "ar" => "حذف بلد من النظام",
             "en" => "Delete Country in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يقوم بحذف البلد المحددة من النظام مع إمكانية الاسترجاع.",
             "en" => "Deletes the selected country from the system with option to restore.",
         ],
@@ -46,7 +46,7 @@ return [
             "ar" => "استرجاع بلد محذوفة من النظام",
             "en" => "Restore deleted Country in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يعيد تفعيل البلد المحذوفة مسبقًا داخل النظام.",
             "en" => "Restores a previously deleted country in the system.",
         ],
@@ -56,7 +56,7 @@ return [
             "ar" => "حذف البلد نهائيا من النظام",
             "en" => "Force delete country from system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يحذف البلد بشكل دائم من النظام بدون إمكانية استرجاع.",
             "en" => "Permanently deletes the country from the system with no restore option.",
         ],
@@ -67,7 +67,7 @@ return [
             "ar" => "عرض كل المحافظات في النظام",
             "en" => "View all governorates in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يتيح لك هذا الدور استعراض جميع المحافظات المسجلة في النظام.",
             "en" => "Allows you to view all governorates registered in the system.",
         ],
@@ -77,7 +77,7 @@ return [
             "ar" => "إنشاء محافظة جديدة في النظام",
             "en" => "Create new governorate in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "هذا الإجراء يتيح لك إنشاء سجل جديد لمحافظة داخل النظام.",
             "en" => "This action allows you to create a new governorate record in the system.",
         ],
@@ -87,7 +87,7 @@ return [
             "ar" => "تعديل معلومات المحافظات في النظام",
             "en" => "Update governorates in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يمكنك من تعديل معلومات محافظة موجودة في النظام.",
             "en" => "Allows updating the information of an existing governorate in the system.",
         ],
@@ -97,7 +97,7 @@ return [
             "ar" => "حذف محافظة من النظام",
             "en" => "Delete governorate in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يقوم بحذف المحافظة المحددة من النظام مع إمكانية الاسترجاع.",
             "en" => "Deletes the selected governorate from the system with option to restore.",
         ],
@@ -107,7 +107,7 @@ return [
             "ar" => "استرجاع محافظة محذوفة من النظام",
             "en" => "Restore deleted governorate in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يعيد تفعيل المحافظة المحذوفة مسبقًا داخل النظام.",
             "en" => "Restores a previously deleted governorate in the system.",
         ],
@@ -117,7 +117,7 @@ return [
             "ar" => "حذف المحافظة نهائيا من النظام",
             "en" => "Force delete governorate from system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يحذف المحافظة بشكل دائم من النظام بدون إمكانية استرجاع.",
             "en" => "Permanently deletes the governorate from the system with no restore option.",
         ],
@@ -128,7 +128,7 @@ return [
             "ar" => "عرض كل المدن في النظام",
             "en" => "View all cities in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يتيح لك هذا الدور استعراض جميع المدن المسجلة في النظام.",
             "en" => "Allows you to view all cities registered in the system.",
         ],
@@ -138,7 +138,7 @@ return [
             "ar" => "إنشاء مدينة جديدة في النظام",
             "en" => "Create new city in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "هذا الإجراء يتيح لك إنشاء سجل جديد لمدينة داخل النظام.",
             "en" => "This action allows you to create a new city record in the system.",
         ],
@@ -148,7 +148,7 @@ return [
             "ar" => "تعديل معلومات المدن في النظام",
             "en" => "Update cities in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يمكنك من تعديل معلومات مدينة موجودة في النظام.",
             "en" => "Allows updating the information of an existing city in the system.",
         ],
@@ -158,7 +158,7 @@ return [
             "ar" => "حذف مدينة من النظام",
             "en" => "Delete city in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يقوم بحذف المدينة المحددة من النظام مع إمكانية الاسترجاع.",
             "en" => "Deletes the selected city from the system with option to restore.",
         ],
@@ -168,7 +168,7 @@ return [
             "ar" => "استرجاع مدينة محذوفة من النظام",
             "en" => "Restore deleted city in system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يعيد تفعيل المدينة المحذوفة مسبقًا داخل النظام.",
             "en" => "Restores a previously deleted city in the system.",
         ],
@@ -178,7 +178,7 @@ return [
             "ar" => "حذف المدينة نهائيا من النظام",
             "en" => "Force delete city from system",
         ],
-        "discretion" => [
+        "descriptions" => [
             "ar" => "يحذف المدينة بشكل دائم من النظام بدون إمكانية استرجاع.",
             "en" => "Permanently deletes the city from the system with no restore option.",
         ],

@@ -20,10 +20,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authentication;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
+use TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
 
 class UsersCoreUsersModel extends Authentication
 {
-    use HasApiTokens, SoftDeletes, Notifiable;
+    use HasApiTokens, SoftDeletes, Notifiable,InteractsWithLanguages;
 
     const TABLE_NAME = "users_core";
     const RELATIONS = ["country", "governorate", "city", "type", "gender", "azure", "adManager"];
@@ -52,7 +53,7 @@ class UsersCoreUsersModel extends Authentication
         "must_change_password",
         "password",
         "timezone_id",
-        "lang",
+        "language_id",
         "type_id",
         "gender_id",
         "nationality_id",
@@ -106,6 +107,7 @@ class UsersCoreUsersModel extends Authentication
             foreignKey: "id",
             localKey: "country_id");
     }
+
     public function nationality(): HasOne
     {
         return $this->hasOne(
@@ -113,12 +115,13 @@ class UsersCoreUsersModel extends Authentication
             foreignKey: "id",
             localKey: "nationality_id");
     }
-    public function phoneNumberKey(): HasOne
+
+    public function language(): HasOne
     {
         return $this->hasOne(
             related: LocationsCountriesModel::class,
             foreignKey: "id",
-            localKey: "phone_number_key_id");
+            localKey: "language_id");
     }
 
     public function governorate(): HasOne
@@ -157,6 +160,36 @@ class UsersCoreUsersModel extends Authentication
         return new Attribute(
             get: fn() => (new Avatar())->create($this->email ?? env(key: "APP_NAME"))->toGravatar(['d' => 'identicon', 'r' => 'pg', 's' => 300])
         );
+    }
+
+    public function canEdit(): bool
+    {
+        $notDeleted = is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Users.Update');
+        return $notDeleted && $abilities;
+    }
+
+    public function canDelete($relationsCount): bool
+    {
+        $notDeleted = is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Users.Delete');
+        $isNotAuthUser = auth()->id() != $this->id;
+        return $notDeleted && $abilities && $isNotAuthUser && $relationsCount <= 0;
+    }
+
+    public function canForceDelete($relationsCount): bool
+    {
+        $notDeleted = !is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Users.ForceDelete');
+        $isNotAuthUser = auth()->id() != $this->id;
+        return $notDeleted && $abilities && $isNotAuthUser && $relationsCount <= 0;
+    }
+
+    public function canRestore(): bool
+    {
+        $notDeleted = !is_null($this->deleted_at);
+        $abilities = auth()->user()?->can('Users.Restore');
+        return $notDeleted && $abilities;
     }
 
     protected static function booted(): void

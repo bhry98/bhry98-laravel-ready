@@ -3,6 +3,8 @@
 namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages;
 
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersResource;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Bhry98\Bhry98LaravelReady\Services\users\UsersManagementService;
 use Carbon\Carbon;
 use Filament\Actions;
 use Filament\Infolists\Components\IconEntry;
@@ -32,7 +34,11 @@ class ViewUsers extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            Actions\EditAction::make()
+                ->visible(fn(UsersCoreUsersModel $record) => $record->canEdit())
+                ->action(fn(UsersCoreUsersModel $record, $data) => (new UsersManagementService())->updateUser($record->id, $data))
+                ->slideOver()
+                ->closeModalByClickingAway(false)
         ];
     }
 
@@ -46,9 +52,9 @@ class ViewUsers extends ViewRecord
         $basicInfo[] = TextEntry::make('display_name')->label(__("Bhry98::users.display-name"))->weight(FontWeight::Bold)->copyable();
         $basicInfo[] = TextEntry::make('gender.default_name')->label(__("Bhry98::users.gender"))->getStateUsing(fn($record) => $record->gender?->name ?? $record->gender?->default_name ?? "---")->weight(FontWeight::Bold)->copyable();
         $basicInfo[] = TextEntry::make('nationality.default_name')->label(__("Bhry98::users.nationality"))->getStateUsing(fn($record) => $record->nationality ? "({$record->nationality?->flag}) {$record->nationality?->name}" : "---")->weight(FontWeight::Bold)->copyable();
-        $basicInfo[] = TextEntry::make('birthdate')->label(__("Bhry98::users.birthdate"))->getStateUsing(fn($record) => $record->birthdate ? Carbon::parse($record->birthdate)->format(config("bhry98.date.format.format_without_time")) : "---")->weight(FontWeight::Bold)->copyable();
+        $basicInfo[] = TextEntry::make('birthdate')->label(__("Bhry98::users.birthdate"))->getStateUsing(fn($record) => $record->birthdate ? Carbon::parse($record->birthdate)->format(config("bhry98.date.format_without_time")) : "---")->weight(FontWeight::Bold)->copyable();
         $basicInfo[] = TextEntry::make('national_id')->label(__("Bhry98::users.national-id"))->default("---")->weight(FontWeight::Bold)->copyable();
-        $basicInfo[] = TextEntry::make('lang')->label(__("Bhry98::users.lang"))->getStateUsing(fn($record) => $record->lang_label ?? "---")->weight(FontWeight::Bold)->copyable();
+        $basicInfo[] = TextEntry::make('language.default_name')->label(__("Bhry98::users.lang"))->getStateUsing(fn($record) => $record->language?->name_label ?? "---")->weight(FontWeight::Bold)->copyable();
         $accountInfo[] = TextEntry::make('email')->label(__("Bhry98::users.email"))->weight(FontWeight::Bold)->copyable();
         $accountInfo[] = PhoneEntry::make('phone_number')->label(__("Bhry98::users.phone-number"))->weight(FontWeight::Bold)->copyable();
         $accountInfo[] = TextEntry::make('username')->label(__("Bhry98::users.username"))->weight(FontWeight::Bold)->copyable();

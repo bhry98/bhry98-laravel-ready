@@ -32,7 +32,7 @@ class CoreRBACSeeder extends Seeder
                 ],
                 [
                     "code" => (string)$key,
-                    "default_name" => $group['locales_name']['en'],
+                    "default_name" => $group['names']['en'],
                     "can_delete" => $group['can_delete'] ?? false,
                     "is_default" => $group['is_default'] ?? false,
                     "active" => $group['active'] ?? true,
@@ -81,13 +81,13 @@ class CoreRBACSeeder extends Seeder
                 [
                     "code" => (string)$key,
                     "default_name" => $permission['names']['en'],
-                    "default_discretion" => $permission['discretion']['en'],
+                    "default_description" => $permission['descriptions']['en'],
                 ]);
             foreach ($permission['names'] ?? [] as $local => $value) {
                 $permissionRecord->setLocalized(column: 'name', value: $value, locale: $local);
             }
-            foreach ($permission['discretion'] ?? [] as $local => $value) {
-                $permissionRecord->setLocalized(column: 'discretion', value: $value, locale: $local);
+            foreach ($permission['descriptions'] ?? [] as $local => $value) {
+                $permissionRecord->setLocalized(column: 'description', value: $value, locale: $local);
             }
         });
     }

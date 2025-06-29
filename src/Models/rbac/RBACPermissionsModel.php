@@ -10,7 +10,7 @@ class RBACPermissionsModel extends BaseModel
 {
     use HasLocalization;
 
-    protected array $localizable = ['name', 'discretion'];
+    protected array $localizable = ['name', 'description'];
     const TABLE_NAME = 'rbac_permissions';
     const RELATIONS = [];
     const FILTER_COLUMNS = ["code", "name", "default_name"];
@@ -18,7 +18,7 @@ class RBACPermissionsModel extends BaseModel
     protected $fillable = [
         "code",
         "default_name",
-        "default_discretion",
+        "default_description",
         "is_default",
     ];
     protected $hidden = [];

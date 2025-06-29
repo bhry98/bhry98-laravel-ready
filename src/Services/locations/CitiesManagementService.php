@@ -89,7 +89,7 @@ class CitiesManagementService extends BaseService
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));
         }
         bhry98_updated_log((bool)$update, "update locations city", context: ['record' => $record, 'data' => $data]);
-        auth()->user()->notify(new SuccessfullyRegistration());
+//        auth()->user()->notify(new SuccessfullyRegistration());
         return $update;
     }
 
@@ -176,7 +176,7 @@ class CitiesManagementService extends BaseService
      */
     public function getOptions(?string $searchStr = null, int $limit = 20, ?int $governorateId = null): array
     {
-        $data = LocationsCitiesModel::query()->locales();
+        $data = LocationsCitiesModel::query()->with('localizations');
         if ($governorateId) $data->where('governorate_id', $governorateId);
         $data->orderBy('id', 'desc');
         if ($searchStr) {
@@ -189,18 +189,4 @@ class CitiesManagementService extends BaseService
             return [$model->id => $model->name ?? $model->default_name];
         })->toArray();
     }
-//    public function searchByName(string $cityName, int $limit = 20): array
-//    {
-//        $data = LocationsCitiesModel::query();
-//        $data->orderBy('id', 'desc');
-//        $data->whereHas('localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$cityName}%"));
-////        $data->orWhereLike(column: 'default_name', value: "%{$cityName}%");
-//        $data->limit($limit);
-//        $result = $data->get();
-//        return $result->mapWithKeys(function ($model) {
-//            $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name;
-//            return [$model->id => $label];
-//        })->toArray();
-//    }
-
 }

@@ -38,11 +38,11 @@ return new class extends Migration {
                 $table->timestamp('email_verified_at')->nullable();
                 $table->boolean('must_change_password')->default(false);
                 $table->string('password')->nullable();
-                $table->string('lang')->default('en');
                 $table->foreignId('type_id')->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('timezone_id')->nullable()->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('gender_id')->nullable()->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('nationality_id')->nullable()->references('id')->on(LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('language_id')->nullable()->references('id')->on(LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('country_id')->nullable()->references('id')->on(LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('governorate_id')->nullable()->references('id')->on(LocationsGovernoratesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('city_id')->nullable()->references('id')->on(LocationsCitiesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
@@ -55,7 +55,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists( UsersCoreUsersModel::TABLE_NAME);
+        Schema::dropIfExists(UsersCoreUsersModel::TABLE_NAME);
         Schema::enableForeignKeyConstraints();
     }
 };

@@ -206,7 +206,7 @@ class GovernorateManagementService extends BaseService
      */
     public function getOptions(?string $searchStr = null, int $limit = 20, ?int $countryId = null): array
     {
-        $data = LocationsGovernoratesModel::query()->locales();
+        $data = LocationsGovernoratesModel::query()->with('localizations');
         if ($countryId) $data->where('country_id', $countryId);
         $data->orderBy('id', 'desc');
         if ($searchStr) {
