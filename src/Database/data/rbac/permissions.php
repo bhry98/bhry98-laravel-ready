@@ -43,49 +43,7 @@ return [
             "en" => "Update users in local group policy",
         ],
     ],
-    ### Core Users
-    "CoreUsers.Create" => [
-        "locales" => [
-            "ar" => "إضافة مستخدم جديد للنظام",
-            "en" => "Create new core user",
-        ],
-    ],
-    "CoreUsers.Update" => [
-        "locales" => [
-            "ar" => "تعديل مستخدم للنظام",
-            "en" => "Update core user",
-        ],
-    ],
-    "CoreUsers.Retrieve" => [
-        "locales" => [
-            "ar" => "عرض تفاصيل مستخدم للنظام",
-            "en" => "Retrieve core user details",
-        ],
-    ],
-    "CoreUsers.Delete" => [
-        "locales" => [
-            "ar" => "حذف مستخدم للنظام",
-            "en" => "Delete core user",
-        ],
-    ],
-    "CoreUsers.ForceDelete" => [
-        "locales" => [
-            "ar" => "حذف مستخدم للنظام نهائياً",
-            "en" => "Force delete core user",
-        ],
-    ],
-    "CoreUsers.All" => [
-        "locales" => [
-            "ar" => "عرض كل المستخدمين بالنظام",
-            "en" => "View all core users",
-        ],
-    ],
-    "CoreUsers.AccountStatus" => [
-        "locales" => [
-            "ar" => "تغيير حالة الحساب للمستخدم",
-            "en" => "Change account status of user",
-        ],
-    ],
+
     ###
     "CoreUsers.Types.All" => [
         "locales" => [

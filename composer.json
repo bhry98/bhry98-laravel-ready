@@ -16,6 +16,7 @@
   "autoload": {
     "files": [
       "src/Helpers/functions/notifications.php",
+      "src/Helpers/functions/logs.php",
       "src/Helpers/functions/responses.php",
       "src/Helpers/functions/assets.php"
     ],

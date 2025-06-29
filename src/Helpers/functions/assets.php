@@ -26,157 +26,11 @@ if (!function_exists(function: 'bhry98_app_settings')) {
         return config(key: "bhry98.app_settings.$key", default: $default);
     }
 }
-if (!function_exists(function: 'bhry98_add_log')) {
-    function bhry98_add_log($level, string $message, array $context = []): void
-    {
-        switch ($level) {
-            case 'info':
-                \Illuminate\Support\Facades\Log::info(message: $message, context: $context);
-                break;
-            case 'debug':
-                \Illuminate\Support\Facades\Log::debug(message: $message, context: $context);
-                break;
-            case 'error':
-                \Illuminate\Support\Facades\Log::error(message: $message, context: $context);
-                break;
-            case 'warning':
-                \Illuminate\Support\Facades\Log::warning(message: $message, context: $context);
-                break;
-            case 'notice':
-                \Illuminate\Support\Facades\Log::notice(message: $message, context: $context);
-                break;
-            case 'alert':
-                \Illuminate\Support\Facades\Log::alert(message: $message, context: $context);
-                break;
-            case 'emergency':
-                \Illuminate\Support\Facades\Log::emergency(message: $message, context: $context);
-                break;
-            default:
-                \Illuminate\Support\Facades\Log::error(message: "Cant Find Log Level $level", context: $context);
-                \Illuminate\Support\Facades\Log::info(message: $message, context: $context);
-                break;
-        }
-    }
-}
-if (!function_exists(function: 'bhry98_created_log')) {
-    function bhry98_created_log(bool $success, string $message = "", array $context = []): void
-    {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
-        $class = $trace['class'] ?? 'N/A';
-        $method = $trace['function'] ?? 'N/A';
-        if ($success) {
-            Log::info(message: "Created Successfully", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        } else {
-            Log::error(message: "Created Field", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        }
-    }
-}
-if (!function_exists(function: 'bhry98_updated_log')) {
-    function bhry98_updated_log(bool $success, string $message = "", array $context = []): void
-    {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
-        $class = $trace['class'] ?? 'N/A';
-        $method = $trace['function'] ?? 'N/A';
-        if ($success) {
-            Log::info(message: "Updated Successfully", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        } else {
-            Log::error(message: "Updated Field", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        }
-    }
-}
-if (!function_exists(function: 'bhry98_deleted_log')) {
-    function bhry98_deleted_log(bool $success, string $message = "", array $context = []): void
-    {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
-        $class = $trace['class'] ?? 'N/A';
-        $method = $trace['function'] ?? 'N/A';
-        if ($success) {
-            Log::info(message: "Deleted Successfully", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        } else {
-            Log::error(message: "Deleted Field", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        }
-    }
-}
-if (!function_exists(function: 'bhry98_restored_log')) {
-    function bhry98_restored_log(bool $success, string $message = "", array $context = []): void
-    {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
-        $class = $trace['class'] ?? 'N/A';
-        $method = $trace['function'] ?? 'N/A';
-        if ($success) {
-            Log::info(message: "Restored Successfully", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        } else {
-            Log::error(message: "Restored Field", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        }
-    }
-}
-if (!function_exists(function: 'bhry98_force_delete_log')) {
-    function bhry98_force_delete_log(bool $success, string $message = "", array $context = []): void
-    {
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
-        $class = $trace['class'] ?? 'N/A';
-        $method = $trace['function'] ?? 'N/A';
-        if ($success) {
-            Log::info(message: "Force-Deleted Successfully", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        } else {
-            Log::error(message: "Force-Deleted Field", context: [
-                "class" => $class,
-                "method" => $method,
-                "message" => $message,
-                "context" => $context
-            ]);
-        }
-    }
-}
 if (!function_exists(function: 'bhry98_common_database_columns')) {
-    function bhry98_common_database_columns(Blueprint $table, bool $softDeletes = false, bool $userLog = false, bool $active = false): void
+    function bhry98_common_database_columns(Blueprint $table, bool $softDeletes = false, bool $userLog = false, bool $active = false, bool $note = false): void
     {
         if ($active) $table->boolean(column: 'active')->default(value: true);
+        if ($note) $table->longText('note')->nullable();
         if ($userLog) $table->foreignId(column: 'created_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
         if ($userLog) $table->foreignId(column: 'updated_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
         if ($userLog && $softDeletes) $table->foreignId(column: 'deleted_by')->nullable()->references(column: "id")->on(table: UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
@@ -197,8 +51,8 @@ if (!function_exists(function: 'bhry98_set_setting')) {
         return \Rawilk\Settings\Facades\Settings::set(key: $key, value: $value);
     }
 }
-if (!function_exists(function: 'bhry98_figma_columns')) {
-    function bhry98_figma_columns(bool $active = false, bool $by = false): array
+if (!function_exists(function: 'bhry98_filament_columns')) {
+    function bhry98_filament_columns(bool $active = false, bool $by = false): array
     {
         if ($active) {
             $columns[] = IconColumn::make('active')
@@ -208,12 +62,12 @@ if (!function_exists(function: 'bhry98_figma_columns')) {
         }
         $columns[] = TextColumn::make('created_at')
             ->label(__('Bhry98::global.created-at'))
-            ->getStateUsing(fn(LocationsCountriesModel $record) => $record->created_at ? Carbon::parse($record->created_at)->format(config("bhry98.app_settings.date.format")) : "---")
+            ->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config("bhry98.app_settings.date.format")) : "---")
             ->toggleable()
             ->toggledHiddenByDefault();
         $columns[] = TextColumn::make('updated_at')
             ->label(__('Bhry98::global.updated-at'))
-            ->getStateUsing(fn(LocationsCountriesModel $record) => $record->updated_at ? Carbon::parse($record->updated_at)->format(config("bhry98.app_settings.date.format")) : "---")
+            ->getStateUsing(fn($record) => $record->updated_at ? Carbon::parse($record->updated_at)->format(config("bhry98.app_settings.date.format")) : "---")
             ->toggleable()
             ->toggledHiddenByDefault();
         if ($by) {

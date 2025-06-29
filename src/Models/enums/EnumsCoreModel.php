@@ -26,9 +26,11 @@ class EnumsCoreModel extends BaseModel
         "default_name",
         "default_color",
         "api_access",
+        "ordering",
         "can_delete",
         "parent_id",
-        "active"
+        "default",
+        "active",
     ];
     protected $hidden = [];
 
@@ -37,6 +39,8 @@ class EnumsCoreModel extends BaseModel
         return [
             'api_access' => "boolean",
             'can_delete' => "boolean",
+            'default' => "boolean",
+            'ordering' => "integer",
         ];
     }
 

@@ -16,13 +16,15 @@ return new class extends Migration {
             table: EnumsCoreModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->string(column: 'code')->index()->unique();
-                $table->string(column: 'type');
-                $table->string(column: 'default_name')->nullable();
-                $table->string(column: 'default_color')->default('gray');
-                $table->boolean(column: 'api_access')->default(value: false);
-                $table->boolean(column: 'can_delete')->default(value: true);
-                $table->foreignId(column: 'parent_id')->nullable()->references(column: 'id')->on(table: EnumsCoreModel::TABLE_NAME)->cascadeOnDelete()->cascadeOnUpdate();
+                $table->string('code')->index()->unique();
+                $table->string('type');
+                $table->string('default_name')->nullable();
+                $table->string('default_color')->default('gray');
+                $table->integer('ordering')->default(1);
+                $table->boolean('api_access')->default(false);
+                $table->boolean('can_delete')->default(true);
+                $table->boolean('default')->default(false);
+                $table->foreignId('parent_id')->nullable()->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnDelete()->cascadeOnUpdate();
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();

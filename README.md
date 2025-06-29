@@ -40,4 +40,39 @@ routes/
 config/
 database/
 ├── seeders/
+//
+company_name
+hiring_for
+career_level
+job_types
 
+experience_years
+educational_level
+fields_of_study
+university
+degree
+grade
+skills
+user_languages
+//
+code
+display_name
+first_name #
+last_name #
+phone_number #
+phone_number_verified_at
+national_id
+nationality #
+birthdate #
+username
+email #
+email_verified_at
+must_change_password
+password #
+timezone
+lang #
+type_id
+gender_id #
+country_id
+governorate_id
+city_id

@@ -1,11 +1,11 @@
 <?php
 
 use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
+use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
 
 return new class extends Migration {
 

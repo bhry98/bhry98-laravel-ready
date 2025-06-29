@@ -3,6 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady\Services\locations;
 
 use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCitiesModel;
+use Bhry98\Bhry98LaravelReady\Notifications\auth\SuccessfullyRegistration;
 use Bhry98\Bhry98LaravelReady\Services\BaseService;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -51,10 +52,15 @@ class CitiesManagementService extends BaseService
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.created-field"));
             return false;
         } else {
+            if (array_key_exists('names', $data)) {
+                foreach ($data['names'] as $locale => $value) {
+                    $record->setLocalized('name', $value, $locale);
+                }
+            }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.created-success"));
         }
         bhry98_created_log((bool)$record, "create new locations city", context: ['record' => $record->toArray()]);
-        return $record;
+        return (bool)$record;
     }
 
     /**
@@ -70,18 +76,20 @@ class CitiesManagementService extends BaseService
             return false;
         }
         $update = $record->update($data);
-        if (array_key_exists('names', $data)) {
-            foreach ($data['names'] as $locale => $value) {
-                $record->setLocalized('name', $value, $locale);
-            }
-        }
         if (!$update) {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-field"));
             return false;
         } else {
+            if (array_key_exists('names', $data)) {
+                $record = self::getById($id);
+                foreach ($data['names'] as $locale => $value) {
+                    $record->setLocalized('name', $value, $locale);
+                }
+            }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));
         }
         bhry98_updated_log((bool)$update, "update locations city", context: ['record' => $record, 'data' => $data]);
+        auth()->user()->notify(new SuccessfullyRegistration());
         return $update;
     }
 
@@ -130,7 +138,7 @@ class CitiesManagementService extends BaseService
             return false;
         }
         $restore = $record->restore();
-        bhry98_deleted_log((bool)$restore, "restore locations city", ['record' => $record]);
+        bhry98_restored_log((bool)$restore, "restore locations city", ['record' => $record]);
         if (!$restore) {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restored-field"));
             return false;
@@ -160,7 +168,27 @@ class CitiesManagementService extends BaseService
         return $data->paginate($perPage, page: $pageNumber);
     }
 
-
+    /**
+     * @param string|null $searchStr
+     * @param int $limit
+     * @param int|null $governorateId
+     * @return array
+     */
+    public function getOptions(?string $searchStr = null, int $limit = 20, ?int $governorateId = null): array
+    {
+        $data = LocationsCitiesModel::query()->locales();
+        if ($governorateId) $data->where('governorate_id', $governorateId);
+        $data->orderBy('id', 'desc');
+        if ($searchStr) {
+            $data->whereHas('localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$searchStr}%"));
+            $data->orWhereLike('default_name', value: "%{$searchStr}%");
+        }
+        $data->limit($limit);
+        $result = $data->get();
+        return $result->mapWithKeys(function ($model) {
+            return [$model->id => $model->name ?? $model->default_name];
+        })->toArray();
+    }
 //    public function searchByName(string $cityName, int $limit = 20): array
 //    {
 //        $data = LocationsCitiesModel::query();

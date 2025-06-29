@@ -72,12 +72,13 @@ class CountriesManagementService extends BaseService
             return false;
         }
         $updated = $record->update(collect($data)->except(['names'])?->toArray() ?? []);
-        if (array_key_exists('names', $data)) {
-            foreach ($data['names'] as $locale => $value) {
-                $record->setLocalized('name', $value, $locale);
-            }
-        }
         if ($updated) {
+            if (array_key_exists('names', $data)) {
+                $record = self::getById($id);
+                foreach ($data['names'] as $locale => $value) {
+                    $record->setLocalized('name', $value, $locale);
+                }
+            }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));
         } else {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-failed"));
@@ -204,6 +205,21 @@ class CountriesManagementService extends BaseService
         if ($relations) $data->with($relations);
         $data->withCount(['users']);
         return $data->paginate($perPage, page: $pageNumber);
+    }
+
+    /**
+     * @param int $limit
+     * @return array
+     */
+    public function getOptions(int $limit = 20): array
+    {
+        $data = LocationsCountriesModel::query()->locales();
+        $data->orderBy('id', 'desc');
+        $data->limit($limit);
+        $result = $data->get();
+        return $result->mapWithKeys(function ($model) {
+            return [$model->id => $model->name_label];
+        })->toArray();
     }
 
     /**

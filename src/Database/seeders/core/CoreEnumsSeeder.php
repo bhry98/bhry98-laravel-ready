@@ -29,7 +29,7 @@ class CoreEnumsSeeder extends Seeder
                     [
                         'default_name' => array_key_exists('default_name', $enumValue) ? $enumValue['default_name'] : $enumValue['locales']['en'],
                         'type' => $enumValue['type'],
-                        'default_color' => array_key_exists('default_color', $enumValue) ? $enumValue['default_color'] : "gray",
+                        'default_color' => self::getHexColor($enumValue['default_color']??""),
                         'api_access' => $enumValue['api_access'],
                         'can_delete' => $enumValue['can_delete'],
                         'parent_id' => $enumValue['parent_id'],
@@ -39,6 +39,18 @@ class CoreEnumsSeeder extends Seeder
                 }
             }
         }
+    }
+
+    function getHexColor(string $color): string
+    {
+        return match ($color) {
+            'red' => '#b0171d',
+            'orange' => '#f6b26b',
+            'azure', 'blue' => '#4ba9fd',
+            'pink' => '#ff54b8',
+            'green' => '#6aa84f',
+            default => '#bcbcbc',
+        };
     }
 
 }

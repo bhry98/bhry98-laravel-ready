@@ -2,31 +2,42 @@
 
 namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource;
 
-use App\Filament\Resources\Users;
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
-use Bhry98\Bhry98LaravelReady\Filament\Bhry98UsersResource\Modules;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\CreateUsers;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ListUsers;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ManageUserLogons;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ViewUserLogs;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ViewUserNotifications;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ViewUsers;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Bhry98\Bhry98LaravelReady\Services\enums\EnumsManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\CitiesManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\CountriesManagementService;
 use Bhry98\Bhry98LaravelReady\Services\locations\GovernorateManagementService;
 use Bhry98\Bhry98LaravelReady\Services\users\UsersManagementService;
+use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 //use Filament\;
 class Bhry98UsersResource extends Resource
@@ -36,7 +47,7 @@ class Bhry98UsersResource extends Resource
 
     public static function canAccess(): bool
     {
-        return auth()->user()->can(abilities: 'CoreUsers.All');
+        return auth()->user()->can('Users.All');
     }
 
     public static function getRoutePrefix(): string
@@ -46,19 +57,24 @@ class Bhry98UsersResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __(key: 'center.users.user');
+        return __('Bhry98::users.manage');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Bhry98::users.users');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return __(key: 'center.users.manage');
+        return __('Bhry98::users.users');
     }
 
-    public static function form(Form $form): Form
+    public static function getLabel(): ?string
     {
-        return $form
-            ->schema([]);
+        return __('Bhry98::users.users');
     }
+
 
 //    public static function infolist(Infolist $infolist): Infolist
 //    {
@@ -66,89 +82,151 @@ class Bhry98UsersResource extends Resource
 //            ->schema(self::usersInfoList());
 //    }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
+            ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
             ->columns([
-                Tables\Columns\TextColumn::make(name: 'last_name')
-                    ->label(__(key: 'center.users.last-name'))
-                    ->copyable()
+                TextColumn::make('code')
+                    ->label(__('Bhry98::users.code'))
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
                     ->searchable(),
-                Tables\Columns\TextColumn::make(name: 'type.name')
-                    ->label(__(key: 'center.users.type')),
-                Tables\Columns\TextColumn::make(name: 'phone_number')
-                    ->copyable()
-                    ->default(state: '---')
-                    ->label(__(key: 'center.users.phone-number'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make(name: 'gender.name')
-                    ->default(state: '---')
-                    ->label(__(key: 'center.users.gender')),
-                Tables\Columns\TextColumn::make(name: 'email')
-                    ->default(state: '---')
-                    ->copyable()
-                    ->label(__(key: 'center.users.email')),
-                Tables\Columns\IconColumn::make(name: 'active')
+                TextColumn::make('first_name')
+                    ->label(__('Bhry98::users.first-name'))
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('last_name')
+                    ->label(__('Bhry98::users.last-name'))
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('display_name')
+                    ->label(__('Bhry98::users.display-name'))
+                    ->toggleable(),
+                TextColumn::make('phone_number')
+                    ->label(__('Bhry98::users.phone-number'))
+                    ->toggleable(),
+                TextColumn::make('phone_number_verified_at')
+                    ->label(__('Bhry98::users.phone-number-verified-at'))
+                    ->getStateUsing(fn($record) => $record->phone_number_verified_at ? Carbon::parse($record->phone_number_verified_at)->format(config("bhry98.date.format")) : "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('email')
+                    ->label(__('Bhry98::users.email'))
+                    ->toggleable(),
+                TextColumn::make('email_verified_at')
+                    ->label(__('Bhry98::users.email-verified-at'))
+                    ->getStateUsing(fn($record) => $record->email_verified_at ? Carbon::parse($record->email_verified_at)->format(config("bhry98.date.format")) : "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('birthdate')
+                    ->label(__('Bhry98::users.birthdate'))
+                    ->getStateUsing(fn($record) => $record->birthdate ? Carbon::parse($record->birthdate)->format(config("bhry98.date.format")) : "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('username')
+                    ->label(__('Bhry98::users.username'))
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('national_id')
+                    ->label(__('Bhry98::users.national-id'))
+                    ->default("--")
+                    ->searchable()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
+                TextColumn::make('gender.default_name')
+                    ->getStateUsing(fn($record) => $record->gender?->name ?? $record->gender?->default_name ?? "---")
+                    ->toggleable()
+                    ->label(__('Bhry98::users.gender')),
+                TextColumn::make('nationality.default_name')
+                    ->getStateUsing(fn($record) => $record->nationality ? "({$record->nationality->flag}) {$record->nationality->name}" : "---")
+                    ->toggleable()
+                    ->label(__('Bhry98::users.nationality')),
+                TextColumn::make('country.default_name')
+                    ->getStateUsing(fn($record) => $record->country ? "({$record->country->flag}) {$record->country->name}" : "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.country')),
+                TextColumn::make('governorate.default_name')
+                    ->getStateUsing(fn($record) => $record->governorate?->name ?? $record->governorate?->default_name ?? "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.governorate')),
+                TextColumn::make('city.default_name')
+                    ->getStateUsing(fn($record) => $record->city?->name ?? $record->city?->default_name ?? "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.city')),
+                TextColumn::make('timezone.default_name')
+                    ->getStateUsing(fn($record) => $record->timezone?->name ?? $record->timezone?->default_name ?? "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.timezone')),
+                TextColumn::make('type.default_name')
+                    ->getStateUsing(fn($record) => $record->type?->name ?? $record->type?->default_name ?? "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.type')),
+                TextColumn::make('lang')
+                    ->getStateUsing(fn($record) => $record->lang ?? "---")
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.lang')),
+                IconColumn::make('active')
                     ->boolean()
-                    ->label(__(key: 'center.active')),
+                    ->toggleable()
+                    ->label(__('Bhry98::global.active')),
+                IconColumn::make('must_change_password')
+                    ->boolean()
+                    ->toggleable()
+                    ->toggledHiddenByDefault()
+                    ->label(__('Bhry98::users.must-change-password')),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
-                    ->label(__(key: 'center.delete'))
-                    ->visible(auth()->user()->can(abilities: 'CoreUsers.ForceDelete') || auth()->user()->can(abilities: 'CoreUsers.Delete'))
+                Tables\Filters\TrashedFilter::make()->visible(auth()->user()->can('Users.ForceDelete') || auth()->user()->can('Users.Delete')),
+                Tables\Filters\TernaryFilter::make('active')->label(__("Bhry98::global.active")),
+                Tables\Filters\TernaryFilter::make('must_change_password')->label(__("Bhry98::users.must-change-password")),
             ])
             ->actions([
 
-                ActionGroup::make([
-//                    Tables\Actions\ViewAction::make()
-//                        ->label(__(key: "center.view"))
-//                        ->visible(fn(Model $record) => is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Retrieve'))
-//                        ->url(fn($record) => Users\UsersResource\Pages\ViewUsers::getUrl([$record])),
-                    Tables\Actions\EditAction::make()
-                        ->label(__(key: "center.modify"))
-                        ->visible(fn(Model $record) => is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Update'))
-                        ->form(form: fn(Model $record) => self::usersForm($record))
-                        ->using(fn(Model $record, array $data) => (new UsersManagementService())->updateProfile(identityCode: $record->identity_code ?? "", data: $data))
-                        ->slideOver()
-                        ->stickyModalFooter(),
-                    Tables\Actions\EditAction::make("active")
-                        ->label(__(key: "center.enable-disable"))
-                        ->color(Color::Gray)
-                        ->visible(fn(Model $record) => is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Update'))
-                        ->requiresConfirmation()
-                        ->action(fn(Model $record) => (new UsersManagementService())->changeAccountStatus(identityCode: $record->identity_code ?? "")),
-                    Tables\Actions\EditAction::make("updatePassword")
-                        ->label(__(key: "center.update-password"))
-                        ->color(Color::Orange)
-                        ->visible(fn(Model $record) => $record->id != auth()->id() && is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Update'))
-                        ->requiresConfirmation()
-                        ->fillForm(["password" => null, "password_confirmation" => null])
-                        ->form(form: fn(Model $record) => [
-                            TextInput::make(name: "password")
-                                ->label(__(key: "center.users.password"))
-                                ->password()
-                                ->confirmed()
-                                ->revealable()
-                                ->required(),
-                            TextInput::make('password_confirmation')
-                                ->password()
-                                ->revealable()
-                                ->required()
-                        ])
-                        ->action(fn(Model $record, array $data) => (new UsersManagementService())->changePassword(identityCode: $record->identity_code ?? "", password: $data["password"])),
-                    Tables\Actions\DeleteAction::make()
-                        ->label(__(key: "center.delete"))
-                        ->visible(fn(Model $record) => $record->id != auth()->id() && is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.Delete'))
-                        ->action(fn(Model $record) => (new UsersManagementService())->delete(identityCode: $record->identity_code ?? "")),
-                    Tables\Actions\ForceDeleteAction::make()
-                        ->label(__(key: "center.force-delete"))
-                        ->visible(fn(Model $record) => $record->id != auth()->id() && !is_null($record->deleted_at) && auth()->user()->can(abilities: 'CoreUsers.ForceDelete'))
-                        ->action(fn(Model $record) => (new UsersManagementService())->forceDelete(identityCode: $record->identity_code ?? "")),
-
-                ]),])
+            ])
             ->bulkActions([
             ]);
     }
+
+    public static function form(Form $form): Form
+    {
+        $personalInputs[] = TextInput::make('code')->label(__("Bhry98::users.code"))->nullable()->unique(UsersCoreUsersModel::TABLE_NAME, "code", ignoreRecord: true);
+        $personalInputs[] = TextInput::make('first_name')->label(__("Bhry98::users.first-name"))->live(debounce: 500)->required()->afterStateUpdated(fn($get, $set) => $set('display_name', trim($get('first_name')) . " " . trim($get('last_name'))));
+        $personalInputs[] = TextInput::make('last_name')->label(__("Bhry98::users.last-name"))->live(debounce: 500)->required()->afterStateUpdated(fn($get, $set) => $set('display_name', trim($get('first_name')) . " " . trim($get('last_name'))));
+        $personalInputs[] = TextInput::make('display_name')->label(__("Bhry98::users.display-name"))->required();
+        $personalInputs[] = Select::make('gender_id')->relationship('gender', 'default_name')->options((new EnumsManagementService())->selectOptions(EnumsCoreTypes::UsersGender->name))->getSearchResultsUsing(fn($search) => (new EnumsManagementService())->searchByName(EnumsCoreTypes::UsersGender->name, $search))->searchable()->preload()->label(__("Bhry98::users.gender"))->required();
+        $personalInputs[] = Select::make('nationality_id')->relationship('nationality', 'default_name')->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->searchable()->preload()->label(__("Bhry98::users.nationality"))->required();
+        $personalInputs[] = DatePicker::make('birthdate')->native(false)->label(__("Bhry98::users.birthdate"))->nullable();
+        $personalInputs[] = Select::make('lang')->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->options(fn() => (new CountriesManagementService())->getOptions())->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->searchable()->preload()->label(__("Bhry98::users.lang"))->required();
+        $personalInputs[] = TextInput::make('national_id')->numeric()->label(__("Bhry98::users.national-id"))->nullable();
+        $accountInputs[] = TextInput::make('email')->label(__("Bhry98::users.email"))->email()->unique(UsersCoreUsersModel::TABLE_NAME, "email", ignoreRecord: true)->required();
+        $accountInputs[] = PhoneInput::make('phone_number')->label(__("Bhry98::users.phone-number"))->defaultCountry(bhry98_get_setting("default_input_phone_country", "EG"))->required();
+        $accountInputs[] = TextInput::make('username')->label(__("Bhry98::users.username"))->maxLength(100)->unique(UsersCoreUsersModel::TABLE_NAME, "username", ignoreRecord: true)->nullable();
+        $accountInputs[] = Select::make('type_id')->relationship('type', 'default_name')->options((new EnumsManagementService())->selectOptions(EnumsCoreTypes::UsersType->name))->getSearchResultsUsing(fn($search) => (new EnumsManagementService())->searchByName(EnumsCoreTypes::UsersType->name, $search))->searchable()->preload()->label(__("Bhry98::users.type"))->required();
+        $accountInputs[] = Select::make('timezone_id')->relationship('timezone', 'default_name')->options((new EnumsManagementService())->selectOptions(EnumsCoreTypes::Timezone->name))->getSearchResultsUsing(fn($search) => (new EnumsManagementService())->searchByName(EnumsCoreTypes::Timezone->name, $search))->searchable()->preload()->label(__("Bhry98::users.timezone"))->required();
+        $accountInputs[] = TextInput::make('password')->label(__("Bhry98::users.password"))->maxLength(100)->password()->minLength(8)->maxLength(20)->revealable();
+        $accountInputs[] = Select::make('country_id')->relationship('country', 'default_name')->getSearchResultsUsing(fn($search) => (new CountriesManagementService())->searchByName($search))->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)->reactive()->afterStateUpdated(function (Set $set) {
+            $set('governorate_id', null);
+            $set('city_id', null);
+        })->searchable()->preload()->label(__("Bhry98::users.country"))->required();
+        $accountInputs[] = Select::make('governorate_id')->relationship('governorate', 'default_name')->disabled(fn($get) => !$get('country_id'))->options(fn($get) => (new GovernorateManagementService())->getOptions(countryId: $get('country_id')))->getSearchResultsUsing(fn($search, $get) => (new GovernorateManagementService())->getOptions($search, countryId: $get('country_id')))->reactive()->searchable()->preload()->label(__("Bhry98::users.governorate"))->nullable();
+        $accountInputs[] = Select::make('city_id')->relationship('city', 'default_name')->disabled(fn($get) => !$get('governorate_id'))->options(fn($get) => (new CitiesManagementService())->getOptions(governorateId: $get('governorate_id')))->getSearchResultsUsing(fn($search, $get) => (new CitiesManagementService())->getOptions($search, governorateId: $get('governorate_id')))->reactive()->searchable()->preload()->label(__("Bhry98::users.city"))->nullable();
+        $accountInputs[] = Toggle::make('active')->label(__("Bhry98::global.active"))->default(true)->inline(false);
+        $accountInputs[] = Toggle::make('must_change_password')->label(__("Bhry98::users.must-change-password"))->default(true)->inline(false);
+        $tabs[] = Tab::make(__("Bhry98::users.basic-info"))->columns(3)->schema($personalInputs);
+        $tabs[] = Tab::make(__("Bhry98::users.account-info"))->columns(3)->schema($accountInputs);
+        return $form->schema([Tabs::make()->columnSpanFull()->schema($tabs)]);
+    }
+
 
     public static function getRelations(): array
     {
@@ -157,169 +235,59 @@ class Bhry98UsersResource extends Resource
         ];
     }
 
+
+    public static function getRecordSubNavigation(\Filament\Pages\Page $page): array
+    {
+        $pages = array_merge(
+            [
+                ViewUsers::class,
+                ViewUserLogs::class,
+                ViewUserNotifications::class,
+                ManageUserLogons::class,
+            ],
+            static::discoverPages(true),
+        );
+//        dd($pages);
+        return $page->generateNavigationItems($pages);
+    }
+
     public static function getPages(): array
     {
-        return [
-            'index' => ListUsers::route(path: '/'),
-//            'view' => Users\UsersResource\Pages\ViewUsers::route(path: '/{record}'),
-        ];
+
+        $pages = array_merge(
+            [
+                'index' => ListUsers::route('/'),
+//                'create' => CreateUsers::route('/create'),
+                'view' => ViewUsers::route('/{record:code}'),
+                'logons' => ManageUserLogons::route('/{record:code}/logons'),
+                'logs' => ViewUserLogs::route('/{record:code}/logs'),
+                'notifications' => ViewUserNotifications::route('/{record:code}/notifications'),
+            ],
+            static::discoverPages(),
+        );
+        return $pages;
     }
 
-    public static function getEloquentQuery(): Builder
+    /**
+     * Discovers and maps page routes from configuration.
+     *
+     * @return array<string, mixed> Array of discovered page routes
+     */
+    protected static function discoverPages(bool $forSubNavigation = false): array
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
-
-    static function usersForm($record = null): array
-    {
-        return [
-            Fieldset::make(label: __(key: "center.users.account-information"))
-                ->columns(columns: 3)
-                ->schema([
-                    TextInput::make(name: "first_name")->label(__(key: "center.users.first-name"))->maxLength(length: 50)->minLength(length: 3)->required(),
-                    TextInput::make(name: "last_name")->label(__(key: "center.users.last-name"))->maxLength(length: 50)->minLength(length: 3)->required(),
-                    Select::make(name: "type_id")
-                        ->label(__(key: "center.users.type"))
-                        ->relationship(name: 'type', titleAttribute: 'default_name')
-                        ->searchable()
-                        ->required()
-                        ->disabled($record?->id == auth()->id())
-                        ->searchable()
-                        ->options(function (): array {
-                            return EnumsCoreModel::with('localizations')
-                                ->where([
-                                    'type' => EnumsCoreTypes::UsersType,
-                                    'module' => Modules::Core,
-                                ])
-                                ->get()
-                                ->mapWithKeys(function ($model) {
-                                    $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name;
-                                    return [$model->id => $label];
-                                })->toArray();
-                        })
-                        ->getSearchResultsUsing(function (string $search): array {
-                            return EnumsCoreModel::query()
-                                ->where([
-                                    'type' => EnumsCoreTypes::UsersType,
-                                    'module' => Modules::Core,
-                                ])
-                                ->whereHas('localizations', fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$search}%"))
-                                ->limit(50)
-                                ->get()
-                                ->mapWithKeys(function ($model) {
-                                    $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? 'N/A';
-                                    return [$model->id => $label];
-                                })
-                                ->toArray();
-                        })
-                        ->getOptionLabelUsing(function ($value): ?string {
-                            return EnumsCoreModel::with('localizations')
-                                ->where('id', $value)
-                                ->first()
-                                ?->localizations
-                                ->where('locale', app()->getLocale())
-                                ->first()
-                                ?->value;
-                        }),
-                    TextInput::make(name: "phone_number")
-                        ->label(__(key: "center.users.phone-number"))
-                        ->required()
-                        ->unique(table: UsersCoreUsersModel::TABLE_NAME, column: "phone_number", ignorable: $record),
-                    TextInput::make(name: "username")
-                        ->label(__(key: "center.users.username"))
-                        ->required()
-                        ->unique(table: UsersCoreUsersModel::TABLE_NAME, column: "username", ignorable: $record),
-                    TextInput::make(name: "email")
-                        ->label(__(key: "center.users.email"))
-                        ->nullable()
-                        ->email()
-                        ->unique(table: UsersCoreUsersModel::TABLE_NAME, column: "email", ignorable: $record),
-                    TextInput::make(name: "password")
-                        ->visible(is_null($record))
-                        ->label(__(key: "center.users.password"))
-                        ->password()
-                        ->revealable()
-                        ->required()
-                        ->default(state: Str::password(length: 10)),
-                ]),
-            Fieldset::make(label: __(key: "center.users.personal-information"))
-                ->columns(columns: 4)
-                ->schema([
-                    TextInput::make(name: "national_id")
-                        ->label(__(key: "center.users.national-id"))
-                        ->nullable()
-                        ->numeric()
-                        ->startsWith(values: [2, 3])
-                        ->length(length: 14)
-                        ->unique(table: UsersCoreUsersModel::TABLE_NAME, column: "national_id", ignorable: $record),
-                    DatePicker::make(name: "birthdate")
-                        ->label(__(key: "center.users.birthdate"))
-                        ->date()
-                        ->beforeOrEqual(now(tz: config('app.timezone'))->subYears(10)->startOfYear())
-                        ->nullable(),
-                    Select::make(name: "gender_id")
-                        ->label(__(key: "center.users.gender"))
-                        ->relationship(name: 'gender', titleAttribute: 'default_name')
-                        ->searchable()
-                        ->options(function (): array {
-                            return EnumsCoreModel::with('localizations')
-                                ->where([
-                                    'type' => EnumsCoreTypes::UsersGender,
-                                    'module' => Modules::Core,
-                                ])
-                                ->get()
-                                ->mapWithKeys(function ($model) {
-                                    $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name;
-                                    return [$model->id => $label];
-                                })->toArray();
-                        })
-                        ->required(),
-                    Select::make(name: "country_id")
-                        ->label(__(key: "center.users.country"))
-                        ->relationship(name: 'country', titleAttribute: 'default_name')
-                        ->searchable()
-                        ->getSearchResultsUsing(fn(string $search) => (new CountriesManagementService())->searchByName($search))
-                        ->nullable(),
-                    Select::make(name: "governorate_id")
-                        ->label(__(key: "center.users.governorate"))
-                        ->relationship(name: 'governorate', titleAttribute: 'default_name')
-                        ->searchable()
-                        ->getSearchResultsUsing(fn(string $search) => (new GovernorateManagementService())->searchByName($search))
-                        ->nullable(),
-                    Select::make(name: "city_id")
-                        ->label(__(key: "center.users.city"))
-                        ->relationship(name: 'city', titleAttribute: 'default_name')
-                        ->searchable()
-                        ->getSearchResultsUsing(fn(string $search) => (new CitiesManagementService())->searchByName($search))
-                        ->nullable(),
-                    Select::make(name: "timezone_id")
-                        ->label(__(key: "center.users.timezone"))
-                        ->relationship(name: 'timezone', titleAttribute: 'default_name')
-                        ->searchable()
-                        ->options(function (): array {
-                            return EnumsCoreModel::with('localizations')
-                                ->where([
-                                    'type' => EnumsCoreTypes::Timezone,
-                                    'module' => Modules::Core,
-                                ])
-                                ->get()
-                                ->mapWithKeys(function ($model) {
-                                    $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name;
-                                    return [$model->id => $label];
-                                })->toArray();
-                        })
-                        ->nullable(),
-                ]),
-            Fieldset::make(label: __(key: "center.users.account-settings"))
-                ->schema([
-                    Toggle::make(name: "active")
-                        ->inline(false)
-                        ->label(__(key: "center.active"))
-                        ->default(state: true),
-                ])
-        ];
+        try {
+            return collect(config('bhry98.filament.users-pages', []))
+                ->filter(function (string $class): bool {
+                    return class_exists($class) && method_exists($class, 'route');
+                })
+                ->mapWithKeys(function (string $class) use ($forSubNavigation): array {
+                    $baseName = str($class)->classBasename()->kebab()->toString();
+                    return $forSubNavigation ? [$class] : [$baseName => $class::route('/{record:code}/' . $baseName)];
+                })
+                ->all();
+        } catch (\Throwable $e) {
+            report($e);
+            return [];
+        }
     }
 }

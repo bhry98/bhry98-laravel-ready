@@ -2,7 +2,7 @@
 
 namespace Bhry98\Bhry98LaravelReady\Providers;
 
-use Bhry98\Bhry98LaravelReady\Helpers\CreateCustomLogger;
+use Bhry98\Bhry98LaravelReady\Helpers\logs\CreateCustomLogger;
 use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;

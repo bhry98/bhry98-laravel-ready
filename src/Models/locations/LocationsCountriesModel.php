@@ -5,6 +5,7 @@ namespace Bhry98\Bhry98LaravelReady\Models\locations;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
 use Bhry98\Bhry98LaravelReady\Traits\HasLocalization;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,6 +26,7 @@ class LocationsCountriesModel extends BaseModel
         "default_name",
         "flag",
         "lang_key",
+        "dial_code",
         "system_lang",
         "active",
     ];
@@ -56,6 +58,13 @@ class LocationsCountriesModel extends BaseModel
             related: UsersCoreUsersModel::class,
             foreignKey: "country_id",
             localKey: "id");
+    }
+
+    public function nameLabel(): Attribute
+    {
+        return new Attribute(
+            get: fn() => "({$this->flag}) " . $this->name ?? $this->default_name ?? "---"
+        );
     }
 
     protected static function booted(): void

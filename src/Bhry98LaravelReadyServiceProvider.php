@@ -6,11 +6,13 @@ use Bhry98\Bhry98LaravelReady\Exceptions\HandlerUnAuthenticatedException;
 use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreConfigLoad;
 use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreMigrationsLoad;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
+use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreAuthServiceProvider;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreCommandsServiceProvider;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreConfigServiceProvider;
 use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreMigrationsServiceProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
@@ -27,7 +29,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         $ds = DIRECTORY_SEPARATOR;
         $this->mergeConfigFrom(path: __DIR__ . "{$ds}Config{$ds}bhry98.php", key: 'bhry98');
         $this->app->singleton(abstract: ExceptionHandler::class, concrete: HandlerUnAuthenticatedException::class);
-
+        $this->app->bind(Notification::class, UsersNotificationsModel::class);
     }
 
     /**
@@ -39,6 +41,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         $this->app->register(LaravelCoreCommandsServiceProvider::class);
         self::loadRoutes();
         self::loadTranslations();
+        self::loadFilamentViews();
 //        $this->app->register(LaravelCoreConfigServiceProvider::class);
         LaravelCoreConfigLoad::load();
         try {
@@ -52,7 +55,6 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
             __DIR__ . '/Config/bhry98.php' => config_path('bhry98.php'),
         ]);
 //        dd(config('mail.mailers.smtp'));
-
     }
 
     function loadRoutes(): void
@@ -65,6 +67,12 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
     {
         $ds = DIRECTORY_SEPARATOR;
         $this->loadTranslationsFrom(path: __DIR__ . "{$ds}Locales", namespace: "Bhry98");
+    }
+
+    function loadFilamentViews(): void
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        $this->loadViewsFrom(__DIR__ . "{$ds}Filament{$ds}users{$ds}Bhry98UsersResource{$ds}Views", namespace: "Bhry98UsersResource");
     }
 
 }

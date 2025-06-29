@@ -72,6 +72,7 @@ class Bhry98CountriesResource extends Resource
         $inputs[] = TextInput::make('country_code')->label(__("Bhry98::locations.country-code"))->minLength(2)->maxLength(50)->unique(LocationsCountriesModel::TABLE_NAME, "country_code", ignoreRecord: true)->nullable();
         $inputs[] = TextInput::make('default_name')->label(__("Bhry98::global.default-name"))->minLength(2)->maxLength(50)->nullable();
         $inputs[] = TextInput::make('flag')->label(__("Bhry98::locations.country-flag"))->disabled();
+        $inputs[] = TextInput::make('dial_code')->label(__("Bhry98::locations.country-dial-code"))->required();
         $inputs[] = TextInput::make('lang_key')->required()->minLength(2)->maxLength(4)->label(__("Bhry98::locations.country-lang-key"))->required();
         $inputs[] = Toggle::make('system_lang')->required()->inline(false)->label(__("Bhry98::locations.country-system-lang"))->required();
         $inputs[] = Toggle::make('active')->required()->inline(false)->label(__("Bhry98::global.active"))->required();
@@ -119,11 +120,14 @@ class Bhry98CountriesResource extends Resource
                 TextColumn::make('lang_key')
                     ->label(__('Bhry98::locations.country-lang-key'))
                     ->toggleable(),
+                TextColumn::make('dial_code')
+                    ->label(__('Bhry98::locations.country-dial-code'))
+                    ->toggleable(),
                 IconColumn::make('system_lang')
                     ->label(__('Bhry98::locations.country-system-lang'))
                     ->boolean()
                     ->toggleable(),
-                ...bhry98_figma_columns(active: true)
+                ...bhry98_filament_columns(active: true)
             ])
             ->filters([
                 TrashedFilter::make()->visible(auth()->user()->can('Locations.Countries.ForceDelete') || auth()->user()->can('Locations.Countries.Delete')),

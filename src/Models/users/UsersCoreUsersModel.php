@@ -29,29 +29,41 @@ class UsersCoreUsersModel extends Authentication
     const RELATIONS = ["country", "governorate", "city", "type", "gender", "azure", "adManager"];
     const FILTER_COLUMNS = ["display_name", "phone_number", "national_id", "username", "email"];
     protected $table = self::TABLE_NAME;
+
+    public function getRouteKeyName(): string
+    {
+        return "code";
+    }
+
     protected $fillable = [
         "id",
-        "type_id",
-        "country_id",
-        "governorate_id",
-        "city_id",
-        "gender_id",
-        "timezone_id",
+        "code",
         "display_name",
         "first_name",
         "last_name",
+        "phone_number_key",
         "phone_number",
+        "phone_number_verified_at",
         "national_id",
-        "active",
         "birthdate",
         "username",
         "email",
         "email_verified_at",
         "must_change_password",
         "password",
+        "timezone_id",
+        "lang",
+        "type_id",
+        "gender_id",
+        "nationality_id",
+        "country_id",
+        "governorate_id",
+        "city_id",
+        "active",
     ];
     protected $casts = [
         "email_verified_at" => "datetime",
+        "phone_number_verified_at" => "datetime",
         "password" => "hashed",
         "remember_token" => "string",
         "must_change_password" => "boolean",
@@ -93,6 +105,20 @@ class UsersCoreUsersModel extends Authentication
             related: LocationsCountriesModel::class,
             foreignKey: "id",
             localKey: "country_id");
+    }
+    public function nationality(): HasOne
+    {
+        return $this->hasOne(
+            related: LocationsCountriesModel::class,
+            foreignKey: "id",
+            localKey: "nationality_id");
+    }
+    public function phoneNumberKey(): HasOne
+    {
+        return $this->hasOne(
+            related: LocationsCountriesModel::class,
+            foreignKey: "id",
+            localKey: "phone_number_key_id");
     }
 
     public function governorate(): HasOne
@@ -136,7 +162,7 @@ class UsersCoreUsersModel extends Authentication
     protected static function booted(): void
     {
         static::creating(function ($model) {
-            $model->username = self::createUniqueTextForColumn("username", $model->username);
+            $model->username = self::createUniqueTextForColumn("username", $model->username, upperCase: false);
             $model->code = self::createUniqueTextForColumn("code", $model->code);
             $model->display_name = $model->display_name ?: "$model->first_name $model->last_name";
             $model->must_change_password = $model->must_change_password ?? false;
@@ -146,16 +172,16 @@ class UsersCoreUsersModel extends Authentication
         });
     }
 
-    private static function createUniqueTextForColumn(string $column, ?string $str = null, int $length = 10): string
+    private static function createUniqueTextForColumn(string $column, ?string $str = null, int $length = 10, bool $upperCase = true): string
     {
         if ($str) {
-            $baseCode = Str::upper(Str::slug($str));
+            $baseCode = $upperCase ? Str::upper(Str::slug($str)) : Str::lower(Str::slug($str));
             if (!static::query()->where($column, $baseCode)->exists()) {
                 return $baseCode;
             }
         }
         do {
-            $code = Str::upper(Str::random($length));
+            $code = $upperCase ? Str::upper(Str::random($length)) : Str::lower(Str::random($length));
         } while (static::query()->where($column, $code)->exists());
         return $code;
     }

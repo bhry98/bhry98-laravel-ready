@@ -21,12 +21,7 @@ return [
             "users_require_email" => "nullable",
             "users_require_national_id" => "nullable",
         ],
-        "date" => [
-            "format" => "Y-m-d | h:i A",
-            "format_time" => "h:i A",
-            "format_notification" => "Y M d",
-            "format_without_time" => "Y-m-d",
-        ],
+
     ],
     "rbac" => [
         "default_groups" => ["Users"],
@@ -54,5 +49,16 @@ return [
         ],
 
     ],
-
+    "filament" => [
+        "pagination" => [
+            "per_page" => [10, 30, 50],
+        ],
+        "users-pages" => [],
+    ],
+    "date" => [
+        "format" => "Y-m-d | h:i A",
+        "format_time" => "h:i A",
+        "format_notification" => "Y M d",
+        "format_without_time" => "Y-m-d",
+    ],
 ];

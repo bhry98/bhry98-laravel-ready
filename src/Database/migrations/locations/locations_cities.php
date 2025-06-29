@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->string(column: 'code',length: 50)->unique()->index();
                 $table->string(column: 'default_name')->nullable();
                 $table->foreignId(column: 'country_id')->references(column: 'id')->on(table: LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId(column: 'governorate_id')->references(column: 'id')->on(table: LocationsGovernoratesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId(column: 'governorate_id')->nullable()->references(column: 'id')->on(table: LocationsGovernoratesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Helpers;
+namespace Bhry98\Bhry98LaravelReady\Helpers\logs;
 
 use Monolog\Logger;
 

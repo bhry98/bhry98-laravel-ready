@@ -7,6 +7,7 @@ return [
         "flag" => "🇦🇼",
         "lang_key" => "nl",
         "system_lang" => false,
+        "dial_code" => "+297"
     ],
     [
         "code" => "AF",
@@ -15,6 +16,7 @@ return [
         "flag" => "🇦🇫",
         "lang_key" => "fa",
         "system_lang" => false,
+        "dial_code" => "+93"
     ],
     [
         "code" => "AO",
@@ -23,6 +25,7 @@ return [
         "flag" => "🇦🇴",
         "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+244"
     ],
     [
         "code" => "AI",
@@ -31,6 +34,7 @@ return [
         "flag" => "🇦🇮",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1264"
     ],
     [
         "code" => "AX",
@@ -39,6 +43,7 @@ return [
         "flag" => "🇦🇽",
         "lang_key" => "sv",
         "system_lang" => false,
+        "dial_code" => "+358"
     ],
     [
         "code" => "AL",
@@ -47,6 +52,7 @@ return [
         "flag" => "🇦🇱",
         "lang_key" => "sq",
         "system_lang" => false,
+        "dial_code" => "+355"
     ],
     [
         "code" => "AD",
@@ -55,6 +61,7 @@ return [
         "flag" => "🇦🇩",
         "lang_key" => "ca",
         "system_lang" => false,
+        "dial_code" => "+376"
     ],
     [
         "code" => "AE",
@@ -63,6 +70,7 @@ return [
         "flag" => "🇦🇪",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+971"
     ],
     [
         "code" => "AR",
@@ -71,6 +79,7 @@ return [
         "flag" => "🇦🇷",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+54"
     ],
     [
         "code" => "AM",
@@ -79,6 +88,7 @@ return [
         "flag" => "🇦🇲",
         "lang_key" => "hy",
         "system_lang" => false,
+        "dial_code" => "+374"
     ],
     [
         "code" => "AS",
@@ -87,6 +97,7 @@ return [
         "flag" => "🇦🇸",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1684"
     ],
     [
         "code" => "AQ",
@@ -95,6 +106,7 @@ return [
         "flag" => "🇦🇶",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+672"
     ],
     [
         "code" => "TF",
@@ -103,6 +115,7 @@ return [
         "flag" => "🇹🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+262"
     ],
     [
         "code" => "AG",
@@ -111,6 +124,7 @@ return [
         "flag" => "🇦🇬",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1268"
     ],
     [
         "code" => "AU",
@@ -119,6 +133,7 @@ return [
         "flag" => "🇦🇺",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+61"
     ],
     [
         "code" => "AT",
@@ -127,6 +142,7 @@ return [
         "flag" => "🇦🇹",
         "lang_key" => "de",
         "system_lang" => false,
+        "dial_code" => "+43"
     ],
     [
         "code" => "AZ",
@@ -135,6 +151,7 @@ return [
         "flag" => "🇦🇿",
         "lang_key" => "az",
         "system_lang" => false,
+        "dial_code" => "+994"
     ],
     [
         "code" => "BI",
@@ -143,6 +160,7 @@ return [
         "flag" => "🇧🇮",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+257"
     ],
     [
         "code" => "BE",
@@ -151,6 +169,7 @@ return [
         "flag" => "🇧🇪",
         "lang_key" => "nl",
         "system_lang" => false,
+        "dial_code" => "+32"
     ],
     [
         "code" => "BJ",
@@ -159,6 +178,7 @@ return [
         "flag" => "🇧🇯",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+229"
     ],
     [
         "code" => "BQ",
@@ -167,6 +187,7 @@ return [
         "flag" => "🇧🇶",
         "lang_key" => "nl",
         "system_lang" => false,
+        "dial_code" => "+599"
     ],
     [
         "code" => "BF",
@@ -175,6 +196,7 @@ return [
         "flag" => "🇧🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+226"
     ],
     [
         "code" => "BD",
@@ -183,6 +205,7 @@ return [
         "flag" => "🇧🇩",
         "lang_key" => "bn",
         "system_lang" => false,
+        "dial_code" => "+880"
     ],
     [
         "code" => "BG",
@@ -191,6 +214,7 @@ return [
         "flag" => "🇧🇬",
         "lang_key" => "bg",
         "system_lang" => false,
+        "dial_code" => "+359"
     ],
     [
         "code" => "BH",
@@ -199,6 +223,7 @@ return [
         "flag" => "🇧🇭",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+973"
     ],
     [
         "code" => "BS",
@@ -207,6 +232,7 @@ return [
         "flag" => "🇧🇸",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1242"
     ],
     [
         "code" => "BA",
@@ -215,6 +241,7 @@ return [
         "flag" => "🇧🇦",
         "lang_key" => "bs",
         "system_lang" => false,
+        "dial_code" => "+387"
     ],
     [
         "code" => "BL",
@@ -223,6 +250,7 @@ return [
         "flag" => "🇧🇱",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+590"
     ],
     [
         "code" => "BY",
@@ -231,6 +259,7 @@ return [
         "flag" => "🇧🇾",
         "lang_key" => "be",
         "system_lang" => false,
+        "dial_code" => "+375"
     ],
     [
         "code" => "BZ",
@@ -239,6 +268,7 @@ return [
         "flag" => "🇧🇿",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+501"
     ],
     [
         "code" => "BM",
@@ -247,14 +277,16 @@ return [
         "flag" => "🇧🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1441"
     ],
     [
         "code" => "BO",
-        "name_en" => "Bolivia, Plurinational State of",
+        "name_en" => "Bolivia",
         "name_ar" => "بوليفيا",
         "flag" => "🇧🇴",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+591"
     ],
     [
         "code" => "BR",
@@ -263,6 +295,7 @@ return [
         "flag" => "🇧🇷",
         "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+55"
     ],
     [
         "code" => "BB",
@@ -271,6 +304,7 @@ return [
         "flag" => "🇧🇧",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1246"
     ],
     [
         "code" => "BN",
@@ -279,6 +313,7 @@ return [
         "flag" => "🇧🇳",
         "lang_key" => "ms",
         "system_lang" => false,
+        "dial_code" => "+673"
     ],
     [
         "code" => "BT",
@@ -287,6 +322,7 @@ return [
         "flag" => "🇧🇹",
         "lang_key" => "dz",
         "system_lang" => false,
+        "dial_code" => "+975"
     ],
     [
         "code" => "BV",
@@ -295,6 +331,7 @@ return [
         "flag" => "🇧🇻",
         "lang_key" => "no",
         "system_lang" => false,
+        "dial_code" => "+47"
     ],
     [
         "code" => "BW",
@@ -303,6 +340,7 @@ return [
         "flag" => "🇧🇼",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+267"
     ],
     [
         "code" => "CF",
@@ -311,6 +349,7 @@ return [
         "flag" => "🇨🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+236"
     ],
     [
         "code" => "CA",
@@ -319,6 +358,7 @@ return [
         "flag" => "🇨🇦",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1"
     ],
     [
         "code" => "CC",
@@ -327,6 +367,7 @@ return [
         "flag" => "🇨🇨",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+61"
     ],
     [
         "code" => "CH",
@@ -335,6 +376,7 @@ return [
         "flag" => "🇨🇭",
         "lang_key" => "de",
         "system_lang" => false,
+        "dial_code" => "+41"
     ],
     [
         "code" => "CL",
@@ -343,6 +385,7 @@ return [
         "flag" => "🇨🇱",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+56"
     ],
     [
         "code" => "CN",
@@ -351,6 +394,7 @@ return [
         "flag" => "🇨🇳",
         "lang_key" => "zh",
         "system_lang" => false,
+        "dial_code" => "+86"
     ],
     [
         "code" => "CI",
@@ -359,6 +403,7 @@ return [
         "flag" => "🇨🇮",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+225"
     ],
     [
         "code" => "CM",
@@ -367,6 +412,7 @@ return [
         "flag" => "🇨🇲",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+237"
     ],
     [
         "code" => "CD",
@@ -375,6 +421,7 @@ return [
         "flag" => "🇨🇩",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+243"
     ],
     [
         "code" => "CG",
@@ -383,6 +430,7 @@ return [
         "flag" => "🇨🇬",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+242"
     ],
     [
         "code" => "CK",
@@ -391,6 +439,7 @@ return [
         "flag" => "🇨🇰",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+682"
     ],
     [
         "code" => "CO",
@@ -399,6 +448,7 @@ return [
         "flag" => "🇨🇴",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+57"
     ],
     [
         "code" => "KM",
@@ -407,6 +457,7 @@ return [
         "flag" => "🇰🇲",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+269"
     ],
     [
         "code" => "CV",
@@ -415,6 +466,7 @@ return [
         "flag" => "🇨🇻",
         "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+238"
     ],
     [
         "code" => "CR",
@@ -423,6 +475,7 @@ return [
         "flag" => "🇨🇷",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+506"
     ],
     [
         "code" => "CU",
@@ -431,6 +484,7 @@ return [
         "flag" => "🇨🇺",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+53"
     ],
     [
         "code" => "CW",
@@ -439,6 +493,7 @@ return [
         "flag" => "🇨🇼",
         "lang_key" => "nl",
         "system_lang" => false,
+        "dial_code" => "+599"
     ],
     [
         "code" => "CX",
@@ -447,6 +502,7 @@ return [
         "flag" => "🇨🇽",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+61"
     ],
     [
         "code" => "KY",
@@ -455,6 +511,7 @@ return [
         "flag" => "🇰🇾",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1345"
     ],
     [
         "code" => "CY",
@@ -463,6 +520,7 @@ return [
         "flag" => "🇨🇾",
         "lang_key" => "el",
         "system_lang" => false,
+        "dial_code" => "+357"
     ],
     [
         "code" => "CZ",
@@ -471,6 +529,7 @@ return [
         "flag" => "🇨🇿",
         "lang_key" => "cs",
         "system_lang" => false,
+        "dial_code" => "+420"
     ],
     [
         "code" => "DE",
@@ -479,6 +538,7 @@ return [
         "flag" => "🇩🇪",
         "lang_key" => "de",
         "system_lang" => false,
+        "dial_code" => "+49"
     ],
     [
         "code" => "DJ",
@@ -487,6 +547,7 @@ return [
         "flag" => "🇩🇯",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+253"
     ],
     [
         "code" => "DM",
@@ -495,6 +556,7 @@ return [
         "flag" => "🇩🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1767"
     ],
     [
         "code" => "DK",
@@ -503,6 +565,7 @@ return [
         "flag" => "🇩🇰",
         "lang_key" => "da",
         "system_lang" => false,
+        "dial_code" => "+45"
     ],
     [
         "code" => "DO",
@@ -511,6 +574,7 @@ return [
         "flag" => "🇩🇴",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+1809"
     ],
     [
         "code" => "DZ",
@@ -519,6 +583,7 @@ return [
         "flag" => "🇩🇿",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+213"
     ],
     [
         "code" => "EC",
@@ -527,6 +592,7 @@ return [
         "flag" => "🇪🇨",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+593"
     ],
     [
         "code" => "EG",
@@ -535,6 +601,7 @@ return [
         "flag" => "🇪🇬",
         "lang_key" => "ar",
         "system_lang" => true,
+        "dial_code" => "+20"
     ],
     [
         "code" => "ER",
@@ -543,6 +610,7 @@ return [
         "flag" => "🇪🇷",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+291"
     ],
     [
         "code" => "EH",
@@ -551,6 +619,7 @@ return [
         "flag" => "🇪🇭",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+212"
     ],
     [
         "code" => "ES",
@@ -559,6 +628,7 @@ return [
         "flag" => "🇪🇸",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+34"
     ],
     [
         "code" => "EE",
@@ -567,6 +637,7 @@ return [
         "flag" => "🇪🇪",
         "lang_key" => "et",
         "system_lang" => false,
+        "dial_code" => "+372"
     ],
     [
         "code" => "ET",
@@ -575,6 +646,7 @@ return [
         "flag" => "🇪🇹",
         "lang_key" => "am",
         "system_lang" => false,
+        "dial_code" => "+251"
     ],
     [
         "code" => "FI",
@@ -583,6 +655,7 @@ return [
         "flag" => "🇫🇮",
         "lang_key" => "fi",
         "system_lang" => false,
+        "dial_code" => "+358"
     ],
     [
         "code" => "FJ",
@@ -591,6 +664,7 @@ return [
         "flag" => "🇫🇯",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+679"
     ],
     [
         "code" => "FK",
@@ -599,6 +673,7 @@ return [
         "flag" => "🇫🇰",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+500"
     ],
     [
         "code" => "FR",
@@ -607,6 +682,7 @@ return [
         "flag" => "🇫🇷",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+33"
     ],
     [
         "code" => "FO",
@@ -615,14 +691,16 @@ return [
         "flag" => "🇫🇴",
         "lang_key" => "fo",
         "system_lang" => false,
+        "dial_code" => "+298"
     ],
     [
         "code" => "FM",
-        "name_en" => "Micronesia, Federated States of",
+        "name_en" => "Micronesia",
         "name_ar" => "ميكرونيزيا",
         "flag" => "🇫🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+691"
     ],
     [
         "code" => "GA",
@@ -631,6 +709,7 @@ return [
         "flag" => "🇬🇦",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+241"
     ],
     [
         "code" => "GB",
@@ -639,6 +718,7 @@ return [
         "flag" => "🇬🇧",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+44"
     ],
     [
         "code" => "GE",
@@ -647,6 +727,7 @@ return [
         "flag" => "🇬🇪",
         "lang_key" => "ka",
         "system_lang" => false,
+        "dial_code" => "+995"
     ],
     [
         "code" => "GG",
@@ -655,6 +736,7 @@ return [
         "flag" => "🇬🇬",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+44"
     ],
     [
         "code" => "GH",
@@ -663,6 +745,7 @@ return [
         "flag" => "🇬🇭",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+233"
     ],
     [
         "code" => "GI",
@@ -671,6 +754,7 @@ return [
         "flag" => "🇬🇮",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+350"
     ],
     [
         "code" => "GN",
@@ -679,6 +763,7 @@ return [
         "flag" => "🇬🇳",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+224"
     ],
     [
         "code" => "GP",
@@ -687,6 +772,7 @@ return [
         "flag" => "🇬🇵",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+590"
     ],
     [
         "code" => "GM",
@@ -695,6 +781,7 @@ return [
         "flag" => "🇬🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+220"
     ],
     [
         "code" => "GW",
@@ -703,6 +790,7 @@ return [
         "flag" => "🇬🇼",
         "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+245"
     ],
     [
         "code" => "GQ",
@@ -711,7 +799,9 @@ return [
         "flag" => "🇬🇶",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+240"
     ],
+
     [
         "code" => "GR",
         "name_en" => "Greece",
@@ -719,6 +809,7 @@ return [
         "flag" => "🇬🇷",
         "lang_key" => "el",
         "system_lang" => false,
+        "dial_code" => "+30"
     ],
     [
         "code" => "GD",
@@ -727,6 +818,7 @@ return [
         "flag" => "🇬🇩",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1473"
     ],
     [
         "code" => "GL",
@@ -735,6 +827,7 @@ return [
         "flag" => "🇬🇱",
         "lang_key" => "kl",
         "system_lang" => false,
+        "dial_code" => "+299"
     ],
     [
         "code" => "GT",
@@ -743,6 +836,7 @@ return [
         "flag" => "🇬🇹",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+502"
     ],
     [
         "code" => "GF",
@@ -751,6 +845,7 @@ return [
         "flag" => "🇬🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+594"
     ],
     [
         "code" => "GU",
@@ -759,6 +854,7 @@ return [
         "flag" => "🇬🇺",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1671"
     ],
     [
         "code" => "GY",
@@ -767,6 +863,7 @@ return [
         "flag" => "🇬🇾",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+592"
     ],
     [
         "code" => "HK",
@@ -775,6 +872,7 @@ return [
         "flag" => "🇭🇰",
         "lang_key" => "zh",
         "system_lang" => false,
+        "dial_code" => "+852"
     ],
     [
         "code" => "HM",
@@ -783,6 +881,7 @@ return [
         "flag" => "🇭🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+672"
     ],
     [
         "code" => "HN",
@@ -791,6 +890,7 @@ return [
         "flag" => "🇭🇳",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+504"
     ],
     [
         "code" => "HR",
@@ -799,6 +899,7 @@ return [
         "flag" => "🇭🇷",
         "lang_key" => "hr",
         "system_lang" => false,
+        "dial_code" => "+385"
     ],
     [
         "code" => "HT",
@@ -807,6 +908,7 @@ return [
         "flag" => "🇭🇹",
         "lang_key" => "ht",
         "system_lang" => false,
+        "dial_code" => "+509"
     ],
     [
         "code" => "HU",
@@ -815,6 +917,7 @@ return [
         "flag" => "🇭🇺",
         "lang_key" => "hu",
         "system_lang" => false,
+        "dial_code" => "+36"
     ],
     [
         "code" => "ID",
@@ -823,14 +926,7 @@ return [
         "flag" => "🇮🇩",
         "lang_key" => "id",
         "system_lang" => false,
-    ],
-    [
-        "code" => "IM",
-        "name_en" => "Isle of Man",
-        "name_ar" => "جزيرة مان",
-        "flag" => "🇮🇲",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+62"
     ],
     [
         "code" => "IN",
@@ -839,6 +935,7 @@ return [
         "flag" => "🇮🇳",
         "lang_key" => "hi",
         "system_lang" => false,
+        "dial_code" => "+91"
     ],
     [
         "code" => "IO",
@@ -847,6 +944,7 @@ return [
         "flag" => "🇮🇴",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+246"
     ],
     [
         "code" => "IE",
@@ -855,14 +953,16 @@ return [
         "flag" => "🇮🇪",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+353"
     ],
     [
         "code" => "IR",
-        "name_en" => "Iran, Islamic Republic of",
+        "name_en" => "Iran",
         "name_ar" => "إيران",
         "flag" => "🇮🇷",
         "lang_key" => "fa",
         "system_lang" => false,
+        "dial_code" => "+98"
     ],
     [
         "code" => "IQ",
@@ -871,6 +971,7 @@ return [
         "flag" => "🇮🇶",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+964"
     ],
     [
         "code" => "IS",
@@ -879,6 +980,7 @@ return [
         "flag" => "🇮🇸",
         "lang_key" => "is",
         "system_lang" => false,
+        "dial_code" => "+354"
     ],
     [
         "code" => "IL",
@@ -887,6 +989,7 @@ return [
         "flag" => "🇮🇱",
         "lang_key" => "he",
         "system_lang" => false,
+        "dial_code" => "+972"
     ],
     [
         "code" => "IT",
@@ -895,6 +998,7 @@ return [
         "flag" => "🇮🇹",
         "lang_key" => "it",
         "system_lang" => false,
+        "dial_code" => "+39"
     ],
     [
         "code" => "JM",
@@ -903,14 +1007,16 @@ return [
         "flag" => "🇯🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1876"
     ],
     [
         "code" => "JE",
         "name_en" => "Jersey",
-        "name_ar" => "جيرزي",
+        "name_ar" => "جيرسي",
         "flag" => "🇯🇪",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+44"
     ],
     [
         "code" => "JO",
@@ -919,6 +1025,7 @@ return [
         "flag" => "🇯🇴",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+962"
     ],
     [
         "code" => "JP",
@@ -927,6 +1034,7 @@ return [
         "flag" => "🇯🇵",
         "lang_key" => "ja",
         "system_lang" => false,
+        "dial_code" => "+81"
     ],
     [
         "code" => "KZ",
@@ -935,6 +1043,7 @@ return [
         "flag" => "🇰🇿",
         "lang_key" => "kk",
         "system_lang" => false,
+        "dial_code" => "+7"
     ],
     [
         "code" => "KE",
@@ -943,6 +1052,7 @@ return [
         "flag" => "🇰🇪",
         "lang_key" => "sw",
         "system_lang" => false,
+        "dial_code" => "+254"
     ],
     [
         "code" => "KG",
@@ -951,6 +1061,7 @@ return [
         "flag" => "🇰🇬",
         "lang_key" => "ky",
         "system_lang" => false,
+        "dial_code" => "+996"
     ],
     [
         "code" => "KH",
@@ -959,6 +1070,7 @@ return [
         "flag" => "🇰🇭",
         "lang_key" => "km",
         "system_lang" => false,
+        "dial_code" => "+855"
     ],
     [
         "code" => "KI",
@@ -967,6 +1079,7 @@ return [
         "flag" => "🇰🇮",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+686"
     ],
     [
         "code" => "KN",
@@ -975,6 +1088,7 @@ return [
         "flag" => "🇰🇳",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1869"
     ],
     [
         "code" => "KR",
@@ -983,6 +1097,7 @@ return [
         "flag" => "🇰🇷",
         "lang_key" => "ko",
         "system_lang" => false,
+        "dial_code" => "+82"
     ],
     [
         "code" => "KW",
@@ -991,6 +1106,7 @@ return [
         "flag" => "🇰🇼",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+965"
     ],
     [
         "code" => "LA",
@@ -999,6 +1115,7 @@ return [
         "flag" => "🇱🇦",
         "lang_key" => "lo",
         "system_lang" => false,
+        "dial_code" => "+856"
     ],
     [
         "code" => "LB",
@@ -1007,6 +1124,7 @@ return [
         "flag" => "🇱🇧",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+961"
     ],
     [
         "code" => "LR",
@@ -1015,6 +1133,7 @@ return [
         "flag" => "🇱🇷",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+231"
     ],
     [
         "code" => "LY",
@@ -1023,6 +1142,7 @@ return [
         "flag" => "🇱🇾",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+218"
     ],
     [
         "code" => "LC",
@@ -1031,6 +1151,7 @@ return [
         "flag" => "🇱🇨",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1758"
     ],
     [
         "code" => "LI",
@@ -1039,6 +1160,7 @@ return [
         "flag" => "🇱🇮",
         "lang_key" => "de",
         "system_lang" => false,
+        "dial_code" => "+423"
     ],
     [
         "code" => "LK",
@@ -1047,14 +1169,16 @@ return [
         "flag" => "🇱🇰",
         "lang_key" => "si",
         "system_lang" => false,
+        "dial_code" => "+94"
     ],
     [
         "code" => "LS",
         "name_en" => "Lesotho",
         "name_ar" => "ليسوتو",
         "flag" => "🇱🇸",
-        "lang_key" => "st",
+        "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+266"
     ],
     [
         "code" => "LT",
@@ -1063,14 +1187,16 @@ return [
         "flag" => "🇱🇹",
         "lang_key" => "lt",
         "system_lang" => false,
+        "dial_code" => "+370"
     ],
     [
         "code" => "LU",
         "name_en" => "Luxembourg",
         "name_ar" => "لوكسمبورغ",
         "flag" => "🇱🇺",
-        "lang_key" => "lb",
+        "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+352"
     ],
     [
         "code" => "LV",
@@ -1079,6 +1205,7 @@ return [
         "flag" => "🇱🇻",
         "lang_key" => "lv",
         "system_lang" => false,
+        "dial_code" => "+371"
     ],
     [
         "code" => "MO",
@@ -1087,14 +1214,16 @@ return [
         "flag" => "🇲🇴",
         "lang_key" => "zh",
         "system_lang" => false,
+        "dial_code" => "+853"
     ],
     [
         "code" => "MF",
-        "name_en" => "Saint Martin (French part)",
-        "name_ar" => "سانت مارتن (الجزء الفرنسي)",
+        "name_en" => "Saint Martin",
+        "name_ar" => "سانت مارتن",
         "flag" => "🇲🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+590"
     ],
     [
         "code" => "MA",
@@ -1103,6 +1232,7 @@ return [
         "flag" => "🇲🇦",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+212"
     ],
     [
         "code" => "MC",
@@ -1111,15 +1241,18 @@ return [
         "flag" => "🇲🇨",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+377"
     ],
     [
         "code" => "MD",
-        "name_en" => "Moldova, Republic of",
+        "name_en" => "Moldova",
         "name_ar" => "مولدوفا",
         "flag" => "🇲🇩",
         "lang_key" => "ro",
         "system_lang" => false,
+        "dial_code" => "+373"
     ],
+
     [
         "code" => "MG",
         "name_en" => "Madagascar",
@@ -1127,22 +1260,7 @@ return [
         "flag" => "🇲🇬",
         "lang_key" => "mg",
         "system_lang" => false,
-    ],
-    [
-        "code" => "MV",
-        "name_en" => "Maldives",
-        "name_ar" => "المالديف",
-        "flag" => "🇲🇻",
-        "lang_key" => "dv",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "MX",
-        "name_en" => "Mexico",
-        "name_ar" => "المكسيك",
-        "flag" => "🇲🇽",
-        "lang_key" => "es",
-        "system_lang" => false,
+        "dial_code" => "+261"
     ],
     [
         "code" => "MH",
@@ -1151,6 +1269,7 @@ return [
         "flag" => "🇲🇭",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+692"
     ],
     [
         "code" => "MK",
@@ -1159,6 +1278,7 @@ return [
         "flag" => "🇲🇰",
         "lang_key" => "mk",
         "system_lang" => false,
+        "dial_code" => "+389"
     ],
     [
         "code" => "ML",
@@ -1167,14 +1287,7 @@ return [
         "flag" => "🇲🇱",
         "lang_key" => "fr",
         "system_lang" => false,
-    ],
-    [
-        "code" => "MT",
-        "name_en" => "Malta",
-        "name_ar" => "مالطا",
-        "flag" => "🇲🇹",
-        "lang_key" => "mt",
-        "system_lang" => false,
+        "dial_code" => "+223"
     ],
     [
         "code" => "MM",
@@ -1183,14 +1296,7 @@ return [
         "flag" => "🇲🇲",
         "lang_key" => "my",
         "system_lang" => false,
-    ],
-    [
-        "code" => "ME",
-        "name_en" => "Montenegro",
-        "name_ar" => "الجبل الأسود",
-        "flag" => "🇲🇪",
-        "lang_key" => "sr",
-        "system_lang" => false,
+        "dial_code" => "+95"
     ],
     [
         "code" => "MN",
@@ -1199,6 +1305,7 @@ return [
         "flag" => "🇲🇳",
         "lang_key" => "mn",
         "system_lang" => false,
+        "dial_code" => "+976"
     ],
     [
         "code" => "MP",
@@ -1207,30 +1314,7 @@ return [
         "flag" => "🇲🇵",
         "lang_key" => "en",
         "system_lang" => false,
-    ],
-    [
-        "code" => "MZ",
-        "name_en" => "Mozambique",
-        "name_ar" => "موزمبيق",
-        "flag" => "🇲🇿",
-        "lang_key" => "pt",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "MR",
-        "name_en" => "Mauritania",
-        "name_ar" => "موريتانيا",
-        "flag" => "🇲🇷",
-        "lang_key" => "ar",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "MS",
-        "name_en" => "Montserrat",
-        "name_ar" => "مونتسيرات",
-        "flag" => "🇲🇸",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+1670"
     ],
     [
         "code" => "MQ",
@@ -1239,6 +1323,34 @@ return [
         "flag" => "🇲🇶",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+596"
+    ],
+    [
+        "code" => "MR",
+        "name_en" => "Mauritania",
+        "name_ar" => "موريتانيا",
+        "flag" => "🇲🇷",
+        "lang_key" => "ar",
+        "system_lang" => false,
+        "dial_code" => "+222"
+    ],
+    [
+        "code" => "MS",
+        "name_en" => "Montserrat",
+        "name_ar" => "مونتسرات",
+        "flag" => "🇲🇸",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+1664"
+    ],
+    [
+        "code" => "MT",
+        "name_en" => "Malta",
+        "name_ar" => "مالطا",
+        "flag" => "🇲🇹",
+        "lang_key" => "mt",
+        "system_lang" => false,
+        "dial_code" => "+356"
     ],
     [
         "code" => "MU",
@@ -1247,14 +1359,34 @@ return [
         "flag" => "🇲🇺",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+230"
+    ],
+    [
+        "code" => "MV",
+        "name_en" => "Maldives",
+        "name_ar" => "المالديف",
+        "flag" => "🇲🇻",
+        "lang_key" => "dv",
+        "system_lang" => false,
+        "dial_code" => "+960"
     ],
     [
         "code" => "MW",
         "name_en" => "Malawi",
-        "name_ar" => "مالاوي",
+        "name_ar" => "ملاوي",
         "flag" => "🇲🇼",
         "lang_key" => "ny",
         "system_lang" => false,
+        "dial_code" => "+265"
+    ],
+    [
+        "code" => "MX",
+        "name_en" => "Mexico",
+        "name_ar" => "المكسيك",
+        "flag" => "🇲🇽",
+        "lang_key" => "es",
+        "system_lang" => false,
+        "dial_code" => "+52"
     ],
     [
         "code" => "MY",
@@ -1263,14 +1395,16 @@ return [
         "flag" => "🇲🇾",
         "lang_key" => "ms",
         "system_lang" => false,
+        "dial_code" => "+60"
     ],
     [
-        "code" => "YT",
-        "name_en" => "Mayotte",
-        "name_ar" => "مايوت",
-        "flag" => "🇾🇹",
-        "lang_key" => "fr",
+        "code" => "MZ",
+        "name_en" => "Mozambique",
+        "name_ar" => "موزمبيق",
+        "flag" => "🇲🇿",
+        "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+258"
     ],
     [
         "code" => "NA",
@@ -1279,6 +1413,7 @@ return [
         "flag" => "🇳🇦",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+264"
     ],
     [
         "code" => "NC",
@@ -1287,6 +1422,7 @@ return [
         "flag" => "🇳🇨",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+687"
     ],
     [
         "code" => "NE",
@@ -1295,6 +1431,7 @@ return [
         "flag" => "🇳🇪",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+227"
     ],
     [
         "code" => "NF",
@@ -1303,6 +1440,7 @@ return [
         "flag" => "🇳🇫",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+672"
     ],
     [
         "code" => "NG",
@@ -1311,6 +1449,7 @@ return [
         "flag" => "🇳🇬",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+234"
     ],
     [
         "code" => "NI",
@@ -1319,14 +1458,7 @@ return [
         "flag" => "🇳🇮",
         "lang_key" => "es",
         "system_lang" => false,
-    ],
-    [
-        "code" => "NU",
-        "name_en" => "Niue",
-        "name_ar" => "نيوي",
-        "flag" => "🇳🇺",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+505"
     ],
     [
         "code" => "NL",
@@ -1335,6 +1467,7 @@ return [
         "flag" => "🇳🇱",
         "lang_key" => "nl",
         "system_lang" => false,
+        "dial_code" => "+31"
     ],
     [
         "code" => "NO",
@@ -1343,6 +1476,7 @@ return [
         "flag" => "🇳🇴",
         "lang_key" => "no",
         "system_lang" => false,
+        "dial_code" => "+47"
     ],
     [
         "code" => "NP",
@@ -1351,14 +1485,25 @@ return [
         "flag" => "🇳🇵",
         "lang_key" => "ne",
         "system_lang" => false,
+        "dial_code" => "+977"
     ],
     [
         "code" => "NR",
         "name_en" => "Nauru",
         "name_ar" => "ناورو",
         "flag" => "🇳🇷",
+        "lang_key" => "na",
+        "system_lang" => false,
+        "dial_code" => "+674"
+    ],
+    [
+        "code" => "NU",
+        "name_en" => "Niue",
+        "name_ar" => "نيوي",
+        "flag" => "🇳🇺",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+683"
     ],
     [
         "code" => "NZ",
@@ -1367,6 +1512,7 @@ return [
         "flag" => "🇳🇿",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+64"
     ],
     [
         "code" => "OM",
@@ -1375,14 +1521,7 @@ return [
         "flag" => "🇴🇲",
         "lang_key" => "ar",
         "system_lang" => false,
-    ],
-    [
-        "code" => "PK",
-        "name_en" => "Pakistan",
-        "name_ar" => "باكستان",
-        "flag" => "🇵🇰",
-        "lang_key" => "ur",
-        "system_lang" => false,
+        "dial_code" => "+968"
     ],
     [
         "code" => "PA",
@@ -1391,14 +1530,7 @@ return [
         "flag" => "🇵🇦",
         "lang_key" => "es",
         "system_lang" => false,
-    ],
-    [
-        "code" => "PN",
-        "name_en" => "Pitcairn",
-        "name_ar" => "بيتكيرن",
-        "flag" => "🇵🇳",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+507"
     ],
     [
         "code" => "PE",
@@ -1407,78 +1539,7 @@ return [
         "flag" => "🇵🇪",
         "lang_key" => "es",
         "system_lang" => false,
-    ],
-    [
-        "code" => "PH",
-        "name_en" => "Philippines",
-        "name_ar" => "الفلبين",
-        "flag" => "🇵🇭",
-        "lang_key" => "tl",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PW",
-        "name_en" => "Palau",
-        "name_ar" => "بالاو",
-        "flag" => "🇵🇼",
-        "lang_key" => "en",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PG",
-        "name_en" => "Papua New Guinea",
-        "name_ar" => "بابوا غينيا الجديدة",
-        "flag" => "🇵🇬",
-        "lang_key" => "en",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PL",
-        "name_en" => "Poland",
-        "name_ar" => "بولندا",
-        "flag" => "🇵🇱",
-        "lang_key" => "pl",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PR",
-        "name_en" => "Puerto Rico",
-        "name_ar" => "بورتو ريكو",
-        "flag" => "🇵🇷",
-        "lang_key" => "es",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "KP",
-        "name_en" => "North Korea",
-        "name_ar" => "كوريا الشمالية",
-        "flag" => "🇰🇵",
-        "lang_key" => "ko",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PT",
-        "name_en" => "Portugal",
-        "name_ar" => "البرتغال",
-        "flag" => "🇵🇹",
-        "lang_key" => "pt",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PY",
-        "name_en" => "Paraguay",
-        "name_ar" => "باراغواي",
-        "flag" => "🇵🇾",
-        "lang_key" => "es",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "PS",
-        "name_en" => "Palestine",
-        "name_ar" => "فلسطين",
-        "flag" => "🇵🇸",
-        "lang_key" => "ar",
-        "system_lang" => false,
+        "dial_code" => "+51"
     ],
     [
         "code" => "PF",
@@ -1487,142 +1548,43 @@ return [
         "flag" => "🇵🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+689"
     ],
     [
-        "code" => "QA",
-        "name_en" => "Qatar",
-        "name_ar" => "قطر",
-        "flag" => "🇶🇦",
-        "lang_key" => "ar",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "RE",
-        "name_en" => "Réunion",
-        "name_ar" => "ريونيون",
-        "flag" => "🇷🇪",
-        "lang_key" => "fr",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "RO",
-        "name_en" => "Romania",
-        "name_ar" => "رومانيا",
-        "flag" => "🇷🇴",
-        "lang_key" => "ro",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "RU",
-        "name_en" => "Russia",
-        "name_ar" => "روسيا",
-        "flag" => "🇷🇺",
-        "lang_key" => "ru",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "RW",
-        "name_en" => "Rwanda",
-        "name_ar" => "رواندا",
-        "flag" => "🇷🇼",
-        "lang_key" => "rw",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SA",
-        "name_en" => "Saudi Arabia",
-        "name_ar" => "المملكة العربية السعودية",
-        "flag" => "🇸🇦",
-        "lang_key" => "ar",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SD",
-        "name_en" => "Sudan",
-        "name_ar" => "السودان",
-        "flag" => "🇸🇩",
-        "lang_key" => "ar",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SN",
-        "name_en" => "Senegal",
-        "name_ar" => "السنغال",
-        "flag" => "🇸🇳",
-        "lang_key" => "fr",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SG",
-        "name_en" => "Singapore",
-        "name_ar" => "سنغافورة",
-        "flag" => "🇸🇬",
+        "code" => "PG",
+        "name_en" => "Papua New Guinea",
+        "name_ar" => "بابوا غينيا الجديدة",
+        "flag" => "🇵🇬",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+675"
     ],
     [
-        "code" => "GS",
-        "name_en" => "South Georgia and the South Sandwich Islands",
-        "name_ar" => "جورجيا الجنوبية وجزر ساندويتش الجنوبية",
-        "flag" => "🇬🇸",
-        "lang_key" => "en",
+        "code" => "PH",
+        "name_en" => "Philippines",
+        "name_ar" => "الفلبين",
+        "flag" => "🇵🇭",
+        "lang_key" => "tl",
         "system_lang" => false,
+        "dial_code" => "+63"
     ],
     [
-        "code" => "SH",
-        "name_en" => "Saint Helena, Ascension and Tristan da Cunha",
-        "name_ar" => "سانت هيلينا وأسينشين وتريستان دا كونها",
-        "flag" => "🇸🇭",
-        "lang_key" => "en",
+        "code" => "PK",
+        "name_en" => "Pakistan",
+        "name_ar" => "باكستان",
+        "flag" => "🇵🇰",
+        "lang_key" => "ur",
         "system_lang" => false,
+        "dial_code" => "+92"
     ],
     [
-        "code" => "SJ",
-        "name_en" => "Svalbard and Jan Mayen",
-        "name_ar" => "سفالبارد ويان ماين",
-        "flag" => "🇸🇯",
-        "lang_key" => "no",
+        "code" => "PL",
+        "name_en" => "Poland",
+        "name_ar" => "بولندا",
+        "flag" => "🇵🇱",
+        "lang_key" => "pl",
         "system_lang" => false,
-    ],
-    [
-        "code" => "SB",
-        "name_en" => "Solomon Islands",
-        "name_ar" => "جزر سليمان",
-        "flag" => "🇸🇧",
-        "lang_key" => "en",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SL",
-        "name_en" => "Sierra Leone",
-        "name_ar" => "سيراليون",
-        "flag" => "🇸🇱",
-        "lang_key" => "en",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SV",
-        "name_en" => "El Salvador",
-        "name_ar" => "السلفادور",
-        "flag" => "🇸🇻",
-        "lang_key" => "es",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SM",
-        "name_en" => "San Marino",
-        "name_ar" => "سان مارينو",
-        "flag" => "🇸🇲",
-        "lang_key" => "it",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SO",
-        "name_en" => "Somalia",
-        "name_ar" => "الصومال",
-        "flag" => "🇸🇴",
-        "lang_key" => "so",
-        "system_lang" => false,
+        "dial_code" => "+48"
     ],
     [
         "code" => "PM",
@@ -1631,54 +1593,143 @@ return [
         "flag" => "🇵🇲",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+508"
     ],
     [
-        "code" => "RS",
-        "name_en" => "Serbia",
-        "name_ar" => "صربيا",
-        "flag" => "🇷🇸",
-        "lang_key" => "sr",
-        "system_lang" => false,
-    ],
-    [
-        "code" => "SS",
-        "name_en" => "South Sudan",
-        "name_ar" => "جنوب السودان",
-        "flag" => "🇸🇸",
+        "code" => "PN",
+        "name_en" => "Pitcairn",
+        "name_ar" => "بيتكيرن",
+        "flag" => "🇵🇳",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+64"
     ],
     [
-        "code" => "ST",
-        "name_en" => "Sao Tome and Principe",
-        "name_ar" => "ساو تومي وبرينسيبي",
-        "flag" => "🇸🇹",
+        "code" => "PR",
+        "name_en" => "Puerto Rico",
+        "name_ar" => "بورتوريكو",
+        "flag" => "🇵🇷",
+        "lang_key" => "es",
+        "system_lang" => false,
+        "dial_code" => "+1787"
+    ],
+    [
+        "code" => "PS",
+        "name_en" => "Palestine",
+        "name_ar" => "فلسطين",
+        "flag" => "🇵🇸",
+        "lang_key" => "ar",
+        "system_lang" => false,
+        "dial_code" => "+970"
+    ],
+    [
+        "code" => "PT",
+        "name_en" => "Portugal",
+        "name_ar" => "البرتغال",
+        "flag" => "🇵🇹",
         "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+351"
     ],
     [
-        "code" => "SR",
-        "name_en" => "Suriname",
-        "name_ar" => "سورينام",
-        "flag" => "🇸🇷",
-        "lang_key" => "nl",
+        "code" => "PW",
+        "name_en" => "Palau",
+        "name_ar" => "بالاو",
+        "flag" => "🇵🇼",
+        "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+680"
     ],
     [
-        "code" => "SK",
-        "name_en" => "Slovakia",
-        "name_ar" => "سلوفاكيا",
-        "flag" => "🇸🇰",
-        "lang_key" => "sk",
+        "code" => "PY",
+        "name_en" => "Paraguay",
+        "name_ar" => "باراغواي",
+        "flag" => "🇵🇾",
+        "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+595"
     ],
     [
-        "code" => "SI",
-        "name_en" => "Slovenia",
-        "name_ar" => "سلوفينيا",
-        "flag" => "🇸🇮",
-        "lang_key" => "sl",
+        "code" => "QA",
+        "name_en" => "Qatar",
+        "name_ar" => "قطر",
+        "flag" => "🇶🇦",
+        "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+974"
+    ],
+    [
+        "code" => "RE",
+        "name_en" => "Réunion",
+        "name_ar" => "ريونيون",
+        "flag" => "🇷🇪",
+        "lang_key" => "fr",
+        "system_lang" => false,
+        "dial_code" => "+262"
+    ],
+
+    [
+        "code" => "RO",
+        "name_en" => "Romania",
+        "name_ar" => "رومانيا",
+        "flag" => "🇷🇴",
+        "lang_key" => "ro",
+        "system_lang" => false,
+        "dial_code" => "+40"
+    ],
+    [
+        "code" => "RU",
+        "name_en" => "Russian Federation",
+        "name_ar" => "روسيا",
+        "flag" => "🇷🇺",
+        "lang_key" => "ru",
+        "system_lang" => false,
+        "dial_code" => "+7"
+    ],
+    [
+        "code" => "RW",
+        "name_en" => "Rwanda",
+        "name_ar" => "رواندا",
+        "flag" => "🇷🇼",
+        "lang_key" => "rw",
+        "system_lang" => false,
+        "dial_code" => "+250"
+    ],
+    [
+        "code" => "SA",
+        "name_en" => "Saudi Arabia",
+        "name_ar" => "المملكة العربية السعودية",
+        "flag" => "🇸🇦",
+        "lang_key" => "ar",
+        "system_lang" => false,
+        "dial_code" => "+966"
+    ],
+    [
+        "code" => "SB",
+        "name_en" => "Solomon Islands",
+        "name_ar" => "جزر سليمان",
+        "flag" => "🇸🇧",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+677"
+    ],
+    [
+        "code" => "SC",
+        "name_en" => "Seychelles",
+        "name_ar" => "سيشل",
+        "flag" => "🇸🇨",
+        "lang_key" => "fr",
+        "system_lang" => false,
+        "dial_code" => "+248"
+    ],
+    [
+        "code" => "SD",
+        "name_en" => "Sudan",
+        "name_ar" => "السودان",
+        "flag" => "🇸🇩",
+        "lang_key" => "ar",
+        "system_lang" => false,
+        "dial_code" => "+249"
     ],
     [
         "code" => "SE",
@@ -1687,30 +1738,133 @@ return [
         "flag" => "🇸🇪",
         "lang_key" => "sv",
         "system_lang" => false,
+        "dial_code" => "+46"
     ],
     [
-        "code" => "SZ",
-        "name_en" => "Eswatini",
-        "name_ar" => "إسواتيني",
-        "flag" => "🇸🇿",
+        "code" => "SG",
+        "name_en" => "Singapore",
+        "name_ar" => "سنغافورة",
+        "flag" => "🇸🇬",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+65"
+    ],
+    [
+        "code" => "SH",
+        "name_en" => "Saint Helena",
+        "name_ar" => "سانت هيلينا",
+        "flag" => "🇸🇭",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+290"
+    ],
+    [
+        "code" => "SI",
+        "name_en" => "Slovenia",
+        "name_ar" => "سلوفينيا",
+        "flag" => "🇸🇮",
+        "lang_key" => "sl",
+        "system_lang" => false,
+        "dial_code" => "+386"
+    ],
+    [
+        "code" => "SJ",
+        "name_en" => "Svalbard and Jan Mayen",
+        "name_ar" => "سفالبارد وجان ماين",
+        "flag" => "🇸🇯",
+        "lang_key" => "no",
+        "system_lang" => false,
+        "dial_code" => "+47"
+    ],
+    [
+        "code" => "SK",
+        "name_en" => "Slovakia",
+        "name_ar" => "سلوفاكيا",
+        "flag" => "🇸🇰",
+        "lang_key" => "sk",
+        "system_lang" => false,
+        "dial_code" => "+421"
+    ],
+    [
+        "code" => "SL",
+        "name_en" => "Sierra Leone",
+        "name_ar" => "سيراليون",
+        "flag" => "🇸🇱",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+232"
+    ],
+    [
+        "code" => "SM",
+        "name_en" => "San Marino",
+        "name_ar" => "سان مارينو",
+        "flag" => "🇸🇲",
+        "lang_key" => "it",
+        "system_lang" => false,
+        "dial_code" => "+378"
+    ],
+    [
+        "code" => "SN",
+        "name_en" => "Senegal",
+        "name_ar" => "السنغال",
+        "flag" => "🇸🇳",
+        "lang_key" => "fr",
+        "system_lang" => false,
+        "dial_code" => "+221"
+    ],
+    [
+        "code" => "SO",
+        "name_en" => "Somalia",
+        "name_ar" => "الصومال",
+        "flag" => "🇸🇴",
+        "lang_key" => "so",
+        "system_lang" => false,
+        "dial_code" => "+252"
+    ],
+    [
+        "code" => "SR",
+        "name_en" => "Suriname",
+        "name_ar" => "سورينام",
+        "flag" => "🇸🇷",
+        "lang_key" => "nl",
+        "system_lang" => false,
+        "dial_code" => "+597"
+    ],
+    [
+        "code" => "SS",
+        "name_en" => "South Sudan",
+        "name_ar" => "جنوب السودان",
+        "flag" => "🇸🇸",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+211"
+    ],
+    [
+        "code" => "ST",
+        "name_en" => "Sao Tome and Principe",
+        "name_ar" => "ساو تومي وبرينسيبي",
+        "flag" => "🇸🇹",
+        "lang_key" => "pt",
+        "system_lang" => false,
+        "dial_code" => "+239"
+    ],
+    [
+        "code" => "SV",
+        "name_en" => "El Salvador",
+        "name_ar" => "السلفادور",
+        "flag" => "🇸🇻",
+        "lang_key" => "es",
+        "system_lang" => false,
+        "dial_code" => "+503"
     ],
     [
         "code" => "SX",
-        "name_en" => "Sint Maarten (Dutch part)",
-        "name_ar" => "سينت مارتن (الجزء الهولندي)",
+        "name_en" => "Sint Maarten",
+        "name_ar" => "سينت مارتن",
         "flag" => "🇸🇽",
         "lang_key" => "nl",
         "system_lang" => false,
-    ],
-    [
-        "code" => "SC",
-        "name_en" => "Seychelles",
-        "name_ar" => "سيشيل",
-        "flag" => "🇸🇨",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+1721"
     ],
     [
         "code" => "SY",
@@ -1719,14 +1873,25 @@ return [
         "flag" => "🇸🇾",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+963"
+    ],
+    [
+        "code" => "SZ",
+        "name_en" => "Eswatini",
+        "name_ar" => "إسواتيني",
+        "flag" => "🇸🇿",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+268"
     ],
     [
         "code" => "TC",
         "name_en" => "Turks and Caicos Islands",
-        "name_ar" => "جزر تركس وكايكوس",
+        "name_ar" => "جزر توركس وكايكوس",
         "flag" => "🇹🇨",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1649"
     ],
     [
         "code" => "TD",
@@ -1735,6 +1900,7 @@ return [
         "flag" => "🇹🇩",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+235"
     ],
     [
         "code" => "TG",
@@ -1743,6 +1909,7 @@ return [
         "flag" => "🇹🇬",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+228"
     ],
     [
         "code" => "TH",
@@ -1751,6 +1918,7 @@ return [
         "flag" => "🇹🇭",
         "lang_key" => "th",
         "system_lang" => false,
+        "dial_code" => "+66"
     ],
     [
         "code" => "TJ",
@@ -1759,6 +1927,7 @@ return [
         "flag" => "🇹🇯",
         "lang_key" => "tg",
         "system_lang" => false,
+        "dial_code" => "+992"
     ],
     [
         "code" => "TK",
@@ -1767,14 +1936,7 @@ return [
         "flag" => "🇹🇰",
         "lang_key" => "en",
         "system_lang" => false,
-    ],
-    [
-        "code" => "TM",
-        "name_en" => "Turkmenistan",
-        "name_ar" => "تركمانستان",
-        "flag" => "🇹🇲",
-        "lang_key" => "tk",
-        "system_lang" => false,
+        "dial_code" => "+690"
     ],
     [
         "code" => "TL",
@@ -1783,22 +1945,16 @@ return [
         "flag" => "🇹🇱",
         "lang_key" => "pt",
         "system_lang" => false,
+        "dial_code" => "+670"
     ],
     [
-        "code" => "TO",
-        "name_en" => "Tonga",
-        "name_ar" => "تونغا",
-        "flag" => "🇹🇴",
-        "lang_key" => "to",
+        "code" => "TM",
+        "name_en" => "Turkmenistan",
+        "name_ar" => "تركمانستان",
+        "flag" => "🇹🇲",
+        "lang_key" => "tk",
         "system_lang" => false,
-    ],
-    [
-        "code" => "TT",
-        "name_en" => "Trinidad and Tobago",
-        "name_ar" => "ترينيداد وتوباغو",
-        "flag" => "🇹🇹",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+993"
     ],
     [
         "code" => "TN",
@@ -1807,6 +1963,16 @@ return [
         "flag" => "🇹🇳",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+216"
+    ],
+    [
+        "code" => "TO",
+        "name_en" => "Tonga",
+        "name_ar" => "تونغا",
+        "flag" => "🇹🇴",
+        "lang_key" => "to",
+        "system_lang" => false,
+        "dial_code" => "+676"
     ],
     [
         "code" => "TR",
@@ -1815,6 +1981,16 @@ return [
         "flag" => "🇹🇷",
         "lang_key" => "tr",
         "system_lang" => false,
+        "dial_code" => "+90"
+    ],
+    [
+        "code" => "TT",
+        "name_en" => "Trinidad and Tobago",
+        "name_ar" => "ترينيداد وتوباغو",
+        "flag" => "🇹🇹",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+1868"
     ],
     [
         "code" => "TV",
@@ -1823,30 +1999,25 @@ return [
         "flag" => "🇹🇻",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+688"
     ],
     [
         "code" => "TW",
-        "name_en" => "Taiwan, Province of China",
+        "name_en" => "Taiwan",
         "name_ar" => "تايوان",
         "flag" => "🇹🇼",
         "lang_key" => "zh",
         "system_lang" => false,
+        "dial_code" => "+886"
     ],
     [
         "code" => "TZ",
-        "name_en" => "Tanzania, United Republic of",
+        "name_en" => "Tanzania",
         "name_ar" => "تنزانيا",
         "flag" => "🇹🇿",
         "lang_key" => "sw",
         "system_lang" => false,
-    ],
-    [
-        "code" => "UG",
-        "name_en" => "Uganda",
-        "name_ar" => "أوغندا",
-        "flag" => "🇺🇬",
-        "lang_key" => "en",
-        "system_lang" => false,
+        "dial_code" => "+255"
     ],
     [
         "code" => "UA",
@@ -1855,14 +2026,35 @@ return [
         "flag" => "🇺🇦",
         "lang_key" => "uk",
         "system_lang" => false,
+        "dial_code" => "+380"
     ],
+
     [
         "code" => "UM",
         "name_en" => "United States Minor Outlying Islands",
-        "name_ar" => "جزر الولايات المتحدة البعيدة الصغيرة",
+        "name_ar" => "جزر الولايات المتحدة الصغيرة النائية",
         "flag" => "🇺🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1"
+    ],
+    [
+        "code" => "UG",
+        "name_en" => "Uganda",
+        "name_ar" => "أوغندا",
+        "flag" => "🇺🇬",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+256"
+    ],
+    [
+        "code" => "US",
+        "name_en" => "United States",
+        "name_ar" => "الولايات المتحدة",
+        "flag" => "🇺🇸",
+        "lang_key" => "en",
+        "system_lang" => false,
+        "dial_code" => "+1"
     ],
     [
         "code" => "UY",
@@ -1871,14 +2063,7 @@ return [
         "flag" => "🇺🇾",
         "lang_key" => "es",
         "system_lang" => false,
-    ],
-    [
-        "code" => "US",
-        "name_en" => "United States",
-        "name_ar" => "الولايات المتحدة",
-        "flag" => "🇺🇸",
-        "lang_key" => "en",
-        "system_lang" => true,
+        "dial_code" => "+598"
     ],
     [
         "code" => "UZ",
@@ -1887,14 +2072,16 @@ return [
         "flag" => "🇺🇿",
         "lang_key" => "uz",
         "system_lang" => false,
+        "dial_code" => "+998"
     ],
     [
         "code" => "VA",
-        "name_en" => "Holy See (Vatican City State)",
+        "name_en" => "Holy See",
         "name_ar" => "الفاتيكان",
         "flag" => "🇻🇦",
         "lang_key" => "it",
         "system_lang" => false,
+        "dial_code" => "+379"
     ],
     [
         "code" => "VC",
@@ -1903,14 +2090,16 @@ return [
         "flag" => "🇻🇨",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1784"
     ],
     [
         "code" => "VE",
-        "name_en" => "Venezuela, Bolivarian Republic of",
+        "name_en" => "Venezuela",
         "name_ar" => "فنزويلا",
         "flag" => "🇻🇪",
         "lang_key" => "es",
         "system_lang" => false,
+        "dial_code" => "+58"
     ],
     [
         "code" => "VG",
@@ -1919,6 +2108,7 @@ return [
         "flag" => "🇻🇬",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1284"
     ],
     [
         "code" => "VI",
@@ -1927,6 +2117,7 @@ return [
         "flag" => "🇻🇮",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+1340"
     ],
     [
         "code" => "VN",
@@ -1935,6 +2126,7 @@ return [
         "flag" => "🇻🇳",
         "lang_key" => "vi",
         "system_lang" => false,
+        "dial_code" => "+84"
     ],
     [
         "code" => "VU",
@@ -1943,6 +2135,7 @@ return [
         "flag" => "🇻🇺",
         "lang_key" => "bi",
         "system_lang" => false,
+        "dial_code" => "+678"
     ],
     [
         "code" => "WF",
@@ -1951,6 +2144,7 @@ return [
         "flag" => "🇼🇫",
         "lang_key" => "fr",
         "system_lang" => false,
+        "dial_code" => "+681"
     ],
     [
         "code" => "WS",
@@ -1959,6 +2153,7 @@ return [
         "flag" => "🇼🇸",
         "lang_key" => "sm",
         "system_lang" => false,
+        "dial_code" => "+685"
     ],
     [
         "code" => "YE",
@@ -1967,14 +2162,25 @@ return [
         "flag" => "🇾🇪",
         "lang_key" => "ar",
         "system_lang" => false,
+        "dial_code" => "+967"
+    ],
+    [
+        "code" => "YT",
+        "name_en" => "Mayotte",
+        "name_ar" => "مايوت",
+        "flag" => "🇾🇹",
+        "lang_key" => "fr",
+        "system_lang" => false,
+        "dial_code" => "+262"
     ],
     [
         "code" => "ZA",
         "name_en" => "South Africa",
         "name_ar" => "جنوب أفريقيا",
         "flag" => "🇿🇦",
-        "lang_key" => "en",
+        "lang_key" => "af",
         "system_lang" => false,
+        "dial_code" => "+27"
     ],
     [
         "code" => "ZM",
@@ -1983,6 +2189,7 @@ return [
         "flag" => "🇿🇲",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+260"
     ],
     [
         "code" => "ZW",
@@ -1991,5 +2198,6 @@ return [
         "flag" => "🇿🇼",
         "lang_key" => "en",
         "system_lang" => false,
+        "dial_code" => "+263"
     ]
 ];

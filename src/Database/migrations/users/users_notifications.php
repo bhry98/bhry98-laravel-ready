@@ -15,32 +15,22 @@ return new class extends Migration {
         Schema::create(
             table: UsersNotificationsModel::TABLE_NAME,
             callback: function (Blueprint $table) {
-                $table->id();
-                $table->foreignId(column: 'notifiable_id')
-                    ->nullable()
-                    ->references(column: 'id')
-                    ->on(table: UsersCoreUsersModel::TABLE_NAME)
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
-                $table->foreignId(column: 'notifiable_type')
-                    ->nullable();
-                $table->foreignId(column: 'from_user_id')
-                    ->nullable()
-                    ->references(column: 'id')
-                    ->on(table: UsersCoreUsersModel::TABLE_NAME)
-                    ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
-                $table->string(column: 'relation')->nullable();
-                $table->string(column: 'relation_id')->nullable();
-                $table->string(column: 'type');
-                $table->string(column: 'title_key');
-                $table->string(column: 'message_key');
-                $table->string(column: 'note_key')->nullable();
-                $table->string(column: 'icon')->nullable();
-                $table->string(column: 'color')->nullable();
-                $table->string(column: 'is_read')->default(value: false);
-                $table->string(column: 'url')->nullable();
-                $table->timestamp(column: 'read_at')->nullable();
+                $table->uuid('id')->primary();
+                $table->foreignId('from_user_id')->nullable()->references('id')->on(UsersCoreUsersModel::TABLE_NAME)->cascadeOnUpdate()->nullOnDelete();
+                $table->text('data');
+//                $table->string('title_key');
+//                $table->string('message_key');
+//                $table->json('title_replaced')->nullable();
+//                $table->string('message_replaced')->nullable();
+                $table->string( 'icon')->nullable();
+                $table->string( 'color')->nullable();
+                $table->string( 'relation')->nullable();
+                $table->string( 'relation_id')->nullable();
+                ///////////
+                $table->string('type');
+                $table->morphs('notifiable');
+                $table->timestamp('read_at')->nullable();
+                ////
                 bhry98_common_database_columns($table);
             });
         Schema::enableForeignKeyConstraints();

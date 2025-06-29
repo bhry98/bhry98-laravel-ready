@@ -13,14 +13,15 @@ class SuccessfullyRegistration extends Notification
 {
     use Queueable;
 
+    public  $user;
     /**
      * Create a new notification instance.
      */
     public function __construct(
-        public UsersCoreUsersModel $user
+//        public UsersCoreUsersModel $user
     )
     {
-        //
+        $this->user = auth()->user();
     }
 
     /**
@@ -30,7 +31,7 @@ class SuccessfullyRegistration extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -57,6 +58,16 @@ class SuccessfullyRegistration extends Notification
     {
         return [
             //
+        ];
+    }
+
+    public function toDatabase($notifiable): array
+    {
+        return [
+            'title_key' => 'notifications.welcome.title',
+            'message_key' => 'notifications.welcome.message',
+//            'lang_/**/params' => ['name' => $notifiable->name],
+            // other data...
         ];
     }
 }

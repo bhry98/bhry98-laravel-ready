@@ -112,7 +112,7 @@ class Bhry98GovernoratesResource extends Resource
                 TextColumn::make('users_count')
                     ->label(__('Bhry98::locations.total-users'))
                     ->toggleable(),
-                ...bhry98_figma_columns(active: true)
+                ...bhry98_filament_columns(active: true)
             ])
             ->filters([
                 TrashedFilter::make()->visible(auth()->user()->can('Locations.Countries.ForceDelete') || auth()->user()->can('Locations.Countries.Delete')),

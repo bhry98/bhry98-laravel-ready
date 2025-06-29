@@ -2,13 +2,13 @@
 
 namespace Bhry98\Bhry98LaravelReady\Helpers\loads;
 
-use Bhry98\Bhry98LaravelReady\Helpers\CreateCustomLogger;
+use Bhry98\Bhry98LaravelReady\Helpers\logs\CreateCustomLogger;
 use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
+use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobBatchesModel;
+use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobFailedModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class LaravelCoreConfigLoad
 {
@@ -38,16 +38,24 @@ class LaravelCoreConfigLoad
 
     private function queueConfig(): void
     {
-        config()->set('session.driver', 'database');
-        config()->set(key: 'session.connections.database', value: [
-            'driver' => '',
+        config()->set('queue.default', 'database');
+        config()->set('queue.connections.database', value: [
+            'driver' => 'database',
             'connection' => "mysql",
             'table' => QueueJobModel::TABLE_NAME,
             'queue' => "database",
             'retry_after' => (int)env('DB_QUEUE_RETRY_AFTER', 90),
             'after_commit' => false,
-
-        ]);;
+        ]);
+        config()->set('queue.batching', value: [
+            'database' =>'mysql',
+            'table' => QueueJobBatchesModel::TABLE_NAME,
+        ]);
+        config()->set('queue.failed', value: [
+            'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
+            'database' => 'mysql',
+            'table' => QueueJobFailedModel::TABLE_NAME,
+        ]);
     }
 
     private function loggingConfig(): void

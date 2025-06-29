@@ -84,6 +84,7 @@ class UsersManagementService extends BaseService
 
     public function createNewUser(array $data): ?UsersCoreUsersModel
     {
+        dd($data);
         $first_name = $data["first_name"];
         $last_name = $data["last_name"];
         $data["display_name"] = "$first_name $last_name";

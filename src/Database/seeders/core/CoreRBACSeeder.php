@@ -63,11 +63,17 @@ class CoreRBACSeeder extends Seeder
     function permissionsSeeder(): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $permissions = include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}locations.php";
-//        if (config('bhry98.rbac.permissions') && count(config('bhry98.rbac.permissions')) > 0) {
-//            $permissions = array_merge($permissions, config('bhry98.rbac.permissions', []));
-//        }
-        foreach ($permissions ?? [] as $key => $permission) {
+        $permissions = collect();
+        foreach ([
+                     include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}locations.php",
+                     include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}users.php",
+                     config('bhry98.rbac.permissions', []),
+                 ] as $set) {
+            if (is_array($set) && count($set) > 0) {
+                $permissions = $permissions->merge($set);
+            }
+        }
+        $permissions?->each(function ($permission, $key) {
             $permissionRecord = RBACPermissionsModel::query()->updateOrCreate(
                 [
                     "code" => (string)$key,
@@ -83,7 +89,7 @@ class CoreRBACSeeder extends Seeder
             foreach ($permission['discretion'] ?? [] as $local => $value) {
                 $permissionRecord->setLocalized(column: 'discretion', value: $value, locale: $local);
             }
-        }
+        });
     }
 
 }

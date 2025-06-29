@@ -2,6 +2,7 @@
 
 namespace Bhry98\Bhry98LaravelReady\Models\logs;
 
+use Bhry98\Bhry98LaravelReady\Enums\logs\LogsLevelsEnums;
 use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
 use Bhry98\Bhry98LaravelReady\Models\BaseModel;
 
@@ -19,7 +20,8 @@ class LogsSystemModel extends BaseModel
     ];
     protected $casts = [
         'context' => 'array',
-        "action" => SystemActionEnums::class
+        "action" => SystemActionEnums::class,
+        "log_level"=>LogsLevelsEnums::class
     ];
 
     protected static function booted(): void

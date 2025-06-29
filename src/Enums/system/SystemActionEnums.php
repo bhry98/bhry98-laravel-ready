@@ -33,7 +33,7 @@ enum SystemActionEnums implements HasColor, HasLabel, HasIcon
             self::Creating => 'heroicon-o-check-badge',
             self::Updating => 'heroicon-o-pencil-square',
             self::Deleting, self::ForceDeleting => 'heroicon-o-trash',
-            self::Restoring => 'heroicon-o-refresh',
+            self::Restoring => 'heroicon-o-arrow-path',
             self::Other => 'heroicon-o-exclamation-circle',
         };
     }
@@ -41,12 +41,12 @@ enum SystemActionEnums implements HasColor, HasLabel, HasIcon
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::Creating => __("Bhry98::enums.logs-system-action.creating"),
-            self::Updating => __("Bhry98::enums.logs-system-action.updating"),
-            self::Deleting => __("Bhry98::enums.logs-system-action.deleting"),
-            self::ForceDeleting => __("Bhry98::enums.logs-system-action.force-deleting"),
-            self::Restoring => __("Bhry98::enums.logs-system-action.restoring"),
-            self::Other => __("Bhry98::enums.logs-system-action.other"),
+            self::Creating => __("Bhry98::enums.system-action.creating"),
+            self::Updating => __("Bhry98::enums.system-action.updating"),
+            self::Deleting => __("Bhry98::enums.system-action.deleting"),
+            self::ForceDeleting => __("Bhry98::enums.system-action.force-deleting"),
+            self::Restoring => __("Bhry98::enums.system-action.restoring"),
+            self::Other => __("Bhry98::enums.system-action.other"),
         };
     }
 }

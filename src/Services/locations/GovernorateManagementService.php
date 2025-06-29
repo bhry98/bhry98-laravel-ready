@@ -49,10 +49,16 @@ class GovernorateManagementService extends BaseService
     public function createGovernorate(array $data): bool
     {
         $record = LocationsGovernoratesModel::query()->create($data);
+
         if (!$record) {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.created-field"));
             return false;
         } else {
+            if (array_key_exists('names', $data)) {
+                foreach ($data['names'] as $locale => $value) {
+                    if ($value) $record->setLocalized('name', $value, $locale);
+                }
+            }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.created-success"));
         }
         bhry98_created_log((bool)$record, "create new locations governorate", context: ['record' => $record->toArray()]);
@@ -72,15 +78,16 @@ class GovernorateManagementService extends BaseService
             return false;
         }
         $update = $record->update($data);
-        if (array_key_exists('names', $data)) {
-            foreach ($data['names'] as $locale => $value) {
-               if($value) $record->setLocalized('name', $value, $locale);
-            }
-        }
         if (!$update) {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.updated-field"));
             return false;
         } else {
+            if (array_key_exists('names', $data)) {
+                $record = self::getById($id);
+                foreach ($data['names'] as $locale => $value) {
+                    if ($value) $record->setLocalized('name', $value, $locale);
+                }
+            }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));
         }
         bhry98_updated_log((bool)$update, "update locations governorate", context: ['record' => $record, 'data' => $data]);
@@ -134,7 +141,7 @@ class GovernorateManagementService extends BaseService
             return false;
         }
         $restore = $record->restore();
-        bhry98_deleted_log((bool)$restore, "restore locations governorate", ['record' => $record]);
+        bhry98_restored_log((bool)$restore, "restore locations governorate", ['record' => $record]);
         if (!$restore) {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restored-field"));
             return false;
@@ -191,38 +198,25 @@ class GovernorateManagementService extends BaseService
         return $data->paginate($perPage, page: $pageNumber);
     }
 
-
-
-    //    public function getAllGovernoratesByGlobalCountryCode(string $countryGlobalCode, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
-//    {
-//        $country = LocationsCountriesModel::query()->where('country_code', $countryGlobalCode)->first();
-//        $data = LocationsGovernoratesModel::query()
-//            ->where("country_id", $country?->id ?? "")
-//            ->orderBy('id', 'desc');
-//        if (!empty($filters)) {
-//            self::applyFilters($data, $filters, LocationsGovernoratesModel::class);
-//            $pageNumber = 0;
-//        }
-//        if ($relations) {
-//            $data->with($relations);
-//        }
-//        return $data->withCount(['users', 'cities'])
-//            ->paginate(
-//                perPage: $perPage,
-//                page: $pageNumber,
-//            );
-//    }
-//    public function searchByName(string $governorateName, int $limit = 20): array
-//    {
-//        $data = LocationsGovernoratesModel::query();
-//        $data->orderBy(column: 'id', direction: 'desc');
-//        $data->whereHas(relation: 'localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$governorateName}%"));
-//        $data->orWhereLike(column: 'default_name', value: "%{$governorateName}%");
-//        $data->limit(value: $limit);
-//        $result = $data->get();
-//        return $result->mapWithKeys(function ($model) {
-//            $label = optional($model->localizations->where('locale', app()->getLocale())->first())->value ?? $model->default_name . 33;
-//            return [$model->id => $label];
-//        })->toArray();
-//    }
+    /**
+     * @param string|null $searchStr
+     * @param int $limit
+     * @param int|null $countryId
+     * @return array
+     */
+    public function getOptions(?string $searchStr = null, int $limit = 20, ?int $countryId = null): array
+    {
+        $data = LocationsGovernoratesModel::query()->locales();
+        if ($countryId) $data->where('country_id', $countryId);
+        $data->orderBy('id', 'desc');
+        if ($searchStr) {
+            $data->whereHas('localizations', callback: fn($q) => $q->where('locale', app()->getLocale())->where('value', 'like', "%{$searchStr}%"));
+            $data->orWhereLike( 'default_name', value: "%{$searchStr}%");
+        }
+        $data->limit($limit);
+        $result = $data->get();
+        return $result->mapWithKeys(function ($model) {
+            return [$model->id => $model->name ?? $model->default_name];
+        })->toArray();
+    }
 }

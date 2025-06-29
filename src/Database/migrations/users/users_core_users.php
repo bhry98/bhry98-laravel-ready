@@ -24,26 +24,28 @@ return new class extends Migration {
             table: UsersCoreUsersModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->string(column: 'code', length: 50)->unique()->index();
-                $table->string(column: 'display_name', length: 100);
-                $table->string(column: 'first_name', length: 50);
-                $table->string(column: 'last_name', length: 50);
-                $table->string(column: 'phone_number', length: 20)->nullable()->index()->unique();
-                $table->timestamp(column: 'phone_number_verified_at')->nullable();
-                $table->string(column: 'national_id', length: 20)->nullable()->index()->unique();
-                $table->string(column: 'birthdate', length: 50)->nullable();
-                $table->string(column: 'username', length: 50)->unique();
-                $table->string(column: 'email', length: 100)->nullable()->unique();
-                $table->timestamp(column: 'email_verified_at')->nullable();
-                $table->boolean(column: 'must_change_password')->default(value: false);
-                $table->string(column: 'password')->nullable();
-                $table->string('timezone')->nullable();
+                $table->string('code', 50)->unique()->index();
+                $table->string('display_name', 100);
+                $table->string('first_name', 50);
+                $table->string('last_name', 50);
+                $table->foreignId('phone_number_key_id')->nullable()->references('id')->on(LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->string('phone_number', 40)->nullable()->index()->unique();
+                $table->timestamp('phone_number_verified_at')->nullable();
+                $table->string('national_id', 50)->nullable()->index()->unique();
+                $table->string('birthdate', 50)->nullable();
+                $table->string('username', 50)->unique();
+                $table->string('email', 100)->nullable()->unique();
+                $table->timestamp('email_verified_at')->nullable();
+                $table->boolean('must_change_password')->default(false);
+                $table->string('password')->nullable();
                 $table->string('lang')->default('en');
-                $table->foreignId(column: 'type_id')->references(column: 'id')->on(table: EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId(column: 'gender_id')->nullable()->references(column: 'id')->on(table: EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId(column: 'country_id')->nullable()->references(column: 'id')->on(table: LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId(column: 'governorate_id')->nullable()->references(column: 'id')->on(table: LocationsGovernoratesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
-                $table->foreignId(column: 'city_id')->nullable()->references(column: 'id')->on(table: LocationsCitiesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('type_id')->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('timezone_id')->nullable()->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('gender_id')->nullable()->references('id')->on(EnumsCoreModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('nationality_id')->nullable()->references('id')->on(LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('country_id')->nullable()->references('id')->on(LocationsCountriesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('governorate_id')->nullable()->references('id')->on(LocationsGovernoratesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('city_id')->nullable()->references('id')->on(LocationsCitiesModel::TABLE_NAME)->cascadeOnUpdate()->cascadeOnDelete();
                 $table->rememberToken();
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
@@ -53,7 +55,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists(table: UsersCoreUsersModel::TABLE_NAME);
+        Schema::dropIfExists( UsersCoreUsersModel::TABLE_NAME);
         Schema::enableForeignKeyConstraints();
     }
 };

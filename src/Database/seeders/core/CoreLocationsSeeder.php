@@ -23,6 +23,7 @@ class CoreLocationsSeeder extends Seeder
                 "default_name" => $country["name_en"],
                 "flag" => $country["flag"],
                 "lang_key" => $country["lang_key"],
+                "dial_code" => $country["dial_code"],
                 "system_lang" => false,
                 "active" => in_array($country["code"], ['EG', "SA"]),
             ];
@@ -50,7 +51,8 @@ class CoreLocationsSeeder extends Seeder
         foreach ($egyptGovernoratesArray ?? [] as $governorate) {
             $fixData = [
                 "default_name" => $governorate["name_en"],
-                "country_id" => $egypt_id
+                "country_id" => $egypt_id,
+                "active"=>false
             ];
             $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate(['country_id' => $egypt_id, 'default_name' => $governorate["name_en"]], $fixData);
             if ($governorateAfterAdd) {
@@ -79,7 +81,9 @@ class CoreLocationsSeeder extends Seeder
             $fixData = [
                 "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
-                "governorate_id" => $cairo_id
+                "governorate_id" => $cairo_id,
+                "active"=>false
+
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
@@ -104,7 +108,9 @@ class CoreLocationsSeeder extends Seeder
             $fixData = [
                 "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
-                "governorate_id" => $giza_id
+                "governorate_id" => $giza_id,
+                "active"=>false
+
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
@@ -130,7 +136,9 @@ class CoreLocationsSeeder extends Seeder
             $fixData = [
                 "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
-                "governorate_id" => $alexandria_id
+                "governorate_id" => $alexandria_id,
+                "active"=>false
+
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
@@ -149,7 +157,9 @@ class CoreLocationsSeeder extends Seeder
         foreach ($governoratesArray ?? [] as $governorate) {
             $fixData = [
                 "default_name" => $governorate["name_en"],
-                "country_id" => $saudi_arabia_id
+                "country_id" => $saudi_arabia_id,
+                "active"=>false
+
             ];
             $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate(['country_id' => $saudi_arabia_id, 'default_name' => $governorate["name_en"]], $fixData);
             self::addLocalizations($governorateAfterAdd, $governorate);

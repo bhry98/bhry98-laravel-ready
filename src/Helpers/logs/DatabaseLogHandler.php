@@ -1,6 +1,6 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Helpers;
+namespace Bhry98\Bhry98LaravelReady\Helpers\logs;
 
 use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
 use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
@@ -18,10 +18,14 @@ class DatabaseLogHandler extends AbstractProcessingHandler
      */
     protected function write(array|\Monolog\LogRecord $record): void
     {
+//        dd($record,
+//             $record['context']['action']
+//        );
         LogsSystemModel::query()->create([
             'log_level' => $record['level_name'],
             'message' => $record['message'],
             'context' => $record['context'],
+            'action' => array_key_exists('action', $record['context']??[]) ? $record['context']['action'] : SystemActionEnums::Other->name,
         ]);
     }
 }

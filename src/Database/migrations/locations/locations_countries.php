@@ -19,12 +19,13 @@ return new class extends Migration {
             table: LocationsCountriesModel::TABLE_NAME,
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->string(column: 'code',length: 50)->unique()->index();
-                $table->string(column: 'default_name')->nullable();
-                $table->string(column: 'country_code', length: 20)->index()->unique();
-                $table->string(column: 'flag', length: 10);
-                $table->string(column: 'lang_key', length: 10);
-                $table->boolean(column: 'system_lang')->default(value: false);
+                $table->string('code', 50)->unique()->index();
+                $table->string('default_name')->nullable();
+                $table->string('country_code', 20)->index()->unique();
+                $table->string('flag', 10);
+                $table->string('lang_key', 10);
+                $table->string('dial_code', 10)->nullable();
+                $table->boolean('system_lang')->default(false);
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });
         Schema::enableForeignKeyConstraints();
