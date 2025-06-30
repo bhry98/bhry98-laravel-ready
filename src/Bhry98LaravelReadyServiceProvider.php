@@ -72,6 +72,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
     function loadFilamentViews(): void
     {
         $ds = DIRECTORY_SEPARATOR;
+        $this->loadViewsFrom(__DIR__ . "{$ds}Filament{$ds}Views", namespace: "Bhry98");
         $this->loadViewsFrom(__DIR__ . "{$ds}Filament{$ds}users{$ds}Bhry98UsersResource{$ds}Views", namespace: "Bhry98UsersResource");
     }
 

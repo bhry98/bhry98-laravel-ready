@@ -25,8 +25,7 @@ trait HasLocalization
      * @param Builder $query
      * @return void
      */
-    #[Scope]
-    protected function locales(Builder $query): void
+    protected function scopeLocales(Builder $query): void
     {
         $query->with('localizations');
     }
