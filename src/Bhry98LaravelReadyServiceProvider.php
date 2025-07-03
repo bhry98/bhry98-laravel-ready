@@ -42,8 +42,9 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         $this->app->register(LaravelCoreCommandsServiceProvider::class);
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
+//                ->circular()
                 ->visible(outsidePanels: true)
-                ->locales(['ar','en','fr']);
+                ->locales(['ar','en']);
         });
         self::loadRoutes();
         self::loadTranslations();

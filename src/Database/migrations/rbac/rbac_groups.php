@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->id();
                 $table->string(column: 'code')->index()->unique();
                 $table->string(column: 'default_name');
-                $table->string(column: 'description')->nullable();
+                $table->string(column: 'default_description')->nullable();
                 $table->boolean(column: 'can_delete')->default(value: true);
                 $table->boolean(column: 'is_default')->default(value: false);
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);;

@@ -80,6 +80,48 @@ return [
             "en" => "Activates or deactivates the user’s account.",
         ],
     ],
+    "Users.Account.ManagerGroupPolicies" => [
+        "names" => [
+            "ar" => "إدارة سياسات المجموعات للمستخدم",
+            "en" => "Manage group policies for user",
+        ],
+        "descriptions" => [
+            "ar" => "يسمح بتعيين أو إزالة سياسات المجموعات المرتبطة بحساب مستخدم معين.",
+            "en" => "Allows assigning or removing group policies linked to a specific user account.",
+        ],
+    ],
+    "Users.Account.ManageNotifications" => [
+        "names" => [
+            "ar" => "إدارة إشعارات المستخدم",
+            "en" => "Manage user notifications",
+        ],
+        "descriptions" => [
+            "ar" => "يسمح بإعداد أو تعديل أو حذف إعدادات الإشعارات الخاصة بالمستخدم.",
+            "en" => "Allows configuring, modifying, or deleting a user's notification settings.",
+        ],
+    ],
+
+    "Users.Account.ViewLogs" => [
+        "names" => [
+            "ar" => "عرض سجلات حساب المستخدم",
+            "en" => "View user account logs",
+        ],
+        "descriptions" => [
+            "ar" => "يعرض كافة السجلات المرتبطة بنشاطات حساب المستخدم.",
+            "en" => "Displays all logs related to user account activities.",
+        ],
+    ],
+
+    "Users.Account.ViewLogonsActivity" => [
+        "names" => [
+            "ar" => "عرض نشاط تسجيل الدخول",
+            "en" => "View logon activity",
+        ],
+        "descriptions" => [
+            "ar" => "يعرض تفاصيل محاولات تسجيل الدخول للمستخدم.",
+            "en" => "Shows details of user login attempts.",
+        ],
+    ],
     "Users.Account.ChangePassword" => [
         "names" => [
             "ar" => "تغيير كلمة مرور الحساب للمستخدم",

@@ -33,11 +33,12 @@ class CoreRBACSeeder extends Seeder
                 [
                     "code" => (string)$key,
                     "default_name" => $group['names']['en'],
+                    "default_description" => $group['descriptions']['en'],
                     "can_delete" => $group['can_delete'] ?? false,
                     "is_default" => $group['is_default'] ?? false,
                     "active" => $group['active'] ?? true,
                 ]);
-            if (array_key_exists(key: "default_permission", array: $group)) {
+            if (array_key_exists("default_permission", $group)) {
                 if ($group["default_permission"] == "*") {
                     RBACPermissionsModel::query()->get()->each(function ($permission) use ($groupRecord) {
                         RBACGroupsPermissionsModel::query()->updateOrCreate([
@@ -54,8 +55,11 @@ class CoreRBACSeeder extends Seeder
                     });
                 }
             }
-            foreach ($group['locales_name'] ?? [] as $local => $value) {
-                $groupRecord->setLocalized(column: 'name', value: $value, locale: $local);
+            foreach ($group['names'] ?? [] as $nameLocal => $nameValue) {
+                $groupRecord->setLocalized(column: 'name', value: $nameValue, locale: $nameLocal);
+            }
+            foreach ($group['descriptions'] ?? [] as $descriptionLocal => $descriptionValue) {
+                $groupRecord->setLocalized(column: 'description', value: $descriptionValue, locale: $descriptionLocal);
             }
         }
     }

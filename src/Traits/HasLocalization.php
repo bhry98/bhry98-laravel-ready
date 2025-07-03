@@ -39,12 +39,9 @@ trait HasLocalization
     public function getLocalized($column, $locale = null): ?string
     {
         $locale = $locale ?? App::getLocale();
-        return collect($this->localizations ?? [])
-            ->where('column_name', $column)
-            ->where('locale', $locale)
-            ->first()?->value
-            ?? $this->attributes[$column]
-            ?? null;
+        $localizationValue = collect($this->localizations ?? [])->where('column_name', $column)->where('locale', $locale)->first()?->value;
+        $defaultValue = array_key_exists("default_$column", $this->attributes) ? $this->attributes["default_$column"] : "---";
+        return $localizationValue ?? $defaultValue;
     }
 
     /**

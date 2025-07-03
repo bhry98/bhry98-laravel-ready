@@ -6,50 +6,33 @@ use Bhry98\Bhry98LaravelReady\Enums\logs\LogsLevelsEnums;
 use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersResource;
 use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
-use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsLogonsModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
 use Carbon\Carbon;
-use CRM\Filament\Resources\Customers\CustomersResource;
-use CRM\Models\customers\CRMCustomersContactsModel;
-use CRM\Services\Customers\CRMCustomersService;
-use Filament\Actions\CreateAction;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ForceDeleteAction;
-use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
-use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
-class ViewUserNotifications extends ViewRecord implements Tables\Contracts\HasTable
+class ManageUserLogs extends ViewRecord implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
 
     protected static string $resource = Bhry98UsersResource::class;
-    protected static string $view = 'Bhry98UsersResource::view-notifications';
-    protected static ?string $navigationIcon = "heroicon-o-bell";
+    protected static string $view = 'Bhry98UsersResource::view-logs';
+    protected static ?string $navigationIcon = "heroicon-o-clock";
 
     public static function getNavigationLabel(): string
     {
-        return __("Bhry98::users.notifications");
+        return __("Bhry98::users.logs");
     }
 
     public function getTitle(): string
     {
-        return __("Bhry98::users.user-notifications", ['user' => $this->record?->display_name]) . " ({$this->record?->code})";
+        return __("Bhry98::users.user-logs", ['user' => $this->record?->display_name]) . " ({$this->record?->code})";
     }
 
     protected function getHeaderActions(): array
@@ -64,14 +47,14 @@ class ViewUserNotifications extends ViewRecord implements Tables\Contracts\HasTa
     {
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
-            ->query(UsersNotificationsModel::query()->where(['notifiable_id' => $this->record?->id])->latest())
+            ->query(LogsSystemModel::query()->where(['user_id' => $this->record?->id])->latest())
             ->modelLabel(__("Bhry98::users.logs"))
             ->columns([
                 TextColumn::make('created_at')->label(__("Bhry98::logs.time"))->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config('bhry98.date.format')) : "---"),
-//                TextColumn::make('log_level')->label(__("Bhry98::logs.level"))->badge(),
-//                TextColumn::make('action')->label(__("Bhry98::logs.action"))->badge(),
-//                TextColumn::make('app_profile')->label(__("Bhry98::logs.profile")),
-//                TextColumn::make('message')->label(__("Bhry98::logs.message"))->searchable()->limit(30),
+                TextColumn::make('log_level')->label(__("Bhry98::logs.level"))->badge(),
+                TextColumn::make('action')->label(__("Bhry98::logs.action"))->badge(),
+                TextColumn::make('app_profile')->label(__("Bhry98::logs.profile")),
+                TextColumn::make('message')->label(__("Bhry98::logs.message"))->searchable()->limit(30),
 //                TextColumn::make('context')->label(__("Bhry98::logs.context"))->limit(30),
             ])
             ->filters([

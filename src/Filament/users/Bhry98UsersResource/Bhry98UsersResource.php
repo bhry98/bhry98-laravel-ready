@@ -5,9 +5,10 @@ namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource;
 use Bhry98\Bhry98LaravelReady\Enums\enums\EnumsCoreTypes;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\CreateUsers;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ListUsers;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ManageUserGroupPolicies;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ManageUserLogons;
-use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ViewUserLogs;
-use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ViewUserNotifications;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ManageUserLogs;
+use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ManageUserNotifications;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages\ViewUsers;
 use Bhry98\Bhry98LaravelReady\Models\enums\EnumsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
@@ -201,9 +202,10 @@ class Bhry98UsersResource extends Resource
         $pages = array_merge(
             [
                 ViewUsers::class,
-                ViewUserLogs::class,
-                ViewUserNotifications::class,
+                ManageUserLogs::class,
+                ManageUserNotifications::class,
                 ManageUserLogons::class,
+                ManageUserGroupPolicies::class,
             ],
             static::discoverPages(true),
         );
@@ -220,8 +222,9 @@ class Bhry98UsersResource extends Resource
 //                'create' => CreateUsers::route('/create'),
                 'view' => ViewUsers::route('/{record:code}'),
                 'logons' => ManageUserLogons::route('/{record:code}/logons'),
-                'logs' => ViewUserLogs::route('/{record:code}/logs'),
-                'notifications' => ViewUserNotifications::route('/{record:code}/notifications'),
+                'logs' => ManageUserLogs::route('/{record:code}/logs'),
+                'notifications' => ManageUserNotifications::route('/{record:code}/notifications'),
+                'group-policies' => ManageUserGroupPolicies::route('/{record:code}/group-policies'),
             ],
             static::discoverPages(),
         );

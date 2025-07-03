@@ -13,7 +13,7 @@ class RBACGroupsModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
 
-    protected array $localizable = ['name'];
+    protected array $localizable = ['name', 'description'];
     const TABLE_NAME = 'rbac_groups';
     const FILTER_COLUMNS = ['code', 'default_name', 'name'];
     const RELATIONS = [];
@@ -21,7 +21,7 @@ class RBACGroupsModel extends BaseModel
     protected $fillable = [
         "code",
         "default_name",
-        "description",
+        "default_description",
         "can_delete",
         "is_default",
         "active"

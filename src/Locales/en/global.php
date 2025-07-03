@@ -21,6 +21,8 @@ return [
     "city" => "City",
     "region" => "Region",
     "country" => "Country",
+    "join-at" => "Join at",
+    "leave" => "Leave",
     "loc" => "location",
     "org" => "organization",
     "timezone" => "Timezone",

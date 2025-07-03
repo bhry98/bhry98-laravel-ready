@@ -36,4 +36,6 @@ return [
     "user-details" => ":user details",
     "user-notifications" => ":user notifications",
     "notifications" => "Notifications",
+    "user-group-policies" => ":user group policies",
+    "group-policies" => "Group policies",
 ];
