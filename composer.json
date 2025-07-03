@@ -36,11 +36,11 @@
     "barryvdh/laravel-debugbar": "^3.15",
     "filament/support": "^3.3",
     "filament/filament": "^3.3",
-    "tomatophp/filament-language-switcher": "^1.0",
     "ysfkaya/filament-phone-input": "^3.1",
     "tomatophp/filament-translation-component": "^1.0",
-    "propaganistas/laravel-phone": "^6.0"
-  },
+    "propaganistas/laravel-phone": "^6.0",
+    "bezhansalleh/filament-language-switch": "^3.1"}
+,
   "authors": [
     {
       "name": "bhry98",

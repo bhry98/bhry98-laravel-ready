@@ -3,28 +3,12 @@
 namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages;
 
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersResource;
-use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsLogonsModel;
+use Bhry98\Bhry98LaravelReady\Models\logs\LogsUsersLogonsModel;
 use Carbon\Carbon;
-use CRM\Filament\Resources\Customers\CustomersResource;
-use CRM\Models\customers\CRMCustomersContactsModel;
-use CRM\Services\Customers\CRMCustomersService;
-use Filament\Actions\CreateAction;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ForceDeleteAction;
-use Filament\Tables\Actions\RestoreAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
-use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 class ManageUserLogons extends ViewRecord implements Tables\Contracts\HasTable
 {
@@ -38,104 +22,36 @@ class ManageUserLogons extends ViewRecord implements Tables\Contracts\HasTable
     {
         return __("Bhry98::users.logons-info");
     }
+
     public function getTitle(): string
     {
-        return __("Bhry98::users.user-logons", ['user' => $this->record?->display_name]);
+        return __("Bhry98::users.user-logons", ['user' => $this->record?->display_name ?? ""]);
     }
 
     protected function getHeaderActions(): array
     {
-        return [
-            CreateAction::make('create_contact')
-                ->label(__("crm.customers.add-contact"))
-//                ->visible(fn() => $this->record?->canManageContacts())
-//                ->action(fn(array $data) => (new CRMCustomersService())->addContact($this->record?->id, $data))
-                ->slideOver()
-                ->closeModalByClickingAway(false)
-                ->createAnother(false)
-//                ->form(self::contactForm()),
-        ];
+        return [];
     }
 
     public function table(Table $table): Table
     {
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
-            ->query(SessionsLogonsModel::query()->where(['user_id' => $this->record?->id])->latest())
+            ->query(LogsUsersLogonsModel::query()->where(['user_id' => $this->record?->id ?? null])->orWhereRaw('0 = 1')->latest())
             ->modelLabel(__("Bhry98::users.logons-info"))
             ->columns([
-                TextColumn::make(name: 'created_at')
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__(key: "global.created-at"))
-                    ->formatStateUsing(fn($state) => $state ? Carbon::parse($state)->format(bhry98_app_settings('date.table')) : "---"),
-                TextColumn::make(name: 'createdBy.display_name')
-                    ->default("---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__(key: "global.created-by")),
-                TextColumn::make(name: 'updated_at')
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__(key: "global.updated-at"))
-                    ->formatStateUsing(fn($state) => $state ? Carbon::parse($state)->format(bhry98_app_settings('date.table')) : "---"),
-//                TextColumn::make(name: 'updatedBy.display_name')
-                TextColumn::make(name: 'updated_by')
-                    ->default("---")
-                    ->toggleable()
-                    ->toggledHiddenByDefault()
-                    ->label(__(key: "global.updated-by")),
+                TextColumn::make('created_at')->label(__("Bhry98::global.created-at"))->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config('bhry98.date.format')) : "---"),
+                TextColumn::make('ip_address')->label(__("Bhry98::global.ip-address")),
+                TextColumn::make('city')->searchable()->toggleable()->label(__("Bhry98::global.city")),
+                TextColumn::make('region')->toggleable()->label(__("Bhry98::global.region")),
+                TextColumn::make('country')->searchable()->toggleable()->label(__("Bhry98::global.country")),
+                TextColumn::make('loc')->toggleable()->toggledHiddenByDefault()->label(__("Bhry98::global.loc")),
+                TextColumn::make('org')->toggleable()->label(__("Bhry98::global.org")),
+                TextColumn::make('timezone')->toggleable()->label(__("Bhry98::global.timezone")),
             ])
-            ->filters([
-//                Tables\Filters\TrashedFilter::make()
-//                    ->visible($this->record?->canManageContacts())
-            ])
-            ->actions([
-
-            ]);
+            ->filters([])
+            ->actions([]);
     }
 
-    function contactForm(): array
-    {
-        return [
-            Grid::make()
-                ->columns(2)
-                ->schema([
-                    TextInput::make('display_name')
-                        ->label(__("global.display-name"))
-                        ->required()
-                        ->maxLength(50),
-                    TextInput::make('email')
-                        ->label(__("global.email"))
-                        ->email()
-                        ->required()
-                        ->maxLength(50),
-                    PhoneInput::make('phone_number')
-                        ->label(__("global.phone-number"))
-                        ->defaultCountry('EG')
-                        ->startsWith("+")
-                        ->required(),
-                    PhoneInput::make('whatsapp_number')
-                        ->label(__("global.whatsapp-number"))
-                        ->defaultCountry('EG')
-                        ->nullable()
-                        ->startsWith("+"),
-                    TextInput::make("note")
-                        ->label(__("global.note"))
-                        ->nullable()
-                        ->columnSpanFull(),
-                ]),
-            Section::make("")
-                ->columns(2)
-                ->schema([
-                    Toggle::make("is_primary")->label(__("global.is-primary"))->default(false),
-                    Toggle::make("is_valid")->label(__("global.is-valid"))->default(true),
-                    Toggle::make("is_optional")->label(__("global.is-optional"))->default(false),
-                    Toggle::make("for_sms")->label(__("global.for-sms"))->default(false),
-                    Toggle::make("for_billing")->label(__("global.for-billing"))->default(false),
-                ])
-        ];
-
-    }
 
 }

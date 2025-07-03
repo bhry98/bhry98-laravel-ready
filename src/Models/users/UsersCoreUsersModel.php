@@ -24,7 +24,7 @@ use TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
 
 class UsersCoreUsersModel extends Authentication
 {
-    use HasApiTokens, SoftDeletes, Notifiable,InteractsWithLanguages;
+    use HasApiTokens, SoftDeletes, Notifiable;
 
     const TABLE_NAME = "users_core";
     const RELATIONS = ["country", "governorate", "city", "type", "gender", "azure", "adManager"];

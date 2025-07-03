@@ -17,4 +17,11 @@ return [
     "created-by" => "Created by",
     "updated-at" => "Updated at",
     "updated-by" => "Updated by",
+    "ip-address" => "IP address",
+    "city" => "City",
+    "region" => "Region",
+    "country" => "Country",
+    "loc" => "location",
+    "org" => "organization",
+    "timezone" => "Timezone",
 ];

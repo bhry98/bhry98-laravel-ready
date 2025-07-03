@@ -1,46 +1,8 @@
 <?php
 
 use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
-use Bhry98\Bhry98LaravelReady\Models\locations\LocationsCountriesModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
-use Carbon\Carbon;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Log;
 
-//if (!function_exists(function: 'bhry98_add_log')) {
-//    function bhry98_add_log($level, string $message, array $context = []): void
-//    {
-//        switch ($level) {
-//            case 'info':
-//                \Illuminate\Support\Facades\Log::info(message: $message, context: $context);
-//                break;
-//            case 'debug':
-//                \Illuminate\Support\Facades\Log::debug(message: $message, context: $context);
-//                break;
-//            case 'error':
-//                \Illuminate\Support\Facades\Log::error(message: $message, context: $context);
-//                break;
-//            case 'warning':
-//                \Illuminate\Support\Facades\Log::warning(message: $message, context: $context);
-//                break;
-//            case 'notice':
-//                \Illuminate\Support\Facades\Log::notice(message: $message, context: $context);
-//                break;
-//            case 'alert':
-//                \Illuminate\Support\Facades\Log::alert(message: $message, context: $context);
-//                break;
-//            case 'emergency':
-//                \Illuminate\Support\Facades\Log::emergency(message: $message, context: $context);
-//                break;
-//            default:
-//                \Illuminate\Support\Facades\Log::error(message: "Cant Find Log Level $level", context: $context);
-//                \Illuminate\Support\Facades\Log::info(message: $message, context: $context);
-//                break;
-//        }
-//    }
-//}
 if (!function_exists(function: 'bhry98_created_log')) {
     function bhry98_created_log(bool $success, string $message = "", array $context = []): void
     {
@@ -166,6 +128,21 @@ if (!function_exists(function: 'bhry98_force_delete_log')) {
                 "context" => $context
             ]);
         }
+    }
+}
+if (!function_exists(function: 'bhry98_error_log')) {
+    function bhry98_error_log(string $message = "", array $context = []): void
+    {
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1] ?? [];
+        $class = $trace['class'] ?? 'N/A';
+        $method = $trace['function'] ?? 'N/A';
+        Log::error(message: $message ?? "System Error", context: [
+            "class" => $class,
+            "method" => $method,
+            "message" => $message,
+            "action" => SystemActionEnums::Other->name,
+            "context" => $context
+        ]);
     }
 }
 

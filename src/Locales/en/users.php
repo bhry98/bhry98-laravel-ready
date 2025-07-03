@@ -34,4 +34,6 @@ return [
     "user-logs" => ":user logs",
     "details" => "User details",
     "user-details" => ":user details",
+    "user-notifications" => ":user notifications",
+    "notifications" => "Notifications",
 ];

@@ -5,9 +5,9 @@
 {{--        @endif--}}
 
     {{-- Render subnavigation --}}
-    <x-filament::layouts.app.sub-navigation
-            :items="static::getSubNavigation()"
-    />
+{{--    <x-filament::layouts.app.sub-navigation--}}
+{{--            :items="static::getSubNavigation()"--}}
+{{--    />--}}
 
     {{-- Your form --}}
     {{ $this->form }}

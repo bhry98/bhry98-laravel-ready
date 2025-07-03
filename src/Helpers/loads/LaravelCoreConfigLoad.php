@@ -119,16 +119,16 @@ class LaravelCoreConfigLoad
 
     private function filamentLanguageSwitcherConfig(): void
     {
-        config()->set('filament-language-switcher.locals', [
-            'en' => [
-                'label' => 'English',
-                'flag' => 'us',
-            ],
-            'ar' => [
-                'label' => 'Arabic',
-                'flag' => 'sa',
-            ],
-        ]);
+//        config()->set('filament-language-switcher.locals', [
+//            'en' => [
+//                'label' => 'English',
+//                'flag' => 'us',
+//            ],
+//            'ar' => [
+//                'label' => 'Arabic',
+//                'flag' => 'sa',
+//            ],
+//        ]);
         config()->set('filament-translation-component.languages', [
             "en" => [
                 "label" => "English",

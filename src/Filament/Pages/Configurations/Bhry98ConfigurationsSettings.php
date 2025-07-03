@@ -16,9 +16,11 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
+
 class Bhry98ConfigurationsSettings extends Page implements HasForms
 {
     use InteractsWithForms;
+
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
     protected static string $view = 'Bhry98::Configurations.global-settings';
@@ -90,26 +92,43 @@ class Bhry98ConfigurationsSettings extends Page implements HasForms
         return [
             Action::make('save')
                 ->label(__('Save'))
-                ->submit('save'), // Calls $this->save()
+                ->action(fn() => $this->save()), // ✅ Fix: Trigger save method directly
         ];
     }
-    public function getSubNavigation(): array
+
+    protected function getHeaderActions(): array
     {
-        return [
-            NavigationGroup::make('group')
-                ->items([
-                    NavigationItem::make(Page::class::getNavigationLabel())
-                        ->icon(Pages::class::getNavigationIcon())
-                        ->isActiveWhen(fn (): bool => request()->routeIs(Page::class::getNavigationItemActiveRoutePattern()))
-                        ->url(Page::class::getNavigationUrl()),
-                ])
-        ];
+        return $this->getFormActions();
     }
+
+//    public function getSubNavigation(): array
+//    {
+//        return [
+//            NavigationItem::make(Page::class::getNavigationLabel())
+//                ->icon(Page::class::getNavigationIcon())
+//                ->isActiveWhen(fn(): bool => request()->routeIs(Page::class::getNavigationItemActiveRoutePattern()))
+//                ->url(Page::class::getNavigationItemActiveRoutePattern()),
+//        ];
+//    }
 
     public static function getNavigationGroup(): ?string
     {
         return __('Settings');
     }
+////
+ public function getSubNavigation(): array
+{
+    return static::resolveSubNavigation();
+}
 
+    protected static function resolveSubNavigation(): array
+    {
+        return [
+            NavigationItem::make(static::getNavigationLabel())
+                ->icon(static::getNavigationIcon())
+                ->isActiveWhen(fn(): bool => request()->routeIs(static::getNavigationItemActiveRoutePattern()))
+                ->url(static::getUrl()),
+        ];
+    }
 
 }

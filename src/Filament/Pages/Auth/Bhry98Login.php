@@ -3,6 +3,7 @@
 namespace Bhry98\Bhry98LaravelReady\Filament\Pages\Auth;
 
 use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreUsersModel;
+use Bhry98\Bhry98LaravelReady\Services\system\logs\SystemLogsUsersLogonsService;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Filament\Http\Responses\Auth\LoginResponse;
@@ -16,29 +17,29 @@ class Bhry98Login extends BaseAuth
     {
         return $form
             ->schema([
-//                $this->getEmailFormComponent(),
-                $this->getLoginFormComponent(),
+                $this->getEmailFormComponent(),
+//                $this->getLoginFormComponent(),
                 $this->getPasswordFormComponent(),
                 $this->getRememberFormComponent(),
             ])
             ->statePath('data');
     }
 
-    protected function getLoginFormComponent(): Component
-    {
-        return TextInput::make('username')
-            ->label('Username')
-            ->required()
-            ->autocomplete()
-            ->autofocus()
-            ->extraInputAttributes(['tabindex' => 1]);
-    }
+//    protected function getLoginFormComponent(): Component
+//    {
+//        return TextInput::make('username')
+//            ->label('Username')
+//            ->required()
+//            ->autocomplete()
+//            ->autofocus()
+//            ->extraInputAttributes(['tabindex' => 1]);
+//    }
 
 
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
-            "username"=> $data['username'],
+            "email"=> $data['email'],
             'password' => $data['password'],
         ];
     }
@@ -51,13 +52,24 @@ class Bhry98Login extends BaseAuth
         $data = $this->form->getState(); // Get the submitted form data
 
         if (auth()->attempt([
-            'username' => $data['username'],
+            'email' => $data['email'],
             'password' => $data['password'],
         ])) {
             session()->regenerate();
+//            dd(auth()->user());
+            (new SystemLogsUsersLogonsService())->createLogonLog();
             return app(LoginResponse::class);
         }
         $this->throwFailureValidationException();
     }
 
+    /**
+     * @throws ValidationException
+     */
+    protected function throwFailureValidationException(): never
+    {
+        throw ValidationException::withMessages([
+            'data.login' => __('filament-panels::pages/auth/login.messages.failed'),
+        ]);
+    }
 }
