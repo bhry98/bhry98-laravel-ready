@@ -40,9 +40,7 @@ abstract class BaseModel extends Model
     /**
      * Scope a query to only include active users.
      */
-
-    #[Scope]
-    protected function active(Builder $query): void
+    protected function scopeActive(Builder $query): void
     {
         $query->where('active', true);
     }

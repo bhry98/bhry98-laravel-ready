@@ -23,6 +23,8 @@ return [
     "country" => "Country",
     "join-at" => "Join at",
     "leave" => "Leave",
+    "is-default" => "Is default",
+    "can-delete" => "Can delete",
     "loc" => "location",
     "org" => "organization",
     "timezone" => "Timezone",

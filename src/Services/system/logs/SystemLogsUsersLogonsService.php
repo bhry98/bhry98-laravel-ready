@@ -35,9 +35,10 @@ class SystemLogsUsersLogonsService
             'country' => 'Unknown',
             'loc' => '0.0,0.0',
             'org' => 'Unknown',
-            'timezone' => 'UTC',
+            'timezone' => env("APP_TIMEZONE", "Africa/Cairo"),
         ];
     }
+
     public function createLogonLog(): bool
     {
         $geoData = $this->getIpDetails();

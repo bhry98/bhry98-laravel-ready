@@ -54,6 +54,7 @@ return [
             "per_page" => [10, 30, 50],
         ],
         "users-pages" => [],
+        "settings-pages" => [],
     ],
     "date" => [
         "format" => "Y-m-d | h:i A",

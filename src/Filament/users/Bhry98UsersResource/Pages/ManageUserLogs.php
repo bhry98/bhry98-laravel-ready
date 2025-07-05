@@ -8,7 +8,11 @@ use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersReso
 use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
+use Filament\Infolists\Components\KeyValueEntry;
+use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
@@ -96,19 +100,14 @@ class ManageUserLogs extends ViewRecord implements Tables\Contracts\HasTable
             ->schema([
                 TextEntry::make('message')->label('')->columnSpanFull()->html(),
             ]);
-//        $infoList[] = \Filament\Infolists\Components\Section::make()
-//            ->heading(__("Bhry98::logs.context"))
-//            ->schema([
-//                TextEntry::make('context')
-////                    ->label('')
-////                    ->columnSpanFull()
-//                    ->markdown()
-////                    ->formatStateUsing(fn ($state) =>
-////                        '<pre class="text-sm text-gray-800 dark:text-gray-100 whitespace-pre-wrap">' .
-////                        json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) .
-////                        '</pre>'
-////                    ),
-//            ]);
+        $infoList[] = Section::make()
+            ->heading(__('Bhry98::logs.context'))
+            ->schema([
+                TextEntry::make('id')
+                    ->label('')
+                    ->getStateUsing(fn() => null)
+                    ->helperText(fn($record) => json_encode($record->context, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))
+            ]);
         return $infoList;
     }
 }

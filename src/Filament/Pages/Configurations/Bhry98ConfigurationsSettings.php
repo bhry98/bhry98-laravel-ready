@@ -100,35 +100,53 @@ class Bhry98ConfigurationsSettings extends Page implements HasForms
     {
         return $this->getFormActions();
     }
-
-//    public function getSubNavigation(): array
-//    {
-//        return [
-//            NavigationItem::make(Page::class::getNavigationLabel())
-//                ->icon(Page::class::getNavigationIcon())
-//                ->isActiveWhen(fn(): bool => request()->routeIs(Page::class::getNavigationItemActiveRoutePattern()))
-//                ->url(Page::class::getNavigationItemActiveRoutePattern()),
-//        ];
-//    }
-
-    public static function getNavigationGroup(): ?string
+    public function getSubNavigation(): array
     {
-        return __('Settings');
+        return static::resolveSubNavigation();
     }
-////
- public function getSubNavigation(): array
-{
-    return static::resolveSubNavigation();
-}
 
+    /**
+     * Returns an array of NavigationItem objects for subnavigation.
+     *
+     * @return array
+     */
     protected static function resolveSubNavigation(): array
     {
-        return [
-            NavigationItem::make(static::getNavigationLabel())
-                ->icon(static::getNavigationIcon())
-                ->isActiveWhen(fn(): bool => request()->routeIs(static::getNavigationItemActiveRoutePattern()))
-                ->url(static::getUrl()),
-        ];
+        try {
+            // Get all configured setting pages
+            $pages = collect(config('bhry98.filament.settings-pages', []))
+                ->filter(fn(string $class) => class_exists($class) && method_exists($class, 'getUrl'))
+                ->map(function (string $class) {
+                    return NavigationItem::make($class::getNavigationLabel())
+                        ->icon($class::getNavigationIcon())
+                        ->isActiveWhen(fn(): bool => request()->routeIs($class::getNavigationItemActiveRoutePattern()))
+                        ->url($class::getUrl());
+                })
+                ->values()
+                ->all();
+
+            // Ensure current page is added even if not in config
+            $current = NavigationItem::make(self::getNavigationLabel())
+                ->icon(self::getNavigationIcon())
+                ->isActiveWhen(fn(): bool => request()->routeIs(self::getNavigationItemActiveRoutePattern()))
+                ->url(self ::getUrl());
+
+            // Add current page to the beginning if it's not already included
+            return collect($pages)
+                ->prepend($current)
+                ->unique(fn(NavigationItem $item) => $item->getUrl())
+                ->values()
+                ->all();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return [
+                NavigationItem::make(static::getNavigationLabel())
+                    ->icon(static::getNavigationIcon())
+                    ->isActiveWhen(fn(): bool => request()->routeIs(static::getNavigationItemActiveRoutePattern()))
+                    ->url(static::getUrl()),
+            ];
+        }
     }
 
 }

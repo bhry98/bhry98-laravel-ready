@@ -6,6 +6,7 @@ use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsPermissionsModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACPermissionsModel;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class CoreRBACSeeder extends Seeder
 {
@@ -71,6 +72,7 @@ class CoreRBACSeeder extends Seeder
         foreach ([
                      include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}locations.php",
                      include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}users.php",
+                     include __DIR__ . "$ds..$ds..{$ds}data{$ds}rbac{$ds}permissions{$ds}rbac.php",
                      config('bhry98.rbac.permissions', []),
                  ] as $set) {
             if (is_array($set) && count($set) > 0) {

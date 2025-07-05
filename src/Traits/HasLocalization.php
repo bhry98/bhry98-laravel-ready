@@ -130,7 +130,7 @@ trait HasLocalization
     {
 
         $locale = $locale ?? app()->getLocale();
-//        dd($locale);
+//        dd($column,$value,$locale);
         if (is_null($value)) {
             return $query; // Skip filter if value is null
         }

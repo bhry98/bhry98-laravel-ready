@@ -6,6 +6,7 @@ use Bhry98\Bhry98LaravelReady\Enums\logs\LogsLevelsEnums;
 use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
 use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersResource;
 use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
+use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
 use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsUsersModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsLogonsModel;
 use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use CRM\Filament\Resources\Customers\CustomersResource;
 use CRM\Models\customers\CRMCustomersContactsModel;
 use CRM\Services\Customers\CRMCustomersService;
+use Exception;
 use Filament\Actions;
 use Filament\Actions\CreateAction;
 use Filament\Forms\Components\DatePicker;
@@ -22,6 +24,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Colors\Color;
@@ -70,7 +73,7 @@ class ManageUserGroupPolicies extends ViewRecord implements Tables\Contracts\Has
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function table(Table $table): Table
     {
@@ -79,8 +82,8 @@ class ManageUserGroupPolicies extends ViewRecord implements Tables\Contracts\Has
             ->query(RBACGroupsUsersModel::query()->where(['user_id' => $this->record?->id ?? null])->with(['group'])->latest())
             ->modelLabel(__("Bhry98::users.group-policies"))
             ->columns([
-                TextColumn::make('group.default_name')->label(__("Bhry98::rbac.name"))->getStateUsing(fn(RBACGroupsUsersModel $record) => $record->group?->name),
-                TextColumn::make('group.default_description')->label(__("Bhry98::rbac.description"))->limit()->lineClamp(1)->getStateUsing(fn(RBACGroupsUsersModel $record) => $record->group?->description),
+                TextColumn::make('group.default_name')->label(__("Bhry98::rbac.group-name"))->getStateUsing(fn(RBACGroupsUsersModel $record) => $record->group?->name),
+                TextColumn::make('group.default_description')->label(__("Bhry98::rbac.group-description"))->limit()->lineClamp(1)->getStateUsing(fn(RBACGroupsUsersModel $record) => $record->group?->description),
                 TextColumn::make('created_at')->label(__("Bhry98::global.join-at"))->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config('bhry98.date.format')) : "---"),
             ])
             ->filters([])
