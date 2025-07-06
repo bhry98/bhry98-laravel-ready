@@ -124,7 +124,6 @@ class LaravelCoreConfigLoad
     private function filamentLanguageSwitcherConfig(): void
     {
         foreach (Filament::getPanels() as $panel) {
-//                if ($panel->getId() == "corporate") dd($panel->getId());
             $panel
                 ->pages([
                     ApplicationsSwitcher::class
