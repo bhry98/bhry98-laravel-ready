@@ -55,6 +55,7 @@ return [
         ],
         "panel-name" => "bhry98",
         "default-panel" => true,
+        "multi-panels" => false,
         "users-pages" => [],
         "settings-pages" => [],
     ],

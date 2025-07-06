@@ -123,15 +123,17 @@ class LaravelCoreConfigLoad
 
     private function filamentLanguageSwitcherConfig(): void
     {
-        foreach (Filament::getPanels() as $panel) {
-            $panel
-                ->pages([
-                    ApplicationsSwitcher::class
-                ])
-                ->renderHook(
-                PanelsRenderHook::USER_MENU_BEFORE,
-                fn() => view('Bhry98::applications.application-switcher-btn')
-            );
+        if (config("bhry98.filament.multi-panels", false)) {
+            foreach (Filament::getPanels() as $panel) {
+                $panel
+                    ->pages([
+                        ApplicationsSwitcher::class
+                    ])
+                    ->renderHook(
+                        PanelsRenderHook::USER_MENU_BEFORE,
+                        fn() => view('Bhry98::applications.application-switcher-btn')
+                    );
+            }
         }
 //        Filament::serving(function () {
 //            foreach (Filament::getPanels() as $panel) {
