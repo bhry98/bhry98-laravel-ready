@@ -2,6 +2,7 @@
 
 namespace Bhry98\Bhry98LaravelReady\Helpers\loads;
 
+use Bhry98\Bhry98LaravelReady\Filament\Pages\Applications\ApplicationsSwitcher;
 use Bhry98\Bhry98LaravelReady\Helpers\logs\CreateCustomLogger;
 use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobBatchesModel;
@@ -9,6 +10,9 @@ use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobFailedModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobModel;
 use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
+use Filament\Facades\Filament;
+use Filament\Panel;
+use Filament\View\PanelsRenderHook;
 
 class LaravelCoreConfigLoad
 {
@@ -48,7 +52,7 @@ class LaravelCoreConfigLoad
             'after_commit' => false,
         ]);
         config()->set('queue.batching', value: [
-            'database' =>'mysql',
+            'database' => 'mysql',
             'table' => QueueJobBatchesModel::TABLE_NAME,
         ]);
         config()->set('queue.failed', value: [
@@ -119,16 +123,26 @@ class LaravelCoreConfigLoad
 
     private function filamentLanguageSwitcherConfig(): void
     {
-//        config()->set('filament-language-switcher.locals', [
-//            'en' => [
-//                'label' => 'English',
-//                'flag' => 'us',
-//            ],
-//            'ar' => [
-//                'label' => 'Arabic',
-//                'flag' => 'sa',
-//            ],
-//        ]);
+        foreach (Filament::getPanels() as $panel) {
+//                if ($panel->getId() == "corporate") dd($panel->getId());
+            $panel
+                ->pages([
+                    ApplicationsSwitcher::class
+                ])
+                ->renderHook(
+                PanelsRenderHook::USER_MENU_BEFORE,
+                fn() => view('Bhry98::applications.application-switcher-btn')
+            );
+        }
+//        Filament::serving(function () {
+//            foreach (Filament::getPanels() as $panel) {
+////                if ($panel->getId() == "corporate") dd($panel->getId());
+//                $panel->renderHook(
+//                    PanelsRenderHook::USER_MENU_BEFORE,
+//                    fn() => view('Bhry98::applications.application-switcher-btn')
+//                );
+//            }
+//        });
         config()->set('filament-translation-component.languages', [
             "en" => [
                 "label" => "English",

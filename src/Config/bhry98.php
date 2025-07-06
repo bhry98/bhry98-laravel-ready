@@ -53,6 +53,8 @@ return [
         "pagination" => [
             "per_page" => [10, 30, 50],
         ],
+        "panel-name" => "bhry98",
+        "default-panel" => true,
         "users-pages" => [],
         "settings-pages" => [],
     ],
