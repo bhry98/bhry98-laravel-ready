@@ -3,7 +3,7 @@
   "license": "MIT",
   "description": "Laravel Starter to manage [identity, users, RBAC,dynamic enums, and more ] for fresh laravel applications only",
   "keywords": [
-    "src/Users management",
+    "Users management",
     "auth",
     "jwt",
     "bhry98",
