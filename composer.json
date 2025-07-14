@@ -3,7 +3,7 @@
   "license": "MIT",
   "description": "Laravel Starter to manage [identity, users, RBAC,dynamic enums, and more ] for fresh laravel applications only",
   "keywords": [
-    "users management",
+    "src/Users management",
     "auth",
     "jwt",
     "bhry98",
@@ -18,10 +18,15 @@
       "src/Helpers/functions/notifications.php",
       "src/Helpers/functions/logs.php",
       "src/Helpers/functions/responses.php",
+      "src/Helpers/functions/paths.php",
       "src/Helpers/functions/assets.php"
     ],
     "psr-4": {
-      "Bhry98\\Bhry98LaravelReady\\": "src/"
+      "Bhry98\\": "src",
+      "Bhry98\\Locations\\": "src/Locations",
+      "Bhry98\\Settings\\": "src/Settings",
+      "Bhry98\\Users\\": "src/Users",
+      "Bhry98\\GP\\": "src/GroupPolicies"
     }
   },
   "require": {
@@ -34,13 +39,12 @@
     "spatie/laravel-medialibrary": "^11.12",
     "rawilk/laravel-settings": "^3.4",
     "barryvdh/laravel-debugbar": "^3.15",
-    "filament/support": "^3.3",
     "filament/filament": "^3.3",
     "ysfkaya/filament-phone-input": "^3.1",
     "tomatophp/filament-translation-component": "^1.0",
     "propaganistas/laravel-phone": "^6.0",
-    "bezhansalleh/filament-language-switch": "^3.1"}
-,
+    "bezhansalleh/filament-language-switch": "^3.1"
+  },
   "authors": [
     {
       "name": "bhry98",
@@ -50,8 +54,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Bhry98\\Bhry98LaravelReady\\Bhry98LaravelReadyServiceProvider",
-        "Bhry98\\Bhry98LaravelReady\\Providers\\LaravelCoreMigrationsServiceProvider"
+        "Bhry98\\Bhry98LaravelReadyServiceProvider"
       ]
     },
     "minimum-stability": "stable"

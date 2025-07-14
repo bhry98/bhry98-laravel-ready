@@ -1,36 +1,24 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady;
+namespace Bhry98;
 
-use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
-use Bhry98\Bhry98LaravelReady\Exceptions\HandlerUnAuthenticatedException;
-use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreConfigLoad;
-use Bhry98\Bhry98LaravelReady\Helpers\loads\LaravelCoreMigrationsLoad;
-use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsPersonalAccessTokenModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
-use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreAuthServiceProvider;
-use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreCommandsServiceProvider;
-use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreConfigServiceProvider;
-use Bhry98\Bhry98LaravelReady\Providers\LaravelCoreMigrationsServiceProvider;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\DB;
+use Bhry98\GP\Bhry98GroupPoliciesServiceProvider;
+use Bhry98\Helpers\loads\ConfigurationsLoads;
+use Bhry98\Locations\Bhry98LocationsServiceProvider;
+use Bhry98\Settings\Bhry98SettingsServiceProvider;
+use Bhry98\Users\Bhry98UsersServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Sanctum\Sanctum;
-use Throwable;
 
 class Bhry98LaravelReadyServiceProvider extends ServiceProvider
 {
-
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
-        $this->mergeConfigFrom(path: __DIR__ . "{$ds}Config{$ds}bhry98.php", key: 'bhry98');
-        $this->app->singleton(abstract: ExceptionHandler::class, concrete: HandlerUnAuthenticatedException::class);
-        $this->app->bind(Notification::class, UsersNotificationsModel::class);
+        $this->mergeConfigFrom(bhry98_config_path("bhry98.php"), 'bhry98');
+//        $this->app->singleton(abstract: ExceptionHandler::class, concrete: HandlerUnAuthenticatedException::class);
+//        $this->app->bind(Notification::class, UsersNotificationsModel::class);
     }
 
     /**
@@ -38,49 +26,47 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->register(LaravelCoreMigrationsServiceProvider::class);
-        $this->app->register(LaravelCoreCommandsServiceProvider::class);
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-//                ->circular()
-                ->visible(outsidePanels: true)
-                ->locales(['ar','en']);
-        });
-        self::loadRoutes();
+        $this->app->register(Bhry98UsersServiceProvider::class);
+        $this->app->register(Bhry98SettingsServiceProvider::class);
+        $this->app->register(Bhry98GroupPoliciesServiceProvider::class);
+        $this->app->register(Bhry98LocationsServiceProvider::class);
         self::loadTranslations();
-        self::loadFilamentViews();
-//        $this->app->register(LaravelCoreConfigServiceProvider::class);
-        LaravelCoreConfigLoad::load();
-        try {
-            DB::connection()->getPdo();
-            Sanctum::usePersonalAccessTokenModel(model: SessionsPersonalAccessTokenModel::class);
-            $this->app->register(LaravelCoreAuthServiceProvider::class);
+        self::loadMigrations();
+        $this->app->register(ConfigurationsLoads::class);
 
-        } catch (Throwable) {
-        }
-        $this->publishes([
-            __DIR__ . '/Config/bhry98.php' => config_path('bhry98.php'),
-        ]);
+
+//        $this->app->register(LaravelCoreMigrationsServiceProvider::class);
+//        $this->app->register(LaravelCoreCommandsServiceProvider::class);
+//        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+//            $switch
+////                ->circular()
+//                ->visible(outsidePanels: true)
+//                ->locales(['ar', 'en']);
+//        });
+//        self::loadRoutes();
+//        self::loadFilamentViews();
+////        $this->app->register(LaravelCoreConfigServiceProvider::class);
+//        LaravelCoreConfigLoad::load();
+//        try {
+//            DB::connection()->getPdo();
+//            $this->app->register(LaravelCoreAuthServiceProvider::class);
+//
+//        } catch (Throwable) {
+//        }
+//        $this->publishes([
+//            __DIR__ . '/Config/bhry98.php' => config_path('bhry98.php'),
+//        ]);
 //        dd(config('mail.mailers.smtp'));
     }
 
-    function loadRoutes(): void
+    private function loadTranslations(): void
     {
-        $ds = DIRECTORY_SEPARATOR;
-        $this->loadRoutesFrom(path: __DIR__ . "{$ds}Routes{$ds}api.php");
+        $this->loadTranslationsFrom(bhry98_base_path("Locales"), "Bhry98");
     }
 
-    function loadTranslations(): void
+    private function loadMigrations(): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $this->loadTranslationsFrom(path: __DIR__ . "{$ds}Locales", namespace: "Bhry98");
+        $this->loadMigrationsFrom(bhry98_base_path("Helpers{$ds}migrations"));
     }
-
-    function loadFilamentViews(): void
-    {
-        $ds = DIRECTORY_SEPARATOR;
-        $this->loadViewsFrom(__DIR__ . "{$ds}Filament{$ds}Views", namespace: "Bhry98");
-        $this->loadViewsFrom(__DIR__ . "{$ds}Filament{$ds}users{$ds}Bhry98UsersResource{$ds}Views", namespace: "Bhry98UsersResource");
-    }
-
 }
