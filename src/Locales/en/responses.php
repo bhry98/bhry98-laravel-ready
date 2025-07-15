@@ -32,6 +32,8 @@ return [
     "reset-password-send" => "Reset password send successfully",
     "reset-password-failed" => "Reset password failed",
     "otp-not-valid" => "OTP not valid or expired",
-    "you-must-change-password" => "You must change password first"
+    "you-must-change-password" => "You must change password first",
+    "you-must-verify-phone-first" => "You must verify phone first",
+    "otp-verified" => "OTP verified",
 
 ];

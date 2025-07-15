@@ -2,6 +2,7 @@
 return [
     'user_model' => \Bhry98\Users\Models\UsersCoreModel::class,
     'otp_attempt_limit' => 5,
+    'bot_name' => env("B_BOT_NAME", env("APP_NAME", "B BOT")),
     'login_via' => "phone_number",// username | email | phone_number /* by default username */
     "registration" => [
         'require_username' => true,

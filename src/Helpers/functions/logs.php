@@ -1,6 +1,6 @@
 <?php
 
-use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
+use Bhry98\Helpers\enums\SystemActionEnums;
 use Illuminate\Support\Facades\Log;
 
 if (!function_exists('bhry98_created_log')) {

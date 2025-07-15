@@ -13,7 +13,7 @@ class Bhry98SettingsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         self::loadMigrations();
-//        self::loadRoutes();
+        self::loadRoutes();
     }
 
     private function loadRoutes(): void

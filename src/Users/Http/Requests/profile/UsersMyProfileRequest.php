@@ -1,13 +1,12 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Http\Requests\users\profile;
+namespace Bhry98\Users\Http\Requests\profile;
 
-use Bhry98\Bhry98LaravelReady\Models\users\UsersADManagerUsersModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersCoreModel;
-use Illuminate\Foundation\Http\FormRequest;
+use Bhry98\Helpers\extends\BaseRequest;
+use Bhry98\Users\Models\UsersCoreModel;
 use Illuminate\Validation\Rule;
 
-class UsersMyProfileRequest extends FormRequest
+class UsersMyProfileRequest extends BaseRequest
 {
     public function authorize(): bool
     {
@@ -34,21 +33,5 @@ class UsersMyProfileRequest extends FormRequest
             Rule::in(UsersCoreModel::RELATIONS)
         ];
         return $rules;
-    }
-
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): void
-    {
-        if ($this->expectsJson()) {
-            $errors = collect((new \Illuminate\Validation\ValidationException($validator))->errors())->mapWithKeys(function ($messages, $key) {
-                return [self::attributes()[$key] ?? $key => $messages];
-            })->toArray();
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(
-                bhry98_response_validation_error(
-                    data: $errors,
-                    message: (new \Illuminate\Validation\ValidationException($validator))->getMessage()
-                )
-            );
-        }
-        parent::failedValidation($validator);
     }
 }

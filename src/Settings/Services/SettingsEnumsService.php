@@ -193,10 +193,10 @@ class SettingsEnumsService extends BaseService
      */
     public function getAllByType(string $type, int $pageNumber = 0, int $perPage = 20, array|null $relations = null, array|null $filters = null): LengthAwarePaginator
     {
-        $enumType = SettingsEnumsModel::from($type);
+//        $enumType = SettingsEnumsModel::from($type);
         $data = SettingsEnumsModel::query()
-            ->where('type', $enumType)
-            ->where('api_access', true)
+            ->active()
+            ->where('type', $type)
             ->orderBy('id', 'desc');
         if (!empty($filters)) {
             self::applyFilters($data, $filters, SettingsEnumsModel::class);

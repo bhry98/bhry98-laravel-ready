@@ -4,9 +4,11 @@ namespace Bhry98;
 
 use Bhry98\GP\Bhry98GroupPoliciesServiceProvider;
 use Bhry98\Helpers\loads\ConfigurationsLoads;
+use Bhry98\Helpers\loads\HandlerUnAuthenticatedException;
 use Bhry98\Locations\Bhry98LocationsServiceProvider;
 use Bhry98\Settings\Bhry98SettingsServiceProvider;
 use Bhry98\Users\Bhry98UsersServiceProvider;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\ServiceProvider;
 
 class Bhry98LaravelReadyServiceProvider extends ServiceProvider
@@ -17,7 +19,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(bhry98_config_path("bhry98.php"), 'bhry98');
-//        $this->app->singleton(abstract: ExceptionHandler::class, concrete: HandlerUnAuthenticatedException::class);
+        $this->app->singleton(ExceptionHandler::class, HandlerUnAuthenticatedException::class);
 //        $this->app->bind(Notification::class, UsersNotificationsModel::class);
     }
 

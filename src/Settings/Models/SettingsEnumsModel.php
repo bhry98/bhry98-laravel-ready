@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SettingsEnumsModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
-
     protected array $localizable = ['name', 'description'];
     const RELATIONS = ['parent'];
     const FILTER_COLUMNS = ['code', 'name'];

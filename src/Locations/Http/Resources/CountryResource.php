@@ -16,6 +16,7 @@ class CountryResource extends JsonResource
         $data["name"] = $this->name ?? $this->default_name;
         $data["flag"] = $this->flag;
         $data["lang_key"] = $this->lang_key;
+        $data["dial_code"] = $this->dial_code;
         $data["system_lang"] = $this->system_lang;
         $data["total_governorates"] = $this->when(!is_null($this->governorates_count), $this->governorates_count, 0);
         $data["total_cities"] = $this->when(!is_null($this->cities_count), $this->cities_count, 0);

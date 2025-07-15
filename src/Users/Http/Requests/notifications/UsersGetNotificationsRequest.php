@@ -1,11 +1,11 @@
 <?php
 
-namespace Bhry98\Users\Http\Requests\profile;
+namespace Bhry98\Users\Http\Requests\notifications;
 
 
 use Bhry98\Helpers\extends\BaseRequest;
 
-class UsersChangePasswordRequest extends BaseRequest
+class UsersGetNotificationsRequest extends BaseRequest
 {
     public function authorize(): bool
     {
@@ -14,21 +14,16 @@ class UsersChangePasswordRequest extends BaseRequest
 
     public function prepareForValidation()
     {
-        $fixData = [];
+        $fixData['ordering'] = 'desc';
         return $this->merge($fixData);
     }
 
     public function rules(): array
     {
         $rules = [];
-        $rules['password'] = [
+        $rules['ordering'] = [
             "required",
-            "between:8,25",
-            "confirmed"
-        ];
-        $rules['password_confirmation'] = [
-            "required",
-            "same:password"
+            "in:desc,asc"
         ];
         return $rules;
     }

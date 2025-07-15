@@ -1,17 +1,17 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Http\Controllers\users;
+namespace Bhry98\Users\Http\Controllers;
 
-use Bhry98\Bhry98LaravelReady\Http\Requests\users\profile\UsersChangePasswordRequest;
-use Bhry98\Bhry98LaravelReady\Http\Requests\users\profile\UsersMyProfileRequest;
-use Bhry98\Bhry98LaravelReady\Http\Requests\users\profile\UserUpdateProfileRequest;
-use Bhry98\Bhry98LaravelReady\Http\Resources\users\UserResource;
-use Bhry98\Bhry98LaravelReady\Services\users\UsersAuthenticationService;
-use Bhry98\Bhry98LaravelReady\Services\users\UsersManagementService;
+use Bhry98\Helpers\extends\BaseController;
+use Bhry98\Users\Http\Requests\profile\UsersChangePasswordRequest;
+use Bhry98\Users\Http\Requests\profile\UsersMyProfileRequest;
+use Bhry98\Users\Http\Requests\profile\UserUpdateProfileRequest;
+use Bhry98\Users\Http\Resources\UserResource;
+use Bhry98\Users\Services\UsersManagementService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
-class UsersProfileController extends \App\Http\Controllers\Controller
+class UsersProfileController extends BaseController
 {
     function myProfile(UsersMyProfileRequest $request, UsersManagementService $userService): JsonResponse
     {

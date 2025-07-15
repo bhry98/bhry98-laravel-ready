@@ -2,9 +2,9 @@
 
 namespace Bhry98\Bhry98LaravelReady\Providers;
 
-use Bhry98\Bhry98LaravelReady\Helpers\logs\CreateCustomLogger;
+use Bhry98\Bhry98LaravelReady\Helpers\logs\LoggerHandler;
 use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
-use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
+use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,48 +21,18 @@ class LaravelCoreConfigServiceProvider extends ServiceProvider
         self::mailConfig();
     }
 
-    private function sessionsConfig(): void
-    {
-        config()->set('session.driver', 'database');
-        config()->set(key: 'session.table', value: SessionsCoreModel::TABLE_NAME);
-        config()->set(key: 'session.lifetime', value: 120);
-        config()->set(key: 'session.expire_on_close', value: false);
-        config()->set(key: 'session.encrypt', value: false);
-        config()->set(key: 'session.files', value: storage_path(path: 'framework/sessions'));
-        config()->set(key: 'session.lottery', value: [2, 100]);
-    }
 
-    private function loggingConfig(): void
-    {
-        config()->set(key: 'logging.channels.database', value: [
-            'driver' => 'custom',
-            'via' => CreateCustomLogger::class,
-            'ignore_exceptions' => false,
-        ]);
-        config()->set('logging.default', 'database');
-    }
 
     private function cacheConfig(): void
     {
         config()->set('cache.driver', 'file');
     }
 
-    private function authConfig(): void
-    {
-
-
     private function mediaLibraryConfig(): void
     {
         config()->set(key: 'media-library.disk_name', value: 'public');
         config()->set(key: 'media-library.media_model', value: MediaLibraryModel::class);
         config()->set(key: 'media-library.queue_connection_name', value: "database");
-    }
-
-    private function settingsConfig(): void
-    {
-        config()->set(key: 'settings.table', value: SettingsCoreModel::TABLE_NAME);
-        config()->set(key: 'settings.driver', value: "eloquent");
-        config()->set(key: 'settings.teams', value: false);
     }
 
     private function mailConfig(): void

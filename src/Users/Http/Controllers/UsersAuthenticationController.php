@@ -2,6 +2,7 @@
 
 namespace Bhry98\Users\Http\Controllers;
 
+use Bhry98\Helpers\extends\BaseController;
 use Bhry98\Users\Enums\UsersVerifyCodeTypes;
 use Bhry98\Users\Http\Requests\authentication\UserAuthRegistrationRequest;
 use Bhry98\Users\Http\Requests\authentication\UsersAuthLoginRequest;
@@ -11,10 +12,9 @@ use Bhry98\Users\Http\Resources\UserResource;
 use Bhry98\Users\Services\UsersAuthenticationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use \App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class UsersAuthenticationController extends Controller
+class UsersAuthenticationController extends BaseController
 {
 
     public function registration(UserAuthRegistrationRequest $request, UsersAuthenticationService $usersCoreServices): JsonResponse
@@ -109,12 +109,7 @@ class UsersAuthenticationController extends Controller
     {
         try {
             $codeSend = $authenticationService->sendResetPasswordCodeViaEmail($request->get("email"));
-            if (!$codeSend) return bhry98_response_validation_error(
-                [
-                    'username' => __(key: 'Bhry98::responses.reset-password-failed'),
-                    'password' => __(key: 'Bhry98::responses.reset-password-failed'),
-                ],
-                __(key: "Bhry98::responses.reset-password-failed"));
+            if (!$codeSend) return bhry98_response_validation_error(message: __(key: "Bhry98::responses.reset-password-failed"));
             return bhry98_response_success_with_data(message: __(key: "Bhry98::responses.reset-password-send"));
         } catch (Exception $e) {
             return bhry98_response_internal_error([

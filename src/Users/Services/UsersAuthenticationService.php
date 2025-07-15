@@ -14,6 +14,7 @@ use Bhry98\Users\Interfaces\OtpSenderInterface;
 use Bhry98\Users\Models\UsersCoreModel;
 use Bhry98\Users\Models\UsersVerifyCodesModel;
 use Bhry98\Users\Notifications\auth\ResetPasswordCode;
+use Bhry98\Users\Notifications\auth\SuccessfullyRegistration;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
@@ -82,12 +83,13 @@ class UsersAuthenticationService extends BaseService
         if ($user) {
             // if added successfully, add log [info] and return the user
             Log::info(message: "User registered successfully with id {$user->id}", context: ['user' => $user]);
-            if (config('bhry98.registration.must_verify_phone') && filled($user->phone_number)) {
-                $user->must_verify_phone = true;
-                $user->save();
-                $user->refresh();
-                $this->sendOtpViaSms($user->phone_number, UsersVerifyCodeTypes::VerifyPhone);
-            }
+//            if (config('bhry98.registration.must_verify_phone') && filled($user->phone_number)) {
+//                $user->must_verify_phone = true;
+//                $user->save();
+//                $user->refresh();
+//                $this->sendOtpViaSms($user->phone_number, UsersVerifyCodeTypes::VerifyPhone);
+//            }
+            (new UsersNotificationsService())->sendNotificationToUser($user, new SuccessfullyRegistration($user));
             return $user;
         } else {
             // if added successfully, add log [error] and return user
@@ -132,6 +134,7 @@ class UsersAuthenticationService extends BaseService
             "type" => UsersVerifyCodeTypes::ResetPassword,
         ]);
         $user->notifyNow(new ResetPasswordCode($code));
+        $user->update(['must_change_password' => true]);
         return (bool)$code;
     }
 

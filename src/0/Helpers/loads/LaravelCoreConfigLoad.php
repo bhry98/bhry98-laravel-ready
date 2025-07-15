@@ -3,12 +3,12 @@
 namespace Bhry98\Bhry98LaravelReady\Helpers\loads;
 
 use Bhry98\Bhry98LaravelReady\Filament\Pages\Applications\ApplicationsSwitcher;
-use Bhry98\Bhry98LaravelReady\Helpers\logs\CreateCustomLogger;
+use Bhry98\Bhry98LaravelReady\Helpers\logs\LoggerHandler;
 use Bhry98\Bhry98LaravelReady\Models\media\MediaLibraryModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobBatchesModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobFailedModel;
 use Bhry98\Bhry98LaravelReady\Models\queue\QueueJobModel;
-use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsCoreModel;
+use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsModel;
 use Bhry98\Bhry98LaravelReady\Models\settings\SettingsCoreModel;
 use Filament\Facades\Filament;
 use Filament\Panel;
@@ -32,7 +32,7 @@ class LaravelCoreConfigLoad
     private function sessionsConfig(): void
     {
         config()->set('session.driver', 'database');
-        config()->set(key: 'session.table', value: SessionsCoreModel::TABLE_NAME);
+        config()->set(key: 'session.table', value: SessionsModel::TABLE_NAME);
         config()->set(key: 'session.lifetime', value: 120);
         config()->set(key: 'session.expire_on_close', value: false);
         config()->set(key: 'session.encrypt', value: false);
@@ -66,7 +66,7 @@ class LaravelCoreConfigLoad
     {
         config()->set(key: 'logging.channels.database', value: [
             'driver' => 'custom',
-            'via' => CreateCustomLogger::class,
+            'via' => LoggerHandler::class,
             'ignore_exceptions' => false,
         ]);
         config()->set('logging.default', env("B_LOGS", 'file'));
