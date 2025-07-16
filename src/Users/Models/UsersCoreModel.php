@@ -24,10 +24,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 
 class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar, HasName
 {
-    use HasApiTokens, SoftDeletes, Notifiable;
+    use HasApiTokens, SoftDeletes, Notifiable, AuthenticationLoggable;
 
     const RELATIONS = ["country", "governorate", "city", "type", "gender"];
     const FILTER_COLUMNS = ["display_name", "phone_number", "national_id", "username", "email"];
@@ -58,6 +59,7 @@ class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar,
         "updated_at" => "datetime",
         "deleted_at" => "datetime",
     ];
+
     public function type(): HasOne
     {
         return $this->hasOne(SettingsEnumsModel::class, "id", "type_id");

@@ -43,7 +43,8 @@
     "ysfkaya/filament-phone-input": "^3.1",
     "tomatophp/filament-translation-component": "^1.0",
     "propaganistas/laravel-phone": "^6.0",
-    "bezhansalleh/filament-language-switch": "^3.1"
+    "bezhansalleh/filament-language-switch": "^3.1",
+    "rappasoft/laravel-authentication-log": "^5.0"
   },
   "authors": [
     {

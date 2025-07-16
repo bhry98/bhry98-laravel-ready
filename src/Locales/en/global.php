@@ -17,6 +17,8 @@ return [
     "created-by" => "Created by",
     "updated-at" => "Updated at",
     "updated-by" => "Updated by",
+    "deleted-at" => "Deleted at",
+    "deleted-by" => "Deleted by",
     "ip-address" => "IP address",
     "city" => "City",
     "region" => "Region",

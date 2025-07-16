@@ -2,9 +2,12 @@
 
 namespace Bhry98\Helpers\loads;
 
+use Bhry98\Helpers\models\QueueJobBatchesModel;
+use Bhry98\Helpers\models\QueueJobFailedModel;
 use Bhry98\Helpers\models\QueueJobModel;
 use Bhry98\Helpers\models\SessionsModel;
 use Bhry98\Settings\Models\SettingsCoreModel;
+use Bhry98\Users\Models\UsersAuthenticationLogModel;
 use Bhry98\Users\Models\UsersPersonalAccessTokenModel;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
@@ -19,6 +22,7 @@ class ConfigurationsLoads extends ServiceProvider
         self::loggingConfig();
         self::settingsConfig();
         self::mailConfig();
+        self::authenticationLogConfig();
     }
 
     private function sessionsConfig(): void
@@ -45,13 +49,23 @@ class ConfigurationsLoads extends ServiceProvider
 
     private function queueConfig(): void
     {
-        config("queue.connections.database", [
+        config()->set("queue.connections.database", [
             'driver' => 'database',
             'connection' => "mysql",
             'table' => (new QueueJobModel)->getTable(),
             'queue' => env('DB_QUEUE', 'default'),
             'retry_after' => (int)env('DB_QUEUE_RETRY_AFTER', 90),
             'after_commit' => false,
+        ]);
+        config()->set("queue.default", 'database');
+        config()->set("queue.batching", [
+            'database' => env('DB_CONNECTION', 'sqlite'),
+            'table' => (new QueueJobBatchesModel)->getTable(),
+        ]);
+        config()->set("queue.failed", [
+            'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
+            'database' => env('DB_CONNECTION', 'sqlite'),
+            'table' => (new QueueJobFailedModel)->getTable(),
         ]);
     }
 
@@ -68,6 +82,13 @@ class ConfigurationsLoads extends ServiceProvider
         config()->set('settings.table', (new SettingsCoreModel)->getTable());
         config()->set('settings.driver', "eloquent");
         config()->set('settings.teams', false);
+    }
+
+    private function authenticationLogConfig(): void
+    {
+        config()->set('authentication-log.table_name', (new UsersAuthenticationLogModel())->getTable());
+        config()->set('authentication-log.notifications.new-device.location', false);
+        config()->set('authentication-log.notifications.failed-login.location', false);
     }
 
     private function mailConfig(): void

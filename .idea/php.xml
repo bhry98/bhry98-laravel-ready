@@ -136,6 +136,7 @@
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-translatable" />
       <path value="$PROJECT_DIR$/vendor/tomatophp/filament-translation-component" />
       <path value="$PROJECT_DIR$/vendor/bezhansalleh/filament-language-switch" />
+      <path value="$PROJECT_DIR$/vendor/rappasoft/laravel-authentication-log" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
