@@ -1,9 +1,8 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages;
+namespace Bhry98\Users\Filament\Resources\Bhry98UsersResource\Pages;
 
-use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersResource;
-use Bhry98\Bhry98LaravelReady\Services\users\UsersManagementService;
+use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

@@ -40,3 +40,15 @@ if (!function_exists('bhry98_common_database_columns')) {
 //}
 //
 
+if (!function_exists( 'bhry98_app_setting_get')) {
+    function bhry98_app_setting_get(string $key, ?string $default = null)
+    {
+        return \Rawilk\Settings\Facades\Settings::get( $key,  $default);
+    }
+}
+if (!function_exists( 'bhry98_app_setting_set')) {
+    function bhry98_app_setting_set(string $key, string $value)
+    {
+        return \Rawilk\Settings\Facades\Settings::set( $key,  $value);
+    }
+}

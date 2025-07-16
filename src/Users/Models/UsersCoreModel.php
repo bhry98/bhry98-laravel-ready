@@ -9,6 +9,10 @@ use Bhry98\Locations\Models\LocationsCountriesModel;
 use Bhry98\Locations\Models\LocationsGovernoratesModel;
 use Bhry98\Settings\Models\SettingsEnumsModel;
 use Bhry98\Users\Enums\UsersAccountTypes;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
@@ -21,7 +25,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravolt\Avatar\Avatar;
 
-class UsersCoreModel extends Authenticatable
+class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar, HasName
 {
     use HasApiTokens, SoftDeletes, Notifiable;
 
@@ -138,36 +142,50 @@ class UsersCoreModel extends Authenticatable
         );
     }
 
-//    public function canEdit(): bool
-//    {
-//        $notDeleted = is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Users.Update');
-//        return $notDeleted && $abilities;
-//    }
-//
-//    public function canDelete($relationsCount): bool
-//    {
-//        $notDeleted = is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Users.Delete');
-//        $isNotAuthUser = auth()->id() != $this->id;
-//        return $notDeleted && $abilities && $isNotAuthUser && $relationsCount <= 0;
-//    }
-//
-//    public function canForceDelete($relationsCount): bool
-//    {
-//        $notDeleted = !is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Users.ForceDelete');
-//        $isNotAuthUser = auth()->id() != $this->id;
-//        return $notDeleted && $abilities && $isNotAuthUser && $relationsCount <= 0;
-//    }
-//
-//    public function canRestore(): bool
-//    {
-//        $notDeleted = !is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Users.Restore');
-//        return $notDeleted && $abilities;
-//    }
-//
+    public function canEdit(): bool
+    {
+        $notDeleted = is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Users.Update');
+        return $notDeleted && $abilities;
+    }
+
+    public function canDelete($relationsCount): bool
+    {
+        $notDeleted = is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Users.Delete');
+        $isNotAuthUser = auth()->id() != $this->id;
+        return $notDeleted && $abilities && $isNotAuthUser && $relationsCount <= 0;
+    }
+
+    public function canForceDelete($relationsCount): bool
+    {
+        $notDeleted = !is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Users.ForceDelete');
+        $isNotAuthUser = auth()->id() != $this->id;
+        return $notDeleted && $abilities && $isNotAuthUser && $relationsCount <= 0;
+    }
+
+    public function canRestore(): bool
+    {
+        $notDeleted = !is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Users.Restore');
+        return $notDeleted && $abilities;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url;
+    }
+
+    public function getFilamentName(): string
+    {
+        return "{$this->display_name}";
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->account_type == UsersAccountTypes::Administrator;
+    }
 
 
     public static function booting(): void
@@ -202,34 +220,34 @@ class UsersCoreModel extends Authenticatable
         return $code;
     }
 
-//
-//    public function hasPermission($permissionCode): bool
-//    {
-//        if (!Cache::has("user_permissions_" . auth()->id())) {
-//            $userGroups = $this->groups;
-//            if (!$userGroups || count($userGroups) <= 0) return false;
-//            $this->cachePermissions($userGroups);
-//        }
-//        $permissions = Cache::get("user_permissions_" . auth()->id());
-//        return in_array($permissionCode, $permissions ?? []);
-//    }
-//
-//    function cachePermissions($userGroups): void
-//    {
-//        $allPermissions = collect();
-//        $userGroups->each(function ($userGroup) use ($allPermissions) {
-//            $permissionsFromGroup = $userGroup->group?->permissions;
-//            if ($permissionsFromGroup && count($permissionsFromGroup) > 0) {
-//                $permissionsFromGroup->each(function ($permission) use ($userGroup, $allPermissions) {
-//                    $allPermissions->push($permission->permission?->code ?? '');
-//                });
-//            }
-//        });
-//        Cache::remember("user_permissions_" . auth()->id(), now()->addDay(), function () use ($allPermissions) {
-//            return $allPermissions->toArray();
-//        });
-//    }
-//
+
+    public function hasPermission($permissionCode): bool
+    {
+        if (!Cache::has("user_permissions_" . auth()->id())) {
+            $userGroups = $this->groups;
+            if (!$userGroups || count($userGroups) <= 0) return false;
+            $this->cachePermissions($userGroups);
+        }
+        $permissions = Cache::get("user_permissions_" . auth()->id());
+        return in_array($permissionCode, $permissions ?? []);
+    }
+
+    function cachePermissions($userGroups): void
+    {
+        $allPermissions = collect();
+        $userGroups->each(function ($userGroup) use ($allPermissions) {
+            $permissionsFromGroup = $userGroup->group?->permissions;
+            if ($permissionsFromGroup && count($permissionsFromGroup) > 0) {
+                $permissionsFromGroup->each(function ($permission) use ($userGroup, $allPermissions) {
+                    $allPermissions->push($permission->permission?->code ?? '');
+                });
+            }
+        });
+        Cache::remember("user_permissions_" . auth()->id(), now()->addDay(), function () use ($allPermissions) {
+            return $allPermissions->toArray();
+        });
+    }
+
 //    public function notifications(): MorphMany
 //    {
 //        return $this->morphMany(UsersNotificationsModel::class, 'notifiable')

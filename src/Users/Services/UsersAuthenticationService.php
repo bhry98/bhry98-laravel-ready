@@ -156,6 +156,7 @@ class UsersAuthenticationService extends BaseService
         $user = UsersCoreModel::query()->where('phone_number', $phoneNumber)->first();
         if (!$user) return false;
         $user->must_verify_phone = false;
+        $user->phone_number_verified_at = Carbon::now();
         return $user->save();
     }
 
@@ -164,6 +165,7 @@ class UsersAuthenticationService extends BaseService
         $user = UsersCoreModel::query()->where('email', $email)->first();
         if (!$user) return false;
         $user->must_verify_email = false;
+        $user->email_verified_at = Carbon::now();
         return $user->save();
     }
 

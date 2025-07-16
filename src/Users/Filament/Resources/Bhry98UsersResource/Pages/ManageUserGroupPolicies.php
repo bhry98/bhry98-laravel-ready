@@ -1,20 +1,9 @@
 <?php
 
-namespace Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Pages;
+namespace Bhry98\Users\Filament\Resources\Bhry98UsersResource\Pages;
+use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
 
-use Bhry98\Bhry98LaravelReady\Enums\logs\LogsLevelsEnums;
-use Bhry98\Bhry98LaravelReady\Enums\system\SystemActionEnums;
-use Bhry98\Bhry98LaravelReady\Filament\users\Bhry98UsersResource\Bhry98UsersResource;
-use Bhry98\Bhry98LaravelReady\Models\logs\LogsSystemModel;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsModel;
-use Bhry98\Bhry98LaravelReady\Models\rbac\RBACGroupsUsersModel;
-use Bhry98\Bhry98LaravelReady\Models\sessions\SessionsLogonsModel;
-use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
-use Bhry98\Bhry98LaravelReady\Services\system\rbac\GPLocalGroupsService;
 use Carbon\Carbon;
-use CRM\Filament\Resources\Customers\CustomersResource;
-use CRM\Models\customers\CRMCustomersContactsModel;
-use CRM\Services\Customers\CRMCustomersService;
 use Exception;
 use Filament\Actions;
 use Filament\Actions\CreateAction;

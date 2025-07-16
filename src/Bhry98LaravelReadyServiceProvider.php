@@ -2,6 +2,7 @@
 
 namespace Bhry98;
 
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Bhry98\GP\Bhry98GroupPoliciesServiceProvider;
 use Bhry98\Helpers\loads\ConfigurationsLoads;
 use Bhry98\Helpers\loads\HandlerUnAuthenticatedException;
@@ -32,6 +33,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
         $this->app->register(Bhry98SettingsServiceProvider::class);
         $this->app->register(Bhry98GroupPoliciesServiceProvider::class);
         $this->app->register(Bhry98LocationsServiceProvider::class);
+        $this->app->register(Bhry98AuthServiceProvider::class);
         self::loadTranslations();
         self::loadMigrations();
         $this->app->register(ConfigurationsLoads::class);
@@ -39,12 +41,11 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
 
 //        $this->app->register(LaravelCoreMigrationsServiceProvider::class);
 //        $this->app->register(LaravelCoreCommandsServiceProvider::class);
-//        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-//            $switch
-////                ->circular()
-//                ->visible(outsidePanels: true)
-//                ->locales(['ar', 'en']);
-//        });
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->visible(outsidePanels: true)
+                ->locales(['ar', 'en']);
+        });
 //        self::loadRoutes();
 //        self::loadFilamentViews();
 ////        $this->app->register(LaravelCoreConfigServiceProvider::class);

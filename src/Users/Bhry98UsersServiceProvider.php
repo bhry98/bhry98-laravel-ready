@@ -14,6 +14,7 @@ class Bhry98UsersServiceProvider extends ServiceProvider
     {
         self::loadRoutes();
         self::loadMigrations();
+        self::loadViews();
     }
 
     private function loadRoutes(): void
@@ -26,5 +27,11 @@ class Bhry98UsersServiceProvider extends ServiceProvider
     {
         $ds = DIRECTORY_SEPARATOR;
         $this->loadMigrationsFrom(bhry98_users_path("database{$ds}migrations"));
+    }
+
+    private function loadViews(): void
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        $this->loadViewsFrom(bhry98_users_path("Views"), "Users");
     }
 }
