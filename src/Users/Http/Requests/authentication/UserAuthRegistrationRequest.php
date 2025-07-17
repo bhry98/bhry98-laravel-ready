@@ -42,7 +42,6 @@ class UserAuthRegistrationRequest extends BaseRequest
             "digits_between:8,20",
             Rule::unique(UsersCoreModel::class, 'national_id'),
         ];
-
         $roles["first_name"] = [
             "required",
             "string",
@@ -76,7 +75,6 @@ class UserAuthRegistrationRequest extends BaseRequest
             "date",
             "before:" . date('Y') - 10,
         ];
-
         $roles["country"] = [
             "nullable",
             "string",

@@ -22,6 +22,10 @@ return [
             "title" => "Reset password code",
             "message" => "Your reset password code is :code",
         ],
+        "verify-code" => [
+            "title" => "Verification Code",
+            "message" => "Your verification code is :code. Please do not share this code with anyone for your security.",
+        ],
         "successfully-registration" => [
             "title" => "Registration successfully",
             "message" => "Hi :user, your registration was successful.",

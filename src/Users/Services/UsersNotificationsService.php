@@ -56,7 +56,7 @@ class UsersNotificationsService extends BaseService
         });
     }
 
-    public function sendNotificationToUser(UsersCoreModel $user, string|Notification $notification): bool
+    public function sendNotificationToUser(UsersCoreModel|Authenticatable $user, string|Notification $notification): bool
     {
         return DB::transaction(function () use ($user, $notification) {
             // Ensure the user has a notification channel

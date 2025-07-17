@@ -17,19 +17,25 @@ Route::name("api.")
         Route::name("auth.")
             ->prefix("auth")
             ->group(function () {
-                Route::post("/login", [UsersAuthenticationController::class, "login"])->name("login");
                 Route::post("/registration", [UsersAuthenticationController::class, "registration"])->name("registration");
+                Route::post("/login", [UsersAuthenticationController::class, "login"])->name("login");
+                Route::post("/verifyOtp", [UsersAuthenticationController::class, "verifyOtp"])->name("verifyOtp")
+                    ->middleware("auth:sanctum")
+                    ->withoutMiddleware([UserMustVerifyPhone::class, UserMustChangePassword::class]);
+                Route::get("/logout", [UsersAuthenticationController::class, "logout"])->name("logout")
+                    ->middleware("auth:sanctum")
+                    ->withoutMiddleware([UserMustVerifyPhone::class, UserMustChangePassword::class,UserAccountEnable::class]);
                 Route::post("/resetPassword", [UsersAuthenticationController::class, "resetPassword"])->name("resetPassword");
-                Route::post("/verifyOtp", [UsersAuthenticationController::class, "verifyOtp"])->name("verifyOtp")->withoutMiddleware([UserMustVerifyPhone::class]);
-                Route::get("/logout", [UsersAuthenticationController::class, "logout"])->name("logout")->middleware("auth:sanctum");
             });
         // account routes
         Route::name("me.")
             ->middleware(["auth:sanctum",])
             ->prefix("me")
             ->group(function () {
-                Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile")->withoutMiddleware(UserMustChangePassword::class);
-                Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword")->withoutMiddleware(UserMustChangePassword::class);
+                Route::get("/", [UsersProfileController::class, "myProfile"])->name("myProfile")
+                    ->withoutMiddleware([UserMustVerifyPhone::class, UserMustChangePassword::class]);
+                Route::put("/changePassword", [UsersProfileController::class, "changePassword"])->name("changePassword")
+                    ->withoutMiddleware([UserMustVerifyPhone::class, UserMustChangePassword::class]);
                 Route::put("/", [UsersProfileController::class, "updateProfile"])->name("updateProfile");
             });
         // notifications routes

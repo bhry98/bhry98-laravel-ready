@@ -14,10 +14,20 @@ class UsersAuthResetPasswordRequest extends BaseRequest
 
     public function rules(): array
     {
-        $userTable = (new UsersCoreModel)->getTable();
-
         $rules = [];
-        $rules['email'] = ["required", "email", "exists:$userTable,email"];
+        $userTable = (new UsersCoreModel)->getTable();
+        $rules['email'] = [
+            'nullable',
+            'email',
+            "exists:$userTable,email",
+            'required_without:phone_number',
+        ];
+        $rules['phone_number'] = [
+            'nullable',
+            'string',
+            "exists:$userTable,phone_number",
+            'required_without:email',
+        ];
         return $rules;
     }
 }

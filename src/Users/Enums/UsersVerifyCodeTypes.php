@@ -11,9 +11,6 @@ enum UsersVerifyCodeTypes implements HasIcon, HasLabel, HasColor
     case ResetPassword;
     case VerifyEmail;
     case VerifyPhone;
-    case Login;
-    case Registration;
-    case Other;
 
     public function getColor(): string|array|null
     {
@@ -35,9 +32,6 @@ enum UsersVerifyCodeTypes implements HasIcon, HasLabel, HasColor
             self::ResetPassword => __("Bhry98::enums.users-verify-code-types.reset-password"),
             self::VerifyEmail => __("Bhry98::enums.users-verify-code-types.verify-email"),
             self::VerifyPhone => __("Bhry98::enums.users-verify-code-types.verify-phone"),
-            self::Login => __("Bhry98::enums.users-verify-code-types.login"),
-            self::Registration => __("Bhry98::enums.users-verify-code-types.registration"),
-            self::Other => __("Bhry98::enums.users-verify-code-types.other"),
-        };
+           };
     }
 }

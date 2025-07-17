@@ -4,6 +4,7 @@ namespace Bhry98\Users\Http\Requests\authentication;
 
 
 use Bhry98\Helpers\extends\BaseRequest;
+use Bhry98\Users\Enums\UsersLoginTypes;
 use Bhry98\Users\Models\UsersCoreModel;
 
 class UsersAuthLoginRequest extends BaseRequest
@@ -17,13 +18,17 @@ class UsersAuthLoginRequest extends BaseRequest
     {
         $rules = [];
         $userTable = (new UsersCoreModel)->getTable();
-
-        switch (config("bhry98.login_via", "username")) {
-            case 'email':
+        switch (config("bhry98.login_type")) {
+            case UsersLoginTypes::EmailOtp:
+            case UsersLoginTypes::EmailPassword:
                 $rules['email'] = ["required", "email", "exists:$userTable,email"];
                 break;
-            case 'phone_number':
-                $rules['phone_number'] = ["required", "exists:$userTable,phone_number"];
+            case UsersLoginTypes::PhonePassword:
+            case UsersLoginTypes::PhoneOtp:
+                $rules['phone_number'] = ["required", "phone", "exists:$userTable,phone_number"];
+                break;
+            case UsersLoginTypes::NationalIdPassword:
+                $rules['national_id'] = ["required", "exists:$userTable,national_id"];
                 break;
             default:
                 $rules['username'] = ["required", "string", "exists:$userTable,username"];
