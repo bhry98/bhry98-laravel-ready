@@ -55,7 +55,7 @@ if (!function_exists('bhry98_common_database_columns')) {
 }
 
 if (!function_exists('bhry98_common_filament_columns')) {
-    function bhry98_common_filament_columns(bool $withCreated = true, bool $withUpdated = true, bool $withDeleted = true, bool $withActive = true, bool $activeButtonDisabled = false): array
+    function bhry98_common_filament_columns(bool $withCreated = true, bool $withUpdated = true, bool $withDeleted = true, bool $withActive = true, Closure|bool $activeButtonDisabled = false): array
     {
         if ($withActive) $columns[] = ToggleColumn::make('active')->label(__("Bhry98::global.active"))->disabled($activeButtonDisabled);
         if ($withCreated) $columns[] = TextColumn::make('created_at')->date(config("bhry98.date.format"))->toggleable()->toggledHiddenByDefault()->label(__("Bhry98::global.created-at"));

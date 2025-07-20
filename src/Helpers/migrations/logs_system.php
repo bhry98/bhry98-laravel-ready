@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create((new LogsSystemModel)->getTable(),
             function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('user_id')->nullable()->references('id')->on((new UsersCoreModel)->getTable())->cascadeOnUpdate()->nullOnUpdate();
+                $table->foreignId('user_id')->nullable()->references('id')->on((new UsersCoreModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
                 $table->string('action')->default(SystemActionEnums::Other->name);
                 $table->string('log_level');
                 $table->string('app_profile');

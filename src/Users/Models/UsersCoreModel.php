@@ -225,12 +225,17 @@ class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar,
 
     public function hasPermission($permissionCode): bool
     {
+//        dd(
+//            Cache::has("user_permissions_" . auth()->id())
+//            , Cache::get("user_permissions_" . auth()->id()));
         if (!Cache::has("user_permissions_" . auth()->id())) {
             $userGroups = $this->groups;
             if (!$userGroups || count($userGroups) <= 0) return false;
             $this->cachePermissions($userGroups);
         }
         $permissions = Cache::get("user_permissions_" . auth()->id());
+//        dd($permissions);
+
         return in_array($permissionCode, $permissions ?? []);
     }
 

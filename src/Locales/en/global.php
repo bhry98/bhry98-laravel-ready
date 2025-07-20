@@ -30,4 +30,6 @@ return [
     "loc" => "location",
     "org" => "organization",
     "timezone" => "Timezone",
+    "open" => "Open",
+    "switch-portals" => "Switch portals",
 ];

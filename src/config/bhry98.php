@@ -1,4 +1,7 @@
 <?php
+
+use Filament\Support\Colors\Color;
+
 return [
     'user_model' => \Bhry98\Users\Models\UsersCoreModel::class,
     'otp_attempt_limit' => (int)env("B_OTP_ATTEMPT_LIMIT", 5),
@@ -12,8 +15,9 @@ return [
         'must_verify_email' => false,
         'auto_login_after_register' => true,
     ],
-    'login_type' => \Bhry98\Users\Enums\UsersLoginTypes::PhoneOtp,
-    'reset_password_via' =>  \Bhry98\Users\Enums\UsersResetPasswordTypes::PhoneOtp,
+    'enums_type_cast' => \Bhry98\Settings\Enums\EnumsTypes::class,
+    'login_type' => \Bhry98\Users\Enums\UsersLoginTypes::EmailPassword,
+    'reset_password_via' => \Bhry98\Users\Enums\UsersResetPasswordTypes::EmailOtp,
     "db_prefix" => env("BHRY98_DB_PREFIX") ? trim(env("BHRY98_DB_PREFIX"), "_") . "_" : null,
     "date" => [
         "format" => "Y-m-d | h:i A",
@@ -56,6 +60,30 @@ return [
              *    ],
              * ],
              */
+        ],
+    ],
+    "filament" => [
+        "account-center" => [
+            "default" => true,
+            "id" => "account-center",
+            "path" => "AccountCenter",
+            "colors" => [
+                'primary' => Color::Sky,
+            ],
+        ],
+        "users" => [
+            "id" => "users",
+            "path" => "Users",
+            "colors" => [
+                'primary' => Color::Sky,
+            ],
+        ],
+        "locations" => [
+            "id" => "locations",
+            "path" => "Locations",
+            "colors" => [
+                'primary' => Color::Sky,
+            ],
         ],
     ],
 ];

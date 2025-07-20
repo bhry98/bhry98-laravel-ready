@@ -1,12 +1,12 @@
 <?php
 
 namespace Bhry98\Users\Filament\Resources\Bhry98UsersResource\Pages;
+use Bhry98\Helpers\enums\LogsLevelsEnums;
+use Bhry98\Helpers\enums\SystemActionEnums;
+use Bhry98\Helpers\models\LogsSystemModel;
 use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
-
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
-use Filament\Infolists\Components\KeyValueEntry;
-use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
@@ -23,7 +23,7 @@ class ManageUserLogs extends ViewRecord implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
 
     protected static string $resource = Bhry98UsersResource::class;
-    protected static string $view = 'Bhry98UsersResource::view-logs';
+    protected static string $view = 'Users::view-logs';
     protected static ?string $navigationIcon = "heroicon-o-clock";
 
     public static function getNavigationLabel(): string

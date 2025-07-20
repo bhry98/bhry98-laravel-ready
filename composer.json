@@ -26,6 +26,7 @@
       "Bhry98\\Locations\\": "src/Locations",
       "Bhry98\\Settings\\": "src/Settings",
       "Bhry98\\Users\\": "src/Users",
+      "Bhry98\\AccountCenter\\": "src/AccountCenter",
       "Bhry98\\GP\\": "src/GroupPolicies"
     }
   },

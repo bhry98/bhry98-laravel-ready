@@ -16,4 +16,13 @@ class BaseService
             }
         }
     }
+
+    public function notifyFilament(bool $success, string $type): void
+    {
+        if ($success) {
+            bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.$type-success"));
+        } else {
+            bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.$type-field"));
+        }
+    }
 }

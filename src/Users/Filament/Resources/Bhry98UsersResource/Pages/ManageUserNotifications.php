@@ -1,38 +1,29 @@
 <?php
 
 namespace Bhry98\Users\Filament\Resources\Bhry98UsersResource\Pages;
+
 use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
 
-use Bhry98\Bhry98LaravelReady\Models\users\UsersNotificationsModel;
+use Bhry98\Users\Models\UsersChatMessagesModel;
+use Bhry98\Users\Models\UsersCoreModel;
+use Bhry98\Users\Services\UsersNotificationsService;
 use Carbon\Carbon;
-use Filament\Actions\CreateAction;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ForceDeleteAction;
-use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
-use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 class ManageUserNotifications extends ViewRecord implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
 
     protected static string $resource = Bhry98UsersResource::class;
-    protected static string $view = 'Bhry98UsersResource::view-notifications';
+    protected static string $view = 'Users::view-notifications';
     protected static ?string $navigationIcon = "heroicon-o-bell";
 
     public static function getNavigationLabel(): string
@@ -57,7 +48,7 @@ class ManageUserNotifications extends ViewRecord implements Tables\Contracts\Has
     {
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
-            ->query(UsersNotificationsModel::query()->where(['notifiable_id' => $this->record?->id])->latest())
+            ->query(UsersChatMessagesModel::query()->where(['channel_id' => (new UsersNotificationsService)->createOrGetNotificationChannel(UsersCoreModel::query()->where(['id' => $this->record?->id])->first())])->latest())
             ->modelLabel(__("Bhry98::users.logs"))
             ->columns([
                 TextColumn::make('created_at')->label(__("Bhry98::logs.time"))->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config('bhry98.date.format')) : "---"),
@@ -68,8 +59,8 @@ class ManageUserNotifications extends ViewRecord implements Tables\Contracts\Has
 //                TextColumn::make('context')->label(__("Bhry98::logs.context"))->limit(30),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('log_level')->label(__("Bhry98::logs.level"))->options(LogsLevelsEnums::class),
-                Tables\Filters\SelectFilter::make('action')->label(__("Bhry98::logs.action"))->options(SystemActionEnums::class),
+//                Tables\Filters\SelectFilter::make('log_level')->label(__("Bhry98::logs.level"))->options(LogsLevelsEnums::class),
+//                Tables\Filters\SelectFilter::make('action')->label(__("Bhry98::logs.action"))->options(SystemActionEnums::class),
                 Tables\Filters\Filter::make('created_at')->form([
                     DatePicker::make('created_from')->label(__("Bhry98::global.from-date")),
                     DatePicker::make('created_until')->label(__("Bhry98::global.to-date"))->default(now()),

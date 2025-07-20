@@ -15,7 +15,6 @@ return new class extends Migration {
                 $table->id();
                 $table->string('code')->index()->unique();
                 $table->string('type');
-                $table->string('model')->nullable();
                 $table->string('default_name')->nullable();
                 $table->string('default_description')->nullable();
                 $table->string('icon')->nullable();

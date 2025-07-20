@@ -11,9 +11,12 @@ class EnumsResource extends JsonResource
     {
         return [
             "code" => $this->code,
-            "name" => $this->name ?? $this->default_name,
+            "name" => $this->name ?? $this->default_name ?? null,
+            "description" => $this->description ?? $this->default_description ?? null,
             "color" => $this->default_color,
-            "parent" => EnumsResource::make($this->whenLoaded( 'parent')),
+            "ordering" => (int)$this->ordering,
+            "parent" => EnumsResource::make($this->whenLoaded('parent')),
+
         ];
     }
 }

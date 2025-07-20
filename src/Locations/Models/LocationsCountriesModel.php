@@ -26,6 +26,7 @@ class LocationsCountriesModel extends BaseModel
         "flag",
         "lang_key",
         "dial_code",
+        "currency",
         "system_lang",
         "active",
     ];
@@ -68,31 +69,31 @@ class LocationsCountriesModel extends BaseModel
         });
     }
 
-//    public function canEdit(): bool
-//    {
-//        $notDeleted = is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Countries.Update');
-//        return $notDeleted && $abilities;
-//    }
-//
-//    public function canDelete($relationsCount): bool
-//    {
-//        $notDeleted = is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Countries.Delete');
-//        return $notDeleted && $abilities && $relationsCount <= 0;
-//    }
-//
-//    public function canForceDelete($relationsCount): bool
-//    {
-//        $notDeleted = !is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Countries.ForceDelete');
-//        return $notDeleted && $abilities && $relationsCount <= 0;
-//    }
-//
-//    public function canRestore(): bool
-//    {
-//        $notDeleted = !is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Countries.Restore');
-//        return $notDeleted && $abilities;
-//    }
+    public function canEdit(): bool
+    {
+        $notDeleted = is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Countries.Update');
+        return $notDeleted && $abilities;
+    }
+
+    public function canDelete($relationsCount): bool
+    {
+        $notDeleted = is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Countries.Delete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canForceDelete($relationsCount): bool
+    {
+        $notDeleted = !is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Countries.ForceDelete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canRestore(): bool
+    {
+        $notDeleted = !is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Countries.Restore');
+        return $notDeleted && $abilities;
+    }
 }

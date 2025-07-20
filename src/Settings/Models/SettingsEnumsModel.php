@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SettingsEnumsModel extends BaseModel
 {
     use SoftDeletes, HasLocalization;
+
     protected array $localizable = ['name', 'description'];
     const RELATIONS = ['parent'];
     const FILTER_COLUMNS = ['code', 'name'];
@@ -21,6 +22,7 @@ class SettingsEnumsModel extends BaseModel
         "code",
         "type",
         "model",
+        "column_name",
         "default_name",
         "default_description",
         "icon",
@@ -37,7 +39,7 @@ class SettingsEnumsModel extends BaseModel
         return [
             'active' => "boolean",
             'ordering' => "integer",
-            'type' => EnumsTypes::class,
+            'type' => config("bhry98.enums_type_cast", EnumsTypes::class),
         ];
     }
 

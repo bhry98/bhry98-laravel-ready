@@ -46,7 +46,7 @@ class LocationsSeeder extends Seeder
             $fixData = [
                 "default_name" => $governorate["name_en"],
                 "country_id" => $egypt_id,
-                "active" => false
+                "active" => true
             ];
             $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate([
                 'country_id' => $egypt_id,
@@ -72,7 +72,7 @@ class LocationsSeeder extends Seeder
                 "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
                 "governorate_id" => $cairo_id,
-                "active" => false
+                "active" => true
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
@@ -91,7 +91,7 @@ class LocationsSeeder extends Seeder
                 "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
                 "governorate_id" => $giza_id,
-                "active" => false
+                "active" => true
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
@@ -110,7 +110,7 @@ class LocationsSeeder extends Seeder
                 "default_name" => $city["name_en"],
                 "country_id" => $egypt_id,
                 "governorate_id" => $alexandria_id,
-                "active" => false
+                "active" => true
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
                 "country_id" => $egypt_id,
@@ -128,7 +128,7 @@ class LocationsSeeder extends Seeder
             $fixData = [
                 "default_name" => $governorate["name_en"],
                 "country_id" => $saudi_arabia_id,
-                "active" => false
+                "active" => true
             ];
             $governorateAfterAdd = LocationsGovernoratesModel::query()->updateOrCreate([
                 'country_id' => $saudi_arabia_id,

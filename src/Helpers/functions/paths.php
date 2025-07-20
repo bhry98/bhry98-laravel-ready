@@ -55,4 +55,11 @@ if (!function_exists('bhry98_gp_path')) {
         return bhry98_base_path("GroupPolicies$ds$path");
     }
 }
+if (!function_exists('bhry98_ac_path')) {
+    function bhry98_ac_path($path = ''): string
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        return bhry98_base_path("AccountCenter$ds$path");
+    }
+}
 

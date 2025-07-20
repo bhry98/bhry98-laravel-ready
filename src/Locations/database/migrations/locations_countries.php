@@ -19,6 +19,7 @@ return new class extends Migration {
                 $table->string('flag', 10);
                 $table->string('lang_key', 10);
                 $table->string('dial_code', 10)->nullable();
+                $table->string('currency', 10)->nullable();
                 $table->boolean('system_lang')->default(false);
                 bhry98_common_database_columns(table: $table, softDeletes: true, userLog: true, active: true);
             });

@@ -197,7 +197,7 @@ class SettingsEnumsService extends BaseService
         $data = SettingsEnumsModel::query()
             ->active()
             ->where('type', $type)
-            ->orderBy('id', 'desc');
+            ->orderBy('ordering');
         if (!empty($filters)) {
             self::applyFilters($data, $filters, SettingsEnumsModel::class);
             $pageNumber = 0;

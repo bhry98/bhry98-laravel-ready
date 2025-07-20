@@ -39,7 +39,8 @@ class SettingsEnumsGetAllByTypeRequest extends BaseRequest
         $rules['type'] = [
             "required",
 //            Rule::enum(EnumsTypes::class),
-            Rule::in(array_map(fn($case) => $case->name, EnumsTypes::cases())),
+//            Rule::in(array_map(fn($case) => $case->name, EnumsTypes::cases())),
+            Rule::in(array_map(fn($case) => $case->name, config("bhry98.enums_type_cast", EnumsTypes::class)::cases())),
         ];
         $rules["filters"] = [
             "nullable",

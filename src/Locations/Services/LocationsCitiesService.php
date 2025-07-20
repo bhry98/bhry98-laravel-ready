@@ -82,7 +82,7 @@ class LocationsCitiesService extends BaseService
             if (array_key_exists('names', $data)) {
                 $record = self::getById($id);
                 foreach ($data['names'] as $locale => $value) {
-                    $record->setLocalized('name', $value, $locale);
+                    if ($value) $record->setLocalized('name', $value, $locale);
                 }
             }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));

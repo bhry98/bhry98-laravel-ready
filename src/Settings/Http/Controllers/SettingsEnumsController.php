@@ -15,6 +15,7 @@ class SettingsEnumsController extends BaseController
     {
         try {
             // get all enums by type
+
 //            dd($request->validated());
             $permissions = $enumService->getAllByType($request->get('type'), $request->get('pageNumber'), $request->get('perPage'), $request->get('with'),$request->get('filters'));
             if ($permissions->isEmpty()) {

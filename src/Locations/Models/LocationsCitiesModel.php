@@ -58,31 +58,31 @@ class LocationsCitiesModel extends BaseModel
         });
     }
 
-//    public function canEdit(): bool
-//    {
-//        $notDeleted = is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Cities.Update');
-//        return $notDeleted && $abilities;
-//    }
-//
-//    public function canDelete($relationsCount): bool
-//    {
-//        $notDeleted = is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Cities.Delete');
-//        return $notDeleted && $abilities && $relationsCount <= 0;
-//    }
-//
-//    public function canForceDelete($relationsCount): bool
-//    {
-//        $notDeleted = !is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Cities.ForceDelete');
-//        return $notDeleted && $abilities && $relationsCount <= 0;
-//    }
-//
-//    public function canRestore(): bool
-//    {
-//        $notDeleted = !is_null($this->deleted_at);
-//        $abilities = auth()->user()?->can('Locations.Cities.Restore');
-//        return $notDeleted && $abilities;
-//    }
+    public function canEdit(): bool
+    {
+        $notDeleted = is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Cities.Update');
+        return $notDeleted && $abilities;
+    }
+
+    public function canDelete($relationsCount): bool
+    {
+        $notDeleted = is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Cities.Delete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canForceDelete($relationsCount): bool
+    {
+        $notDeleted = !is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Cities.ForceDelete');
+        return $notDeleted && $abilities && $relationsCount <= 0;
+    }
+
+    public function canRestore(): bool
+    {
+        $notDeleted = !is_null($this->getAttribute('deleted_at'));
+        $abilities = auth()->user()?->can('Locations.Cities.Restore');
+        return $notDeleted && $abilities;
+    }
 }
