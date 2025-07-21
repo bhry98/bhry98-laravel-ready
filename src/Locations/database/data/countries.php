@@ -7,7 +7,10 @@ return [
         "flag" => "🇦🇼",
         "lang_key" => "nl",
         "system_lang" => false,
-        "dial_code" => "+297"
+        "dial_code" => "+297",
+        "currency_code" => "AWG",
+        "currency_name_ar" => "فلورن أروبي",
+        "currency_name_en" => "Aruban florin"
     ],
     [
         "code" => "AF",
@@ -16,7 +19,10 @@ return [
         "flag" => "🇦🇫",
         "lang_key" => "fa",
         "system_lang" => false,
-        "dial_code" => "+93"
+        "dial_code" => "+93",
+        "currency_code" => "AFN",
+        "currency_name_ar" => "أفغاني",
+        "currency_name_en" => "Afghan afghani"
     ],
     [
         "code" => "AO",
@@ -25,7 +31,10 @@ return [
         "flag" => "🇦🇴",
         "lang_key" => "pt",
         "system_lang" => false,
-        "dial_code" => "+244"
+        "dial_code" => "+244",
+        "currency_code" => "AOA",
+        "currency_name_ar" => "كوانزا أنغولي",
+        "currency_name_en" => "Angolan kwanza"
     ],
     [
         "code" => "AI",
@@ -34,7 +43,10 @@ return [
         "flag" => "🇦🇮",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1264"
+        "dial_code" => "+1264",
+        "currency_code" => "XCD",
+        "currency_name_ar" => "دولار شرق الكاريبي",
+        "currency_name_en" => "East Caribbean dollar"
     ],
     [
         "code" => "AX",
@@ -43,7 +55,10 @@ return [
         "flag" => "🇦🇽",
         "lang_key" => "sv",
         "system_lang" => false,
-        "dial_code" => "+358"
+        "dial_code" => "+358",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "AL",
@@ -52,7 +67,10 @@ return [
         "flag" => "🇦🇱",
         "lang_key" => "sq",
         "system_lang" => false,
-        "dial_code" => "+355"
+        "dial_code" => "+355",
+        "currency_code" => "ALL",
+        "currency_name_ar" => "ليك ألباني",
+        "currency_name_en" => "Albanian lek"
     ],
     [
         "code" => "AD",
@@ -61,7 +79,10 @@ return [
         "flag" => "🇦🇩",
         "lang_key" => "ca",
         "system_lang" => false,
-        "dial_code" => "+376"
+        "dial_code" => "+376",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "AE",
@@ -70,7 +91,10 @@ return [
         "flag" => "🇦🇪",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+971"
+        "dial_code" => "+971",
+        "currency_code" => "AED",
+        "currency_name_ar" => "درهم إماراتي",
+        "currency_name_en" => "UAE dirham"
     ],
     [
         "code" => "AR",
@@ -79,7 +103,10 @@ return [
         "flag" => "🇦🇷",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+54"
+        "dial_code" => "+54",
+        "currency_code" => "ARS",
+        "currency_name_ar" => "بيزو أرجنتيني",
+        "currency_name_en" => "Argentine peso"
     ],
     [
         "code" => "AM",
@@ -88,7 +115,10 @@ return [
         "flag" => "🇦🇲",
         "lang_key" => "hy",
         "system_lang" => false,
-        "dial_code" => "+374"
+        "dial_code" => "+374",
+        "currency_code" => "AMD",
+        "currency_name_ar" => "درام أرميني",
+        "currency_name_en" => "Armenian dram"
     ],
     [
         "code" => "AS",
@@ -97,7 +127,10 @@ return [
         "flag" => "🇦🇸",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1684"
+        "dial_code" => "+1684",
+        "currency_code" => "USD",
+        "currency_name_ar" => "دولار أمريكي",
+        "currency_name_en" => "US dollar"
     ],
     [
         "code" => "AQ",
@@ -106,7 +139,10 @@ return [
         "flag" => "🇦🇶",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+672"
+        "dial_code" => "+672",
+        "currency_code" => "",
+        "currency_name_ar" => "",
+        "currency_name_en" => ""
     ],
     [
         "code" => "TF",
@@ -115,7 +151,10 @@ return [
         "flag" => "🇹🇫",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+262"
+        "dial_code" => "+262",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "AG",
@@ -124,7 +163,10 @@ return [
         "flag" => "🇦🇬",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1268"
+        "dial_code" => "+1268",
+        "currency_code" => "XCD",
+        "currency_name_ar" => "دولار شرق الكاريبي",
+        "currency_name_en" => "East Caribbean dollar"
     ],
     [
         "code" => "AU",
@@ -133,7 +175,10 @@ return [
         "flag" => "🇦🇺",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+61"
+        "dial_code" => "+61",
+        "currency_code" => "AUD",
+        "currency_name_ar" => "دولار أسترالي",
+        "currency_name_en" => "Australian dollar"
     ],
     [
         "code" => "AT",
@@ -142,7 +187,10 @@ return [
         "flag" => "🇦🇹",
         "lang_key" => "de",
         "system_lang" => false,
-        "dial_code" => "+43"
+        "dial_code" => "+43",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "AZ",
@@ -151,7 +199,10 @@ return [
         "flag" => "🇦🇿",
         "lang_key" => "az",
         "system_lang" => false,
-        "dial_code" => "+994"
+        "dial_code" => "+994",
+        "currency_code" => "AZN",
+        "currency_name_ar" => "مانات أذربيجاني",
+        "currency_name_en" => "Azerbaijani manat"
     ],
     [
         "code" => "BI",
@@ -160,7 +211,10 @@ return [
         "flag" => "🇧🇮",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+257"
+        "dial_code" => "+257",
+        "currency_code" => "BIF",
+        "currency_name_ar" => "فرنك بوروندي",
+        "currency_name_en" => "Burundian franc"
     ],
     [
         "code" => "BE",
@@ -169,7 +223,10 @@ return [
         "flag" => "🇧🇪",
         "lang_key" => "nl",
         "system_lang" => false,
-        "dial_code" => "+32"
+        "dial_code" => "+32",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "BJ",
@@ -178,7 +235,10 @@ return [
         "flag" => "🇧🇯",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+229"
+        "dial_code" => "+229",
+        "currency_code" => "XOF",
+        "currency_name_ar" => "فرنك غرب أفريقي",
+        "currency_name_en" => "West African CFA franc"
     ],
     [
         "code" => "BQ",
@@ -187,7 +247,10 @@ return [
         "flag" => "🇧🇶",
         "lang_key" => "nl",
         "system_lang" => false,
-        "dial_code" => "+599"
+        "dial_code" => "+599",
+        "currency_code" => "USD",
+        "currency_name_ar" => "دولار أمريكي",
+        "currency_name_en" => "US dollar"
     ],
     [
         "code" => "BF",
@@ -196,7 +259,10 @@ return [
         "flag" => "🇧🇫",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+226"
+        "dial_code" => "+226",
+        "currency_code" => "XOF",
+        "currency_name_ar" => "فرنك غرب أفريقي",
+        "currency_name_en" => "West African CFA franc"
     ],
     [
         "code" => "BD",
@@ -205,7 +271,10 @@ return [
         "flag" => "🇧🇩",
         "lang_key" => "bn",
         "system_lang" => false,
-        "dial_code" => "+880"
+        "dial_code" => "+880",
+        "currency_code" => "BDT",
+        "currency_name_ar" => "تاكا بنغلاديشي",
+        "currency_name_en" => "Bangladeshi taka"
     ],
     [
         "code" => "BG",
@@ -214,7 +283,10 @@ return [
         "flag" => "🇧🇬",
         "lang_key" => "bg",
         "system_lang" => false,
-        "dial_code" => "+359"
+        "dial_code" => "+359",
+        "currency_code" => "BGN",
+        "currency_name_ar" => "ليف بلغاري",
+        "currency_name_en" => "Bulgarian lev"
     ],
     [
         "code" => "BH",
@@ -223,7 +295,10 @@ return [
         "flag" => "🇧🇭",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+973"
+        "dial_code" => "+973",
+        "currency_code" => "BHD",
+        "currency_name_ar" => "دينار بحريني",
+        "currency_name_en" => "Bahraini dinar"
     ],
     [
         "code" => "BS",
@@ -232,7 +307,10 @@ return [
         "flag" => "🇧🇸",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1242"
+        "dial_code" => "+1242",
+        "currency_code" => "BSD",
+        "currency_name_ar" => "دولار باهامي",
+        "currency_name_en" => "Bahamian dollar"
     ],
     [
         "code" => "BA",
@@ -241,7 +319,10 @@ return [
         "flag" => "🇧🇦",
         "lang_key" => "bs",
         "system_lang" => false,
-        "dial_code" => "+387"
+        "dial_code" => "+387",
+        "currency_code" => "BAM",
+        "currency_name_ar" => "مارك بوسني",
+        "currency_name_en" => "Bosnia and Herzegovina convertible mark"
     ],
     [
         "code" => "BL",
@@ -250,7 +331,10 @@ return [
         "flag" => "🇧🇱",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+590"
+        "dial_code" => "+590",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "BY",
@@ -259,7 +343,10 @@ return [
         "flag" => "🇧🇾",
         "lang_key" => "be",
         "system_lang" => false,
-        "dial_code" => "+375"
+        "dial_code" => "+375",
+        "currency_code" => "BYN",
+        "currency_name_ar" => "روبل بيلاروسي",
+        "currency_name_en" => "Belarusian ruble"
     ],
     [
         "code" => "BZ",
@@ -268,7 +355,10 @@ return [
         "flag" => "🇧🇿",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+501"
+        "dial_code" => "+501",
+        "currency_code" => "BZD",
+        "currency_name_ar" => "دولار بليزي",
+        "currency_name_en" => "Belize dollar"
     ],
     [
         "code" => "BM",
@@ -277,7 +367,10 @@ return [
         "flag" => "🇧🇲",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1441"
+        "dial_code" => "+1441",
+        "currency_code" => "BMD",
+        "currency_name_ar" => "دولار برمودي",
+        "currency_name_en" => "Bermudian dollar"
     ],
     [
         "code" => "BO",
@@ -286,7 +379,10 @@ return [
         "flag" => "🇧🇴",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+591"
+        "dial_code" => "+591",
+        "currency_code" => "BOB",
+        "currency_name_ar" => "بوليفيانو بوليفي",
+        "currency_name_en" => "Bolivian boliviano"
     ],
     [
         "code" => "BR",
@@ -295,7 +391,10 @@ return [
         "flag" => "🇧🇷",
         "lang_key" => "pt",
         "system_lang" => false,
-        "dial_code" => "+55"
+        "dial_code" => "+55",
+        "currency_code" => "BRL",
+        "currency_name_ar" => "ريال برازيلي",
+        "currency_name_en" => "Brazilian real"
     ],
     [
         "code" => "BB",
@@ -304,7 +403,10 @@ return [
         "flag" => "🇧🇧",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1246"
+        "dial_code" => "+1246",
+        "currency_code" => "BBD",
+        "currency_name_ar" => "دولار بربادوسي",
+        "currency_name_en" => "Barbadian dollar"
     ],
     [
         "code" => "BN",
@@ -313,7 +415,10 @@ return [
         "flag" => "🇧🇳",
         "lang_key" => "ms",
         "system_lang" => false,
-        "dial_code" => "+673"
+        "dial_code" => "+673",
+        "currency_code" => "BND",
+        "currency_name_ar" => "دولار بروني",
+        "currency_name_en" => "Brunei dollar"
     ],
     [
         "code" => "BT",
@@ -322,7 +427,10 @@ return [
         "flag" => "🇧🇹",
         "lang_key" => "dz",
         "system_lang" => false,
-        "dial_code" => "+975"
+        "dial_code" => "+975",
+        "currency_code" => "BTN",
+        "currency_name_ar" => "نولترم بوتاني",
+        "currency_name_en" => "Bhutanese ngultrum"
     ],
     [
         "code" => "BV",
@@ -331,7 +439,10 @@ return [
         "flag" => "🇧🇻",
         "lang_key" => "no",
         "system_lang" => false,
-        "dial_code" => "+47"
+        "dial_code" => "+47",
+        "currency_code" => "NOK",
+        "currency_name_ar" => "كرونة نرويجية",
+        "currency_name_en" => "Norwegian krone"
     ],
     [
         "code" => "BW",
@@ -340,7 +451,10 @@ return [
         "flag" => "🇧🇼",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+267"
+        "dial_code" => "+267",
+        "currency_code" => "BWP",
+        "currency_name_ar" => "بولا بوتسواني",
+        "currency_name_en" => "Botswana pula"
     ],
     [
         "code" => "CF",
@@ -349,7 +463,10 @@ return [
         "flag" => "🇨🇫",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+236"
+        "dial_code" => "+236",
+        "currency_code" => "XAF",
+        "currency_name_ar" => "فرنك وسط أفريقي",
+        "currency_name_en" => "Central African CFA franc"
     ],
     [
         "code" => "CA",
@@ -358,7 +475,10 @@ return [
         "flag" => "🇨🇦",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1"
+        "dial_code" => "+1",
+        "currency_code" => "CAD",
+        "currency_name_ar" => "دولار كندي",
+        "currency_name_en" => "Canadian dollar"
     ],
     [
         "code" => "CC",
@@ -367,7 +487,10 @@ return [
         "flag" => "🇨🇨",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+61"
+        "dial_code" => "+61",
+        "currency_code" => "AUD",
+        "currency_name_ar" => "دولار أسترالي",
+        "currency_name_en" => "Australian dollar"
     ],
     [
         "code" => "CH",
@@ -376,7 +499,10 @@ return [
         "flag" => "🇨🇭",
         "lang_key" => "de",
         "system_lang" => false,
-        "dial_code" => "+41"
+        "dial_code" => "+41",
+        "currency_code" => "CHF",
+        "currency_name_ar" => "فرنك سويسري",
+        "currency_name_en" => "Swiss franc"
     ],
     [
         "code" => "CL",
@@ -385,7 +511,10 @@ return [
         "flag" => "🇨🇱",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+56"
+        "dial_code" => "+56",
+        "currency_code" => "CLP",
+        "currency_name_ar" => "بيزو تشيلي",
+        "currency_name_en" => "Chilean peso"
     ],
     [
         "code" => "CN",
@@ -394,7 +523,10 @@ return [
         "flag" => "🇨🇳",
         "lang_key" => "zh",
         "system_lang" => false,
-        "dial_code" => "+86"
+        "dial_code" => "+86",
+        "currency_code" => "CNY",
+        "currency_name_ar" => "يوان صيني",
+        "currency_name_en" => "Chinese yuan"
     ],
     [
         "code" => "CI",
@@ -403,7 +535,10 @@ return [
         "flag" => "🇨🇮",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+225"
+        "dial_code" => "+225",
+        "currency_code" => "XOF",
+        "currency_name_ar" => "فرنك غرب أفريقي",
+        "currency_name_en" => "West African CFA franc"
     ],
     [
         "code" => "CM",
@@ -412,7 +547,10 @@ return [
         "flag" => "🇨🇲",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+237"
+        "dial_code" => "+237",
+        "currency_code" => "XAF",
+        "currency_name_ar" => "فرنك وسط أفريقي",
+        "currency_name_en" => "Central African CFA franc"
     ],
     [
         "code" => "CD",
@@ -421,7 +559,10 @@ return [
         "flag" => "🇨🇩",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+243"
+        "dial_code" => "+243",
+        "currency_code" => "CDF",
+        "currency_name_ar" => "فرنك كونغولي",
+        "currency_name_en" => "Congolese franc"
     ],
     [
         "code" => "CG",
@@ -430,7 +571,10 @@ return [
         "flag" => "🇨🇬",
         "lang_key" => "fr",
         "system_lang" => false,
-        "dial_code" => "+242"
+        "dial_code" => "+242",
+        "currency_code" => "XAF",
+        "currency_name_ar" => "فرنك وسط أفريقي",
+        "currency_name_en" => "Central African CFA franc"
     ],
     [
         "code" => "CK",
@@ -439,7 +583,10 @@ return [
         "flag" => "🇨🇰",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+682"
+        "dial_code" => "+682",
+        "currency_code" => "NZD",
+        "currency_name_ar" => "دولار نيوزيلندي",
+        "currency_name_en" => "New Zealand dollar"
     ],
     [
         "code" => "CO",
@@ -448,7 +595,10 @@ return [
         "flag" => "🇨🇴",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+57"
+        "dial_code" => "+57",
+        "currency_code" => "COP",
+        "currency_name_ar" => "بيزو كولومبي",
+        "currency_name_en" => "Colombian peso"
     ],
     [
         "code" => "KM",
@@ -457,7 +607,10 @@ return [
         "flag" => "🇰🇲",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+269"
+        "dial_code" => "+269",
+        "currency_code" => "KMF",
+        "currency_name_ar" => "فرنك قمري",
+        "currency_name_en" => "Comorian franc"
     ],
     [
         "code" => "CV",
@@ -466,7 +619,10 @@ return [
         "flag" => "🇨🇻",
         "lang_key" => "pt",
         "system_lang" => false,
-        "dial_code" => "+238"
+        "dial_code" => "+238",
+        "currency_code" => "CVE",
+        "currency_name_ar" => "إيسكودو الرأس الأخضر",
+        "currency_name_en" => "Cape Verdean escudo"
     ],
     [
         "code" => "CR",
@@ -475,7 +631,10 @@ return [
         "flag" => "🇨🇷",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+506"
+        "dial_code" => "+506",
+        "currency_code" => "CRC",
+        "currency_name_ar" => "كولون كوستاريكي",
+        "currency_name_en" => "Costa Rican colón"
     ],
     [
         "code" => "CU",
@@ -484,7 +643,10 @@ return [
         "flag" => "🇨🇺",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+53"
+        "dial_code" => "+53",
+        "currency_code" => "CUP",
+        "currency_name_ar" => "بيزو كوبي",
+        "currency_name_en" => "Cuban peso"
     ],
     [
         "code" => "CW",
@@ -493,7 +655,10 @@ return [
         "flag" => "🇨🇼",
         "lang_key" => "nl",
         "system_lang" => false,
-        "dial_code" => "+599"
+        "dial_code" => "+599",
+        "currency_code" => "ANG",
+        "currency_name_ar" => "جلدر أنتيلي هولندي",
+        "currency_name_en" => "Netherlands Antillean guilder"
     ],
     [
         "code" => "CX",
@@ -502,7 +667,10 @@ return [
         "flag" => "🇨🇽",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+61"
+        "dial_code" => "+61",
+        "currency_code" => "AUD",
+        "currency_name_ar" => "دولار أسترالي",
+        "currency_name_en" => "Australian dollar"
     ],
     [
         "code" => "KY",
@@ -511,7 +679,10 @@ return [
         "flag" => "🇰🇾",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1345"
+        "dial_code" => "+1345",
+        "currency_code" => "KYD",
+        "currency_name_ar" => "دولار جزر كايمان",
+        "currency_name_en" => "Cayman Islands dollar"
     ],
     [
         "code" => "CY",
@@ -520,7 +691,10 @@ return [
         "flag" => "🇨🇾",
         "lang_key" => "el",
         "system_lang" => false,
-        "dial_code" => "+357"
+        "dial_code" => "+357",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "CZ",
@@ -529,7 +703,10 @@ return [
         "flag" => "🇨🇿",
         "lang_key" => "cs",
         "system_lang" => false,
-        "dial_code" => "+420"
+        "dial_code" => "+420",
+        "currency_code" => "CZK",
+        "currency_name_ar" => "كرونة تشيكية",
+        "currency_name_en" => "Czech koruna"
     ],
     [
         "code" => "DE",
@@ -538,7 +715,10 @@ return [
         "flag" => "🇩🇪",
         "lang_key" => "de",
         "system_lang" => false,
-        "dial_code" => "+49"
+        "dial_code" => "+49",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "DJ",
@@ -547,7 +727,10 @@ return [
         "flag" => "🇩🇯",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+253"
+        "dial_code" => "+253",
+        "currency_code" => "DJF",
+        "currency_name_ar" => "فرنك جيبوتي",
+        "currency_name_en" => "Djiboutian franc"
     ],
     [
         "code" => "DM",
@@ -556,7 +739,10 @@ return [
         "flag" => "🇩🇲",
         "lang_key" => "en",
         "system_lang" => false,
-        "dial_code" => "+1767"
+        "dial_code" => "+1767",
+        "currency_code" => "XCD",
+        "currency_name_ar" => "دولار شرق الكاريبي",
+        "currency_name_en" => "East Caribbean dollar"
     ],
     [
         "code" => "DK",
@@ -565,7 +751,10 @@ return [
         "flag" => "🇩🇰",
         "lang_key" => "da",
         "system_lang" => false,
-        "dial_code" => "+45"
+        "dial_code" => "+45",
+        "currency_code" => "DKK",
+        "currency_name_ar" => "كرونة دنماركية",
+        "currency_name_en" => "Danish krone"
     ],
     [
         "code" => "DO",
@@ -574,7 +763,10 @@ return [
         "flag" => "🇩🇴",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+1809"
+        "dial_code" => "+1809",
+        "currency_code" => "DOP",
+        "currency_name_ar" => "بيزو دومنيكاني",
+        "currency_name_en" => "Dominican peso"
     ],
     [
         "code" => "DZ",
@@ -583,7 +775,10 @@ return [
         "flag" => "🇩🇿",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+213"
+        "dial_code" => "+213",
+        "currency_code" => "DZD",
+        "currency_name_ar" => "دينار جزائري",
+        "currency_name_en" => "Algerian dinar"
     ],
     [
         "code" => "EC",
@@ -592,7 +787,10 @@ return [
         "flag" => "🇪🇨",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+593"
+        "dial_code" => "+593",
+        "currency_code" => "USD",
+        "currency_name_ar" => "دولار أمريكي",
+        "currency_name_en" => "US dollar"
     ],
     [
         "code" => "EG",
@@ -601,7 +799,10 @@ return [
         "flag" => "🇪🇬",
         "lang_key" => "ar",
         "system_lang" => true,
-        "dial_code" => "+20"
+        "dial_code" => "+20",
+        "currency_code" => "EGP",
+        "currency_name_ar" => "جنيه مصري",
+        "currency_name_en" => "Egyptian pound"
     ],
     [
         "code" => "ER",
@@ -610,7 +811,10 @@ return [
         "flag" => "🇪🇷",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+291"
+        "dial_code" => "+291",
+        "currency_code" => "ERN",
+        "currency_name_ar" => "ناكفا إريتري",
+        "currency_name_en" => "Eritrean nakfa"
     ],
     [
         "code" => "EH",
@@ -619,7 +823,10 @@ return [
         "flag" => "🇪🇭",
         "lang_key" => "ar",
         "system_lang" => false,
-        "dial_code" => "+212"
+        "dial_code" => "+212",
+        "currency_code" => "MAD",
+        "currency_name_ar" => "درهم مغربي",
+        "currency_name_en" => "Moroccan dirham"
     ],
     [
         "code" => "ES",
@@ -628,7 +835,10 @@ return [
         "flag" => "🇪🇸",
         "lang_key" => "es",
         "system_lang" => false,
-        "dial_code" => "+34"
+        "dial_code" => "+34",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "EE",
@@ -637,7 +847,10 @@ return [
         "flag" => "🇪🇪",
         "lang_key" => "et",
         "system_lang" => false,
-        "dial_code" => "+372"
+        "dial_code" => "+372",
+        "currency_code" => "EUR",
+        "currency_name_ar" => "يورو",
+        "currency_name_en" => "Euro"
     ],
     [
         "code" => "ET",
@@ -646,7 +859,10 @@ return [
         "flag" => "🇪🇹",
         "lang_key" => "am",
         "system_lang" => false,
-        "dial_code" => "+251"
+        "dial_code" => "+251",
+        "currency_code" => "ETB",
+        "currency_name_ar" => "بير إثيوبي",
+        "currency_name_en" => "Ethiopian birr"
     ],
     [
         "code" => "FI",
