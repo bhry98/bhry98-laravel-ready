@@ -31,15 +31,14 @@ class Bhry98AccountCenterPanelProvider extends PanelProvider
             ->id('account-center')
             ->path('AccountCenter')
             ->login(Bhry98AuthenticationLogin::class)
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+            ->colors(config("bhry98.filament.account-center.colors", []))
             ->discoverResources(bhry98_ac_path('Filament/Resources'), 'AccountCenter\\Filament\\Resources')
             ->discoverPages(bhry98_ac_path('Filament/Pages'), 'AccountCenter\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
                 ApplicationsSwitcher::class,
             ])
+            ->brandLogo(config("bhry98.brand_logo"))
             ->discoverWidgets(bhry98_ac_path('Filament/Widgets'), 'AccountCenter\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,

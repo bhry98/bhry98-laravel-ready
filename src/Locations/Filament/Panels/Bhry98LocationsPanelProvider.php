@@ -27,6 +27,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Bhry98LocationsPanelProvider extends PanelProvider
 {
+    /**
+     * @throws \Exception
+     */
     public function panel(Panel $panel): Panel
     {
         return $panel
@@ -45,6 +48,7 @@ class Bhry98LocationsPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->brandLogo(config("bhry98.brand_logo"))
             ->resources([
                 Bhry98CountriesResource::class,
                 Bhry98CitiesResource::class,

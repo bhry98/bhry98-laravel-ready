@@ -6,6 +6,7 @@ return [
     'user_model' => \Bhry98\Users\Models\UsersCoreModel::class,
     'otp_attempt_limit' => (int)env("B_OTP_ATTEMPT_LIMIT", 5),
     'bot_name' => env("B_BOT_NAME", env("APP_NAME", "B BOT")),
+    'brand_logo' => env("B_BRAND_LOGO"),
     "registration" => [
         'require_username' => false,
         'require_email' => true,
