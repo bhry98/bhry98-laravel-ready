@@ -16,7 +16,9 @@ class UsersNotificationsController extends BaseController
     {
         try {
             if (!$notifications = $notificationsService->getAllNotifications(withChannel: true)) return bhry98_response_not_found();
-            return bhry98_response_success_with_data(MessageResource::collection($notifications)->response()->getData(true));
+            return bhry98_response_success_with_data(MessageResource::collection($notifications)->additional([
+                'meta' => $notificationsService->getNotificationsStatistics(),
+            ])->response()->getData(true));
         } catch (Exception $e) {
             return bhry98_response_internal_error([
                 'error' => $e->getMessage(),

@@ -32,6 +32,16 @@ class UsersNotificationsService extends BaseService
         return $messages->paginate($perPage, page: $pageNumber);
     }
 
+    public function getNotificationsStatistics(): array
+    {
+        $user = auth()->user();
+        $channel = $this->createOrGetNotificationChannel($user);
+        $messages = $channel->messages();
+        $data['total_unread'] = (clone $messages)->whereNull('read_at')->count();
+        $data['total_read'] = (clone $messages)->whereNotNull('read_at')->count();
+        return $data;
+    }
+
     public function createOrGetNotificationChannel(UsersCoreModel|Authenticatable $user): UsersChatChannelsModel
     {
         // Check if the user already has a Notifications channel
