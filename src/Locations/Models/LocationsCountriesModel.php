@@ -57,7 +57,6 @@ class LocationsCountriesModel extends BaseModel
             get: fn() => "({$this->flag}) " . $this->name ?? $this->default_name ?? "---"
         );
     }
-
     protected static function booted(): void
     {
         static::creating(function ($model) {

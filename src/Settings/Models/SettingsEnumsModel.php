@@ -57,9 +57,11 @@ class SettingsEnumsModel extends BaseModel
     {
         static::creating(function ($model) {
             $model->code = self::createUniqueTextForColumn('code', $model->code);
+            $model->icon = $model->icon ?? "heroicon-o-cursor-arrow-rays";
             $model->created_by = auth()->id();
         });
         static::updating(function ($model) {
+            $model->icon = $model->icon ?? "heroicon-o-cursor-arrow-rays";
             $model->updated_by = auth()->id();
         });
     }

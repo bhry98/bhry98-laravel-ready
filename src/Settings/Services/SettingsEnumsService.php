@@ -82,8 +82,14 @@ class SettingsEnumsService extends BaseService
         } else {
             if (array_key_exists('names', $data)) {
                 $record = self::getById($id);
-                foreach ($data['names'] as $locale => $value) {
-                    $record->setLocalized('name', $value, $locale);
+                foreach ($data['names'] as $locale => $name) {
+                    if ($name) $record->setLocalized('name', $name, $locale);
+                }
+            }
+            if (array_key_exists('descriptions', $data)) {
+                $record = self::getById($id);
+                foreach ($data['descriptions'] as $locale => $description) {
+                    if ($description) $record->setLocalized('description', $description, $locale);
                 }
             }
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.updated-success"));

@@ -35,6 +35,7 @@ class Bhry98UsersPanelProvider extends PanelProvider
             ->discoverPages(bhry98_users_path('Filament/Pages'), 'Users\\Filament\\Pages')
             ->discoverWidgets(bhry98_users_path('Filament/Widgets'), 'Users\\Filament\\Widgets')
             ->brandLogo(config("bhry98.brand_logo"))
+            ->brandLogoHeight(config("bhry98.brand_logo_size"))
             ->pages([
                 Pages\Dashboard::class,
                 ApplicationsSwitcher::class,
