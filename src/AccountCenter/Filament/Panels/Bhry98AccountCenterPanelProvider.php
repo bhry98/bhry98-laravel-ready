@@ -44,6 +44,8 @@ class Bhry98AccountCenterPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->brandLogo(config("bhry98.brand_logo"))
+            ->brandLogoHeight(config("bhry98.brand_logo_size"))
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
