@@ -1,0 +1,26 @@
+<?php
+
+return [
+    "default-name" => "Group default name",
+    "default-description" => "Group default description",
+    "join-to-group" => "Join to group",
+    "group-policies" => "Group policies",
+    "group-code" => "Group code",
+    "group-name" => "Group name",
+    "group-info" => "Group information",
+    "group-ar-name" => "Group arabic name",
+    "group-en-name" => "Group english name",
+    "group-details" => ":group Details",
+    "group-description" => "Group description",
+    "group-ar-description" => "Group arabic description",
+    "group-en-description" => "Group english description",
+    "is-default-group" => "Is default group",
+    "active-group" => "Group is active",
+    "permissions" => ":group Permissions",
+    "add-permission" => "Add permission",
+    "permission" => "Permission",
+    "permission-description" => "Permission description",
+    "permission-name" => "Permission name",
+    "permission-code" => "Permission code",
+    "users" => ":group Users",
+];

@@ -19,6 +19,7 @@ class Bhry98GroupPoliciesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadMigrations();
+        $this->loadView();
     }
 
     private function loadRoutes(): void
@@ -31,6 +32,11 @@ class Bhry98GroupPoliciesServiceProvider extends ServiceProvider
     {
         $ds = DIRECTORY_SEPARATOR;
         $this->loadMigrationsFrom(bhry98_gp_path("database{$ds}migrations"));
+    }
+    private function loadView(): void
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        $this->loadViewsFrom(bhry98_gp_path("Views"),"GP");
     }
 
 

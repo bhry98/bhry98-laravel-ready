@@ -73,6 +73,13 @@ return [
                 'primary' => Color::Sky,
             ],
         ],
+        "group-policies" => [
+            "id" => "group-policies",
+            "path" => "GroupPolicies",
+            "colors" => [
+                'primary' => Color::Sky,
+            ],
+        ],
         "users" => [
             "id" => "users",
             "path" => "Users",

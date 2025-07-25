@@ -1,11 +1,16 @@
 <?php
 
-namespace Bhry98\GroupPolicies\Filament\Resources\Bhry98GroupsResource;
+namespace Bhry98\GP\Filament\Resources\Bhry98GroupsResource;
 
+use Bhry98\GP\Filament\Resources\Bhry98GroupsResource\Pages\ManageGroupPoliciesPermissions;
+use Bhry98\GP\Filament\Resources\Bhry98GroupsResource\Pages\ManageGroupPoliciesUsers;
+use Bhry98\GP\Filament\Resources\Bhry98GroupsResource\Pages\ViewGroupPolicies;
 use Bhry98\GP\Models\GPGroupsModel;
-use Bhry98\GroupPolicies\Filament\Resources\Bhry98GroupsResource\Pages\ListGroupPolicies;
+use Bhry98\GP\Filament\Resources\Bhry98GroupsResource\Pages\ListGroupPolicies;
+use Bhry98\GP\Services\GPGroupsService;
 use Exception;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -22,37 +27,45 @@ class Bhry98GroupsResource extends Resource
 
     public static function canAccess(): bool
     {
-        return auth()->user()->can('GP.All') || auth()->user()->isAdmin();
+        return auth()->user()->can('GP.All');
     }
 
     public static function getEloquentQuery(): Builder
     {
-        return GPGroupsModel::query()->withCount(['users', 'permissions']);
+        return GPGroupsModel::query()->withTrashed()->withCount(['users', 'permissions']);
     }
 
     public static function getRoutePrefix(): string
     {
-        return '/group-policies';
+        $currentPanelId = filament()->getCurrentPanel()?->getId();
+        if ($currentPanelId === config('bhry98.filament.group-policies.id')) {
+            return '/GroupPolicies/Groups';
+        }
+        return "/Groups";
     }
 
     public static function getNavigationGroup(): ?string
     {
+        $currentPanelId = filament()->getCurrentPanel()?->getId();
+        if ($currentPanelId === config('bhry98.filament.group-policies.id')) {
+            return "";
+        }
         return __('Bhry98::users.manage');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Bhry98::rbac.group-policies');
+        return __('Bhry98::gp.group-policies');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return __('Bhry98::rbac.group-policies');
+        return __('Bhry98::gp.group-policies');
     }
 
     public static function getLabel(): ?string
     {
-        return __('Bhry98::rbac.group-policies');
+        return __('Bhry98::gp.group-policies');
     }
 
     /**
@@ -63,55 +76,63 @@ class Bhry98GroupsResource extends Resource
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
             ->columns([
-                TextColumn::make('code')->label(__('Bhry98::rbac.group-code'))->toggleable()->searchable(),
-                TextColumn::make('default_name')->label(__('Bhry98::rbac.group-name'))->getStateUsing(fn($record) => $record->name)->toggleable()->searchable(),
-                TextColumn::make('default_description')->label(__('Bhry98::rbac.group-description'))->getStateUsing(fn($record) => $record->description)->toggleable()->searchable(),
-                IconColumn::make('is_default')->boolean()->toggleable()->label(__('Bhry98::global.is-default')),
-                IconColumn::make('can_delete')->boolean()->toggleable()->label(__('Bhry98::global.can-delete')),
-                IconColumn::make('active')->boolean()->toggleable()->label(__('Bhry98::global.active')),
+                TextColumn::make('code')->label(__('Bhry98::gp.group-code'))->toggleable()->searchable(),
+                TextColumn::make('default_name')->label(__('Bhry98::gp.group-name'))->getStateUsing(fn($record) => $record->name)->toggleable(),
+                TextColumn::make('users_count')->label(__('Bhry98::gp.users',['group'=>''])),
+                TextColumn::make('permissions_count')->label(__('Bhry98::gp.permissions',['group'=>''])),
+                TextColumn::make('default_description')->label(__('Bhry98::gp.group-description'))->limit(20)->lineClamp(1)->getStateUsing(fn($record) => $record->description)->toggleable()->toggledHiddenByDefault(),
+                IconColumn::make('is_default')->boolean()->toggleable()->label(__('Bhry98::gp.is-default-group')),
+                IconColumn::make('active')->boolean()->toggleable()->label(__('Bhry98::gp.active-group')),
+                ...bhry98_common_filament_columns(withActive: false)
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()->visible(auth()->user()->can('Users.ForceDelete') || auth()->user()->can('Users.Delete')),
+                Tables\Filters\TrashedFilter::make()->visible(auth()->user()->can('GP.ForceDelete') || auth()->user()->can('GP.Delete')),
                 Tables\Filters\TernaryFilter::make('active')->label(__("Bhry98::global.active")),
-//                Tables\Filters\TernaryFilter::make('must_change_password')->label(__("Bhry98::users.must-change-password")),
             ])
             ->actions([
-                ActionGroup::make([
-//                    Tables\Actions\EditAction::make()
-//                        ->label(__("Bhry98::global.modify"))
-//                        ->visible(fn(UsersCoreUsersModel $record) => $record->canEdit())
-//                        ->action(fn(UsersCoreUsersModel $record, array $data) => (new UsersManagementService())->updateUser($record->id, $data))
-//                        ->slideOver()
-//                        ->closeModalByClickingAway(false),
-//                    Tables\Actions\DeleteAction::make()
-//                        ->label(__("Bhry98::global.delete"))
-//                        ->visible(fn(UsersCoreUsersModel $record) => $record->canDelete(self::geRelationsCount()))
-//                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->deleteUser($record->id))
-//                        ->closeModalByClickingAway(false),
-//                    Tables\Actions\ForceDeleteAction::make()
-//                        ->label(__("Bhry98::global.force-delete"))
-//                        ->visible(fn(UsersCoreUsersModel $record) => $record->canForceDelete(self::geRelationsCount()))
-//                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->deleteUser($record->id, true))
-//                        ->closeModalByClickingAway(false),
-//                    Tables\Actions\RestoreAction::make()
-//                        ->label(__("Bhry98::global.restore"))
-//                        ->visible(fn(UsersCoreUsersModel $record) => $record->canRestore())
-//                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->restoreUser($record->id))
-//                        ->closeModalByClickingAway(false),
-//                    Tables\Actions\Action::make()
-//                        ->label(__("Bhry98::auth.change-password"))
-//                        ->visible(fn(UsersCoreUsersModel $record) => $record->canChangePassword())
-//                        ->action(fn(UsersCoreUsersModel $record) => (new UsersManagementService())->restoreUser($record->id))
-//                        ->closeModalByClickingAway(false),
-                ])
+                Tables\Actions\ViewAction::make()->label(__("Bhry98::global.view")),
+                Tables\Actions\EditAction::make()
+                    ->label(__("Bhry98::global.modify"))
+                    ->visible(fn(GPGroupsModel $record) => $record->canEdit())
+                    ->action(fn(GPGroupsModel $record, array $data) => (new GPGroupsService())->updateGroup($record->id, $data))
+                    ->fillForm(function ($record): array {
+                        $data = $record->toArray();
+                        foreach (config('bhry98.locales', []) as $locale) {
+                            $data["names"][$locale] = $record?->getLocalized('name', $locale);
+                            $data["descriptions"][$locale] = $record?->getLocalized('description', $locale);
+                        }
+                        return $data;
+                    })
+                    ->slideOver()
+                    ->closeModalByClickingAway(false),
+                Tables\Actions\DeleteAction::make()
+                    ->label(__("Bhry98::global.delete"))
+                    ->visible(fn(GPGroupsModel $record) => $record->canDelete())
+                    ->action(fn(GPGroupsModel $record) => (new GPGroupsService())->deleteGroup($record->id))
+                    ->closeModalByClickingAway(false),
+                Tables\Actions\RestoreAction::make()
+                    ->label(__("Bhry98::global.restore"))
+                    ->visible(fn(GPGroupsModel $record) => $record->canRestore())
+                    ->action(fn(GPGroupsModel $record) => (new GPGroupsService())->restoreGroup($record->id))
+                    ->closeModalByClickingAway(false),
+                Tables\Actions\ForceDeleteAction::make()
+                    ->label(__("Bhry98::global.force-delete"))
+                    ->visible(fn(GPGroupsModel $record) => $record->canForceDelete(self::geRelationsCount($record)))
+                    ->action(fn(GPGroupsModel $record) => (new GPGroupsService())->deleteGroup($record->id, true))
+                    ->closeModalByClickingAway(false),
             ])
-            ->bulkActions([
-            ]);
+            ->bulkActions([]);
     }
 
     public static function form(Form $form): Form
     {
-        $inputs[] = TextInput::make('code')->label(__("Bhry98::rbac.group-code"))->nullable()->unique((new GPGroupsModel)->getTable(), 'code', ignoreRecord: true);
+        $inputs[] = TextInput::make('code')->label(__("Bhry98::gp.group-code"))->nullable()->unique((new GPGroupsModel)->getTable(), 'code', ignoreRecord: true);
+        $inputs[] =ToggleButtons::make('is_default')->label(__("Bhry98::gp.is-default-group"))->required()->boolean()->inline()->default(false);
+        $inputs[] = TextInput::make('names.ar')->label(__("Bhry98::gp.group-ar-name"))->required()->maxLength(50);
+        $inputs[] = TextInput::make('names.en')->label(__("Bhry98::gp.group-en-name"))->required()->maxLength(50);
+        $inputs[] = TextInput::make('descriptions.ar')->label(__("Bhry98::gp.group-ar-description"))->nullable();
+        $inputs[] = TextInput::make('descriptions.en')->label(__("Bhry98::gp.group-en-description"))->nullable();
+        $inputs[] =ToggleButtons::make('active')->label(__("Bhry98::gp.active-group"))->required()->boolean()->inline()->default(true);
         return $form->schema($inputs);
     }
 
@@ -126,9 +147,12 @@ class Bhry98GroupsResource extends Resource
 
     public static function getRecordSubNavigation(\Filament\Pages\Page $page): array
     {
-        return [
-//            ViewUsers::class,
+        $pages = [
+            ViewGroupPolicies::class,
+            ManageGroupPoliciesUsers::class,
+            ManageGroupPoliciesPermissions::class,
         ];
+        return $page->generateNavigationItems($pages);
 
     }
 
@@ -136,11 +160,14 @@ class Bhry98GroupsResource extends Resource
     {
         return [
             'index' => ListGroupPolicies::route('/'),
+            'view' => ViewGroupPolicies::route('/{record:code}'),
+            'users' => ManageGroupPoliciesUsers::route('/{record:code}/users'),
+            'permissions' => ManageGroupPoliciesPermissions::route('/{record:code}/permissions'),
         ];
     }
 
-    protected static function geRelationsCount(): int
+     static function geRelationsCount(GPGroupsModel $record): int
     {
-        return 0;
+        return ($record->permissions_count ?? 0) + ($record->users_count ?? 0);
     }
 }

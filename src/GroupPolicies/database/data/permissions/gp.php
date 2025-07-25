@@ -60,4 +60,25 @@ return [
             "en" => "Displays a list of all defined group policies in the system.",
         ],
     ],
+    "GP.ManageUsersInGroup" => [
+        "names" => [
+            "ar" => "إدارة المستخدمين في المجموعة",
+            "en" => "Manage users in group",
+        ],
+        "descriptions" => [
+            "ar" => "يسمح بإضافة أو إزالة المستخدمين من مجموعة معينة.",
+            "en" => "Allows adding or removing users from a specific group.",
+        ],
+    ],
+    "GP.ManagePermissionsInGroup" => [
+        "names" => [
+            "ar" => "إدارة الصلاحيات في المجموعة",
+            "en" => "Manage permissions in group",
+        ],
+        "descriptions" => [
+            "ar" => "يتيح تعديل أو تعيين الصلاحيات المرتبطة بالمجموعة.",
+            "en" => "Enables modifying or assigning permissions related to the group.",
+        ],
+    ],
+
 ];

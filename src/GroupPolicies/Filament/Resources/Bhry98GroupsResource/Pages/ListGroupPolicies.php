@@ -1,8 +1,9 @@
 <?php
 
-namespace Bhry98\GroupPolicies\Filament\Resources\Bhry98GroupsResource\Pages;
+namespace Bhry98\GP\Filament\Resources\Bhry98GroupsResource\Pages;
 
-use Bhry98\GroupPolicies\Filament\Resources\Bhry98GroupsResource\Bhry98GroupsResource;
+use Bhry98\GP\Filament\Resources\Bhry98GroupsResource\Bhry98GroupsResource;
+use Bhry98\GP\Services\GPGroupsService;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -15,7 +16,8 @@ class ListGroupPolicies extends ListRecords
         return [
             CreateAction::make()
                 ->label(__("Bhry98::global.create"))
-//                ->action(fn(array $data) => (new UsersManagementService())->createNewUser($data))
+                ->visible(auth()->user()->can("GP.Create"))
+                ->action(fn(array $data) => (new GPGroupsService())->createGroup($data))
                 ->slideOver()
                 ->closeModalByClickingAway(false)
                 ->createAnother(false)

@@ -1,0 +1,26 @@
+<?php
+
+return [
+    "default-name" => "الاسم الافتراضي للمجموعة",
+    "default-description" => "الوصف الافتراضي للمجموعة",
+    "join-to-group" => "الانضمام إلى المجموعة",
+    "group-policies" => "سياسات المجموعة",
+    "group-code" => "رمز المجموعة",
+    "group-name" => "اسم المجموعة",
+    "group-info" => "معلومات المجموعة",
+    "group-ar-name" => "اسم المجموعة بالعربية",
+    "group-en-name" => "اسم المجموعة بالإنجليزية",
+    "group-description" => "وصف المجموعة",
+    "group-details" => "تفاصيل المجموعة",
+    "group-ar-description" => "وصف المجموعة بالعربية",
+    "group-en-description" => "وصف المجموعة بالإنجليزية",
+    "is-default-group" => "هل هي المجموعة الافتراضية؟",
+    "active-group" => "المجموعة مفعّلة",
+    "permissions" => "صلاحيات :group",
+    "add-permission" => "إضافة صلاحية",
+    "permission" => "الصلاحية",
+    "permission-description" => "وصف الصلاحية",
+    "permission-name" => "اسم الصلاحية",
+    "permission-code" => "رمز الصلاحية",
+    "users" => "مستخدمين :group",
+];
