@@ -137,6 +137,8 @@
       <path value="$PROJECT_DIR$/vendor/tomatophp/filament-translation-component" />
       <path value="$PROJECT_DIR$/vendor/bezhansalleh/filament-language-switch" />
       <path value="$PROJECT_DIR$/vendor/rappasoft/laravel-authentication-log" />
+      <path value="$PROJECT_DIR$/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/vendor/tapp/filament-timezone-field" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

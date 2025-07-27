@@ -11,54 +11,41 @@ use Bhry98\Users\Models\UsersCoreModel;
 
 class UsersManagementService extends BaseService
 {
-    /**
-     * @param string $code
-     * @param array|null $relations
-     * @param bool $withRelationsCount
-     * @param bool $withTrash
-     * @return UsersCoreModel|null
-     */
+    public UsersCoreModel $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UsersCoreModel();
+    }
+
     public function getByCode(string $code, array|null $relations = null, bool $withRelationsCount = false, bool $withTrash = false): ?UsersCoreModel
     {
-        $record = UsersCoreModel::query()->where(['code' => $code]);
+        $record = $this->userModel->query()->where(['code' => $code]);
         if ($withTrash) $record->withTrashed();
         if ($relations) $record->with($relations);
         return $record->first();
     }
 
-    /**
-     * @param int $id
-     * @param array|null $relations
-     * @param bool $withRelationsCount
-     * @param bool $withTrash
-     * @return UsersCoreModel|null
-     */
     public function getById(int $id, array|null $relations = null, bool $withRelationsCount = false, bool $withTrash = false): ?UsersCoreModel
     {
-        $record = UsersCoreModel::query()->where(['id' => $id]);
+        $record = $this->userModel->query()->where(['id' => $id]);
         if ($withTrash) $record->withTrashed();
         if ($relations) $record->with($relations);
-//        if ($withRelationsCount) $record->withCount(['governorates', 'cities', 'users']);
         return $record->first();
     }
 
-    /**
-     * @param array $data
-     * @return bool
-     */
-    public function createNewUser(array $data): bool
+    public function createNew(array $data): UsersCoreModel
     {
-        $record = UsersCoreModel::query()->create($data);
-        !$record ? bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.created-field")) : bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.created-success"));
-        bhry98_created_log(success: (bool)$record, message: "create new user", context: ['record' => $record->toArray()]);
-        return (bool)$record;
+        $record = $this->userModel->query()->create($data);
+        bhry98_created_log((bool)$record, "create new user", ['record' => $record->toArray()]);
+        $this->notifyFilament((bool)$record, "created");
+        return $record;
     }
 
-    /**
-     * @param int $id
-     * @param array $data
-     * @return bool
-     */
+
+
+
+    /////////////////
     public function updateUser(int $id, array $data): bool
     {
         $record = self::getById($id);

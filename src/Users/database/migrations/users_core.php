@@ -5,6 +5,7 @@ use Bhry98\Locations\Models\LocationsCountriesModel;
 use Bhry98\Locations\Models\LocationsGovernoratesModel;
 use Bhry98\Settings\Models\SettingsEnumsModel;
 use Bhry98\Users\Enums\UsersAccountTypes;
+use Bhry98\Users\Enums\UsersGenders;
 use Bhry98\Users\Models\UsersCoreModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -41,8 +42,8 @@ return new class extends Migration {
                 $table->boolean('must_change_password')->default(false);
                 $table->string('password')->nullable();
                 $table->string('timezone', 50)->nullable()->default(config("app.timezone", "Africa/Cairo"));
+                $table->string('gender')->default(UsersGenders::Hidden->name);
                 $table->foreignId('type_id')->nullable()->references('id')->on((new SettingsEnumsModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
-                $table->foreignId('gender_id')->nullable()->references('id')->on((new SettingsEnumsModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
                 $table->foreignId('nationality_id')->nullable()->references('id')->on((new LocationsCountriesModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
                 $table->foreignId('country_id')->nullable()->references('id')->on((new LocationsCountriesModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
                 $table->foreignId('governorate_id')->nullable()->references('id')->on((new LocationsGovernoratesModel)->getTable())->cascadeOnUpdate()->nullOnDelete();

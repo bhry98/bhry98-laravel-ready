@@ -4,6 +4,7 @@ namespace Bhry98\Users\Filament\Panels;
 
 use Bhry98\AccountCenter\Filament\Pages\Applications\ApplicationsSwitcher;
 use Bhry98\AccountCenter\Filament\Pages\Auth\Bhry98AuthenticationLogin;
+use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
 use Bhry98\Users\Http\Middlewares\UsersEnsureAdminIsAuth;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -43,6 +44,9 @@ class Bhry98UsersPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+            ])
+            ->resources([
+                Bhry98UsersResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,

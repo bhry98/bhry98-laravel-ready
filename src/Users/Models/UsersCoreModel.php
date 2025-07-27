@@ -7,8 +7,11 @@ use Bhry98\Helpers\extends\BaseModel;
 use Bhry98\Locations\Models\LocationsCitiesModel;
 use Bhry98\Locations\Models\LocationsCountriesModel;
 use Bhry98\Locations\Models\LocationsGovernoratesModel;
+use Bhry98\Settings\Enums\EnumsTypes;
 use Bhry98\Settings\Models\SettingsEnumsModel;
 use Bhry98\Users\Enums\UsersAccountTypes;
+use Bhry98\Users\Enums\UsersGenders;
+use Bhry98\Users\Enums\UsersTitles;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
@@ -52,6 +55,8 @@ class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar,
         "must_verify_phone" => "boolean",
         "must_verify_email" => "boolean",
         "account_type" => UsersAccountTypes::class,
+        "gender" => UsersGenders::class,
+        "title" => UsersTitles::class,
         "active" => "boolean",
         "birthdate" => "date:Y-m-d",
         "national_id" => "integer",
@@ -91,7 +96,7 @@ class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar,
         "password",
         "type_id",
         "timezone",
-        "gender_id",
+        "gender",
         "nationality_id",
         "country_id",
         "governorate_id",
@@ -100,10 +105,6 @@ class UsersCoreModel extends Authenticatable implements FilamentUser, HasAvatar,
         "active",
     ];
 
-    public function gender(): HasOne
-    {
-        return $this->hasOne(SettingsEnumsModel::class, "id", "gender_id");
-    }
 
     public function country(): HasOne
     {
