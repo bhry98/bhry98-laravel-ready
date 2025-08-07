@@ -3,6 +3,8 @@
 
 use Bhry98\Users\Models\UsersCoreModel;
 use Carbon\Carbon;
+use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Schema\Blueprint;
@@ -81,3 +83,20 @@ if (!function_exists('bhry98_app_setting_set')) {
         return \Rawilk\Settings\Facades\Settings::set($key, $value);
     }
 }
+
+//
+//if (!function_exists('bhry98_filament_enums_table_actions')) {
+//    function bhry98_filament_enums_table_actions(string $key, ?string $default = null): array
+//    {
+//        $columns[] = TextColumn::make('code')->label(__("enums.enum-code"))->searchable()->toggleable()->toggledHiddenByDefault();
+//        $columns[] = TextColumn::make('default_name')->label(__("enums.enum-name"))->getStateUsing(fn($record) => $record->name ?? "---");
+//        $columns[] = TextColumn::make('corp_count')->label(__("corp.total-corporates"));
+//        $columns[] = TextColumn::make('default_description')->label(__("enums.enum-description"))->getStateUsing(fn($record) => $record->description ?? "---")->limit(20)->toggleable()->toggledHiddenByDefault();
+//        $columns[] = IconColumn::make('icon')->label(__("enums.enum-icon"))->icon(fn($record) => $record->icon ?? "---");
+//        $columns[] = ColorColumn::make('color')->label(__("enums.enum-color"))->getStateUsing(fn($record) => $record->color);
+//        $columns[] = TextColumn::make('ordering')->label(__("enums.enum-ordering"))->numeric();
+//        $columns[] = IconColumn::make('active')->label(__("Bhry98::global.active"))->boolean();
+////         $columns[]=      ...bhry98_common_filament_columns(withActive: false);
+//        return $columns;
+//    }
+//}

@@ -66,4 +66,31 @@ class SettingsEnumsModel extends BaseModel
         });
     }
 
+    public function canEdit(?string $ability = null): bool
+    {
+        $hasAbility = !$ability || auth()->user()->can($ability);
+        $notDeleted = is_null($this->getAttribute("deleted_at"));
+        return $hasAbility && $notDeleted;
+    }
+
+    public function canDelete(?string $ability = null): bool
+    {
+        $hasAbility = !$ability || auth()->user()->can($ability);
+        $notDeleted = is_null($this->getAttribute("deleted_at"));
+        return $hasAbility && $notDeleted;
+    }
+
+    public function canForceDelete(int $relationsCount = 0, ?string $ability = null): bool
+    {
+        $hasAbility = !$ability || auth()->user()->can($ability);
+        $notDeleted = !is_null($this->getAttribute("deleted_at"));
+        return $hasAbility && $notDeleted && $relationsCount <= 0;
+    }
+
+    public function canRestore(?string $ability = null): bool
+    {
+        $hasAbility = !$ability || auth()->user()->can($ability);
+        $deleted = !is_null($this->getAttribute("deleted_at"));
+        return $hasAbility && $deleted;
+    }
 }
