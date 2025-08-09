@@ -13,7 +13,7 @@ return [
     "title" => "اللقب",
     "active" => "الحساب مفعل",
     "job-position" => "الوظيفة",
-    "display-name" => "اسم العرض",
+    "display-name" => "اسم المستخدم",
     "phone-number" => "رقم الهاتف",
     "phone-number-verified-at" => "تأكيد رقم الهاتف في",
     "email" => "البريد الإلكتروني",
