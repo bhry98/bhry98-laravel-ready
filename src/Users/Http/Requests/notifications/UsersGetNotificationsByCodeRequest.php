@@ -3,9 +3,9 @@
 namespace Bhry98\Users\Http\Requests\notifications;
 
 
+use Bhry98\AccountCenter\Models\AcChatChannelsUsersModel;
+use Bhry98\AccountCenter\Models\AcChatMessagesModel;
 use Bhry98\Helpers\extends\BaseRequest;
-use Bhry98\Users\Models\UsersChatChannelsUsersModel;
-use Bhry98\Users\Models\UsersChatMessagesModel;
 use Illuminate\Validation\Rule;
 
 class UsersGetNotificationsByCodeRequest extends BaseRequest
@@ -27,10 +27,10 @@ class UsersGetNotificationsByCodeRequest extends BaseRequest
         $rules = [];
         $rules['code'] = [
             "required",
-            Rule::exists((new UsersChatMessagesModel)->getTable(), 'code')->where(function ($query) {
+            Rule::exists((new AcChatMessagesModel)->getTable(), 'code')->where(function ($query) {
                 $query->whereIn('channel_id', function ($subquery) {
                     $subquery->select('channel_id')
-                        ->from((new UsersChatChannelsUsersModel)->getTable())
+                        ->from((new AcChatChannelsUsersModel)->getTable())
                         ->where('user_id', auth()->id());
                 });
             }),

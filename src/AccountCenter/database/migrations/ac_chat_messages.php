@@ -1,9 +1,9 @@
 <?php
 
 
-use Bhry98\Users\Enums\UsersChatMessagesTypes;
-use Bhry98\Users\Models\UsersChatChannelsModel;
-use Bhry98\Users\Models\UsersChatMessagesModel;
+use Bhry98\AccountCenter\Enums\AcChatMessagesTypes;
+use Bhry98\AccountCenter\Models\AcChatChannelsModel;
+use Bhry98\AccountCenter\Models\AcChatMessagesModel;
 use Bhry98\Users\Models\UsersCoreModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,16 +14,17 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::create((new UsersChatMessagesModel)->getTable(),
+        Schema::create((new AcChatMessagesModel)->getTable(),
             callback: function (Blueprint $table) {
                 $table->id();
                 $table->string('code')->unique();
-                $table->foreignId('channel_id')->references('id')->on((new UsersChatChannelsModel)->getTable())->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('channel_id')->references('id')->on((new AcChatChannelsModel)->getTable())->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('sender_id')->nullable()->references('id')->on((new UsersCoreModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
-                $table->text('body');
-                $table->string('type', 50)->default(UsersChatMessagesTypes::Text->name);
+                $table->longText('body');
+                $table->string('type', 50)->default(AcChatMessagesTypes::Text->name);
+                $table->nullableMorphs('notifiable');
                 $table->timestamp('read_at')->nullable();
-                bhry98_common_database_columns($table, softDeletes: true);
+                bhry98_common_database_columns($table, note: false);
             });
         Schema::enableForeignKeyConstraints();
     }
@@ -32,7 +33,7 @@ return new class extends Migration {
     {
 
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists((new UsersChatMessagesModel)->getTable());
+        Schema::dropIfExists((new AcChatMessagesModel)->getTable());
         Schema::enableForeignKeyConstraints();
     }
 };

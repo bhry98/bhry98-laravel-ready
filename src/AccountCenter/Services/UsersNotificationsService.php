@@ -1,20 +1,17 @@
 <?php
 
-namespace Bhry98\Users\Services;
+namespace Bhry98\AccountCenter\Services;
 
+use Bhry98\AccountCenter\Enums\AcChatChannelsTypes;
+use Bhry98\AccountCenter\Enums\AcChatMessagesTypes;
+use Bhry98\AccountCenter\Models\AcChatChannelsModel;
+use Bhry98\AccountCenter\Models\AcChatChannelsUsersModel;
+use Bhry98\AccountCenter\Models\AcChatMessagesModel;
 use Bhry98\Helpers\extends\BaseService;
-use Bhry98\Locations\Services\LocationsCitiesService;
-use Bhry98\Locations\Services\LocationsCountriesService;
-use Bhry98\Locations\Services\LocationsGovernorateService;
-use Bhry98\Settings\Services\SettingsEnumsService;
-use Bhry98\Users\Enums\UsersChatChannelsTypes;
-use Bhry98\Users\Enums\UsersChatMessagesTypes;
-use Bhry98\Users\Models\UsersChatChannelsModel;
-use Bhry98\Users\Models\UsersChatChannelsUsersModel;
-use Bhry98\Users\Models\UsersChatMessagesModel;
 use Bhry98\Users\Models\UsersCoreModel;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notification;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -42,11 +39,11 @@ class UsersNotificationsService extends BaseService
         return $data;
     }
 
-    public function createOrGetNotificationChannel(UsersCoreModel|Authenticatable $user): UsersChatChannelsModel
+    public function createOrGetNotificationChannel(UsersCoreModel|Authenticatable $user): AcChatChannelsModel
     {
         // Check if the user already has a Notifications channel
-        $existingChannel = UsersChatChannelsModel::query()
-            ->where('type', UsersChatChannelsTypes::Notifications)
+        $existingChannel = AcChatChannelsModel::query()
+            ->where('type', AcChatChannelsTypes::Notifications)
             ->whereHas('users', fn($query) => $query->where('user_id', $user->id))
             ->first();
 
@@ -55,10 +52,10 @@ class UsersNotificationsService extends BaseService
         }
         // Create a new notification channel and attach the user
         return DB::transaction(function () use ($user) {
-            $channel = UsersChatChannelsModel::query()->create([
-                'type' => UsersChatChannelsTypes::Notifications,
+            $channel = AcChatChannelsModel::query()->create([
+                'type' => AcChatChannelsTypes::Notifications,
             ]);
-            UsersChatChannelsUsersModel::create([
+            AcChatChannelsUsersModel::create([
                 'channel_id' => $channel->id,
                 'user_id' => $user->id,
             ]);
@@ -66,9 +63,9 @@ class UsersNotificationsService extends BaseService
         });
     }
 
-    public function sendNotificationToUser(UsersCoreModel|Authenticatable $user, string|Notification $notification): bool
+    public function sendNotificationToUser(UsersCoreModel|Authenticatable $user, string|Notification $notification, ?Model $record = null): bool
     {
-        return DB::transaction(function () use ($user, $notification) {
+        return DB::transaction(function () use ($user, $notification, $record) {
             // Ensure the user has a notification channel
             $channel = $this->createOrGetNotificationChannel($user);
 
@@ -78,12 +75,14 @@ class UsersNotificationsService extends BaseService
                 : ($notification->toMail($user)->introLines[0] ?? ''); // You can customize this
 
             // Insert the chat message
-            $message = UsersChatMessagesModel::query()
+            $message = AcChatMessagesModel::query()
                 ->create([
                     'channel_id' => $channel->id,
                     'sender_id' => null, // System message, or set an admin/bot user ID
                     'body' => $messageBody,
-                    'type' => UsersChatMessagesTypes::Text,
+                    'type' => AcChatMessagesTypes::Text,
+                    'notifiable_id' => $record?->getKey() ?? null,
+                    'notifiable_type' => $record ? $record::class : null,
                 ]);
             return (bool)$message;
         });
@@ -105,11 +104,11 @@ class UsersNotificationsService extends BaseService
         $message = $this->getNotificationByCode($messageCode);
         if (!$message) return false;
         $message->update(['read_at' => $asRead ? Carbon::now() : null]);
-        return $channel = UsersChatChannelsUsersModel::query()->where(["channel_id" => $message->channel_id, "user_id" => $user->id])->update(['last_read_at' => Carbon::now()]);
+        return $channel = AcChatChannelsUsersModel::query()->where(["channel_id" => $message->channel_id, "user_id" => $user->id])->update(['last_read_at' => Carbon::now()]);
     }
 
-    public function getNotificationByCode(string $messageCode): ?UsersChatMessagesModel
+    public function getNotificationByCode(string $messageCode): ?AcChatMessagesModel
     {
-        return UsersChatMessagesModel::query()->where('code', $messageCode)->first();
+        return AcChatMessagesModel::query()->where('code', $messageCode)->first();
     }
 }

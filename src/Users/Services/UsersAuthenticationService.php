@@ -2,26 +2,23 @@
 
 namespace Bhry98\Users\Services;
 
+use Bhry98\AccountCenter\Services\UsersNotificationsService;
 use Bhry98\Helpers\extends\BaseService;
 use Bhry98\Locations\Services\LocationsCitiesService;
 use Bhry98\Locations\Services\LocationsCountriesService;
 use Bhry98\Locations\Services\LocationsGovernorateService;
-use Bhry98\Settings\Enums\EnumsTypes;
 use Bhry98\Settings\Services\SettingsEnumsService;
-use Bhry98\Users\Enums\UsersAccountTypes;
 use Bhry98\Users\Enums\UsersLoginTypes;
 use Bhry98\Users\Enums\UsersVerifyCodeTypes;
 use Bhry98\Users\Interfaces\OtpSenderInterface;
 use Bhry98\Users\Models\UsersCoreModel;
 use Bhry98\Users\Models\UsersVerifyCodesModel;
-use Bhry98\Users\Notifications\auth\ResetPasswordCode;
 use Bhry98\Users\Notifications\auth\SuccessfullyRegistration;
 use Bhry98\Users\Notifications\auth\VerifyCode;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class UsersAuthenticationService extends BaseService
 {

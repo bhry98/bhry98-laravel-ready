@@ -1,11 +1,7 @@
 <?php
 
-namespace Bhry98\Users\Http\Resources;
+namespace Bhry98\AccountCenter\Http\Resources;
 
-use Bhry98\Locations\Http\Resources\CityResource;
-use Bhry98\Locations\Http\Resources\CountryResource;
-use Bhry98\Locations\Http\Resources\GovernorateResource;
-use Bhry98\Settings\Http\Resources\EnumsResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +12,7 @@ class ChannelResource extends JsonResource
     {
         return [
             "code" => $this->code,
-            "type" => $this->type,
+            "type" =>  $this->type->getLabel(),
             "active" => $this->active,
         ];
     }

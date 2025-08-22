@@ -1,11 +1,8 @@
 <?php
 
-namespace Bhry98\Users\Http\Resources;
+namespace Bhry98\AccountCenter\Http\Resources;
 
-use Bhry98\Locations\Http\Resources\CityResource;
-use Bhry98\Locations\Http\Resources\CountryResource;
-use Bhry98\Locations\Http\Resources\GovernorateResource;
-use Bhry98\Settings\Http\Resources\EnumsResource;
+use Bhry98\Users\Http\Resources\UserResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

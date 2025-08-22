@@ -1,6 +1,8 @@
 <?php
 
 namespace Bhry98\Users\Filament\Resources\Bhry98UsersResource\Pages;
+use Bhry98\GP\Models\GPGroupsUsersModel;
+use Bhry98\GP\Services\GPGroupsService;
 use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
 
 use Carbon\Carbon;
@@ -36,7 +38,7 @@ class ManageUserGroupPolicies extends ViewRecord implements Tables\Contracts\Has
     use Tables\Concerns\InteractsWithTable;
 
     protected static string $resource = Bhry98UsersResource::class;
-    protected static string $view = 'Bhry98UsersResource::manage-group-policies';
+    protected static string $view = 'Users::manage-group-policies';
     protected static ?string $navigationIcon = "heroicon-o-shield-check";
 
     public static function canAccess(array $parameters = []): bool
@@ -68,16 +70,16 @@ class ManageUserGroupPolicies extends ViewRecord implements Tables\Contracts\Has
     {
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
-            ->query(RBACGroupsUsersModel::query()->where(['user_id' => $this->record?->id ?? null])->with(['group'])->latest())
+            ->query(GPGroupsUsersModel::query()->where(['user_id' => $this->record?->id ?? null])->with(['group'])->latest())
             ->modelLabel(__("Bhry98::users.group-policies"))
             ->columns([
-                TextColumn::make('group.default_name')->label(__("Bhry98::rbac.group-name"))->getStateUsing(fn(RBACGroupsUsersModel $record) => $record->group?->name),
-                TextColumn::make('group.default_description')->label(__("Bhry98::rbac.group-description"))->limit()->lineClamp(1)->getStateUsing(fn(RBACGroupsUsersModel $record) => $record->group?->description),
+                TextColumn::make('group.default_name')->label(__("Bhry98::rbac.group-name"))->getStateUsing(fn(GPGroupsUsersModel $record) => $record->group?->name),
+                TextColumn::make('group.default_description')->label(__("Bhry98::rbac.group-description"))->limit()->lineClamp(1)->getStateUsing(fn(GPGroupsUsersModel $record) => $record->group?->description),
                 TextColumn::make('created_at')->label(__("Bhry98::global.join-at"))->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config('bhry98.date.format')) : "---"),
             ])
             ->filters([])
             ->actions([
-                Tables\Actions\Action::make('leave')->label(__("Bhry98::global.leave"))->requiresConfirmation()->icon("heroicon-o-backspace")->color(Color::Red)->closeModalByClickingAway(false)->action(fn($record) => (new GPLocalGroupsService())->manageGroupUser($record->group_id, $this->record->id, false))
+                Tables\Actions\Action::make('leave')->label(__("Bhry98::global.leave"))->requiresConfirmation()->icon("heroicon-o-backspace")->color(Color::Red)->closeModalByClickingAway(false)->action(fn($record) => (new GPGroupsService())->manageUserInGroup($record->group_id, $this->record->id, false))
             ]);
     }
 

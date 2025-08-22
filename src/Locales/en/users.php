@@ -4,6 +4,8 @@ return [
     "manage" => "Manage users",
     "users" => "Users",
     "user" => "User",
+    "create-user" => "Create new user",
+    "display-name-hint" => "If no display name is provided, the first and last name will be used instead.",
     "code" => "Code",
     "first-name" => "First name",
     "middle-name" => "Middle name",

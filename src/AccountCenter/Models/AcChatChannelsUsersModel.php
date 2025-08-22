@@ -1,14 +1,14 @@
 <?php
 
-namespace Bhry98\Users\Models;
+namespace Bhry98\AccountCenter\Models;
 
 use Bhry98\Helpers\extends\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class UsersChatChannelsUsersModel extends BaseModel
+class AcChatChannelsUsersModel extends BaseModel
 {
     const RELATIONS = ["user"];
-    protected $table = "users_chat_channels_users";
+    protected $table = "ac_chat_channels_users";
     protected $fillable = [
         "id",
         "channel_id",
@@ -23,12 +23,13 @@ class UsersChatChannelsUsersModel extends BaseModel
 
     public function channel(): HasOne
     {
-        return $this->hasOne(UsersChatChannelsModel::class, "id", "channel_id");
+        return $this->hasOne(AcChatChannelsModel::class, "id", "channel_id");
     }
+
     protected static function booted(): void
     {
         static::creating(function ($model) {
-});
+        });
     }
 
 }

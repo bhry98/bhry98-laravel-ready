@@ -1,8 +1,8 @@
 <?php
 
 
-use Bhry98\Users\Models\UsersChatChannelsModel;
-use Bhry98\Users\Models\UsersChatChannelsUsersModel;
+use Bhry98\AccountCenter\Models\AcChatChannelsModel;
+use Bhry98\AccountCenter\Models\AcChatChannelsUsersModel;
 use Bhry98\Users\Models\UsersCoreModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,10 +13,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::disableForeignKeyConstraints();
-        Schema::create((new UsersChatChannelsUsersModel)->getTable(),
+        Schema::create((new AcChatChannelsUsersModel)->getTable(),
             callback: function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('channel_id')->references('id')->on((new UsersChatChannelsModel)->getTable())->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('channel_id')->references('id')->on((new AcChatChannelsModel)->getTable())->cascadeOnUpdate()->cascadeOnDelete();
                 $table->foreignId('user_id')->nullable()->references('id')->on((new UsersCoreModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
                 $table->timestamp('last_read_at')->nullable();
                 bhry98_common_database_columns($table);
@@ -28,7 +28,7 @@ return new class extends Migration {
     {
 
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists((new UsersChatChannelsUsersModel)->getTable());
+        Schema::dropIfExists((new AcChatChannelsUsersModel)->getTable());
         Schema::enableForeignKeyConstraints();
     }
 };

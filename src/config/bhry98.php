@@ -21,6 +21,9 @@ return [
     'login_type' => \Bhry98\Users\Enums\UsersLoginTypes::EmailPassword,
     'reset_password_via' => \Bhry98\Users\Enums\UsersResetPasswordTypes::EmailOtp,
     "db_prefix" => env("BHRY98_DB_PREFIX") ? trim(env("BHRY98_DB_PREFIX"), "_") . "_" : null,
+    "chat" => [
+        "messages_resource" => \Bhry98\AccountCenter\Http\Resources\MessageResource::class,
+    ],
     "date" => [
         "format" => "Y-m-d | h:i A",
         "format_time" => "h:i A",

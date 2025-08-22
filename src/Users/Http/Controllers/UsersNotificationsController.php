@@ -2,11 +2,11 @@
 
 namespace Bhry98\Users\Http\Controllers;
 
+use Bhry98\AccountCenter\Http\Resources\MessageResource;
+use Bhry98\AccountCenter\Services\UsersNotificationsService;
 use Bhry98\Helpers\extends\BaseController;
 use Bhry98\Users\Http\Requests\notifications\UsersGetNotificationsByCodeRequest;
 use Bhry98\Users\Http\Requests\notifications\UsersGetNotificationsRequest;
-use Bhry98\Users\Http\Resources\MessageResource;
-use Bhry98\Users\Services\UsersNotificationsService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -15,8 +15,9 @@ class UsersNotificationsController extends BaseController
     public function allNotifications(UsersGetNotificationsRequest $request, UsersNotificationsService $notificationsService): JsonResponse
     {
         try {
+            $resourceClass = config('bhry98.chat.messages_resource');
             if (!$notifications = $notificationsService->getAllNotifications(withChannel: true)) return bhry98_response_not_found();
-            return bhry98_response_success_with_data(MessageResource::collection($notifications)->additional([
+            return bhry98_response_success_with_data($resourceClass::collection($notifications)->additional([
                 'meta' => $notificationsService->getNotificationsStatistics(),
             ])->response()->getData(true));
         } catch (Exception $e) {

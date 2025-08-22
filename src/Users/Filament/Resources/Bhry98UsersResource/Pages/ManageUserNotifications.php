@@ -2,12 +2,10 @@
 
 namespace Bhry98\Users\Filament\Resources\Bhry98UsersResource\Pages;
 
+use Bhry98\AccountCenter\Models\AcChatMessagesModel;
+use Bhry98\AccountCenter\Services\UsersNotificationsService;
 use Bhry98\Users\Filament\Resources\Bhry98UsersResource\Bhry98UsersResource;
-
-use Bhry98\Users\Models\UsersChatMessagesModel;
 use Bhry98\Users\Models\UsersCoreModel;
-use Bhry98\Users\Services\UsersNotificationsService;
-use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
@@ -46,21 +44,22 @@ class ManageUserNotifications extends ViewRecord implements Tables\Contracts\Has
      */
     public function table(Table $table): Table
     {
+        $query = AcChatMessagesModel::query()->where([
+            'channel_id' => (new UsersNotificationsService)->createOrGetNotificationChannel(UsersCoreModel::query()->where(['id' => $this->record?->id])->first())?->id
+        ])->latest();
         return $table
             ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
-            ->query(UsersChatMessagesModel::query()->where(['channel_id' => (new UsersNotificationsService)->createOrGetNotificationChannel(UsersCoreModel::query()->where(['id' => $this->record?->id])->first())])->latest())
-            ->modelLabel(__("Bhry98::users.logs"))
+            ->query($query)
+            ->modelLabel(__("Bhry98::ac.notifications"))
             ->columns([
-                TextColumn::make('created_at')->label(__("Bhry98::logs.time"))->getStateUsing(fn($record) => $record->created_at ? Carbon::parse($record->created_at)->format(config('bhry98.date.format')) : "---"),
-//                TextColumn::make('log_level')->label(__("Bhry98::logs.level"))->badge(),
-//                TextColumn::make('action')->label(__("Bhry98::logs.action"))->badge(),
-//                TextColumn::make('app_profile')->label(__("Bhry98::logs.profile")),
-//                TextColumn::make('message')->label(__("Bhry98::logs.message"))->searchable()->limit(30),
-//                TextColumn::make('context')->label(__("Bhry98::logs.context"))->limit(30),
+                TextColumn::make('created_at')->label(__("Bhry98::ac.notification-time"))->getStateUsing(fn($record) => $record->created_at?->format(config('bhry98.date.format')) ?? "---"),
+//                TextColumn::make('channel.type')->label(__("Bhry98::ac.channel-type"))->badge(),
+                TextColumn::make('type')->label(__("Bhry98::ac.message-type"))->badge(),
+                TextColumn::make('sender.display_name')->label(__("Bhry98::ac.sender-name"))->default(env("APP_NAME")),
+                TextColumn::make('body')->label(__("Bhry98::ac.message-body"))->limit(20)->lineClamp(1),
+                TextColumn::make('read_at')->label(__("Bhry98::ac.message-read-at"))->getStateUsing(fn($record) => $record->read_at?->format(config('bhry98.date.format')) ?? "---"),
             ])
             ->filters([
-//                Tables\Filters\SelectFilter::make('log_level')->label(__("Bhry98::logs.level"))->options(LogsLevelsEnums::class),
-//                Tables\Filters\SelectFilter::make('action')->label(__("Bhry98::logs.action"))->options(SystemActionEnums::class),
                 Tables\Filters\Filter::make('created_at')->form([
                     DatePicker::make('created_from')->label(__("Bhry98::global.from-date")),
                     DatePicker::make('created_until')->label(__("Bhry98::global.to-date"))->default(now()),
@@ -87,29 +86,16 @@ class ManageUserNotifications extends ViewRecord implements Tables\Contracts\Has
             ->heading(__("Bhry98::global.summary"))
             ->columns(2)
             ->schema([
-                TextEntry::make('created_at')->label(__("Bhry98::logs.time"))->weight(FontWeight::Bold),
-                TextEntry::make('app_profile')->label(__("Bhry98::logs.profile")),
-                TextEntry::make('log_level')->label(__("Bhry98::logs.level"))->badge(),
-                TextEntry::make('action')->label(__("Bhry98::logs.action"))->badge(),
+                TextEntry::make('created_at')->label(__("Bhry98::ac.notification-time"))->weight(FontWeight::Bold)->getStateUsing(fn($record) => $record->created_at?->format(config('bhry98.date.format')) ?? "---"),
+                TextEntry::make('sender.display_name')->label(__("Bhry98::ac.sender-name"))->weight(FontWeight::Bold)->default(env("APP_NAME")),
+                TextEntry::make('read_at')->label(__("Bhry98::ac.message-read-at"))->weight(FontWeight::Bold)->getStateUsing(fn($record) => $record->read_at?->format(config('bhry98.date.format')) ?? "---"),
+                TextEntry::make('type')->label(__("Bhry98::ac.message-type"))->badge(),
             ]);
         $infoList[] = \Filament\Infolists\Components\Section::make()
-            ->heading(__("Bhry98::logs.message"))
+            ->heading(__("Bhry98::ac.message-body"))
             ->schema([
-                TextEntry::make('message')->label('')->columnSpanFull()->html(),
+                TextEntry::make('body')->label('')->columnSpanFull()->html(),
             ]);
-//        $infoList[] = \Filament\Infolists\Components\Section::make()
-//            ->heading(__("Bhry98::logs.context"))
-//            ->schema([
-//                TextEntry::make('context')
-////                    ->label('')
-////                    ->columnSpanFull()
-//                    ->markdown()
-////                    ->formatStateUsing(fn ($state) =>
-////                        '<pre class="text-sm text-gray-800 dark:text-gray-100 whitespace-pre-wrap">' .
-////                        json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) .
-////                        '</pre>'
-////                    ),
-//            ]);
         return $infoList;
     }
 }

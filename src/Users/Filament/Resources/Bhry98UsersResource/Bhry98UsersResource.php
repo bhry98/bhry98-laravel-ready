@@ -83,10 +83,19 @@ class Bhry98UsersResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $inputs[] = TextInput::make('first_name')->label(__("Bhry98::users.first-name"))->required()->maxLength(30)->minLength(2)->string();
-        $inputs[] = TextInput::make('middle_name')->label(__("Bhry98::users.middle-name"))->nullable()->maxLength(30)->minLength(2)->string();
-        $inputs[] = TextInput::make('last_name')->label(__("Bhry98::users.last-name"))->required()->maxLength(30)->minLength(2)->string();
-        $inputs[] = TextInput::make('display_name')->label(__("Bhry98::users.display-name"))->nullable()->maxLength(60)->minLength(5)->string();
+
+        return $form
+            ->columns(4)->schema((new Bhry98UsersResource)->userFrom());
+    }
+
+    public static function userFrom(): array
+    {
+        $inputs[] = TextInput::make('first_name')->label(__("Bhry98::users.first-name"))->required()->maxLength(20)->minLength(2)->string();
+        $inputs[] = TextInput::make('middle_name')->label(__("Bhry98::users.middle-name"))->nullable()->maxLength(20)->minLength(2)->string();
+        $inputs[] = TextInput::make('last_name')->label(__("Bhry98::users.last-name"))->required()->maxLength(20)->minLength(2)->string();
+        $inputs[] = TextInput::make('display_name')->label(__("Bhry98::users.display-name"))
+            ->hintIcon("heroicon-o-information-circle",__("Bhry98::users.display-name-hint"))
+            ->nullable()->maxLength(40)->minLength(5)->string();
         $inputs[] = PhoneInput::make('phone_number')->label(__("Bhry98::users.phone-number"))->nullable()->defaultCountry('EG');
         $inputs[] = TextInput::make('email')->label(__("Bhry98::users.email"))->required()->email()->unique((new UsersCoreModel)->getTable(), 'email', ignoreRecord: true);
         $inputs[] = TextInput::make('work_email')->label(__("Bhry98::users.work-email"))->nullable()->email();
@@ -103,7 +112,7 @@ class Bhry98UsersResource extends Resource
         $inputs[] = Select::make('governorate_id')->label(__("Bhry98::users.governorate"))->searchable()->preload()->nullable()->relationship('governorate', 'default_name', fn($query, $get) => $query->where(['country_id' => $get('country_id')]))->getOptionLabelFromRecordUsing(fn($record) => $record->name)->disabled(fn($get) => is_null($get('country_id')))->live()->afterStateUpdated(fn($set) => $set('city_id', null));
         $inputs[] = Select::make('city_id')->label(__("Bhry98::users.city"))->searchable()->preload()->nullable()->relationship('city', 'default_name', fn($query, $get) => $query->where(['governorate_id' => $get('governorate_id')]))->getOptionLabelFromRecordUsing(fn($record) => $record->name)->disabled(fn($get) => is_null($get('governorate_id')));
         $inputs[] = Select::make('title')->label(__("Bhry98::users.title"))->searchable()->preload()->options(UsersTitles::class)->default(UsersTitles::Mr->name);;
-        $inputs[] = TextInput::make('job_position')->label(__("Bhry98::users.job-position"))->nullable()->maxLength(60)->minLength(5)->string();
+        $inputs[] = TextInput::make('job_position')->label(__("Bhry98::users.job-position"))->nullable()->maxLength(40)->minLength(5)->string();
         $inputs[] = TimezoneSelect::make('timezone')->label(__("Bhry98::users.timezone"))->required()->default(config('app.timezone', "Africa/Cairo"));
         $inputs[] = ToggleButtons::make('active')->label(__("Bhry98::users.active"))->required()->boolean()->default(true)->inline();
         /**
@@ -116,8 +125,7 @@ class Bhry98UsersResource extends Resource
          * "password",
          * "type_id",
          */
-        return $form
-            ->columns(4)->schema($inputs);
+        return $inputs;
     }
 
     public static function table(Table $table): Table
