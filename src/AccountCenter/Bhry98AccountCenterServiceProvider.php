@@ -13,6 +13,7 @@ class Bhry98AccountCenterServiceProvider extends ServiceProvider
     public function boot(): void
     {
         self::loadViews();
+        self::loadMigrations();
     }
 
     private function loadRoutes(): void
