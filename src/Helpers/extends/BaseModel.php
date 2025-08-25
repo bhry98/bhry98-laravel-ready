@@ -16,6 +16,7 @@ abstract class BaseModel extends Model
     {
         return strtolower(config('bhry98.db_prefix') . $this->table);
     }
+
     public static function createUniqueTextForColumn(string $column, ?string $str = null, int $length = 10, bool $upper = true): string
     {
         if ($str) return $upper ? Str::upper(Str::slug($str)) : Str::lower(Str::slug($str));
@@ -40,6 +41,7 @@ abstract class BaseModel extends Model
     {
         return $this->hasOne(UsersCoreModel::class, 'id', 'deleted_by');
     }
+
 
     /**
      * Scope a query to only include active records.

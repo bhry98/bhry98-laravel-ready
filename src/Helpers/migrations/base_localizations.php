@@ -16,7 +16,7 @@ return new class extends Migration {
                 $table->string('relation');
                 $table->string('column_name');
                 $table->string('locale');
-                $table->string('value');
+                $table->longText('value');
                 $table->string('reference_id');
                 bhry98_common_database_columns(table: $table, softDeletes: true);
             });

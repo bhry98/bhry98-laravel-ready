@@ -68,6 +68,10 @@ return [
         ],
     ],
     "filament" => [
+        "pagination"=> [
+            "per_page" => [5, 10, 20, 50],
+        ],
+        "multiple-panels"=>false,
         "account-center" => [
             "default" => true,
             "id" => "account-center",

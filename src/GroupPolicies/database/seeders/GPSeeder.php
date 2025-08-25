@@ -17,6 +17,7 @@ class GPSeeder extends Seeder
     {
         self::permissionsSeeder();
         self::groupsSeeder();
+        Cache::clear();
     }
 
     function groupsSeeder(): void
