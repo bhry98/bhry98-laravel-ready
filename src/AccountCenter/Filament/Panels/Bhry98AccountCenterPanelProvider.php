@@ -38,7 +38,6 @@ class Bhry98AccountCenterPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
                 ApplicationsSwitcher::class,
             ])
-            ->brandLogo(config("bhry98.brand_logo"))
             ->discoverWidgets(bhry98_ac_path('Filament/Widgets'), 'AccountCenter\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,

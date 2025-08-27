@@ -5,10 +5,10 @@
                 <div class="flex justify-between items-center">
                     <div>
                         <h2 class="text-lg font-semibold">
-                            {{ ucfirst($panel->getId()) }}
+                            {{ __("panels.".strtolower($panel->getId())) }}
                         </h2>
                         <p class="text-sm text-gray-600">
-                            {{ $panel->getPath() }}
+                            {{ __("panels.".strtolower($panel->getId())."-desc") }}
                         </p>
                     </div>
                     <a
