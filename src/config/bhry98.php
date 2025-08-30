@@ -8,6 +8,8 @@ return [
     'bot_name' => env("B_BOT_NAME", env("APP_NAME", "B BOT")),
     'brand_logo' => env("B_BRAND_LOGO"),
     'brand_logo_size' => "40px",
+    "locales" => ['ar', 'en'],
+
     "registration" => [
         'require_username' => false,
         'require_email' => true,

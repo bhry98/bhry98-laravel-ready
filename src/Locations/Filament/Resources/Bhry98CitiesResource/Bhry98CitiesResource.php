@@ -11,6 +11,7 @@ use Exception;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\{
@@ -19,11 +20,14 @@ use Filament\Tables\Actions\{
     ForceDeleteAction,
     RestoreAction
 };
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use SolutionForest\FilamentTranslateField\Forms\Component\Translate;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class Bhry98CitiesResource extends Resource
@@ -80,23 +84,50 @@ class Bhry98CitiesResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $inputs[] = Select::make('country_id')->label(__("Bhry98::locations.country"))
+        $inputs[] = Select::make('country_id')
+            ->label(__("Bhry98::locations.country"))
             ->relationship('country', 'default_name')
             ->reactive()
             ->afterStateUpdated(fn($set) => $set('governorate_id', null))
             ->getSearchResultsUsing(fn($search) => (new LocationsCountriesService())->searchByName($search))
-            ->getOptionLabelFromRecordUsing(fn($record) => "($record?->flag) $record?->name")->searchable()->preload()->required();;
-        $inputs[] = Select::make('governorate_id')->label(__("Bhry98::locations.governorate"))
+            ->getOptionLabelFromRecordUsing(fn($record) => $record?->name_label)->searchable()->preload()->required();
+        $inputs[] = Select::make('governorate_id')
+            ->label(__("Bhry98::locations.governorate"))
             ->relationship('governorate', 'default_name')
             ->reactive()
             ->disabled(fn($get) => !$get('country_id'))
             ->options(fn($get) => (new LocationsGovernorateService())->getOptions(countryId: $get('country_id')))
             ->getSearchResultsUsing(fn($search, $get) => (new LocationsGovernorateService())->getOptions($search, countryId: $get('country_id')))
             ->getOptionLabelFromRecordUsing(fn($record) => $record?->name)->searchable()->preload();
-        $inputs[] = TextInput::make('code')->nullable()->minLength(2)->maxLength(20)->label(__("Bhry98::locations.city-code"))->unique((new LocationsCitiesModel)->getTable(), "code", ignoreRecord: true);
-        $inputs[] = TextInput::make('default_name')->label(__("Bhry98::global.default-name"))->minLength(2)->maxLength(50)->required();
-        $inputs[] = Toggle::make('active')->required()->inline(false)->label(__("Bhry98::global.active"))->required();
-        $inputs[] = Translation::make('names')->formatStateUsing(fn(?LocationsCitiesModel $record) => $record?->getLocalizedArray())->columnSpanFull()->label(__("Bhry98::locations.governorate-name"))->required();
+        $inputs[] = TextInput::make('code')
+            ->label(__("Bhry98::locations.city-code"))
+            ->nullable()
+            ->minLength(2)
+            ->maxLength(20)
+            ->unique((new LocationsCitiesModel)->getTable(), "code", ignoreRecord: true);
+        $inputs[] = TextInput::make('default_name')
+            ->label(__("Bhry98::global.default-name"))
+            ->minLength(2)
+            ->maxLength(50)
+            ->required();
+        $inputs[] = ToggleButtons::make('active')
+            ->label(__("Bhry98::global.active"))
+            ->boolean()
+            ->required()
+            ->inline()
+            ->default(true);
+        $locales = [
+            TextInput::make('names')->label("Bhry98::locations.city-name")->required()
+//                ->formatStateUsing(fn(?LocationsCitiesModel $record) => $record?->getLocalized('name'))
+        ];
+        $inputs[] = Translate::make()
+            ->locales(config("bhry98.locales"))
+            ->fieldTranslatableLabel(fn($field, $locale) => __($field->getLabel(), locale: $locale))
+            ->formatStateUsing(fn(?LocationsCitiesModel $record) => $record?[...$record->toArray(),"names" => $record->getLocalizedArray()]:[])
+            ->suffixLocaleLabel()
+            ->columnSpanFull()
+            ->contained(false)
+            ->schema($locales);
         return $form->schema($inputs);
     }
 
@@ -106,6 +137,8 @@ class Bhry98CitiesResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
+
             ->columns([
                 TextColumn::make('code')->label(__('Bhry98::global.code'))->copyable()->toggleable()->toggledHiddenByDefault()->searchable(),
                 TextColumn::make('country.default_name')->label(__('Bhry98::locations.country'))->getStateUsing(fn(LocationsCitiesModel $record) => $record->country?->name_label ?? "---"),
@@ -113,11 +146,24 @@ class Bhry98CitiesResource extends Resource
                 TextColumn::make('default_name')->label(__('Bhry98::global.default-name'))->toggleable()->searchable(),
                 TextColumn::make('localization.value')->label(__('Bhry98::locations.city-name'))->getStateUsing(fn(LocationsCitiesModel $record) => $record->name ?? $record->default_name ?? "---")->toggleable(),
                 TextColumn::make('users_count')->label(__('Bhry98::locations.total-users'))->toggleable(),
-                ...bhry98_common_filament_columns(activeButtonDisabled: true)
+                IconColumn::make('active')->label(__('Bhry98::global.active'))->boolean()->toggleable(),
+                ...bhry98_common_filament_columns(withActive: false)
             ])
             ->filters([
                 TrashedFilter::make()->visible(auth()->user()->can('Locations.Cities.ForceDelete') || auth()->user()->can('Locations.Cities.Delete')),
                 TernaryFilter::make('active')->label(__("Bhry98::global.active")),
+                SelectFilter::make('country_id')->label(__("Bhry98::locations.country"))
+                    ->relationship('country', 'default_name', fn($query) => $query->where('active', true))
+                    ->getSearchResultsUsing(fn($search) => (new LocationsCountriesService())->searchByName($search))
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('governorate_id')->label(__("Bhry98::locations.governorate"))
+                    ->relationship('governorate', 'default_name', fn($query) => $query->where('active', true))
+                    ->getSearchResultsUsing(fn($search) => (new LocationsGovernorateService())->getOptions($search))
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                    ->searchable()
+                    ->preload(),
             ])
             ->actions([
                 EditAction::make()->label(__("Bhry98::global.modify"))->visible(fn(LocationsCitiesModel $record) => $record->canEdit())->action(fn(LocationsCitiesModel $record, array $data) => (new LocationsCitiesService())->updateCity($record->id, $data))->slideOver()->closeModalByClickingAway(false),

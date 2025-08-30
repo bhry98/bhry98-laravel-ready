@@ -7,6 +7,7 @@ return [
     "sender-name" => "Sender name",
     "message-body" => "Message",
     "message-read-at" => "Read at",
+    "update-profile" => "Update profile",
     "channel-types" => [
         "announcement" => "Announcement",
         "group" => "Group",

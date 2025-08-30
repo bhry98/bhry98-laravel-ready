@@ -1,0 +1,20 @@
+<?php
+return [
+    ["name_en" => "Aswan", "name_ar" => "أسوان"],
+    ["name_en" => "Daraw", "name_ar" => "دراو"],
+    ["name_en" => "Kom Ombo", "name_ar" => "كوم أمبو"],
+    ["name_en" => "Edfu", "name_ar" => "إدفو"],
+    ["name_en" => "Nasr City (New Aswan)", "name_ar" => "مدينة نصر (أسوان الجديدة)"],
+    ["name_en" => "Kalabsha", "name_ar" => "كلابشة"],
+    ["name_en" => "Sebaiya", "name_ar" => "السباعية"],
+    ["name_en" => "El-Sayala", "name_ar" => "السيالة"],
+    ["name_en" => "Ballana", "name_ar" => "بلانة"],
+    ["name_en" => "Adindan", "name_ar" => "أدندان"],
+    ["name_en" => "Abu Simbel", "name_ar" => "أبو سمبل"],
+    ["name_en" => "Qustul", "name_ar" => "قسطول"],
+    ["name_en" => "Tomas and Afia", "name_ar" => "تومـاس وعافية"],
+    ["name_en" => "Aniba", "name_ar" => "عنّيـبة"],
+    ["name_en" => "Kubaneya", "name_ar" => "كوبانية"],
+    ["name_en" => "New Tushka", "name_ar" => "توشكى الجديدة"],
+    ["name_en" => "El Shallal", "name_ar" => "الشلال"],
+];

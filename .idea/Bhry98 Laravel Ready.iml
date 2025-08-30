@@ -8,6 +8,14 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Locations" isTestSource="false" packagePrefix="Bhry98\Locations\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Settings" isTestSource="false" packagePrefix="Bhry98\Settings\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Users" isTestSource="false" packagePrefix="Bhry98\Users\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jaybizzle/crawler-detect" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jenssegers/agent" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/joaopaulolndev/filament-edit-profile" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/solution-forest/filament-translate-field" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php84" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php85" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

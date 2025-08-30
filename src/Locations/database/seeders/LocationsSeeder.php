@@ -6,7 +6,7 @@ use Bhry98\Locations\Models\LocationsCitiesModel;
 use Bhry98\Locations\Models\LocationsCountriesModel;
 use Bhry98\Locations\Models\LocationsGovernoratesModel;
 use Illuminate\Database\Seeder;
-use function Laravel\Prompts\select;
+use Illuminate\Support\Str;
 
 
 class LocationsSeeder extends Seeder
@@ -54,72 +54,74 @@ class LocationsSeeder extends Seeder
             ], $fixData);
             if ($governorateAfterAdd) {
                 self::addLocalizations($governorateAfterAdd, $governorate);
-                match ($governorate["name_en"]) {
-                    "Cairo" => self::addEgyptCairoCities($egypt_id, $governorateAfterAdd->id),
-                    "Giza" => self::addEgyptGizaCities($egypt_id, $governorateAfterAdd->id),
-                    "Alexandria" => self::addEgyptAlexandriaCities($egypt_id, $governorateAfterAdd->id),
-                    default => null,
-                };
+//                dd();
+                self::addEgyptCities($egypt_id, $governorateAfterAdd->id, Str::replace(" ", "_", Str::lower($governorateAfterAdd->default_name)));
+//                match ($governorate["name_en"]) {
+//                    "Cairo" => self::addEgyptCairoCities($egypt_id, $governorateAfterAdd->id),
+//                    "Giza" => self::addEgyptGizaCities($egypt_id, $governorateAfterAdd->id),
+//                    "Alexandria" => self::addEgyptAlexandriaCities($egypt_id, $governorateAfterAdd->id),
+//                    default => null,
+//                };
             }
         }
     }
 
-    static function addEgyptCairoCities($egypt_id, $cairo_id): void
+    static function addEgyptCities($egyptId, $governorateId, $fileName): void
     {
-        $citiesArray = include bhry98_locations_path("database/data/cities/egypt_cairo.php");
+        $citiesArray = include bhry98_locations_path("database/data/cities/egypt/$fileName.php");
         foreach ($citiesArray ?? [] as $city) {
             $fixData = [
                 "default_name" => $city["name_en"],
-                "country_id" => $egypt_id,
-                "governorate_id" => $cairo_id,
+                "country_id" => $egyptId,
+                "governorate_id" => $governorateId,
                 "active" => true
             ];
             $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
-                "country_id" => $egypt_id,
-                "governorate_id" => $cairo_id,
+                "country_id" => $egyptId,
+                "governorate_id" => $governorateId,
                 "default_name" => $city["name_en"]
             ], $fixData);
             self::addLocalizations($cityRecord, $city);
         }
     }
 
-    static function addEgyptGizaCities($egypt_id, $giza_id): void
-    {
-        $citiesArray = include bhry98_locations_path("database/data/cities/egypt_giza.php");
-        foreach ($citiesArray ?? [] as $city) {
-            $fixData = [
-                "default_name" => $city["name_en"],
-                "country_id" => $egypt_id,
-                "governorate_id" => $giza_id,
-                "active" => true
-            ];
-            $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
-                "country_id" => $egypt_id,
-                "governorate_id" => $giza_id,
-                "default_name" => $city["name_en"]
-            ], $fixData);
-            self::addLocalizations($cityRecord, $city);
-        }
-    }
+//    static function addEgyptGizaCities($egypt_id, $giza_id): void
+//    {
+//        $citiesArray = include bhry98_locations_path("database/data/cities/egypt_giza.php");
+//        foreach ($citiesArray ?? [] as $city) {
+//            $fixData = [
+//                "default_name" => $city["name_en"],
+//                "country_id" => $egypt_id,
+//                "governorate_id" => $giza_id,
+//                "active" => true
+//            ];
+//            $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
+//                "country_id" => $egypt_id,
+//                "governorate_id" => $giza_id,
+//                "default_name" => $city["name_en"]
+//            ], $fixData);
+//            self::addLocalizations($cityRecord, $city);
+//        }
+//    }
 
-    static function addEgyptAlexandriaCities($egypt_id, $alexandria_id): void
-    {
-        $citiesArray = include bhry98_locations_path("database/data/cities/egypt_alexandria.php");
-        foreach ($citiesArray ?? [] as $city) {
-            $fixData = [
-                "default_name" => $city["name_en"],
-                "country_id" => $egypt_id,
-                "governorate_id" => $alexandria_id,
-                "active" => true
-            ];
-            $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
-                "country_id" => $egypt_id,
-                "governorate_id" => $alexandria_id,
-                "default_name" => $city["name_en"]
-            ], $fixData);
-            self::addLocalizations($cityRecord, $city);
-        }
-    }
+//    static function addEgyptAlexandriaCities($egypt_id, $alexandria_id): void
+//    {
+//        $citiesArray = include bhry98_locations_path("database/data/cities/egypt_alexandria.php");
+//        foreach ($citiesArray ?? [] as $city) {
+//            $fixData = [
+//                "default_name" => $city["name_en"],
+//                "country_id" => $egypt_id,
+//                "governorate_id" => $alexandria_id,
+//                "active" => true
+//            ];
+//            $cityRecord = LocationsCitiesModel::query()->updateOrCreate([
+//                "country_id" => $egypt_id,
+//                "governorate_id" => $alexandria_id,
+//                "default_name" => $city["name_en"]
+//            ], $fixData);
+//            self::addLocalizations($cityRecord, $city);
+//        }
+//    }
 
     static function addSaudiArabiaGovernorates($saudi_arabia_id): void
     {

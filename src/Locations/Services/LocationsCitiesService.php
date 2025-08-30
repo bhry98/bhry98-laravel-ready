@@ -120,6 +120,7 @@ class LocationsCitiesService extends BaseService
                 bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.deleted-field"));
             } else {
                 bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.deleted-success"));
+                $record->update(['active' => false]);
             }
         }
         return $delete;
@@ -142,6 +143,8 @@ class LocationsCitiesService extends BaseService
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restored-field"));
             return false;
         } else {
+            $record->update(['active' => true]);
+
             bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.restored-success"));
         }
         return $restore;

@@ -1,0 +1,20 @@
+<?php
+return [
+    ["name_en" => "Zagazig", "name_ar" => "الزقازيق"],
+    ["name_en" => "Abu Hammad", "name_ar" => "أبو حماد"],
+    ["name_en" => "Abu Kabir", "name_ar" => "أبو كبير"],
+    ["name_en" => "Awlad Saqr", "name_ar" => "أولاد صقر"],
+    ["name_en" => "Bilbeis", "name_ar" => "بلبيس"],
+    ["name_en" => "Diyarb Negm", "name_ar" => "ديرب نجم"],
+    ["name_en" => "Faqous", "name_ar" => "فاقوس"],
+    ["name_en" => "Hihya", "name_ar" => "ههيا"],
+    ["name_en" => "Kafr Saqr", "name_ar" => "كفر صقر"],
+    ["name_en" => "Mashtool El Souq", "name_ar" => "مشتول السوق"],
+    ["name_en" => "El Husseiniya", "name_ar" => "الحسينية"],
+    ["name_en" => "El Ibrahimiya", "name_ar" => "الإبراهيمية"],
+    ["name_en" => "El Qurein", "name_ar" => "القرين"],
+    ["name_en" => "Minya El Qamh", "name_ar" => "منيا القمح"],
+    ["name_en" => "Al Qanayat", "name_ar" => "القنايات"],
+    ["name_en" => "10th of Ramadan", "name_ar" => "العاشر من رمضان"],
+    ["name_en" => "El Salhiya El Gedida", "name_ar" => "الصالحية الجديدة"],
+];

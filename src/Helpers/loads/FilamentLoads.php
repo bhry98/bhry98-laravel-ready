@@ -4,6 +4,7 @@ namespace Bhry98\Helpers\loads;
 
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Bhry98\AccountCenter\Filament\Pages\Applications\ApplicationsSwitcher;
+use Bhry98\AccountCenter\Filament\Pages\Auth\Bhry98ProfileUpdate;
 use Bhry98\AccountCenter\Filament\Panels\Bhry98AccountCenterPanelProvider;
 use Bhry98\GP\Filament\Panels\Bhry98GroupPoliciesPanelProvider;
 use Bhry98\Locations\Filament\Panels\Bhry98LocationsPanelProvider;

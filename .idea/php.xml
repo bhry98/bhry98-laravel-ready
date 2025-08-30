@@ -139,6 +139,13 @@
       <path value="$PROJECT_DIR$/vendor/rappasoft/laravel-authentication-log" />
       <path value="$PROJECT_DIR$/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/vendor/tapp/filament-timezone-field" />
+      <path value="$PROJECT_DIR$/vendor/solution-forest/filament-translate-field" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php85" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php84" />
+      <path value="$PROJECT_DIR$/vendor/jaybizzle/crawler-detect" />
+      <path value="$PROJECT_DIR$/vendor/jenssegers/agent" />
+      <path value="$PROJECT_DIR$/vendor/joaopaulolndev/filament-edit-profile" />
+      <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

@@ -114,6 +114,7 @@ class LocationsCountriesService extends BaseService
             if (!$deleted) {
                 bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.deleted-field"));
             } else {
+                $record->update(['active' => false]);
                 bhry98_send_filament_notification("success", __("Bhry98::notifications.filament.deleted-success"));
             }
 
@@ -135,6 +136,7 @@ class LocationsCountriesService extends BaseService
         $restored = $record?->restore();
         bhry98_restored_log((bool)$restored, "restore country", ['record' => $record]);
         if ((bool)$restored) {
+            $record->update(['active' => true]);
             bhry98_send_filament_notification("info", __("Bhry98::notifications.filament.restored-success"));
         } else {
             bhry98_send_filament_notification("danger", __("Bhry98::notifications.filament.restored-failed"));

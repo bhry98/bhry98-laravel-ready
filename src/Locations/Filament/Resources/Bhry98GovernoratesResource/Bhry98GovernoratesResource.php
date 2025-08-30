@@ -4,6 +4,7 @@ namespace Bhry98\Locations\Filament\Resources\Bhry98GovernoratesResource;
 
 
 use Bhry98\Locations\Filament\Resources\Bhry98GovernoratesResource\Pages\ListGovernorates;
+use Bhry98\Locations\Models\LocationsCountriesModel;
 use Bhry98\Locations\Models\LocationsGovernoratesModel;
 use Bhry98\Locations\Services\LocationsCountriesService;
 use Bhry98\Locations\Services\LocationsGovernorateService;
@@ -11,6 +12,7 @@ use Exception;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\{
@@ -19,11 +21,14 @@ use Filament\Tables\Actions\{
     ForceDeleteAction,
     RestoreAction
 };
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use SolutionForest\FilamentTranslateField\Forms\Component\Translate;
 use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 
 class Bhry98GovernoratesResource extends Resource
@@ -86,8 +91,20 @@ class Bhry98GovernoratesResource extends Resource
             ->getOptionLabelFromRecordUsing(fn($record) => "($record?->flag) $record?->name")->searchable()->preload()->required();;
         $inputs[] = TextInput::make('code')->nullable()->minLength(2)->maxLength(20)->label(__("Bhry98::locations.governate-code"))->unique((new LocationsGovernoratesModel)->getTable(), "code", ignoreRecord: true);
         $inputs[] = TextInput::make('default_name')->label(__("Bhry98::global.default-name"))->minLength(2)->maxLength(50)->required();
-        $inputs[] = Toggle::make('active')->required()->inline(false)->label(__("Bhry98::global.active"))->required();
-        $inputs[] = Translation::make('names')->formatStateUsing(fn(?LocationsGovernoratesModel $record) => $record?->getLocalizedArray())->columnSpanFull()->label(__("Bhry98::locations.governorate-name"))->required();
+        $inputs[] = ToggleButtons::make('active')->boolean()->required()->inline()->label(__("Bhry98::global.active"))->required()->default(true);
+//        $inputs[] = Translation::make('names')->formatStateUsing(fn(?LocationsGovernoratesModel $record) => $record?->getLocalizedArray())->columnSpanFull()->label(__("Bhry98::locations.governorate-name"))->required();
+        $locales = [
+            TextInput::make('names')->label("Bhry98::locations.governorate-name")->required()
+//                ->formatStateUsing(fn(?LocationsCitiesModel $record) => $record?->getLocalized('name'))
+        ];
+        $inputs[] = Translate::make()
+            ->locales(config("bhry98.locales"))
+            ->fieldTranslatableLabel(fn($field, $locale) => __($field->getLabel(), locale: $locale))
+            ->formatStateUsing(fn(?LocationsGovernoratesModel $record) => $record ? [...$record->toArray(), "names" => $record->getLocalizedArray()] : ['active'=>true])
+            ->suffixLocaleLabel()
+            ->columnSpanFull()
+            ->contained(false)
+            ->schema($locales);
         return $form->schema($inputs);
     }
 
@@ -97,6 +114,8 @@ class Bhry98GovernoratesResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->paginationPageOptions(config("bhry98.filament.pagination.per_page"))
+
             ->columns([
                 TextColumn::make('code')->label(__('Bhry98::global.code'))->copyable()->toggleable()->toggledHiddenByDefault()->searchable(),
                 TextColumn::make('country.default_name')->label(__('Bhry98::locations.country'))->formatStateUsing(fn(LocationsGovernoratesModel $record) => $record->country ? "({$record->country->flag}) {$record->country->name}" : "---"),
@@ -104,12 +123,19 @@ class Bhry98GovernoratesResource extends Resource
                 TextColumn::make('localization.value')->label(__('Bhry98::locations.governorate-name'))->getStateUsing(fn(LocationsGovernoratesModel $record) => $record->name ?? $record->default_name ?? "---")->toggleable(),
                 TextColumn::make('cities_count')->label(__('Bhry98::locations.total-cities'))->toggleable(),
                 TextColumn::make('users_count')->label(__('Bhry98::locations.total-users'))->toggleable(),
-                ...bhry98_common_filament_columns(activeButtonDisabled: true)
+                IconColumn::make('active')->label(__('Bhry98::global.active'))->boolean()->toggleable(),
+                ...bhry98_common_filament_columns(withActive:false)
             ])
             ->filters([
                 TrashedFilter::make()->visible(auth()->user()->can('Locations.Countries.ForceDelete') || auth()->user()->can('Locations.Countries.Delete')),
                 TernaryFilter::make('active')->label(__("Bhry98::global.active")),
-            ])
+                SelectFilter::make('country_id')->label(__("Bhry98::locations.country"))
+                    ->relationship('country', 'default_name', fn($query) => $query->where('active', true))
+                    ->getSearchResultsUsing(fn($search) => (new LocationsCountriesService())->searchByName($search))
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name_label)
+                    ->searchable()
+                    ->preload(),
+                ])
             ->actions([
                 EditAction::make()->label(__("Bhry98::global.modify"))->visible(fn(LocationsGovernoratesModel $record) => $record->canEdit())->action(fn(LocationsGovernoratesModel $record, array $data) => (new LocationsGovernorateService())->updateGovernorate($record->id, $data))->slideOver()->closeModalByClickingAway(false),
                 DeleteAction::make()->label(__("Bhry98::global.delete"))->visible(fn(LocationsGovernoratesModel $record) => $record->canDelete(self::relationsCount($record)))->action(fn(LocationsGovernoratesModel $record) => (new LocationsGovernorateService())->deleteGovernorate($record->id))->closeModalByClickingAway(false),
