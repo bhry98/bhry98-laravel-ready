@@ -51,7 +51,7 @@ if (!function_exists('bhry98_common_database_columns')) {
         if ($userLog) $table->foreignId('updated_by')->nullable()->references("id")->on((new UsersCoreModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
         if ($userLog && $softDeletes) $table->foreignId('deleted_by')->nullable()->references("id")->on((new UsersCoreModel)->getTable())->cascadeOnUpdate()->nullOnDelete();
         $table->timestamp('created_at')->useCurrent();
-        $table->timestamp('updated_at')->useCurrentOnUpdate();
+        $table->timestamp('updated_at');
         if ($softDeletes) $table->timestamp('deleted_at')->nullable();
     }
 }
