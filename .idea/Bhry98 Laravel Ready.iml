@@ -8,7 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Locations" isTestSource="false" packagePrefix="Bhry98\Locations\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Settings" isTestSource="false" packagePrefix="Bhry98\Settings\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Users" isTestSource="false" packagePrefix="Bhry98\Users\" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jaybizzle/crawler-detect" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jenssegers/agent" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/joaopaulolndev/filament-edit-profile" />
