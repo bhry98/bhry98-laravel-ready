@@ -17,7 +17,7 @@ class UserResource extends JsonResource
         return [
             "code" => $this->code,
             "type" => $this->type ? EnumsResource::make($this->type) : null,
-            "gender" => $this->gender?->getLabel()??null,
+            "gender" => $this->gender?->getLabel() ?? null,
             "timezone" => $this->timezone,
             "display_name" => $this->display_name,
             "first_name" => $this->first_name,

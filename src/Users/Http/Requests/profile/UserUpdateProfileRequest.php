@@ -8,7 +8,9 @@ use Bhry98\Locations\Models\LocationsCitiesModel;
 use Bhry98\Locations\Models\LocationsCountriesModel;
 use Bhry98\Locations\Models\LocationsGovernoratesModel;
 use Bhry98\Settings\Models\SettingsEnumsModel;
+use Bhry98\Users\Enums\UsersGenders;
 use Bhry98\Users\Models\UsersCoreModel;
+use Illuminate\Validation\Rule;
 
 class UserUpdateProfileRequest extends BaseRequest
 {
@@ -93,6 +95,11 @@ class UserUpdateProfileRequest extends BaseRequest
             "nullable",
             "string",
             "exists:" . (new SettingsEnumsModel)->getTable() . ",code",
+        ];
+        $roles["gender"] = [
+            "sometimes",
+            "string",
+            Rule::in(array_map(fn($case) => $case->name, UsersGenders::cases())),
         ];
         return $roles;
     }
