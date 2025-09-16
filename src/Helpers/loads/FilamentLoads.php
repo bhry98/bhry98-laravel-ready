@@ -32,7 +32,11 @@ class FilamentLoads extends ServiceProvider
     private function multiplePanels(): void
     {
         if (config("bhry98.filament.multiple-panels", false)) {
-            collect(Filament::getPanels())->map(fn(Panel $panel) => $panel->pages([ApplicationsSwitcher::class])->renderHook(PanelsRenderHook::USER_MENU_BEFORE, fn() => view('AC::applications.application-switcher-btn')));
+//            dd("");
+            collect(Filament::getPanels())
+                ->map(fn(Panel $panel) => $panel
+//                    ->pages([ApplicationsSwitcher::class,...$panel->getPages()])
+                    ->renderHook(PanelsRenderHook::USER_MENU_BEFORE, fn() => view('AC::applications.application-switcher-btn')));
         }
     }
 

@@ -11,13 +11,13 @@ class EnumsSeeder extends Seeder
      */
     public function run(): void
     {
-        self::seedByFileName('users');
+//        self::seedByFileName('users');
     }
 
     function seedByFileName($fileName): void
     {
         $ds = DIRECTORY_SEPARATOR;
-        $enums = include bhry98_database_path("data{$ds}enums$ds$fileName.php");
+        $enums = include bhry98_settings_path("database{$ds}data$ds$fileName.php");
         foreach ($enums ?? [] as  $enum) {
             foreach ($enum ?? [] as $enumValue) {
                 $defaultName = $enumValue["names"]['en'];
