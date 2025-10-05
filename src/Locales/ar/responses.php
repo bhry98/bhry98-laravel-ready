@@ -1,5 +1,6 @@
 <?php
 return [
+    "not-found" => "لا يوجد",
     "success-with-data" => "تم بنجاح مع بيانات",
     "forbidden" => "ممنوع",
     "success-without-data" => "تم بنجاح لكن لا توجد بيانات",

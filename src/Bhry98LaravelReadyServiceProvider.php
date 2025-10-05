@@ -27,6 +27,7 @@ class Bhry98LaravelReadyServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(bhry98_config_path("bhry98.php"), 'bhry98');
         $this->app->singleton(ExceptionHandler::class, HandlerUnAuthenticatedException::class);
+
         if (config("bhry98.filament.multiple-panels", false)) {
             $this->app->register(Bhry98AccountCenterPanelProvider::class);
             $this->app->register(Bhry98LocationsPanelProvider::class);

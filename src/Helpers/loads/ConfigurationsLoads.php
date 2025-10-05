@@ -9,6 +9,7 @@ use Bhry98\Helpers\models\SessionsModel;
 use Bhry98\Settings\Models\SettingsCoreModel;
 use Bhry98\Users\Models\UsersAuthenticationLogModel;
 use Bhry98\Users\Models\UsersPersonalAccessTokenModel;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -39,12 +40,7 @@ class ConfigurationsLoads extends ServiceProvider
 
     private function authConfig(): void
     {
-        config()->set("auth.providers", [
-            'users' => [
-                'driver' => 'eloquent',
-                'model' => config('bhry98.user_model'),
-            ],
-        ]);
+
     }
 
     private function queueConfig(): void
@@ -71,10 +67,12 @@ class ConfigurationsLoads extends ServiceProvider
 
     private function loggingConfig(): void
     {
-        config()->set('logging.channels.database.driver', 'custom');
-        config()->set('logging.channels.database.via', LoggerHandler::class);
-        config()->set('logging.channels.database.ignore_exceptions', false);
-        config()->set('logging.default', 'database');
+        if (Schema::hasTable('logs_system')) {
+            config()->set('logging.channels.database.driver', 'custom');
+            config()->set('logging.channels.database.via', LoggerHandler::class);
+            config()->set('logging.channels.database.ignore_exceptions', false);
+            config()->set('logging.default', 'database');
+        }
     }
 
     private function settingsConfig(): void
