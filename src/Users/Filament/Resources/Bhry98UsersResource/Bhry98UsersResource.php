@@ -94,7 +94,7 @@ class Bhry98UsersResource extends Resource
         $inputs[] = TextInput::make('middle_name')->label(__("Bhry98::users.middle-name"))->nullable()->maxLength(20)->minLength(2)->string();
         $inputs[] = TextInput::make('last_name')->label(__("Bhry98::users.last-name"))->required()->maxLength(20)->minLength(2)->string();
         $inputs[] = TextInput::make('display_name')->label(__("Bhry98::users.display-name"))
-            ->hintIcon("heroicon-o-information-circle",__("Bhry98::users.display-name-hint"))
+            ->hintIcon("heroicon-o-information-circle", __("Bhry98::users.display-name-hint"))
             ->nullable()->maxLength(40)->minLength(5)->string();
         $inputs[] = PhoneInput::make('phone_number')->label(__("Bhry98::users.phone-number"))->nullable()->defaultCountry('EG');
         $inputs[] = TextInput::make('email')->label(__("Bhry98::users.email"))->required()->email()->unique((new UsersCoreModel)->getTable(), 'email', ignoreRecord: true);
@@ -128,6 +128,9 @@ class Bhry98UsersResource extends Resource
         return $inputs;
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -162,6 +165,25 @@ class Bhry98UsersResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
+                    Tables\Actions\Action::make('reset_password')
+                        ->label(__('Bhry98::users.reset-password'))
+                        ->requiresConfirmation()
+                        ->form([
+                            TextInput::make('password')
+                                ->label(__("Bhry98::users.password"))
+                                ->password()
+                                ->revealable()
+                                ->required()
+                                ->confirmed(),
+                            TextInput::make('password_confirmation')
+                                ->label(__("Bhry98::users.confirmation-password"))
+                                ->same('password')
+                                ->password()
+                                ->revealable()
+                                ->required()
+                        ])
+                        ->visible(auth()?->user()?->can('Users.Account.ChangePassword'))
+                        ->action(fn($record, $data) => $record->update(['password' => $data['password']])),
                     Tables\Actions\EditAction::make()
                         ->label(__("Bhry98::global.modify"))
                         ->visible(fn(UsersCoreModel $record) => $record->canEdit())

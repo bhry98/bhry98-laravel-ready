@@ -29,6 +29,8 @@ return [
     "governorate" => "المحافظة",
     "city" => "المدينة",
     "password" => "كلمة المرور",
+    "confirmation-password" => "تأكيد كلمة المرور",
+    "reset-password" => "تغيير كلمة المرور",
     "timezone" => "المنطقة الزمنية",
     "lang" => "اللغة",
     "must-change-password" => "يجب تغيير كلمة المرور",

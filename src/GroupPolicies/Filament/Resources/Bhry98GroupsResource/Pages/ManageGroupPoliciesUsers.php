@@ -39,6 +39,7 @@ class ManageGroupPoliciesUsers extends ViewRecord implements Tables\Contracts\Ha
                         ->label(__("Bhry98::users.email"))
                         ->required()
                         ->relationship('users.user', 'email')
+                        ->getOptionLabelFromRecordUsing(fn ($record) => $record->email ?? $record->phone_number)
                         ->searchable()
                         ->preload()
                 ])
