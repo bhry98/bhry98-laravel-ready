@@ -2,6 +2,8 @@
 
 namespace Bhry98\Helpers\extends;
 
+use Illuminate\Support\Str;
+
 class BaseService
 {
     function applyFilters($data, array $filters, $class): void
@@ -16,6 +18,8 @@ class BaseService
             }
         }
     }
+
+
 
     public function notifyFilament(bool $success, string $type): void
     {
